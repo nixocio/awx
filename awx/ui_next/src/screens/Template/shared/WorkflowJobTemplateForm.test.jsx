@@ -13,10 +13,10 @@ import {
   InventoriesAPI,
 } from '@api';
 
-jest.mock('@api/models/WorkflowJobTemplates');
-jest.mock('@api/models/Labels');
-jest.mock('@api/models/Organizations');
-jest.mock('@api/models/Inventories');
+jest.mock('@api');
+// jest.mock('@api/models/Labels');
+// jest.mock('@api/models/Organizations');
+// jest.mock('@api/models/Inventories');
 
 describe('<WorkflowJobTemplateForm/>', () => {
   let wrapper;
@@ -120,7 +120,7 @@ describe('<WorkflowJobTemplateForm/>', () => {
     fields.map((field, index) => assertField(field, index));
   });
 
-  test('changing inputs should update values', async () => {
+  test.only('changing inputs should update values', async () => {
     const inputsToChange = [
       {
         element: 'wfjt-name',
