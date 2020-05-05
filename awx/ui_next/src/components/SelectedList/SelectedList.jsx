@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { withI18n } from '@lingui/react';
+import { t } from '@lingui/macro';
 import PropTypes from 'prop-types';
 import {
   Chip,
@@ -6,6 +8,8 @@ import {
   Split as PFSplit,
   SplitItem,
 } from '@patternfly/react-core';
+
+import CustomChipGroup from '@components/CustomChipGroup';
 import styled from 'styled-components';
 
 const Split = styled(PFSplit)`
@@ -22,6 +26,7 @@ const SplitLabelItem = styled(SplitItem)`
 class SelectedList extends Component {
   render() {
     const {
+      i18n,
       label,
       selected,
       onRemove,
@@ -42,7 +47,7 @@ class SelectedList extends Component {
       <Split>
         <SplitLabelItem>{label}</SplitLabelItem>
         <SplitItem>
-          <ChipGroup numChips={5}>
+          <CustomChipGroup numChips={5} totalChips={selected.length}>
             {selected.map(item =>
               renderChip({
                 item,
@@ -50,7 +55,7 @@ class SelectedList extends Component {
                 canDelete: !isReadOnly,
               })
             )}
-          </ChipGroup>
+          </CustomChipGroup>
         </SplitItem>
       </Split>
     );
@@ -74,4 +79,4 @@ SelectedList.defaultProps = {
   renderItemChip: null,
 };
 
-export default SelectedList;
+export default withI18n()(SelectedList);

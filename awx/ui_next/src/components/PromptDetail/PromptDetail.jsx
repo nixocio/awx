@@ -15,6 +15,7 @@ import PromptProjectDetail from './PromptProjectDetail';
 import PromptInventorySourceDetail from './PromptInventorySourceDetail';
 import PromptJobTemplateDetail from './PromptJobTemplateDetail';
 import PromptWFJobTemplateDetail from './PromptWFJobTemplateDetail';
+import CustomChipGroup from '@components/CustomChipGroup';
 
 const PromptHeader = styled.h2`
   font-weight: bold;
@@ -220,7 +221,10 @@ function PromptDetail({ i18n, resource, launchConfig = {} }) {
                 label={i18n._(t`Credentials`)}
                 rows={4}
                 value={
-                  <ChipGroup numChips={5}>
+                  <CustomChipGroup
+                    numChips={5}
+                    totalChips={overrides.credentials.length}
+                  >
                     {overrides.credentials.map(cred => (
                       <CredentialChip
                         key={cred.id}
@@ -228,7 +232,7 @@ function PromptDetail({ i18n, resource, launchConfig = {} }) {
                         isReadOnly
                       />
                     ))}
-                  </ChipGroup>
+                  </CustomChipGroup>
                 }
               />
             )}
@@ -258,13 +262,16 @@ function PromptDetail({ i18n, resource, launchConfig = {} }) {
                 fullWidth
                 label={i18n._(t`Job Tags`)}
                 value={
-                  <ChipGroup numChips={5}>
+                  <CustomChipGroup
+                    numChips={5}
+                    totalChips={overrides.job_tags.split(',').length}
+                  >
                     {overrides.job_tags.split(',').map(jobTag => (
                       <Chip key={jobTag} isReadOnly>
                         {jobTag}
                       </Chip>
                     ))}
-                  </ChipGroup>
+                  </CustomChipGroup>
                 }
               />
             )}
@@ -273,13 +280,16 @@ function PromptDetail({ i18n, resource, launchConfig = {} }) {
                 fullWidth
                 label={i18n._(t`Skip Tags`)}
                 value={
-                  <ChipGroup numChips={5}>
+                  <CustomChipGroup
+                    numChips={5}
+                    totalChips={overrides.skip_tags.split(',').length}
+                  >
                     {overrides.skip_tags.split(',').map(skipTag => (
                       <Chip key={skipTag} isReadOnly>
                         {skipTag}
                       </Chip>
                     ))}
-                  </ChipGroup>
+                  </CustomChipGroup>
                 }
               />
             )}

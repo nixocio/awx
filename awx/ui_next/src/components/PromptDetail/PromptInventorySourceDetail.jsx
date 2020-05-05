@@ -7,6 +7,7 @@ import { Chip, ChipGroup, List, ListItem } from '@patternfly/react-core';
 import { Detail, DeletedDetail } from '@components/DetailList';
 import { VariablesDetail } from '@components/CodeMirrorInput';
 import CredentialChip from '@components/CredentialChip';
+import CustomChipGroup from '@components/CustomChipGroup';
 
 function PromptInventorySourceDetail({ i18n, resource }) {
   const {
@@ -120,13 +121,16 @@ function PromptInventorySourceDetail({ i18n, resource }) {
           fullWidth
           label={i18n._(t`Regions`)}
           value={
-            <ChipGroup numChips={5}>
+            <CustomChipGroup
+              numChips={5}
+              totalChips={source_regions.split(',').length}
+            >
               {source_regions.split(',').map(region => (
                 <Chip key={region} isReadOnly>
                   {region}
                 </Chip>
               ))}
-            </ChipGroup>
+            </CustomChipGroup>
           }
         />
       )}
@@ -135,13 +139,16 @@ function PromptInventorySourceDetail({ i18n, resource }) {
           fullWidth
           label={i18n._(t`Instance Filters`)}
           value={
-            <ChipGroup numChips={5}>
+            <CustomChipGroup
+              numChips={5}
+              totalChips={instance_filters.split(',').length}
+            >
               {instance_filters.split(',').map(filter => (
                 <Chip key={filter} isReadOnly>
                   {filter}
                 </Chip>
               ))}
-            </ChipGroup>
+            </CustomChipGroup>
           }
         />
       )}
@@ -150,13 +157,16 @@ function PromptInventorySourceDetail({ i18n, resource }) {
           fullWidth
           label={i18n._(t`Only Group By`)}
           value={
-            <ChipGroup numChips={5}>
+            <CustomChipGroup
+              numChips={5}
+              totalChips={group_by.split(',').length}
+            >
               {group_by.split(',').map(group => (
                 <Chip key={group} isReadOnly>
                   {group}
                 </Chip>
               ))}
-            </ChipGroup>
+            </CustomChipGroup>
           }
         />
       )}

@@ -24,6 +24,7 @@ import styled from 'styled-components';
 
 import reducer, { initReducer } from './shared/reducer';
 import { QSConfig } from '@types';
+import CustomChipGroup from '@components/CustomChipGroup';
 
 const SearchButton = styled(Button)`
   ::after {
@@ -128,7 +129,7 @@ function Lookup(props) {
           <SearchIcon />
         </SearchButton>
         <ChipHolder className="pf-c-form-control">
-          <ChipGroup numChips={5}>
+          <CustomChipGroup numChips={5} totalChips={items.length}>
             {items.map(item =>
               renderItemChip({
                 item,
@@ -136,7 +137,7 @@ function Lookup(props) {
                 canDelete,
               })
             )}
-          </ChipGroup>
+          </CustomChipGroup>
         </ChipHolder>
       </InputGroup>
       <Modal

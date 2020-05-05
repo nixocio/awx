@@ -18,6 +18,7 @@ import useRequest from '@util/useRequest';
 import { SchedulesAPI } from '@api';
 import DeleteButton from '@components/DeleteButton';
 import ErrorDetail from '@components/ErrorDetail';
+import CustomChipGroup from '@components/CustomChipGroup';
 
 const PromptTitle = styled(Title)`
   --pf-c-title--m-md--FontWeight: 700;
@@ -173,11 +174,11 @@ function ScheduleDetail({ schedule, i18n }) {
                 fullWidth
                 label={i18n._(t`Credentials`)}
                 value={
-                  <ChipGroup numChips={5}>
+                  <CustomChipGroup numChips={5} totalChips={credentials.length}>
                     {credentials.map(c => (
                       <CredentialChip key={c.id} credential={c} isReadOnly />
                     ))}
-                  </ChipGroup>
+                  </CustomChipGroup>
                 }
               />
             )}
@@ -186,13 +187,16 @@ function ScheduleDetail({ schedule, i18n }) {
                 fullWidth
                 label={i18n._(t`Job Tags`)}
                 value={
-                  <ChipGroup numChips={5}>
+                  <CustomChipGroup
+                    numChips={5}
+                    totalChips={job_tags.split(',').length}
+                  >
                     {job_tags.split(',').map(jobTag => (
                       <Chip key={jobTag} isReadOnly>
                         {jobTag}
                       </Chip>
                     ))}
-                  </ChipGroup>
+                  </CustomChipGroup>
                 }
               />
             )}
@@ -201,13 +205,16 @@ function ScheduleDetail({ schedule, i18n }) {
                 fullWidth
                 label={i18n._(t`Skip Tags`)}
                 value={
-                  <ChipGroup numChips={5}>
+                  <CustomChipGroup
+                    numChips={5}
+                    totalChips={skip_tags.split(',').length}
+                  >
                     {skip_tags.split(',').map(skipTag => (
                       <Chip key={skipTag} isReadOnly>
                         {skipTag}
                       </Chip>
                     ))}
-                  </ChipGroup>
+                  </CustomChipGroup>
                 }
               />
             )}

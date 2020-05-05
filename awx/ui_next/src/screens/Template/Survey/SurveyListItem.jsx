@@ -15,6 +15,7 @@ import {
   StackItem,
 } from '@patternfly/react-core';
 import DataListCell from '@components/DataListCell';
+import CustomChipGroup from '@components/CustomChipGroup';
 import { CaretDownIcon, CaretUpIcon } from '@patternfly/react-icons';
 import styled from 'styled-components';
 
@@ -117,15 +118,19 @@ function SurveyListItem({
               {[question.type].includes('password') && (
                 <span>{i18n._(t`encrypted`).toUpperCase()}</span>
               )}
+              {console.log(question.default.split('\n'))}
               {[question.type].includes('multiselect') &&
                 question.default.length > 0 && (
-                  <ChipGroup numChips={5}>
+                  <CustomChipGroup
+                    numChips={5}
+                    totalChips={question.default.split('\n').length}
+                  >
                     {question.default.split('\n').map(chip => (
                       <Chip key={chip} isReadOnly>
                         {chip}
                       </Chip>
                     ))}
-                  </ChipGroup>
+                  </CustomChipGroup>
                 )}
               {![question.type].includes('password') &&
                 ![question.type].includes('multiselect') && (

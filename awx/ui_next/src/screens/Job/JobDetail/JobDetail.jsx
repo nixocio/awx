@@ -215,7 +215,11 @@ function JobDetail({ job, i18n }) {
             fullWidth
             label={i18n._(t`Credentials`)}
             value={
-              <ChipGroup numChips={5}>
+              <ChipGroup
+                numChips={5}
+                expandedText={i18n._(t`Show Less`)}
+                collapsedText={i18n._(t`more`)}
+              >
                 {credentials.map(c => (
                   <CredentialChip key={c.id} credential={c} isReadOnly />
                 ))}
@@ -228,7 +232,11 @@ function JobDetail({ job, i18n }) {
             fullWidth
             label={i18n._(t`Labels`)}
             value={
-              <ChipGroup numChips={5}>
+              <ChipGroup
+                numChips={5}
+                expandedText={i18n._(t`Show Less`)}
+                collapsedText={i18n._(t`more`)}
+              >
                 {labels.results.map(l => (
                   <Chip key={l.id} isReadOnly>
                     {l.name}

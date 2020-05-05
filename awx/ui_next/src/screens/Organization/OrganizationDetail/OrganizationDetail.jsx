@@ -96,7 +96,11 @@ function OrganizationDetail({ i18n, organization }) {
             fullWidth
             label={i18n._(t`Instance Groups`)}
             value={
-              <ChipGroup numChips={5}>
+              <ChipGroup
+                numChips={5}
+                expandedText={i18n._(t`Show Less`)}
+                collapsedText={i18n._(t`more`)}
+              >
                 {instanceGroups.map(ig => (
                   <Chip key={ig.id} isReadOnly>
                     {ig.name}

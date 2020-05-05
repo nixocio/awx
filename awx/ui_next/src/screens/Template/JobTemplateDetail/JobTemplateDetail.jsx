@@ -281,7 +281,11 @@ function JobTemplateDetail({ i18n, template }) {
             fullWidth
             label={i18n._(t`Credentials`)}
             value={
-              <ChipGroup numChips={5}>
+              <ChipGroup
+                numChips={5}
+                expandedText={i18n._(t`Show Less`)}
+                collapsedText={i18n._(t`more`)}
+              >
                 {summary_fields.credentials.map(c => (
                   <CredentialChip key={c.id} credential={c} isReadOnly />
                 ))}
@@ -294,7 +298,11 @@ function JobTemplateDetail({ i18n, template }) {
             fullWidth
             label={i18n._(t`Labels`)}
             value={
-              <ChipGroup numChips={5}>
+              <ChipGroup
+                numChips={5}
+                expandedText={i18n._(t`Show Less`)}
+                collapsedText={i18n._(t`more`)}
+              >
                 {summary_fields.labels.results.map(l => (
                   <Chip key={l.id} isReadOnly>
                     {l.name}
@@ -309,7 +317,11 @@ function JobTemplateDetail({ i18n, template }) {
             fullWidth
             label={i18n._(t`Instance Groups`)}
             value={
-              <ChipGroup numChips={5}>
+              <ChipGroup
+                numChips={5}
+                expandedText={i18n._(t`Show Less`)}
+                collapsedText={i18n._(t`more`)}
+              >
                 {instanceGroups.map(ig => (
                   <Chip key={ig.id} isReadOnly>
                     {ig.name}
@@ -324,7 +336,11 @@ function JobTemplateDetail({ i18n, template }) {
             fullWidth
             label={i18n._(t`Job Tags`)}
             value={
-              <ChipGroup numChips={5}>
+              <ChipGroup
+                numChips={5}
+                expandedText={i18n._(t`Show Less`)}
+                collapsedText={i18n._(t`more`)}
+              >
                 {job_tags.split(',').map(jobTag => (
                   <Chip key={jobTag} isReadOnly>
                     {jobTag}
@@ -339,7 +355,11 @@ function JobTemplateDetail({ i18n, template }) {
             fullWidth
             label={i18n._(t`Skip Tags`)}
             value={
-              <ChipGroup numChips={5}>
+              <ChipGroup
+                numChips={5}
+                expandedText={i18n._(t`Show Less`)}
+                collapsedText={i18n._(t`more`)}
+              >
                 {skip_tags.split(',').map(skipTag => (
                   <Chip key={skipTag} isReadOnly>
                     {skipTag}

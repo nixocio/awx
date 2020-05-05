@@ -16,6 +16,7 @@ import DataListCell from '@components/DataListCell';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import CustomChipGroup from '@components/CustomChipGroup';
 import { DetailList, Detail } from '@components/DetailList';
 import { AccessRecord } from '@types';
 
@@ -115,9 +116,12 @@ class ResourceAccessListItem extends React.Component {
                     <Detail
                       label={i18n._(t`User Roles`)}
                       value={
-                        <ChipGroup numChips={5}>
+                        <CustomChipGroup
+                          numChips={5}
+                          totalChips={userRoles.length}
+                        >
                           {userRoles.map(this.renderChip)}
-                        </ChipGroup>
+                        </CustomChipGroup>
                       }
                     />
                   )}
@@ -125,9 +129,12 @@ class ResourceAccessListItem extends React.Component {
                     <Detail
                       label={i18n._(t`Team Roles`)}
                       value={
-                        <ChipGroup numChips={5}>
+                        <CustomChipGroup
+                          numChips={5}
+                          totalChips={teamRoles.length}
+                        >
                           {teamRoles.map(this.renderChip)}
-                        </ChipGroup>
+                        </CustomChipGroup>
                       }
                     />
                   )}

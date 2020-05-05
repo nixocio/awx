@@ -9,6 +9,7 @@ import { Detail } from '@components/DetailList';
 import { VariablesDetail } from '@components/CodeMirrorInput';
 import Sparkline from '@components/Sparkline';
 import { toTitleCase } from '@util/strings';
+import CustomChipGroup from '@components/CustomChipGroup';
 
 function PromptWFJobTemplateDetail({ i18n, resource }) {
   const {
@@ -108,13 +109,16 @@ function PromptWFJobTemplateDetail({ i18n, resource }) {
           fullWidth
           label={i18n._(t`Labels`)}
           value={
-            <ChipGroup numChips={5}>
+            <CustomChipGroup
+              numChips={5}
+              totalChips={summary_fields.labels.results.length}
+            >
               {summary_fields.labels.results.map(label => (
                 <Chip key={label.id} isReadOnly>
                   {label.name}
                 </Chip>
               ))}
-            </ChipGroup>
+            </CustomChipGroup>
           }
         />
       )}

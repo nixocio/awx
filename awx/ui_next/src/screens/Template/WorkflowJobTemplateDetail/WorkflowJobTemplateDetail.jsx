@@ -168,7 +168,10 @@ function WorkflowJobTemplateDetail({ template, i18n }) {
             fullWidth
             label={i18n._(t`Labels`)}
             value={
-              <ChipGroup>
+              <ChipGroup
+                expandedText={i18n._(t`Show Less`)}
+                collapsedText={i18n._(t`morexxx`)}
+              >
                 {summary_fields.labels.results.map(l => (
                   <Chip key={l.id} isReadOnly>
                     {l.name}
