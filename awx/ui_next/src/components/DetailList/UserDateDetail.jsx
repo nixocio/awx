@@ -13,7 +13,9 @@ const Detail = styled(_Detail)`
 
 function UserDateDetail({ label, date, user, dataCy = null }) {
   const dateStr = formatDateString(date);
+  console.log(dateStr, 'dateStr');
   const username = user ? user.username : '';
+  console.log(username, 'username');  
   return (
     <Detail
       label={label}

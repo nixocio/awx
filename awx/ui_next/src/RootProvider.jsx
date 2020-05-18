@@ -15,7 +15,7 @@ class RootProvider extends Component {
     const language = getLanguageWithoutRegionCode(navigator);
 
     return (
-      <HashRouter>
+      <HashRouter basename="/next">
         <I18nProvider language={language} catalogs={catalogs}>
           {children}
         </I18nProvider>
