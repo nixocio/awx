@@ -5,6 +5,7 @@ import os
 import re  # noqa
 import sys
 from datetime import timedelta
+from pprint import pprint
 
 # global settings
 from django.conf import global_settings
@@ -19,6 +20,8 @@ for setting in dir(global_settings):
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+pprint(BASE_DIR)
 
 
 def is_testing(argv=None):

@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.js": "/static/js/main.52ec5b2d.chunk.js",
+    "main.js.map": "/static/js/main.52ec5b2d.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e005a742.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e005a742.js.map",
+    "static/css/2.a17ae219.chunk.css": "/static/css/2.a17ae219.chunk.css",
+    "static/js/2.13848f35.chunk.js": "/static/js/2.13848f35.chunk.js",
+    "static/js/2.13848f35.chunk.js.map": "/static/js/2.13848f35.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.b488e4f2603f182639d47c8175992d3b.js": "/precache-manifest.b488e4f2603f182639d47c8175992d3b.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.a17ae219.chunk.css.map": "/static/css/2.a17ae219.chunk.css.map",
+    "static/js/2.13848f35.chunk.js.LICENSE.txt": "/static/js/2.13848f35.chunk.js.LICENSE.txt",
+    "static/media/base.css": "/static/media/pficon.f907e666.ttf",
+    "static/media/brand-logo.svg": "/static/media/brand-logo.6549f233.svg",
+    "static/media/background-image.css": "/static/media/pfbg_768@2x.0099dea3.jpg",
+    "static/media/about-modal-box.css": "/static/media/pfbg_992@2x.1423e11e.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e005a742.js",
+    "static/css/2.a17ae219.chunk.css",
+    "static/js/2.13848f35.chunk.js",
+    "static/js/main.52ec5b2d.chunk.js"
+  ]
+}
