@@ -8,8 +8,19 @@
       "modules": true
     }
   },
-  "plugins": ["react-hooks"],
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "plugins": [
+    "react-hooks",
+    "import",
+    "eslint-plugin"
+  ],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "eslint:recommended",
+    "plugin:eslint-plugin/recommended",
+    "plugin:import/recommended"
+  ],
   "settings": {
     "react": {
       "version": "16.5.2"
@@ -24,36 +35,73 @@
     "window": true
   },
   "rules": {
-    "camelcase": "off",
-    "arrow-parens": "off",
-    "comma-dangle": "off",
-    // https://github.com/benmosher/eslint-plugin-import/issues/479#issuecomment-252500896
-    "import/no-extraneous-dependencies": "off",
-    "max-len": [
-      "error",
+    "import/no-unresolved": [
+      2,
       {
-        "code": 100,
-        "ignoreStrings": true,
-        "ignoreTemplateLiterals": true
+        "commonjs": true,
+        "amd": true
       }
     ],
-    "no-continue": "off",
-    "no-debugger": "off",
-    "no-mixed-operators": "off",
-    "no-param-reassign": "off",
-    "no-plusplus": "off",
-    "no-underscore-dangle": "off",
-    "no-use-before-define": "off",
-    "no-multiple-empty-lines": ["error", { "max": 1 }],
-    "object-curly-newline": "off",
-    "no-trailing-spaces": ["error"],
-    "no-unused-expressions": ["error", { "allowShortCircuit": true }],
-    "react/prefer-stateless-function": "off",
-    "react/prop-types": "off",
-    "react/sort-comp": ["error", {}],
-    "jsx-a11y/label-has-for": "off",
-    "jsx-a11y/label-has-associated-control": "off",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
-  }
+    "import/named": 2,
+    "import/namespace": 2,
+    "import/default": 2,
+    "import/export": 2
+  },
+  "camelcase": "off",
+  "arrow-parens": "off",
+  "comma-dangle": "off",
+  "eslint-plugin/consistent-output": [
+    "error",
+    "always"
+  ],
+  "eslint-plugin/meta-property-ordering": "error",
+  "eslint-plugin/no-deprecated-context-methods": "error",
+  "eslint-plugin/no-deprecated-report-api": "off",
+  "eslint-plugin/prefer-replace-text": "error",
+  "eslint-plugin/report-message-format": "error",
+  "eslint-plugin/require-meta-schema": "error",
+  "eslint-plugin/require-meta-type": "error",
+  "import/no-extraneous-dependencies": "error",
+  "import/unambiguous": "off",
+  "max-len": [
+    "error",
+    {
+      "code": 100,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true
+    }
+  ],
+  "no-continue": "off",
+  "no-debugger": "off",
+  "no-mixed-operators": "off",
+  "no-param-reassign": "off",
+  "no-plusplus": "off",
+  "no-underscore-dangle": "off",
+  "no-use-before-define": "off",
+  "no-multiple-empty-lines": [
+    "error",
+    {
+      "max": 1
+    }
+  ],
+  "object-curly-newline": "off",
+  "no-trailing-spaces": [
+    "error"
+  ],
+  "no-unused-expressions": [
+    "error",
+    {
+      "allowShortCircuit": true
+    }
+  ],
+  "react/prefer-stateless-function": "off",
+  "react/prop-types": "off",
+  "react/sort-comp": [
+    "error",
+    {}
+  ],
+  "jsx-a11y/label-has-for": "off",
+  "jsx-a11y/label-has-associated-control": "off",
+  "react-hooks/rules-of-hooks": "error",
+  "react-hooks/exhaustive-deps": "warn"
 }
