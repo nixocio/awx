@@ -1,17 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-
+import { withI18n } from '@lingui/react';
 import { Card } from '@patternfly/react-core';
-import AlertModal from '../AlertModal';
-import DatalistToolbar from '../DataListToolbar';
-import ErrorDetail from '../ErrorDetail';
-import PaginatedDataList, { ToolbarDeleteButton } from '../PaginatedDataList';
-import useRequest, { useDeleteItems } from '../../util/useRequest';
-import { getQSConfig, parseQueryString } from '../../util/qs';
-import JobListItem from './JobListItem';
-import useWsJobs from './useWsJobs';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import {
   AdHocCommandsAPI,
   InventoryUpdatesAPI,
@@ -21,6 +13,14 @@ import {
   UnifiedJobsAPI,
   WorkflowJobsAPI,
 } from '../../api';
+import { getQSConfig, parseQueryString } from '../../util/qs';
+import useRequest, { useDeleteItems } from '../../util/useRequest';
+import AlertModal from '../AlertModal';
+import DatalistToolbar from '../DataListToolbar';
+import ErrorDetail from '../ErrorDetail';
+import PaginatedDataList, { ToolbarDeleteButton } from '../PaginatedDataList';
+import JobListItem from './JobListItem';
+import useWsJobs from './useWsJobs';
 
 function JobList({ i18n, defaultParams, showTypeColumn = false }) {
   const QS_CONFIG = getQSConfig(
@@ -59,7 +59,7 @@ function JobList({ i18n, defaultParams, showTypeColumn = false }) {
 
   // TODO: update QS_CONFIG to be safe for deps array
   const fetchJobsById = useCallback(
-    async ids => {
+    async (ids) => {
       const params = parseQueryString(QS_CONFIG, location.search);
       params.id__in = ids.join(',');
       const { data } = await UnifiedJobsAPI.read(params);
@@ -111,13 +111,13 @@ function JobList({ i18n, defaultParams, showTypeColumn = false }) {
     setSelected([]);
   };
 
-  const handleSelectAll = isSelected => {
+  const handleSelectAll = (isSelected) => {
     setSelected(isSelected ? [...jobs] : []);
   };
 
-  const handleSelect = item => {
-    if (selected.some(s => s.id === item.id)) {
-      setSelected(selected.filter(s => s.id !== item.id));
+  const handleSelect = (item) => {
+    if (selected.some((s) => s.id === item.id)) {
+      setSelected(selected.filter((s) => s.id !== item.id));
     } else {
       setSelected(selected.concat(item));
     }
@@ -209,7 +209,7 @@ function JobList({ i18n, defaultParams, showTypeColumn = false }) {
               key: 'started',
             },
           ]}
-          renderToolbar={props => (
+          renderToolbar={(props) => (
             <DatalistToolbar
               {...props}
               showSelectAll
@@ -227,13 +227,13 @@ function JobList({ i18n, defaultParams, showTypeColumn = false }) {
               ]}
             />
           )}
-          renderItem={job => (
+          renderItem={(job) => (
             <JobListItem
               key={job.id}
               job={job}
               showTypeColumn={showTypeColumn}
               onSelect={() => handleSelect(job)}
-              isSelected={selected.some(row => row.id === job.id)}
+              isSelected={selected.some((row) => row.id === job.id)}
             />
           )}
         />

@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { func, shape } from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { InventorySourcesAPI } from '../../../../../../api';
-import { getQSConfig, parseQueryString } from '../../../../../../util/qs';
-import PaginatedDataList from '../../../../../../components/PaginatedDataList';
-import DataListToolbar from '../../../../../../components/DataListToolbar';
 import CheckboxListItem from '../../../../../../components/CheckboxListItem';
+import DataListToolbar from '../../../../../../components/DataListToolbar';
+import PaginatedDataList from '../../../../../../components/PaginatedDataList';
+import { getQSConfig, parseQueryString } from '../../../../../../util/qs';
 
 const QS_CONFIG = getQSConfig('inventory_sources', {
   page: 1,
@@ -46,10 +47,10 @@ function InventorySourcesList({ i18n, nodeResource, onUpdateNodeResource }) {
       hasContentLoading={isLoading}
       itemCount={count}
       items={inventorySources}
-      onRowClick={row => onUpdateNodeResource(row)}
+      onRowClick={(row) => onUpdateNodeResource(row)}
       qsConfig={QS_CONFIG}
       showPageSizeOptions={false}
-      renderItem={item => (
+      renderItem={(item) => (
         <CheckboxListItem
           isSelected={!!(nodeResource && nodeResource.id === item.id)}
           itemId={item.id}
@@ -61,7 +62,7 @@ function InventorySourcesList({ i18n, nodeResource, onUpdateNodeResource }) {
           isRadio
         />
       )}
-      renderToolbar={props => <DataListToolbar {...props} fillWidth />}
+      renderToolbar={(props) => <DataListToolbar {...props} fillWidth />}
       toolbarSearchColumns={[
         {
           name: i18n._(t`Name`),

@@ -1,12 +1,12 @@
-import React, { useState, useCallback } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import React, { useCallback, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import Breadcrumbs from '../../components/Breadcrumbs';
+import CredentialType from './CredentialType';
 import CredentialTypeAdd from './CredentialTypeAdd';
 import CredentialTypeList from './CredentialTypeList';
-import CredentialType from './CredentialType';
-import Breadcrumbs from '../../components/Breadcrumbs';
 
 function CredentialTypes({ i18n }) {
   const [breadcrumbConfig, setBreadcrumbConfig] = useState({
@@ -15,7 +15,7 @@ function CredentialTypes({ i18n }) {
   });
 
   const buildBreadcrumbConfig = useCallback(
-    credentialTypes => {
+    (credentialTypes) => {
       if (!credentialTypes) {
         return;
       }

@@ -1,14 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { shape, func } from 'prop-types';
+import { withI18n } from '@lingui/react';
+import { Button, Badge as PFBadge, Tooltip } from '@patternfly/react-core';
 import {
   DownloadIcon,
   RocketIcon,
   TrashAltIcon,
 } from '@patternfly/react-icons';
-import { Badge as PFBadge, Button, Tooltip } from '@patternfly/react-core';
+import { func, shape } from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
+
 import DeleteButton from '../../../../components/DeleteButton';
 import LaunchButton from '../../../../components/LaunchButton';
 
@@ -23,7 +24,7 @@ const Badge = styled(PFBadge)`
   display: flex;
   justify-content: center;
   margin-left: 10px;
-  ${props =>
+  ${(props) =>
     props.color
       ? `
   background-color: ${props.color}
@@ -39,7 +40,7 @@ const Wrapper = styled.div`
   font-size: 14px;
 `;
 
-const toHHMMSS = elapsed => {
+const toHHMMSS = (elapsed) => {
   const sec_num = parseInt(elapsed, 10);
   const hours = Math.floor(sec_num / 3600);
   const minutes = Math.floor(sec_num / 60) % 60;

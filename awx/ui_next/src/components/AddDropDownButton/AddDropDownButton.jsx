@@ -1,14 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { Dropdown, DropdownPosition } from '@patternfly/react-core';
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import { ToolbarAddButton } from '../PaginatedDataList';
 
 function AddDropDownButton({ dropdownItems }) {
   const [isOpen, setIsOpen] = useState(false);
   const element = useRef(null);
 
-  const toggle = e => {
+  const toggle = (e) => {
     if (!element || !element.current.contains(e.target)) {
       setIsOpen(false);
     }
@@ -28,7 +29,7 @@ function AddDropDownButton({ dropdownItems }) {
         isOpen={isOpen}
         position={DropdownPosition.right}
         toggle={<ToolbarAddButton onClick={() => setIsOpen(!isOpen)} />}
-        dropdownItems={dropdownItems.map(item => (
+        dropdownItems={dropdownItems.map((item) => (
           <Link
             className="pf-c-dropdown__menu-item"
             key={item.url}

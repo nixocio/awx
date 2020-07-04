@@ -1,25 +1,25 @@
-import React, { useState, useCallback } from 'react';
-import { string, bool, func } from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { Link } from 'react-router-dom';
+import { withI18n } from '@lingui/react';
 import {
   Button,
-  DataListAction as _DataListAction,
   DataListCheck,
   DataListItem,
-  DataListItemRow,
   DataListItemCells,
+  DataListItemRow,
   Tooltip,
+  DataListAction as _DataListAction,
 } from '@patternfly/react-core';
 import { PencilAltIcon } from '@patternfly/react-icons';
+import { bool, func, string } from 'prop-types';
+import React, { useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import DataListCell from '../../../components/DataListCell';
-import { timeOfDay } from '../../../util/dates';
 
-import { Credential } from '../../../types';
 import { CredentialsAPI } from '../../../api';
 import CopyButton from '../../../components/CopyButton';
+import DataListCell from '../../../components/DataListCell';
+import { Credential } from '../../../types';
+import { timeOfDay } from '../../../util/dates';
 
 const DataListAction = styled(_DataListAction)`
   align-items: center;

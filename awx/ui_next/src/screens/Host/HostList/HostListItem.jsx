@@ -1,25 +1,26 @@
 import 'styled-components/macro';
-import React, { Fragment } from 'react';
-import { string, bool, func } from 'prop-types';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   Button,
-  DataListAction as _DataListAction,
   DataListCheck,
   DataListItem,
-  DataListItemRow,
   DataListItemCells,
+  DataListItemRow,
   Tooltip,
+  DataListAction as _DataListAction,
 } from '@patternfly/react-core';
-import { Link } from 'react-router-dom';
 import { PencilAltIcon } from '@patternfly/react-icons';
+import { bool, func, string } from 'prop-types';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import DataListCell from '../../../components/DataListCell';
 
+import DataListCell from '../../../components/DataListCell';
+import HostToggle from '../../../components/HostToggle';
 import Sparkline from '../../../components/Sparkline';
 import { Host } from '../../../types';
-import HostToggle from '../../../components/HostToggle';
 
 const DataListAction = styled(_DataListAction)`
   align-items: center;
@@ -30,7 +31,7 @@ const DataListAction = styled(_DataListAction)`
 
 function HostListItem({ i18n, host, isSelected, onSelect, detailUrl }) {
   const labelId = `check-action-${host.id}`;
-  const recentPlaybookJobs = host.summary_fields.recent_jobs.map(job => ({
+  const recentPlaybookJobs = host.summary_fields.recent_jobs.map((job) => ({
     ...job,
     type: 'job',
   }));

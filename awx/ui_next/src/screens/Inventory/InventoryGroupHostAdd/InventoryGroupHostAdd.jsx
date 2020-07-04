@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { CardBody } from '../../../components/Card';
-import HostForm from '../../../components/HostForm';
 
 import { GroupsAPI } from '../../../api';
+import { CardBody } from '../../../components/Card';
+import HostForm from '../../../components/HostForm';
 
 function InventoryGroupHostAdd({ inventoryGroup }) {
   const [formError, setFormError] = useState(null);
   const baseUrl = `/inventories/inventory/${inventoryGroup.inventory}`;
   const history = useHistory();
 
-  const handleSubmit = async formData => {
+  const handleSubmit = async (formData) => {
     try {
       const values = {
         ...formData,

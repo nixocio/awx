@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro';
 
 import Applications from './screens/Application';
+import AuthSettings from './screens/AuthSetting';
 import Credentials from './screens/Credential';
 import CredentialTypes from './screens/CredentialType';
 import Dashboard from './screens/Dashboard';
@@ -9,19 +10,18 @@ import InstanceGroups from './screens/InstanceGroup';
 import Inventory from './screens/Inventory';
 import InventoryScripts from './screens/InventoryScript';
 import { Jobs } from './screens/Job';
+import JobsSettings from './screens/JobsSetting';
+import License from './screens/License';
 import ManagementJobs from './screens/ManagementJob';
 import NotificationTemplates from './screens/NotificationTemplate';
 import Organizations from './screens/Organization';
 import Portal from './screens/Portal';
 import Projects from './screens/Project';
 import Schedules from './screens/Schedule';
-import AuthSettings from './screens/AuthSetting';
-import JobsSettings from './screens/JobsSetting';
 import SystemSettings from './screens/SystemSetting';
-import UISettings from './screens/UISetting';
-import License from './screens/License';
 import Teams from './screens/Team';
 import Templates from './screens/Template';
+import UISettings from './screens/UISetting';
 import Users from './screens/User';
 
 // Ideally, this should just be a regular object that we export, but we

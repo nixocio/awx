@@ -1,4 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { PageSection } from '@patternfly/react-core';
+import React, { useCallback, useState } from 'react';
 import {
   Route,
   Switch,
@@ -7,14 +10,12 @@ import {
   useParams,
   useRouteMatch,
 } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { PageSection } from '@patternfly/react-core';
+
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
-import Job from './Job';
-import JobTypeRedirect from './JobTypeRedirect';
 import JobList from '../../components/JobList';
 import { JOB_TYPE_URL_SEGMENTS } from '../../constants';
+import Job from './Job';
+import JobTypeRedirect from './JobTypeRedirect';
 
 function Jobs({ i18n }) {
   const history = useHistory();
@@ -25,7 +26,7 @@ function Jobs({ i18n }) {
   });
 
   const buildBreadcrumbConfig = useCallback(
-    job => {
+    (job) => {
       if (!job) {
         return;
       }

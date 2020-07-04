@@ -1,11 +1,10 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 
-import CheckboxCard from './CheckboxCard';
 import SelectedList from '../SelectedList';
+import CheckboxCard from './CheckboxCard';
 
 class RolesStep extends React.Component {
   render() {
@@ -44,12 +43,12 @@ class RolesStep extends React.Component {
             marginTop: '20px',
           }}
         >
-          {Object.keys(roles).map(role => (
+          {Object.keys(roles).map((role) => (
             <CheckboxCard
               description={roles[role].description}
               itemId={roles[role].id}
               isSelected={selectedRoleRows.some(
-                item => item.id === roles[role].id
+                (item) => item.id === roles[role].id
               )}
               key={roles[role].id}
               name={roles[role].name}

@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { useField } from 'formik';
+import { withI18n } from '@lingui/react';
 import {
   Button,
   ButtonVariant,
@@ -11,8 +8,12 @@ import {
   Tooltip,
 } from '@patternfly/react-core';
 import { KeyIcon } from '@patternfly/react-icons';
-import { FieldTooltip } from '../../../../../components/FormField';
+import { useField } from 'formik';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+
 import FieldWithPrompt from '../../../../../components/FieldWithPrompt';
+import { FieldTooltip } from '../../../../../components/FormField';
 import { CredentialPluginPrompt } from './CredentialPluginPrompt';
 import CredentialPluginSelected from './CredentialPluginSelected';
 
@@ -73,7 +74,7 @@ function CredentialPluginInput(props) {
             typeof inputField.value === 'object' ? inputField.value : {}
           }
           onClose={() => setShowPluginWizard(false)}
-          onSubmit={val => {
+          onSubmit={(val) => {
             val.touched = true;
             helpers.setValue(val);
             setShowPluginWizard(false);

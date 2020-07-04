@@ -1,15 +1,16 @@
-import React, { Fragment } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { bool, instanceOf } from 'prop-types';
 import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
 import {
-  Title,
   EmptyState,
-  EmptyStateIcon,
   EmptyStateBody,
+  EmptyStateIcon,
+  Title,
 } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons';
+import { bool, instanceOf } from 'prop-types';
+import React, { Fragment } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+
 import { RootAPI } from '../../api';
 import ErrorDetail from '../ErrorDetail';
 

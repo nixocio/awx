@@ -1,20 +1,20 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Form, FormGroup } from '@patternfly/react-core';
+import { Formik, useField } from 'formik';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { Formik, useField } from 'formik';
-import { Form, FormGroup } from '@patternfly/react-core';
-import PropTypes from 'prop-types';
 
-import { required } from '../../../util/validators';
+import AnsibleSelect from '../../../components/AnsibleSelect';
+import FormActionGroup from '../../../components/FormActionGroup/FormActionGroup';
 import FormField, {
-  FormSubmitError,
   FieldTooltip,
+  FormSubmitError,
 } from '../../../components/FormField';
 import { FormColumnLayout } from '../../../components/FormLayout';
-import FormActionGroup from '../../../components/FormActionGroup/FormActionGroup';
 import OrganizationLookup from '../../../components/Lookup/OrganizationLookup';
-import AnsibleSelect from '../../../components/AnsibleSelect';
+import { required } from '../../../util/validators';
 
 function ApplicationFormFields({
   i18n,
@@ -59,7 +59,7 @@ function ApplicationFormFields({
         helperTextInvalid={organizationMeta.error}
         isValid={!organizationMeta.touched || !organizationMeta.error}
         onBlur={() => organizationHelpers.setTouched()}
-        onChange={value => {
+        onChange={(value) => {
           organizationHelpers.setValue(value);
         }}
         value={organizationField.value}
@@ -145,8 +145,11 @@ function ApplicationForm({
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={values => onSubmit(values)}>
-      {formik => (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={(values) => onSubmit(values)}
+    >
+      {(formik) => (
         <Form autoComplete="off" onSubmit={formik.handleSubmit}>
           <FormColumnLayout>
             <ApplicationFormFields

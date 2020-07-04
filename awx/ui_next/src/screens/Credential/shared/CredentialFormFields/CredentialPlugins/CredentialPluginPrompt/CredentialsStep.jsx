@@ -1,8 +1,9 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { useField } from 'formik';
 import React, { useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { useField } from 'formik';
+
 import { CredentialsAPI } from '../../../../../../api';
 import CheckboxListItem from '../../../../../../components/CheckboxListItem';
 import ContentError from '../../../../../../components/ContentError';
@@ -57,9 +58,9 @@ function CredentialsStep({ i18n }) {
       hasContentLoading={isCredentialsLoading}
       itemCount={count}
       items={credentials}
-      onRowClick={row => selectedCredentialHelper.setValue(row)}
+      onRowClick={(row) => selectedCredentialHelper.setValue(row)}
       qsConfig={QS_CONFIG}
-      renderItem={credential => (
+      renderItem={(credential) => (
         <CheckboxListItem
           isSelected={selectedCredential?.value?.id === credential.id}
           itemId={credential.id}
@@ -71,7 +72,7 @@ function CredentialsStep({ i18n }) {
           isRadio
         />
       )}
-      renderToolbar={props => <DataListToolbar {...props} fillWidth />}
+      renderToolbar={(props) => <DataListToolbar {...props} fillWidth />}
       showPageSizeOptions={false}
       toolbarSearchColumns={[
         {

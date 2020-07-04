@@ -1,8 +1,9 @@
+import { mount } from 'enzyme';
+import { createMemoryHistory } from 'history';
 /* eslint-disable react/jsx-pascal-case */
 import React from 'react';
-import { mount } from 'enzyme';
 import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+
 import RoutedTabs from './RoutedTabs';
 
 let wrapper;

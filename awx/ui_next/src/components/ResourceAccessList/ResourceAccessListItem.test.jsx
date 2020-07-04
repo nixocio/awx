@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
-
 import ResourceAccessListItem from './ResourceAccessListItem';
 
 const accessRecord = {

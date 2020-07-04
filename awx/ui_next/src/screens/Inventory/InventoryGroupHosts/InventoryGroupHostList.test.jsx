@@ -1,13 +1,14 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
-import { GroupsAPI, InventoriesAPI } from '../../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-import InventoryGroupHostList from './InventoryGroupHostList';
+import { GroupsAPI, InventoriesAPI } from '../../../api';
 import mockHosts from '../shared/data.hosts.json';
+import InventoryGroupHostList from './InventoryGroupHostList';
 
 jest.mock('../../../api/models/Groups');
 jest.mock('../../../api/models/Inventories');
@@ -37,7 +38,7 @@ describe('<InventoryGroupHostList />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<InventoryGroupHostList />);
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
   });
 
   afterEach(() => {
@@ -76,21 +77,21 @@ describe('<InventoryGroupHostList />', () => {
   });
 
   test('should check all row items when select all is checked', async () => {
-    wrapper.find('DataListCheck').forEach(el => {
+    wrapper.find('DataListCheck').forEach((el) => {
       expect(el.props().checked).toBe(false);
     });
     await act(async () => {
       wrapper.find('Checkbox#select-all').invoke('onChange')(true);
     });
     wrapper.update();
-    wrapper.find('DataListCheck').forEach(el => {
+    wrapper.find('DataListCheck').forEach((el) => {
       expect(el.props().checked).toBe(true);
     });
     await act(async () => {
       wrapper.find('Checkbox#select-all').invoke('onChange')(false);
     });
     wrapper.update();
-    wrapper.find('DataListCheck').forEach(el => {
+    wrapper.find('DataListCheck').forEach((el) => {
       expect(el.props().checked).toBe(false);
     });
   });
@@ -107,7 +108,7 @@ describe('<InventoryGroupHostList />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<InventoryGroupHostList />);
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(wrapper.find('AddHostDropdown').length).toBe(0);
   });
 
@@ -182,18 +183,15 @@ describe('<InventoryGroupHostList />', () => {
         .find('DropdownItem[aria-label="add existing host"]')
         .simulate('click');
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     await act(async () => {
-      wrapper
-        .find('CheckboxListItem')
-        .first()
-        .invoke('onSelect')();
+      wrapper.find('CheckboxListItem').first().invoke('onSelect')();
     });
     wrapper.update();
     await act(async () => {
       wrapper.find('button[aria-label="Save"]').simulate('click');
     });
-    await waitForElement(wrapper, 'AssociateModal', el => el.length === 0);
+    await waitForElement(wrapper, 'AssociateModal', (el) => el.length === 0);
     expect(InventoriesAPI.readHosts).toHaveBeenCalledTimes(1);
     expect(GroupsAPI.associateHost).toHaveBeenCalledTimes(1);
   });
@@ -214,12 +212,9 @@ describe('<InventoryGroupHostList />', () => {
         .find('DropdownItem[aria-label="add existing host"]')
         .simulate('click');
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     await act(async () => {
-      wrapper
-        .find('CheckboxListItem')
-        .first()
-        .invoke('onSelect')();
+      wrapper.find('CheckboxListItem').first().invoke('onSelect')();
     });
     await act(async () => {
       wrapper.find('button[aria-label="Save"]').simulate('click');
@@ -251,7 +246,7 @@ describe('<InventoryGroupHostList />', () => {
         },
       });
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     const dropdownToggle = wrapper.find(
       'DropdownToggle button[aria-label="add host"]'
     );
@@ -269,6 +264,6 @@ describe('<InventoryGroupHostList />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<InventoryGroupHostList />);
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

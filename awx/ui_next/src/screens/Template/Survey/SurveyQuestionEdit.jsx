@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import ContentLoading from '../../../components/ContentLoading';
+
 import { CardBody } from '../../../components/Card';
+import ContentLoading from '../../../components/ContentLoading';
 import SurveyQuestionForm from './SurveyQuestionForm';
 
 export default function SurveyQuestionEdit({ survey, updateSurvey }) {
@@ -13,18 +14,20 @@ export default function SurveyQuestionEdit({ survey, updateSurvey }) {
     return <ContentLoading />;
   }
 
-  const question = survey.spec.find(q => q.variable === match.params.variable);
+  const question = survey.spec.find(
+    (q) => q.variable === match.params.variable
+  );
 
   const navigateToList = () => {
     const index = match.url.indexOf('/edit');
     history.push(match.url.substr(0, index));
   };
 
-  const handleSubmit = async formData => {
+  const handleSubmit = async (formData) => {
     try {
       if (
         formData.variable !== question.variable &&
-        survey.spec.find(q => q.variable === formData.variable)
+        survey.spec.find((q) => q.variable === formData.variable)
       ) {
         setFormError(
           new Error(
@@ -34,7 +37,7 @@ export default function SurveyQuestionEdit({ survey, updateSurvey }) {
         return;
       }
       const questionIndex = survey.spec.findIndex(
-        q => q.variable === match.params.variable
+        (q) => q.variable === match.params.variable
       );
       if (questionIndex === -1) {
         throw new Error('Question not found in spec');
@@ -42,8 +45,8 @@ export default function SurveyQuestionEdit({ survey, updateSurvey }) {
       if (formData.type === 'multiselect') {
         formData.default = formData.default
           .split('\n')
-          .filter(v => v !== '' || '\n')
-          .map(v => v.trim())
+          .filter((v) => v !== '' || '\n')
+          .map((v) => v.trim())
           .join('\n');
       }
       await updateSurvey([

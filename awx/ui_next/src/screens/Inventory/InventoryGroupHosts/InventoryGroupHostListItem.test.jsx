@@ -1,7 +1,8 @@
 import React from 'react';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
-import InventoryGroupHostListItem from './InventoryGroupHostListItem';
 import mockHosts from '../shared/data.hosts.json';
+import InventoryGroupHostListItem from './InventoryGroupHostListItem';
 
 jest.mock('../../../api');
 
@@ -26,12 +27,9 @@ describe('<InventoryGroupHostListItem />', () => {
   });
 
   test('should display expected row item content', () => {
-    expect(
-      wrapper
-        .find('DataListCell')
-        .first()
-        .text()
-    ).toBe('.host-000001.group-00000.dummy');
+    expect(wrapper.find('DataListCell').first().text()).toBe(
+      '.host-000001.group-00000.dummy'
+    );
     expect(wrapper.find('Sparkline').length).toBe(1);
     expect(wrapper.find('HostToggle').length).toBe(1);
   });

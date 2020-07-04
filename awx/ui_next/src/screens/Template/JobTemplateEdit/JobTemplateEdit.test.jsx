@@ -1,14 +1,15 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
-import { sleep } from '../../../../testUtils/testUtils';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
+import { sleep } from '../../../../testUtils/testUtils';
 import {
-  CredentialsAPI,
   CredentialTypesAPI,
+  CredentialsAPI,
   JobTemplatesAPI,
   LabelsAPI,
   ProjectsAPI,
@@ -217,7 +218,7 @@ describe('<JobTemplateEdit />', () => {
         <JobTemplateEdit template={mockJobTemplate} />
       );
     });
-    await waitForElement(wrapper, 'EmptyStateBody', el => el.length === 0);
+    await waitForElement(wrapper, 'EmptyStateBody', (el) => el.length === 0);
   });
 
   test('handleSubmit should call api update', async () => {
@@ -238,7 +239,7 @@ describe('<JobTemplateEdit />', () => {
       { id: 5, name: 'Maple' },
       { id: 6, name: 'Tree' },
     ];
-    await waitForElement(wrapper, 'EmptyStateBody', el => el.length === 0);
+    await waitForElement(wrapper, 'EmptyStateBody', (el) => el.length === 0);
     act(() => {
       wrapper.find('input#template-name').simulate('change', {
         target: { value: 'new name', name: 'name' },
@@ -290,7 +291,7 @@ describe('<JobTemplateEdit />', () => {
     const cancelButton = await waitForElement(
       wrapper,
       'button[aria-label="Cancel"]',
-      e => e.length === 1
+      (e) => e.length === 1
     );
     await act(async () => {
       cancelButton.prop('onClick')();

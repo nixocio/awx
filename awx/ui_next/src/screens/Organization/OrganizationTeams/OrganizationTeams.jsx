@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { OrganizationsAPI } from '../../../api';
 import PaginatedDataList from '../../../components/PaginatedDataList';
 import { getQSConfig, parseQueryString } from '../../../util/qs';
@@ -31,7 +32,7 @@ function OrganizationTeams({ id, i18n }) {
         } = await OrganizationsAPI.readTeams(id, params);
         setItemCount(count);
         setTeams(
-          results.map(team => ({ ...team, url: `/teams/${team.id}/details` }))
+          results.map((team) => ({ ...team, url: `/teams/${team.id}/details` }))
         );
       } catch (error) {
         setContentError(error);

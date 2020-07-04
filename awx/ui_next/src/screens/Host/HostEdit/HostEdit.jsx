@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
+import { HostsAPI } from '../../../api';
 import { CardBody } from '../../../components/Card';
 import HostForm from '../../../components/HostForm';
-import { HostsAPI } from '../../../api';
 
 function HostEdit({ host }) {
   const [formError, setFormError] = useState(null);
   const detailsUrl = `/hosts/${host.id}/details`;
   const history = useHistory();
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     try {
       await HostsAPI.update(host.id, values);
       history.push(detailsUrl);

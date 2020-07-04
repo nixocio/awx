@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
-
 import ManagementJobs from './ManagementJobs';
 
 describe('<ManagementJobs />', () => {

@@ -1,14 +1,13 @@
-import React, { Component, Fragment } from 'react';
-import { Route, withRouter, Switch } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import React, { Component, Fragment } from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
-import { Config } from '../../contexts/Config';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
-
-import ProjectsList from './ProjectList/ProjectList';
-import ProjectAdd from './ProjectAdd/ProjectAdd';
+import { Config } from '../../contexts/Config';
 import Project from './Project';
+import ProjectAdd from './ProjectAdd/ProjectAdd';
+import ProjectsList from './ProjectList/ProjectList';
 
 class Projects extends Component {
   constructor(props) {

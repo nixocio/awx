@@ -1,13 +1,13 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
 import { sleep } from '../../../../testUtils/testUtils';
-
-import { InventoriesAPI, CredentialTypesAPI } from '../../../api';
+import { CredentialTypesAPI, InventoriesAPI } from '../../../api';
 import InventoryEdit from './InventoryEdit';
 
 jest.mock('../../../api');
@@ -101,7 +101,7 @@ describe('<InventoryEdit />', () => {
   });
 
   test('handleCancel returns the user to inventory detail', async () => {
-    await waitForElement(wrapper, 'isLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'isLoading', (el) => el.length === 0);
     wrapper.find('Button[aria-label="Cancel"]').simulate('click');
     expect(history.location.pathname).toEqual(
       '/inventories/inventory/1/details'
@@ -109,7 +109,7 @@ describe('<InventoryEdit />', () => {
   });
 
   test('handleSubmit should post to the api', async () => {
-    await waitForElement(wrapper, 'isLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'isLoading', (el) => el.length === 0);
     const instanceGroups = [
       { name: 'Bizz', id: 2 },
       { name: 'Buzz', id: 3 },
@@ -122,13 +122,13 @@ describe('<InventoryEdit />', () => {
       instanceGroups,
     });
     await sleep(0);
-    instanceGroups.map(IG =>
+    instanceGroups.map((IG) =>
       expect(InventoriesAPI.associateInstanceGroup).toHaveBeenCalledWith(
         1,
         IG.id
       )
     );
-    associatedInstanceGroups.map(async aIG =>
+    associatedInstanceGroups.map(async (aIG) =>
       expect(InventoriesAPI.disassociateInstanceGroup).toHaveBeenCalledWith(
         1,
         aIG.id

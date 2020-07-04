@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { RootAPI } from '../../api';
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
-
+import { RootAPI } from '../../api';
 import AWXLogin from './Login';
 
 jest.mock('../../api');
@@ -21,21 +20,21 @@ describe('<Login />', () => {
       submitButton,
       loginHeaderLogo,
     ] = await Promise.all([
-      waitForElement(wrapper, 'AWXLogin', el => el.length === 1),
-      waitForElement(wrapper, 'LoginPage', el => el.length === 1),
-      waitForElement(wrapper, 'LoginForm', el => el.length === 1),
+      waitForElement(wrapper, 'AWXLogin', (el) => el.length === 1),
+      waitForElement(wrapper, 'LoginPage', (el) => el.length === 1),
+      waitForElement(wrapper, 'LoginForm', (el) => el.length === 1),
       waitForElement(
         wrapper,
         'input#pf-login-username-id',
-        el => el.length === 1
+        (el) => el.length === 1
       ),
       waitForElement(
         wrapper,
         'input#pf-login-password-id',
-        el => el.length === 1
+        (el) => el.length === 1
       ),
-      waitForElement(wrapper, 'Button[type="submit"]', el => el.length === 1),
-      waitForElement(wrapper, 'img', el => el.length === 1),
+      waitForElement(wrapper, 'Button[type="submit"]', (el) => el.length === 1),
+      waitForElement(wrapper, 'img', (el) => el.length === 1),
     ]);
     return {
       awxLogin,
@@ -61,7 +60,7 @@ describe('<Login />', () => {
     jest.clearAllMocks();
   });
 
-  test('initially renders without crashing', async done => {
+  test('initially renders without crashing', async (done) => {
     const loginWrapper = mountWithContexts(
       <AWXLogin isAuthenticated={() => false} />
     );
@@ -78,7 +77,7 @@ describe('<Login />', () => {
     done();
   });
 
-  test('custom logo renders Brand component with correct src and alt', async done => {
+  test('custom logo renders Brand component with correct src and alt', async (done) => {
     const loginWrapper = mountWithContexts(
       <AWXLogin alt="Foo Application" isAuthenticated={() => false} />
     );
@@ -91,7 +90,7 @@ describe('<Login />', () => {
     done();
   });
 
-  test('default logo renders Brand component with correct src and alt', async done => {
+  test('default logo renders Brand component with correct src and alt', async (done) => {
     RootAPI.read.mockResolvedValue({ data: {} });
     const loginWrapper = mountWithContexts(
       <AWXLogin isAuthenticated={() => false} />
@@ -102,7 +101,7 @@ describe('<Login />', () => {
     done();
   });
 
-  test('default logo renders on data initialization error', async done => {
+  test('default logo renders on data initialization error', async (done) => {
     RootAPI.read.mockRejectedValueOnce({ response: { status: 500 } });
     const loginWrapper = mountWithContexts(
       <AWXLogin isAuthenticated={() => false} />
@@ -113,7 +112,7 @@ describe('<Login />', () => {
     done();
   });
 
-  test('state maps to un/pw input value props', async done => {
+  test('state maps to un/pw input value props', async (done) => {
     const loginWrapper = mountWithContexts(
       <AWXLogin isAuthenticated={() => false} />
     );
@@ -123,17 +122,17 @@ describe('<Login />', () => {
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('username') === 'un'
+      (el) => el.state('username') === 'un'
     );
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('password') === 'pw'
+      (el) => el.state('password') === 'pw'
     );
     done();
   });
 
-  test('handles input validation errors and clears on input value change', async done => {
+  test('handles input validation errors and clears on input value change', async (done) => {
     const formError = '.pf-c-form__helper-text.pf-m-error';
     const loginWrapper = mountWithContexts(
       <AWXLogin isAuthenticated={() => false} />
@@ -149,43 +148,43 @@ describe('<Login />', () => {
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('username') === 'invalid'
+      (el) => el.state('username') === 'invalid'
     );
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('password') === 'invalid'
+      (el) => el.state('password') === 'invalid'
     );
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('hasValidationError') === true
+      (el) => el.state('hasValidationError') === true
     );
-    await waitForElement(loginWrapper, formError, el => el.length === 1);
+    await waitForElement(loginWrapper, formError, (el) => el.length === 1);
 
     usernameInput.props().onChange({ currentTarget: { value: 'dsarif' } });
     passwordInput.props().onChange({ currentTarget: { value: 'freneticpny' } });
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('username') === 'dsarif'
+      (el) => el.state('username') === 'dsarif'
     );
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('password') === 'freneticpny'
+      (el) => el.state('password') === 'freneticpny'
     );
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('hasValidationError') === false
+      (el) => el.state('hasValidationError') === false
     );
-    await waitForElement(loginWrapper, formError, el => el.length === 0);
+    await waitForElement(loginWrapper, formError, (el) => el.length === 0);
 
     done();
   });
 
-  test('handles other errors and clears on resubmit', async done => {
+  test('handles other errors and clears on resubmit', async (done) => {
     const loginWrapper = mountWithContexts(
       <AWXLogin isAuthenticated={() => false} />
     );
@@ -198,7 +197,7 @@ describe('<Login />', () => {
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('hasAuthError') === true
+      (el) => el.state('hasAuthError') === true
     );
 
     usernameInput.props().onChange({ currentTarget: { value: 'sgrimes' } });
@@ -206,29 +205,29 @@ describe('<Login />', () => {
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('username') === 'sgrimes'
+      (el) => el.state('username') === 'sgrimes'
     );
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('password') === 'ovid'
+      (el) => el.state('password') === 'ovid'
     );
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('hasAuthError') === true
+      (el) => el.state('hasAuthError') === true
     );
 
     submitButton.simulate('click');
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('hasAuthError') === false
+      (el) => el.state('hasAuthError') === false
     );
     done();
   });
 
-  test('no login requests are made when already authenticating', async done => {
+  test('no login requests are made when already authenticating', async (done) => {
     const loginWrapper = mountWithContexts(
       <AWXLogin isAuthenticated={() => false} />
     );
@@ -247,7 +246,7 @@ describe('<Login />', () => {
     done();
   });
 
-  test('submit calls api.login successfully', async done => {
+  test('submit calls api.login successfully', async (done) => {
     const loginWrapper = mountWithContexts(
       <AWXLogin isAuthenticated={() => false} />
     );
@@ -261,12 +260,12 @@ describe('<Login />', () => {
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('isAuthenticating') === true
+      (el) => el.state('isAuthenticating') === true
     );
     await waitForElement(
       loginWrapper,
       'AWXLogin',
-      el => el.state('isAuthenticating') === false
+      (el) => el.state('isAuthenticating') === false
     );
     expect(RootAPI.login).toHaveBeenCalledTimes(1);
     expect(RootAPI.login).toHaveBeenCalledWith('gthorpe', 'hydro');
@@ -274,12 +273,16 @@ describe('<Login />', () => {
     done();
   });
 
-  test('render Redirect to / when already authenticated', async done => {
+  test('render Redirect to / when already authenticated', async (done) => {
     const loginWrapper = mountWithContexts(
       <AWXLogin isAuthenticated={() => true} />
     );
-    await waitForElement(loginWrapper, 'Redirect', el => el.length === 1);
-    await waitForElement(loginWrapper, 'Redirect', el => el.props().to === '/');
+    await waitForElement(loginWrapper, 'Redirect', (el) => el.length === 1);
+    await waitForElement(
+      loginWrapper,
+      'Redirect',
+      (el) => el.props().to === '/'
+    );
     done();
   });
 });

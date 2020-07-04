@@ -1,28 +1,27 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Button, Chip, Label } from '@patternfly/react-core';
+import { shape } from 'prop-types';
 import React, { useCallback, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { shape } from 'prop-types';
-import { Button, Chip, Label } from '@patternfly/react-core';
 
-import { Inventory } from '../../../types';
 import { InventoriesAPI, UnifiedJobsAPI } from '../../../api';
-import useRequest, { useDismissableError } from '../../../util/useRequest';
-
 import AlertModal from '../../../components/AlertModal';
-import { CardBody, CardActionsRow } from '../../../components/Card';
+import { CardActionsRow, CardBody } from '../../../components/Card';
 import ChipGroup from '../../../components/ChipGroup';
 import { VariablesDetail } from '../../../components/CodeMirrorInput';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
 import DeleteButton from '../../../components/DeleteButton';
 import {
-  DetailList,
   Detail,
+  DetailList,
   UserDateDetail,
 } from '../../../components/DetailList';
 import ErrorDetail from '../../../components/ErrorDetail';
 import Sparkline from '../../../components/Sparkline';
+import { Inventory } from '../../../types';
+import useRequest, { useDismissableError } from '../../../util/useRequest';
 
 function SmartInventoryDetail({ inventory, i18n }) {
   const history = useHistory();
@@ -123,7 +122,7 @@ function SmartInventoryDetail({ inventory, i18n }) {
               label={i18n._(t`Instance groups`)}
               value={
                 <ChipGroup numChips={5} totalChips={instanceGroups.length}>
-                  {instanceGroups.map(ig => (
+                  {instanceGroups.map((ig) => (
                     <Chip key={ig.id} isReadOnly>
                       {ig.name}
                     </Chip>

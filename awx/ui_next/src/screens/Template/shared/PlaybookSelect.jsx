@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect } from 'react';
-import { number, string, oneOfType } from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import AnsibleSelect from '../../../components/AnsibleSelect';
+import { withI18n } from '@lingui/react';
+import { number, oneOfType, string } from 'prop-types';
+import React, { useCallback, useEffect } from 'react';
+
 import { ProjectsAPI } from '../../../api';
+import AnsibleSelect from '../../../components/AnsibleSelect';
 import useRequest from '../../../util/useRequest';
 
 function PlaybookSelect({ projectId, isValid, field, onBlur, onError, i18n }) {
@@ -18,7 +19,7 @@ function PlaybookSelect({ projectId, isValid, field, onBlur, onError, i18n }) {
         return [];
       }
       const { data } = await ProjectsAPI.readPlaybooks(projectId);
-      const opts = (data || []).map(playbook => ({
+      const opts = (data || []).map((playbook) => ({
         value: playbook,
         key: playbook,
         label: playbook,

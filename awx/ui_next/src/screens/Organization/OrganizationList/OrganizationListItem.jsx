@@ -1,23 +1,22 @@
-import React from 'react';
-import { string, bool, func } from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
-  Badge as PFBadge,
   Button,
-  DataListAction as _DataListAction,
   DataListCheck,
   DataListItem,
   DataListItemCells,
   DataListItemRow,
+  Badge as PFBadge,
   Tooltip,
+  DataListAction as _DataListAction,
 } from '@patternfly/react-core';
-
+import { PencilAltIcon } from '@patternfly/react-icons';
+import { bool, func, string } from 'prop-types';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { PencilAltIcon } from '@patternfly/react-icons';
-import DataListCell from '../../../components/DataListCell';
 
+import DataListCell from '../../../components/DataListCell';
 import { Organization } from '../../../types';
 
 const Badge = styled(PFBadge)`

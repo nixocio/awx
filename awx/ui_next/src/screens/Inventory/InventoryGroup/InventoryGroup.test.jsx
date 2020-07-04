@@ -1,13 +1,13 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
+import React from 'react';
+import { act } from 'react-dom/test-utils';
+import { Route } from 'react-router-dom';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
 import { GroupsAPI } from '../../../api';
-
 import InventoryGroup from './InventoryGroup';
 
 jest.mock('../../../api');
@@ -52,7 +52,7 @@ describe('<InventoryGroup />', () => {
         { context: { router: { history } } }
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
   });
 
   afterEach(() => {
@@ -82,7 +82,7 @@ describe('<InventoryGroup />', () => {
         { context: { router: { history } } }
       );
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 
   test('should show content error when api throws error on initial render', async () => {
@@ -92,6 +92,6 @@ describe('<InventoryGroup />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<InventoryGroup inventory={inventory} />);
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

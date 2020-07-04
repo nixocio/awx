@@ -1,10 +1,11 @@
-import React from 'react';
 import { createMemoryHistory } from 'history';
-import { OrganizationsAPI } from '../../api';
+import React from 'react';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
+import { OrganizationsAPI } from '../../api';
 import mockOrganization from '../../util/data.organization.json';
 import Organization from './Organization';
 
@@ -43,7 +44,7 @@ describe('<Organization />', () => {
     mountWithContexts(<Organization setBreadcrumb={() => {}} me={mockMe} />);
   });
 
-  test('notifications tab shown for admins', async done => {
+  test('notifications tab shown for admins', async (done) => {
     OrganizationsAPI.readDetail.mockResolvedValue({ data: mockOrganization });
     OrganizationsAPI.read.mockImplementation(getOrganizations);
 
@@ -53,13 +54,13 @@ describe('<Organization />', () => {
     const tabs = await waitForElement(
       wrapper,
       '.pf-c-tabs__item',
-      el => el.length === 5
+      (el) => el.length === 5
     );
     expect(tabs.last().text()).toEqual('Notifications');
     done();
   });
 
-  test('notifications tab hidden with reduced permissions', async done => {
+  test('notifications tab hidden with reduced permissions', async (done) => {
     OrganizationsAPI.readDetail.mockResolvedValue({ data: mockOrganization });
     OrganizationsAPI.read.mockResolvedValue({
       count: 0,
@@ -74,9 +75,9 @@ describe('<Organization />', () => {
     const tabs = await waitForElement(
       wrapper,
       '.pf-c-tabs__item',
-      el => el.length === 4
+      (el) => el.length === 4
     );
-    tabs.forEach(tab => expect(tab.text()).not.toEqual('Notifications'));
+    tabs.forEach((tab) => expect(tab.text()).not.toEqual('Notifications'));
     done();
   });
 
@@ -102,6 +103,6 @@ describe('<Organization />', () => {
         },
       }
     );
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

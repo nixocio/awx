@@ -1,8 +1,5 @@
-import React from 'react';
-import { bool, func, number, oneOfType, string } from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-
+import { withI18n } from '@lingui/react';
 import {
   Button,
   DataListAction,
@@ -12,9 +9,11 @@ import {
   DataListItemRow,
   Tooltip,
 } from '@patternfly/react-core';
-
-import { Link } from 'react-router-dom';
 import { PencilAltIcon } from '@patternfly/react-icons';
+import { bool, func, number, oneOfType, string } from 'prop-types';
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 import DataListCell from '../../../components/DataListCell';
 import { Group } from '../../../types';
 

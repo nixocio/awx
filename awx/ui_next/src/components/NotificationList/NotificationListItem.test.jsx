@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
 import NotificationListItem from './NotificationListItem';
 
@@ -51,10 +52,7 @@ describe('<NotificationListItem canToggleNotifications />', () => {
         typeLabels={typeLabels}
       />
     );
-    const typeCell = wrapper
-      .find('DataListCell')
-      .at(1)
-      .find('div');
+    const typeCell = wrapper.find('DataListCell').at(1).find('div');
     expect(typeCell.text()).toContain('Slack');
   });
 
@@ -69,11 +67,7 @@ describe('<NotificationListItem canToggleNotifications />', () => {
         typeLabels={typeLabels}
       />
     );
-    wrapper
-      .find('Switch')
-      .first()
-      .find('input')
-      .simulate('change');
+    wrapper.find('Switch').first().find('input').simulate('change');
     expect(toggleNotification).toHaveBeenCalledWith(9000, true, 'started');
   });
 

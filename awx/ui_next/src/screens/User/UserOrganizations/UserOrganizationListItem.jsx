@@ -1,10 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import {
+  DataListItem,
   DataListItemCells,
   DataListItemRow,
-  DataListItem,
 } from '@patternfly/react-core';
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 import DataListCell from '../../../components/DataListCell';
 
 export default function UserOrganizationListItem({ organization }) {

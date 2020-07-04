@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-
+import { withI18n } from '@lingui/react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const ST0 = styled.g`

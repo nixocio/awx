@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { useField } from 'formik';
+import { withI18n } from '@lingui/react';
 import {
   Button,
   ButtonVariant,
@@ -10,6 +7,9 @@ import {
   Tooltip,
 } from '@patternfly/react-core';
 import { EyeIcon, EyeSlashIcon } from '@patternfly/react-icons';
+import { useField } from 'formik';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
 function PasswordInput(props) {
   const { id, name, validate, isRequired, isDisabled, i18n } = props;

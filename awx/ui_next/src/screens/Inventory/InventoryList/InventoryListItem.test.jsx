@@ -1,7 +1,8 @@
-import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
 import { I18nProvider } from '@lingui/react';
+import React from 'react';
 import { act } from 'react-dom/test-utils';
+import { MemoryRouter } from 'react-router-dom';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import { InventoriesAPI } from '../../../api';
 import InventoryListItem from './InventoryListItem';

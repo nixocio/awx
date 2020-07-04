@@ -1,12 +1,13 @@
-import React, { useCallback } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { Link, useHistory } from 'react-router-dom';
+import { withI18n } from '@lingui/react';
 import { Button } from '@patternfly/react-core';
+import React, { useCallback } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
-import { VariablesDetail } from '../../../components/CodeMirrorInput';
+import { CredentialTypesAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal';
-import { CardBody, CardActionsRow } from '../../../components/Card';
+import { CardActionsRow, CardBody } from '../../../components/Card';
+import { VariablesDetail } from '../../../components/CodeMirrorInput';
 import DeleteButton from '../../../components/DeleteButton';
 import {
   Detail,
@@ -14,7 +15,6 @@ import {
   UserDateDetail,
 } from '../../../components/DetailList';
 import useRequest, { useDismissableError } from '../../../util/useRequest';
-import { CredentialTypesAPI } from '../../../api';
 import { jsonToYaml } from '../../../util/yaml';
 
 function CredentialTypeDetails({ credentialType, i18n }) {

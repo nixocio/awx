@@ -1,11 +1,12 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
-import { TeamsAPI } from '../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
+import { TeamsAPI } from '../../api';
 import Team from './Team';
 
 jest.mock('../../api');
@@ -78,6 +79,6 @@ describe('<Team />', () => {
         }
       );
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

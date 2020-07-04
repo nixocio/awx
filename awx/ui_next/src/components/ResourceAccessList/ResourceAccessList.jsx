@@ -1,19 +1,18 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
 
 import { TeamsAPI, UsersAPI } from '../../api';
+import {
+  encodeQueryString,
+  getQSConfig,
+  parseQueryString,
+} from '../../util/qs';
 import AddResourceRole from '../AddRole/AddResourceRole';
 import AlertModal from '../AlertModal';
 import DataListToolbar from '../DataListToolbar';
 import PaginatedDataList, { ToolbarAddButton } from '../PaginatedDataList';
-import {
-  getQSConfig,
-  encodeQueryString,
-  parseQueryString,
-} from '../../util/qs';
-
 import DeleteRoleConfirmationModal from './DeleteRoleConfirmationModal';
 import ResourceAccessListItem from './ResourceAccessListItem';
 
@@ -193,7 +192,7 @@ class ResourceAccessList extends React.Component {
               key: 'last_name',
             },
           ]}
-          renderToolbar={props => (
+          renderToolbar={(props) => (
             <DataListToolbar
               {...props}
               qsConfig={QS_CONFIG}
@@ -209,7 +208,7 @@ class ResourceAccessList extends React.Component {
               }
             />
           )}
-          renderItem={accessRecord => (
+          renderItem={(accessRecord) => (
             <ResourceAccessListItem
               key={accessRecord.id}
               accessRecord={accessRecord}

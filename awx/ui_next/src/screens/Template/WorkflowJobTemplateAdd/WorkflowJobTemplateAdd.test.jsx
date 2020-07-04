@@ -1,14 +1,14 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
-import {
-  WorkflowJobTemplatesAPI,
-  OrganizationsAPI,
-  LabelsAPI,
-} from '../../../api';
-import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
+import React from 'react';
+import { act } from 'react-dom/test-utils';
+import { Route } from 'react-router-dom';
 
+import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
+import {
+  LabelsAPI,
+  OrganizationsAPI,
+  WorkflowJobTemplatesAPI,
+} from '../../../api';
 import WorkflowJobTemplateAdd from './WorkflowJobTemplateAdd';
 
 jest.mock('../../../api/models/WorkflowJobTemplates');
@@ -78,10 +78,7 @@ describe('<WorkflowJobTemplateAdd/>', () => {
         target: { value: 'Alex', name: 'name' },
       });
 
-      wrapper
-        .find('LabelSelect')
-        .find('SelectToggle')
-        .simulate('click');
+      wrapper.find('LabelSelect').find('SelectToggle').simulate('click');
     });
 
     wrapper.update();

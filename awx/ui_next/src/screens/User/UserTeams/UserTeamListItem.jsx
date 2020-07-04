@@ -1,12 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
+  DataListItem,
   DataListItemCells,
   DataListItemRow,
-  DataListItem,
 } from '@patternfly/react-core';
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 import DataListCell from '../../../components/DataListCell';
 
 function UserTeamListItem({ team, i18n }) {

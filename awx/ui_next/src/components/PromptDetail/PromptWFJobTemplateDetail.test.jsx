@@ -1,7 +1,8 @@
 import React from 'react';
+
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
-import PromptWFJobTemplateDetail from './PromptWFJobTemplateDetail';
 import mockData from './data.workflow_template.json';
+import PromptWFJobTemplateDetail from './PromptWFJobTemplateDetail';
 
 const mockWF = {
   ...mockData,

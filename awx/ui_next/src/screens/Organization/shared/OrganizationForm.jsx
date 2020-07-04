@@ -1,21 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Formik, useField } from 'formik';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Form, FormGroup } from '@patternfly/react-core';
+import { Formik, useField } from 'formik';
+import PropTypes from 'prop-types';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { OrganizationsAPI } from '../../../api';
-import { ConfigContext } from '../../../contexts/Config';
 import AnsibleSelect from '../../../components/AnsibleSelect';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
-import FormField, { FormSubmitError } from '../../../components/FormField';
 import FormActionGroup from '../../../components/FormActionGroup/FormActionGroup';
-import { InstanceGroupsLookup } from '../../../components/Lookup';
-import { getAddedAndRemoved } from '../../../util/lists';
-import { required, minMaxValue } from '../../../util/validators';
+import FormField, { FormSubmitError } from '../../../components/FormField';
 import { FormColumnLayout } from '../../../components/FormLayout';
+import { InstanceGroupsLookup } from '../../../components/Lookup';
+import { ConfigContext } from '../../../contexts/Config';
+import { getAddedAndRemoved } from '../../../util/lists';
+import { minMaxValue, required } from '../../../util/validators';
 
 function OrganizationFormFields({
   i18n,
@@ -72,8 +72,8 @@ function OrganizationFormFields({
             data={[
               defaultVenv,
               ...custom_virtualenvs
-                .filter(value => value !== defaultVenv.value)
-                .map(value => ({ value, label: value, key: value })),
+                .filter((value) => value !== defaultVenv.value)
+                .map((value) => ({ value, label: value, key: value })),
             ]}
             {...venvField}
           />
@@ -106,7 +106,7 @@ function OrganizationForm({
     onCancel();
   };
 
-  const handleSubmit = values => {
+  const handleSubmit = (values) => {
     const { added, removed } = getAddedAndRemoved(
       initialInstanceGroups,
       instanceGroups
@@ -163,7 +163,7 @@ function OrganizationForm({
       }}
       onSubmit={handleSubmit}
     >
-      {formik => (
+      {(formik) => (
         <Form autoComplete="off" onSubmit={formik.handleSubmit}>
           <FormColumnLayout>
             <OrganizationFormFields

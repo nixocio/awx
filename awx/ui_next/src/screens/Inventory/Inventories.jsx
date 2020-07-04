@@ -1,14 +1,14 @@
-import React, { useState, useCallback } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import React, { useCallback, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { Config } from '../../contexts/Config';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
-import { InventoryList } from './InventoryList';
+import { Config } from '../../contexts/Config';
 import Inventory from './Inventory';
-import SmartInventory from './SmartInventory';
 import InventoryAdd from './InventoryAdd';
+import { InventoryList } from './InventoryList';
+import SmartInventory from './SmartInventory';
 import SmartInventoryAdd from './SmartInventoryAdd';
 
 function Inventories({ i18n }) {

@@ -1,14 +1,13 @@
-import React, { Component, Fragment } from 'react';
-import { Route, withRouter, Switch } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import React, { Component, Fragment } from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
-import { Config } from '../../contexts/Config';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
-
-import OrganizationsList from './OrganizationList/OrganizationList';
-import OrganizationAdd from './OrganizationAdd/OrganizationAdd';
+import { Config } from '../../contexts/Config';
 import Organization from './Organization';
+import OrganizationAdd from './OrganizationAdd/OrganizationAdd';
+import OrganizationsList from './OrganizationList/OrganizationList';
 
 class Organizations extends Component {
   constructor(props) {
@@ -24,7 +23,7 @@ class Organizations extends Component {
     };
   }
 
-  setBreadcrumbConfig = organization => {
+  setBreadcrumbConfig = (organization) => {
     const { i18n } = this.props;
 
     if (!organization) {

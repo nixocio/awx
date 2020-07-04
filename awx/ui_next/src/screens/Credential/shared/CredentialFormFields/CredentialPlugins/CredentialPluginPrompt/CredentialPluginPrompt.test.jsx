@@ -1,12 +1,13 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../../../../testUtils/enzymeHelpers';
-import { CredentialsAPI, CredentialTypesAPI } from '../../../../../../api';
-import selectedCredential from '../../../data.cyberArkCredential.json';
+import { CredentialTypesAPI, CredentialsAPI } from '../../../../../../api';
 import azureVaultCredential from '../../../data.azureVaultCredential.json';
+import selectedCredential from '../../../data.cyberArkCredential.json';
 import hashiCorpCredential from '../../../data.hashiCorpCredential.json';
 import CredentialPluginPrompt from './CredentialPluginPrompt';
 
@@ -100,7 +101,7 @@ describe('<CredentialPluginPrompt />', () => {
       expect(wrapper.find('CredentialsStep').length).toBe(1);
       expect(wrapper.find('DataListItem').length).toBe(3);
       expect(
-        wrapper.find('Radio').filterWhere(radio => radio.isChecked).length
+        wrapper.find('Radio').filterWhere((radio) => radio.isChecked).length
       ).toBe(0);
     });
     test('next button disabled until credential selected', () => {
@@ -114,18 +115,10 @@ describe('<CredentialPluginPrompt />', () => {
     });
     test('clicking credential row enables next button', async () => {
       await act(async () => {
-        wrapper
-          .find('Radio')
-          .at(0)
-          .invoke('onChange')(true);
+        wrapper.find('Radio').at(0).invoke('onChange')(true);
       });
       wrapper.update();
-      expect(
-        wrapper
-          .find('Radio')
-          .at(0)
-          .prop('isChecked')
-      ).toBe(true);
+      expect(wrapper.find('Radio').at(0).prop('isChecked')).toBe(true);
       expect(wrapper.find('Button[children="Next"]').prop('isDisabled')).toBe(
         false
       );
@@ -200,12 +193,7 @@ describe('<CredentialPluginPrompt />', () => {
     test('credentials step renders correctly', () => {
       expect(wrapper.find('CredentialsStep').length).toBe(1);
       expect(wrapper.find('DataListItem').length).toBe(3);
-      expect(
-        wrapper
-          .find('Radio')
-          .at(0)
-          .prop('isChecked')
-      ).toBe(true);
+      expect(wrapper.find('Radio').at(0).prop('isChecked')).toBe(true);
       expect(wrapper.find('Button[children="Next"]').prop('isDisabled')).toBe(
         false
       );

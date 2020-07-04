@@ -1,13 +1,14 @@
-import React from 'react';
-import { Wizard } from '@patternfly/react-core';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Wizard } from '@patternfly/react-core';
 import { Formik } from 'formik';
+import React from 'react';
+
 import ContentError from '../ContentError';
 import ContentLoading from '../ContentLoading';
+import getSurveyValues from './getSurveyValues';
 import mergeExtraVars from './mergeExtraVars';
 import useSteps from './useSteps';
-import getSurveyValues from './getSurveyValues';
 
 function LaunchPrompt({ config, resource, onLaunch, onCancel, i18n }) {
   const {
@@ -27,7 +28,7 @@ function LaunchPrompt({ config, resource, onLaunch, onCancel, i18n }) {
     return <ContentLoading />;
   }
 
-  const submit = values => {
+  const submit = (values) => {
     const postValues = {};
     const setValue = (key, value) => {
       if (typeof value !== 'undefined' && value !== null) {
@@ -38,7 +39,7 @@ function LaunchPrompt({ config, resource, onLaunch, onCancel, i18n }) {
     setValue('inventory_id', values.inventory?.id);
     setValue(
       'credentials',
-      values.credentials?.map(c => c.id)
+      values.credentials?.map((c) => c.id)
     );
     setValue('job_type', values.job_type);
     setValue('limit', values.limit);

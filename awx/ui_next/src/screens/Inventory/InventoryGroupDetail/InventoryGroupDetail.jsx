@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
 import { t } from '@lingui/macro';
-
-import { Button } from '@patternfly/react-core';
 import { withI18n } from '@lingui/react';
+import { Button } from '@patternfly/react-core';
+import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { VariablesDetail } from '../../../components/CodeMirrorInput';
-import { CardBody, CardActionsRow } from '../../../components/Card';
-import ErrorDetail from '../../../components/ErrorDetail';
+
+import { GroupsAPI, InventoriesAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal';
+import { CardActionsRow, CardBody } from '../../../components/Card';
+import { VariablesDetail } from '../../../components/CodeMirrorInput';
 import {
-  DetailList,
   Detail,
+  DetailList,
   UserDateDetail,
 } from '../../../components/DetailList';
+import ErrorDetail from '../../../components/ErrorDetail';
 import InventoryGroupsDeleteModal from '../shared/InventoryGroupsDeleteModal';
-import { GroupsAPI, InventoriesAPI } from '../../../api';
 
 function InventoryGroupDetail({ i18n, inventoryGroup }) {
   const {
@@ -30,7 +30,7 @@ function InventoryGroupDetail({ i18n, inventoryGroup }) {
   const history = useHistory();
   const params = useParams();
 
-  const handleDelete = async option => {
+  const handleDelete = async (option) => {
     const inventoryId = parseInt(params.id, 10);
     const groupId = parseInt(params.groupId, 10);
     setIsDeleteModalOpen(false);

@@ -1,21 +1,22 @@
-import React from 'react';
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   arrayOf,
-  shape,
   bool,
   func,
   number,
-  string,
   oneOfType,
+  shape,
+  string,
 } from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import SelectedList from '../SelectedList';
-import PaginatedDataList from '../PaginatedDataList';
+
+import { QSConfig, SearchColumns, SortColumns } from '../../types';
 import CheckboxListItem from '../CheckboxListItem';
 import DataListToolbar from '../DataListToolbar';
-import { QSConfig, SearchColumns, SortColumns } from '../../types';
+import PaginatedDataList from '../PaginatedDataList';
+import SelectedList from '../SelectedList';
 
 const ModalList = styled.div`
   .pf-c-toolbar__content {
@@ -48,7 +49,7 @@ function OptionsList({
           label={i18n._(t`Selected`)}
           selected={value}
           showOverflowAfter={5}
-          onRemove={item => deselectItem(item)}
+          onRemove={(item) => deselectItem(item)}
           isReadOnly={readOnly}
           renderItemChip={renderItemChip}
         />
@@ -63,19 +64,19 @@ function OptionsList({
         toolbarSortColumns={sortColumns}
         hasContentLoading={isLoading}
         onRowClick={selectItem}
-        renderItem={item => (
+        renderItem={(item) => (
           <CheckboxListItem
             key={item.id}
             itemId={item.id}
             name={multiple ? item.name : name}
             label={item.name}
-            isSelected={value.some(i => i.id === item.id)}
+            isSelected={value.some((i) => i.id === item.id)}
             onSelect={() => selectItem(item)}
             onDeselect={() => deselectItem(item)}
             isRadio={!multiple}
           />
         )}
-        renderToolbar={props => <DataListToolbar {...props} fillWidth />}
+        renderToolbar={(props) => <DataListToolbar {...props} fillWidth />}
         showPageSizeOptions={false}
       />
     </ModalList>

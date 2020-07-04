@@ -1,17 +1,18 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { func, shape } from 'prop-types';
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
 import styled from 'styled-components';
-import { func, shape } from 'prop-types';
-import { WorkflowStateContext } from '../../../contexts/Workflow';
+
 import StatusIcon from '../../../components/StatusIcon';
 import { WorkflowNodeTypeLetter } from '../../../components/Workflow';
-import { secondsToHHMMSS } from '../../../util/dates';
 import { constants as wfConstants } from '../../../components/Workflow/WorkflowUtils';
+import { WorkflowStateContext } from '../../../contexts/Workflow';
+import { secondsToHHMMSS } from '../../../util/dates';
 
 const NodeG = styled.g`
-  cursor: ${props =>
+  cursor: ${(props) =>
     props.job && props.job.type !== 'workflow_approval'
       ? 'pointer'
       : 'default'};
@@ -88,8 +89,9 @@ function WorkflowOutputNode({ i18n, mouseEnter, mouseLeave, node }) {
   return (
     <NodeG
       id={`node-${node.id}`}
-      transform={`translate(${nodePositions[node.id].x},${nodePositions[node.id]
-        .y - nodePositions[1].y})`}
+      transform={`translate(${nodePositions[node.id].x},${
+        nodePositions[node.id].y - nodePositions[1].y
+      })`}
       job={node.job}
       onClick={handleNodeClick}
       onMouseEnter={mouseEnter}

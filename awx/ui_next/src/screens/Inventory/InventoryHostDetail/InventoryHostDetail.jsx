@@ -1,23 +1,25 @@
 import 'styled-components/macro';
+
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Button } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { Button } from '@patternfly/react-core';
-import { Host } from '../../../types';
-import { CardBody, CardActionsRow } from '../../../components/Card';
+
+import { HostsAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal';
-import ErrorDetail from '../../../components/ErrorDetail';
+import { CardActionsRow, CardBody } from '../../../components/Card';
+import { VariablesDetail } from '../../../components/CodeMirrorInput';
+import DeleteButton from '../../../components/DeleteButton';
 import {
-  DetailList,
   Detail,
+  DetailList,
   UserDateDetail,
 } from '../../../components/DetailList';
-import { VariablesDetail } from '../../../components/CodeMirrorInput';
-import Sparkline from '../../../components/Sparkline';
-import DeleteButton from '../../../components/DeleteButton';
-import { HostsAPI } from '../../../api';
+import ErrorDetail from '../../../components/ErrorDetail';
 import HostToggle from '../../../components/HostToggle';
+import Sparkline from '../../../components/Sparkline';
+import { Host } from '../../../types';
 
 function InventoryHostDetail({ i18n, host }) {
   const {
@@ -66,7 +68,10 @@ function InventoryHostDetail({ i18n, host }) {
     );
   }
 
-  const recentPlaybookJobs = recent_jobs.map(job => ({ ...job, type: 'job' }));
+  const recentPlaybookJobs = recent_jobs.map((job) => ({
+    ...job,
+    type: 'job',
+  }));
 
   return (
     <CardBody>

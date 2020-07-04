@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
 import { withI18n } from '@lingui/react';
-import { useField } from 'formik';
 import {
   Form,
   FormGroup,
@@ -8,17 +6,20 @@ import {
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core';
-import FormField, { FieldTooltip } from '../../FormField';
-import AnsibleSelect from '../../AnsibleSelect';
+import { useField } from 'formik';
+import React, { useState } from 'react';
+
+import { Survey } from '../../../types';
 import {
-  required,
-  minMaxValue,
+  combine,
+  integer,
   maxLength,
   minLength,
-  integer,
-  combine,
+  minMaxValue,
+  required,
 } from '../../../util/validators';
-import { Survey } from '../../../types';
+import AnsibleSelect from '../../AnsibleSelect';
+import FormField, { FieldTooltip } from '../../FormField';
 
 function SurveyStep({ survey, i18n }) {
   const fieldTypes = {
@@ -32,7 +33,7 @@ function SurveyStep({ survey, i18n }) {
   };
   return (
     <Form>
-      {survey.spec.map(question => {
+      {survey.spec.map((question) => {
         const Field = fieldTypes[question.type];
         return (
           <Field key={question.variable} question={question} i18n={i18n} />
@@ -104,7 +105,7 @@ function MultipleChoiceField({ question }) {
         id={id}
         isValid={isValid}
         {...field}
-        data={question.choices.split('\n').map(opt => ({
+        data={question.choices.split('\n').map((opt) => ({
           key: opt,
           value: opt,
           label: opt,
@@ -134,7 +135,7 @@ function MultiSelectField({ question }) {
         onToggle={setIsOpen}
         onSelect={(event, option) => {
           if (field.value.includes(option)) {
-            helpers.setValue(field.value.filter(o => o !== option));
+            helpers.setValue(field.value.filter((o) => o !== option));
           } else {
             helpers.setValue(field.value.concat(option));
           }
@@ -142,7 +143,7 @@ function MultiSelectField({ question }) {
         isOpen={isOpen}
         selections={field.value}
       >
-        {question.choices.split('\n').map(opt => (
+        {question.choices.split('\n').map((opt) => (
           <SelectOption key={opt} value={opt} />
         ))}
       </Select>

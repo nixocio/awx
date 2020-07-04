@@ -1,18 +1,19 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
-import { bool, func } from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { bool, func } from 'prop-types';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { SchedulesAPI } from '../../../api';
+import { getQSConfig, parseQueryString } from '../../../util/qs';
+import useRequest, { useDeleteItems } from '../../../util/useRequest';
 import AlertModal from '../../AlertModal';
-import ErrorDetail from '../../ErrorDetail';
 import DataListToolbar from '../../DataListToolbar';
+import ErrorDetail from '../../ErrorDetail';
 import PaginatedDataList, {
   ToolbarAddButton,
   ToolbarDeleteButton,
 } from '../../PaginatedDataList';
-import useRequest, { useDeleteItems } from '../../../util/useRequest';
-import { getQSConfig, parseQueryString } from '../../../util/qs';
 import ScheduleListItem from './ScheduleListItem';
 
 const QS_CONFIG = getQSConfig('schedule', {
@@ -81,13 +82,13 @@ function ScheduleList({
     }
   );
 
-  const handleSelectAll = isSelected => {
+  const handleSelectAll = (isSelected) => {
     setSelected(isSelected ? [...schedules] : []);
   };
 
-  const handleSelect = row => {
-    if (selected.some(s => s.id === row.id)) {
-      setSelected(selected.filter(s => s.id !== row.id));
+  const handleSelect = (row) => {
+    if (selected.some((s) => s.id === row.id)) {
+      setSelected(selected.filter((s) => s.id !== row.id));
     } else {
       setSelected(selected.concat(row));
     }
@@ -112,9 +113,9 @@ function ScheduleList({
         itemCount={itemCount}
         qsConfig={QS_CONFIG}
         onRowClick={handleSelect}
-        renderItem={item => (
+        renderItem={(item) => (
           <ScheduleListItem
-            isSelected={selected.some(row => row.id === item.id)}
+            isSelected={selected.some((row) => row.id === item.id)}
             key={item.id}
             onSelect={() => handleSelect(item)}
             schedule={item}
@@ -141,7 +142,7 @@ function ScheduleList({
             key: 'unified_job_template__polymorphic_ctype__model',
           },
         ]}
-        renderToolbar={props => (
+        renderToolbar={(props) => (
           <DataListToolbar
             {...props}
             showSelectAll

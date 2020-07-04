@@ -1,5 +1,6 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import {
   WorkflowJobTemplateNodesAPI,
@@ -177,10 +178,10 @@ describe('Visualizer', () => {
     wrapper.find('WorkflowActionTooltipItem#link-edit').simulate('click');
     expect(wrapper.find('LinkEditModal').length).toBe(1);
     act(() => {
-      wrapper
-        .find('LinkEditModal')
-        .find('AnsibleSelect')
-        .prop('onChange')(null, 'success');
+      wrapper.find('LinkEditModal').find('AnsibleSelect').prop('onChange')(
+        null,
+        'success'
+      );
     });
     wrapper.find('button#link-confirm').simulate('click');
     expect(wrapper.find('LinkEditModal').length).toBe(0);

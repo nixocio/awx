@@ -1,5 +1,7 @@
 import 'styled-components/macro';
-import React from 'react';
+
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Modal, Title } from '@patternfly/react-core';
 import {
   CheckCircleIcon,
@@ -8,8 +10,7 @@ import {
   InfoCircleIcon,
   TimesCircleIcon,
 } from '@patternfly/react-icons';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
+import React from 'react';
 import styled from 'styled-components';
 
 const Header = styled.div`

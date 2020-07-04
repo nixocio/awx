@@ -1,32 +1,32 @@
 import 'styled-components/macro';
-import React, { useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Button,
-  DataListAction as _DataListAction,
-  DataListCheck,
-  DataListItem,
-  DataListItemRow,
-  DataListItemCells,
-  Tooltip,
-} from '@patternfly/react-core';
+
 import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
+import {
+  Button,
+  DataListCheck,
+  DataListItem,
+  DataListItemCells,
+  DataListItemRow,
+  Tooltip,
+  DataListAction as _DataListAction,
+} from '@patternfly/react-core';
 import {
   ExclamationTriangleIcon,
   PencilAltIcon,
   RocketIcon,
 } from '@patternfly/react-icons';
+import React, { useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import DataListCell from '../../../components/DataListCell';
-
-import { timeOfDay } from '../../../util/dates';
 
 import { JobTemplatesAPI, WorkflowJobTemplatesAPI } from '../../../api';
+import CopyButton from '../../../components/CopyButton';
+import DataListCell from '../../../components/DataListCell';
 import LaunchButton from '../../../components/LaunchButton';
 import Sparkline from '../../../components/Sparkline';
+import { timeOfDay } from '../../../util/dates';
 import { toTitleCase } from '../../../util/strings';
-import CopyButton from '../../../components/CopyButton';
 
 const DataListAction = styled(_DataListAction)`
   align-items: center;

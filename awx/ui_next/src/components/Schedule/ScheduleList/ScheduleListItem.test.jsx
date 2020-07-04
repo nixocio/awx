@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import ScheduleListItem from './ScheduleListItem';
 
@@ -61,51 +62,25 @@ describe('ScheduleListItem', () => {
       wrapper.unmount();
     });
     test('Name correctly shown with correct link', () => {
-      expect(
-        wrapper
-          .find('DataListCell')
-          .first()
-          .text()
-      ).toBe('Mock Schedule');
-      expect(
-        wrapper
-          .find('DataListCell')
-          .first()
-          .find('Link')
-          .props().to
-      ).toBe('/templates/job_template/12/schedules/6/details');
+      expect(wrapper.find('DataListCell').first().text()).toBe('Mock Schedule');
+      expect(wrapper.find('DataListCell').first().find('Link').props().to).toBe(
+        '/templates/job_template/12/schedules/6/details'
+      );
     });
     test('Type correctly shown', () => {
-      expect(
-        wrapper
-          .find('DataListCell')
-          .at(1)
-          .text()
-      ).toBe('Playbook Run');
+      expect(wrapper.find('DataListCell').at(1).text()).toBe('Playbook Run');
     });
     test('Edit button shown with correct link', () => {
       expect(wrapper.find('PencilAltIcon').length).toBe(1);
-      expect(
-        wrapper
-          .find('Button')
-          .find('Link')
-          .props().to
-      ).toBe('/templates/job_template/12/schedules/6/edit');
+      expect(wrapper.find('Button').find('Link').props().to).toBe(
+        '/templates/job_template/12/schedules/6/edit'
+      );
     });
     test('Toggle button enabled', () => {
-      expect(
-        wrapper
-          .find('Switch')
-          .first()
-          .props().isDisabled
-      ).toBe(false);
+      expect(wrapper.find('Switch').first().props().isDisabled).toBe(false);
     });
     test('Clicking checkbox makes expected callback', () => {
-      wrapper
-        .find('DataListCheck')
-        .first()
-        .find('input')
-        .simulate('change');
+      wrapper.find('DataListCheck').first().find('input').simulate('change');
       expect(onSelect).toHaveBeenCalledTimes(1);
     });
   });
@@ -132,38 +107,19 @@ describe('ScheduleListItem', () => {
       wrapper.unmount();
     });
     test('Name correctly shown with correct link', () => {
-      expect(
-        wrapper
-          .find('DataListCell')
-          .first()
-          .text()
-      ).toBe('Mock Schedule');
-      expect(
-        wrapper
-          .find('DataListCell')
-          .first()
-          .find('Link')
-          .props().to
-      ).toBe('/templates/job_template/12/schedules/6/details');
+      expect(wrapper.find('DataListCell').first().text()).toBe('Mock Schedule');
+      expect(wrapper.find('DataListCell').first().find('Link').props().to).toBe(
+        '/templates/job_template/12/schedules/6/details'
+      );
     });
     test('Type correctly shown', () => {
-      expect(
-        wrapper
-          .find('DataListCell')
-          .at(1)
-          .text()
-      ).toBe('Playbook Run');
+      expect(wrapper.find('DataListCell').at(1).text()).toBe('Playbook Run');
     });
     test('Edit button hidden', () => {
       expect(wrapper.find('PencilAltIcon').length).toBe(0);
     });
     test('Toggle button disabled', () => {
-      expect(
-        wrapper
-          .find('Switch')
-          .first()
-          .props().isDisabled
-      ).toBe(true);
+      expect(wrapper.find('Switch').first().props().isDisabled).toBe(true);
     });
   });
 });

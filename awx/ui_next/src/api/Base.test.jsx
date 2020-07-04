@@ -18,7 +18,7 @@ describe('Base', () => {
     jest.clearAllMocks();
   });
 
-  test('create calls http method with expected data', async done => {
+  test('create calls http method with expected data', async (done) => {
     const data = { name: 'test ' };
     await BaseAPI.create(data);
 
@@ -28,7 +28,7 @@ describe('Base', () => {
     done();
   });
 
-  test('destroy calls http method with expected data', async done => {
+  test('destroy calls http method with expected data', async (done) => {
     const resourceId = 1;
     await BaseAPI.destroy(resourceId);
 
@@ -40,7 +40,7 @@ describe('Base', () => {
     done();
   });
 
-  test('read calls http method with expected data', async done => {
+  test('read calls http method with expected data', async (done) => {
     const testParams = { foo: 'bar' };
     const testParamsDuplicates = { foo: ['bar', 'baz'] };
 
@@ -60,7 +60,7 @@ describe('Base', () => {
     done();
   });
 
-  test('readDetail calls http method with expected data', async done => {
+  test('readDetail calls http method with expected data', async (done) => {
     const resourceId = 1;
 
     await BaseAPI.readDetail(resourceId);
@@ -72,7 +72,7 @@ describe('Base', () => {
     done();
   });
 
-  test('readOptions calls http method with expected data', async done => {
+  test('readOptions calls http method with expected data', async (done) => {
     await BaseAPI.readOptions();
 
     expect(mockHttp.options).toHaveBeenCalledTimes(1);
@@ -80,7 +80,7 @@ describe('Base', () => {
     done();
   });
 
-  test('replace calls http method with expected data', async done => {
+  test('replace calls http method with expected data', async (done) => {
     const resourceId = 1;
     const data = { name: 'test ' };
 
@@ -95,7 +95,7 @@ describe('Base', () => {
     done();
   });
 
-  test('update calls http method with expected data', async done => {
+  test('update calls http method with expected data', async (done) => {
     const resourceId = 1;
     const data = { name: 'test ' };
 

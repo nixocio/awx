@@ -1,6 +1,6 @@
 import Base from '../Base';
-import SchedulesMixin from '../mixins/Schedules.mixin';
 import NotificationsMixin from '../mixins/Notifications.mixin';
+import SchedulesMixin from '../mixins/Schedules.mixin';
 
 class WorkflowJobTemplates extends SchedulesMixin(NotificationsMixin(Base)) {
   constructor(http) {

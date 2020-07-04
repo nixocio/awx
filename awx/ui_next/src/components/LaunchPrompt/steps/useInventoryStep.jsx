@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
 import { t } from '@lingui/macro';
+import React, { useState } from 'react';
+
 import InventoryStep from './InventoryStep';
 import StepName from './StepName';
 
@@ -8,7 +9,7 @@ const STEP_ID = 'inventory';
 export default function useInventoryStep(config, resource, visitedSteps, i18n) {
   const [stepErrors, setStepErrors] = useState({});
 
-  const validate = values => {
+  const validate = (values) => {
     if (!config.ask_inventory_on_launch) {
       return {};
     }
@@ -29,7 +30,7 @@ export default function useInventoryStep(config, resource, visitedSteps, i18n) {
     isReady: true,
     contentError: null,
     formError: stepErrors,
-    setTouched: setFieldsTouched => {
+    setTouched: (setFieldsTouched) => {
       setFieldsTouched({
         inventory: true,
       });

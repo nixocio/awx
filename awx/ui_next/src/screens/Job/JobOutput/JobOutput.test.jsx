@@ -1,20 +1,21 @@
 import React from 'react';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-import JobOutput, { _JobOutput } from './JobOutput';
 import { JobsAPI } from '../../../api';
 import mockJobData from '../shared/data.job.json';
 import mockJobEventsData from './data.job_events.json';
+import JobOutput, { _JobOutput } from './JobOutput';
 
 jest.mock('../../../api');
 
 async function checkOutput(wrapper, expectedLines) {
-  await waitForElement(wrapper, 'div[type="job_event"]', el => el.length > 1);
+  await waitForElement(wrapper, 'div[type="job_event"]', (el) => el.length > 1);
   const jobEventLines = wrapper.find('JobEventLineText div');
   const actualLines = [];
-  jobEventLines.forEach(line => {
+  jobEventLines.forEach((line) => {
     actualLines.push(line.text());
   });
   expect(actualLines.length).toEqual(expectedLines.length);
@@ -65,7 +66,7 @@ describe('<JobOutput />', () => {
 
   test('initially renders succesfully', async () => {
     wrapper = mountWithContexts(<JobOutput job={mockJob} />);
-    await waitForElement(wrapper, 'JobEvent', el => el.length > 0);
+    await waitForElement(wrapper, 'JobEvent', (el) => el.length > 0);
     await checkOutput(wrapper, [
       'ok: [localhost] => (item=37) => {',
       '    "msg": "This is a debug message: 37"',
@@ -256,7 +257,7 @@ describe('<JobOutput />', () => {
       'handleScrollPrevious'
     );
     wrapper = mountWithContexts(<JobOutput job={mockJob} />);
-    await waitForElement(wrapper, 'JobEvent', el => el.length > 0);
+    await waitForElement(wrapper, 'JobEvent', (el) => el.length > 0);
     const { scrollLastButton, scrollPreviousButton } = await findScrollButtons(
       wrapper
     );
@@ -276,7 +277,7 @@ describe('<JobOutput />', () => {
       'handleScrollFirst'
     );
     wrapper = mountWithContexts(<JobOutput job={mockJob} />);
-    await waitForElement(wrapper, 'JobEvent', el => el.length > 0);
+    await waitForElement(wrapper, 'JobEvent', (el) => el.length > 0);
     const { scrollFirstButton, scrollLastButton } = await findScrollButtons(
       wrapper
     );
@@ -297,11 +298,8 @@ describe('<JobOutput />', () => {
       'handleScrollLast'
     );
     wrapper = mountWithContexts(<JobOutput job={mockJob} />);
-    await waitForElement(wrapper, 'EmptyStateBody', el => el.length === 0);
-    wrapper
-      .find('JobOutput')
-      .instance()
-      .handleResize({ width: 100 });
+    await waitForElement(wrapper, 'EmptyStateBody', (el) => el.length === 0);
+    wrapper.find('JobOutput').instance().handleResize({ width: 100 });
     const { scrollLastButton } = await findScrollButtons(wrapper);
     wrapper.find('JobOutput').instance().scrollToRow = scrollMock;
 
@@ -314,12 +312,12 @@ describe('<JobOutput />', () => {
 
   test('should make expected api call for delete', async () => {
     wrapper = mountWithContexts(<JobOutput job={mockJob} />);
-    await waitForElement(wrapper, 'JobEvent', el => el.length > 0);
+    await waitForElement(wrapper, 'JobEvent', (el) => el.length > 0);
     wrapper.find('button[aria-label="Delete"]').simulate('click');
     await waitForElement(
       wrapper,
       'Modal',
-      el => el.props().isOpen === true && el.props().title === 'Delete Job'
+      (el) => el.props().isOpen === true && el.props().title === 'Delete Job'
     );
     wrapper.find('Modal button[aria-label="Delete"]').simulate('click');
     expect(JobsAPI.destroy).toHaveBeenCalledTimes(1);
@@ -328,12 +326,12 @@ describe('<JobOutput />', () => {
   test('should show error dialog for failed deletion', async () => {
     JobsAPI.destroy.mockRejectedValue(new Error({}));
     wrapper = mountWithContexts(<JobOutput job={mockJob} />);
-    await waitForElement(wrapper, 'JobEvent', el => el.length > 0);
+    await waitForElement(wrapper, 'JobEvent', (el) => el.length > 0);
     wrapper.find('button[aria-label="Delete"]').simulate('click');
     await waitForElement(
       wrapper,
       'Modal',
-      el => el.props().isOpen === true && el.props().title === 'Delete Job'
+      (el) => el.props().isOpen === true && el.props().title === 'Delete Job'
     );
     wrapper.find('Modal button[aria-label="Delete"]').simulate('click');
     await waitForElement(wrapper, 'Modal ErrorDetail');
@@ -341,12 +339,12 @@ describe('<JobOutput />', () => {
       'ModalBox[aria-label="Job Delete Error"] ModalBoxCloseButton'
     );
     errorModalCloseBtn.simulate('click');
-    await waitForElement(wrapper, 'Modal ErrorDetail', el => el.length === 0);
+    await waitForElement(wrapper, 'Modal ErrorDetail', (el) => el.length === 0);
   });
 
   test('should throw error', async () => {
     JobsAPI.readEvents = () => Promise.reject(new Error());
     wrapper = mountWithContexts(<JobOutput job={mockJob} />);
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

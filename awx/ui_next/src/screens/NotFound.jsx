@@ -1,5 +1,6 @@
+import { Card, PageSection } from '@patternfly/react-core';
 import React from 'react';
-import { PageSection, Card } from '@patternfly/react-core';
+
 import ContentError from '../components/ContentError';
 
 function NotFound() {

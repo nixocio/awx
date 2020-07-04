@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { CardBody } from '../../../components/Card';
-import { OrganizationsAPI } from '../../../api';
-import { Config } from '../../../contexts/Config';
 
+import { OrganizationsAPI } from '../../../api';
+import { CardBody } from '../../../components/Card';
+import { Config } from '../../../contexts/Config';
 import OrganizationForm from '../shared/OrganizationForm';
 
 function OrganizationEdit({ organization }) {
@@ -20,12 +20,12 @@ function OrganizationEdit({ organization }) {
     try {
       await OrganizationsAPI.update(organization.id, values);
       await Promise.all(
-        groupsToAssociate.map(id =>
+        groupsToAssociate.map((id) =>
           OrganizationsAPI.associateInstanceGroup(organization.id, id)
         )
       );
       await Promise.all(
-        groupsToDisassociate.map(id =>
+        groupsToDisassociate.map((id) =>
           OrganizationsAPI.disassociateInstanceGroup(organization.id, id)
         )
       );

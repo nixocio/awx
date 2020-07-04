@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from 'react';
 import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
-
+import { CaretLeftIcon } from '@patternfly/react-icons';
+import React, { useEffect, useState } from 'react';
 import {
-  Switch,
-  Route,
   Link,
   Redirect,
+  Route,
+  Switch,
   useLocation,
   useParams,
 } from 'react-router-dom';
-import { CaretLeftIcon } from '@patternfly/react-icons';
-import RoutedTabs from '../../../components/RoutedTabs';
-import ContentError from '../../../components/ContentError';
-import ContentLoading from '../../../components/ContentLoading';
-import InventoryGroupEdit from '../InventoryGroupEdit/InventoryGroupEdit';
-import InventoryGroupDetail from '../InventoryGroupDetail/InventoryGroupDetail';
-import InventoryGroupHosts from '../InventoryGroupHosts';
 
 import { GroupsAPI } from '../../../api';
+import ContentError from '../../../components/ContentError';
+import ContentLoading from '../../../components/ContentLoading';
+import RoutedTabs from '../../../components/RoutedTabs';
+import InventoryGroupDetail from '../InventoryGroupDetail/InventoryGroupDetail';
+import InventoryGroupEdit from '../InventoryGroupEdit/InventoryGroupEdit';
+import InventoryGroupHosts from '../InventoryGroupHosts';
 
 function InventoryGroup({ i18n, setBreadcrumb, inventory }) {
   const [inventoryGroup, setInventoryGroup] = useState(null);
@@ -97,7 +96,7 @@ function InventoryGroup({ i18n, setBreadcrumb, inventory }) {
   }
 
   let showCardHeader = true;
-  if (['add', 'edit'].some(name => location.pathname.includes(name))) {
+  if (['add', 'edit'].some((name) => location.pathname.includes(name))) {
     showCardHeader = false;
   }
 

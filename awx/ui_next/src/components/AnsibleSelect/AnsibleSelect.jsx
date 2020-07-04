@@ -1,16 +1,16 @@
-import React from 'react';
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { FormSelect, FormSelectOption } from '@patternfly/react-core';
 import {
   arrayOf,
-  oneOfType,
+  bool,
   func,
   number,
-  string,
+  oneOfType,
   shape,
-  bool,
+  string,
 } from 'prop-types';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { FormSelect, FormSelectOption } from '@patternfly/react-core';
+import React from 'react';
 
 class AnsibleSelect extends React.Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class AnsibleSelect extends React.Component {
         className={className}
         isDisabled={isDisabled}
       >
-        {data.map(option => (
+        {data.map((option) => (
           <FormSelectOption
             key={option.key}
             value={option.value}

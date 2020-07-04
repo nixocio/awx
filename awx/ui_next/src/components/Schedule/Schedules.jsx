@@ -1,6 +1,7 @@
-import React from 'react';
 import { withI18n } from '@lingui/react';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+
 import Schedule from './Schedule';
 import ScheduleAdd from './ScheduleAdd';
 import ScheduleList from './ScheduleList';

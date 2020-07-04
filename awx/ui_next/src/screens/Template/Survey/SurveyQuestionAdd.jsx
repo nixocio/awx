@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+
 import { CardBody } from '../../../components/Card';
 import SurveyQuestionForm from './SurveyQuestionForm';
 
@@ -8,9 +9,9 @@ export default function SurveyQuestionAdd({ survey, updateSurvey }) {
   const history = useHistory();
   const match = useRouteMatch();
 
-  const handleSubmit = async question => {
+  const handleSubmit = async (question) => {
     try {
-      if (survey.spec?.some(q => q.variable === question.variable)) {
+      if (survey.spec?.some((q) => q.variable === question.variable)) {
         setFormError(
           new Error(
             `Survey already contains a question with variable named “${question.variable}”`
@@ -21,8 +22,8 @@ export default function SurveyQuestionAdd({ survey, updateSurvey }) {
       if (question.type === 'multiselect') {
         question.default = question.default
           .split('\n')
-          .filter(v => v !== '' || '\n')
-          .map(v => v.trim())
+          .filter((v) => v !== '' || '\n')
+          .map((v) => v.trim())
           .join('\n');
       }
       const newSpec = survey.spec ? survey.spec.concat(question) : [question];

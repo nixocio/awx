@@ -1,23 +1,24 @@
-import React from 'react';
-import { func, string, bool, number, shape } from 'prop-types';
-import { Formik, useField } from 'formik';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Form, FormGroup } from '@patternfly/react-core';
-import { FormColumnLayout } from '../../../components/FormLayout';
+import { Formik, useField } from 'formik';
+import { bool, func, number, shape, string } from 'prop-types';
+import React from 'react';
+
+import AnsibleSelect from '../../../components/AnsibleSelect';
 import FormActionGroup from '../../../components/FormActionGroup/FormActionGroup';
 import FormField, {
   CheckboxField,
-  PasswordField,
-  FormSubmitError,
   FieldTooltip,
+  FormSubmitError,
+  PasswordField,
 } from '../../../components/FormField';
-import AnsibleSelect from '../../../components/AnsibleSelect';
+import { FormColumnLayout } from '../../../components/FormLayout';
 import {
-  required,
-  noWhiteSpace,
   combine,
   maxLength,
+  noWhiteSpace,
+  required,
 } from '../../../util/validators';
 
 function AnswerTypeField({ i18n }) {
@@ -71,10 +72,10 @@ function SurveyQuestionForm({
   submitError,
   i18n,
 }) {
-  const defaultIsNotAvailable = choices => {
-    return defaultValue => {
+  const defaultIsNotAvailable = (choices) => {
+    return (defaultValue) => {
       let errorMessage;
-      const found = [...defaultValue].every(dA => choices.indexOf(dA) > -1);
+      const found = [...defaultValue].every((dA) => choices.indexOf(dA) > -1);
 
       if (!found) {
         errorMessage = i18n._(
@@ -101,7 +102,7 @@ function SurveyQuestionForm({
       }}
       onSubmit={handleSubmit}
     >
-      {formik => (
+      {(formik) => (
         <Form autoComplete="off" onSubmit={formik.handleSubmit}>
           <FormColumnLayout>
             <FormField

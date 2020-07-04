@@ -1,10 +1,10 @@
 import {
-  getScaleAndOffsetToFit,
   generateLine,
   getLinePoints,
   getLinkOverlayPoints,
-  layoutGraph,
+  getScaleAndOffsetToFit,
   getTranslatePointsForZoom,
+  layoutGraph,
 } from './WorkflowUtils';
 
 describe('getScaleAndOffsetToFit', () => {

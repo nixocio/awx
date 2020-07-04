@@ -1,11 +1,12 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
-import { InventoriesAPI } from '../../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
+import { InventoriesAPI } from '../../../api';
 import mockHost from '../shared/data.host.json';
 import InventoryHost from './InventoryHost';
 
@@ -63,8 +64,8 @@ describe('<InventoryHost />', () => {
         <InventoryHost inventory={mockInventory} setBreadcrumb={() => {}} />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 
   test('should show content error when user attempts to navigate to erroneous route', async () => {
@@ -77,7 +78,7 @@ describe('<InventoryHost />', () => {
         { context: { router: { history } } }
       );
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 
   test('should show content error when inventory id does not match host inventory', async () => {
@@ -86,6 +87,6 @@ describe('<InventoryHost />', () => {
         <InventoryHost inventory={{ id: 99 }} setBreadcrumb={() => {}} />
       );
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

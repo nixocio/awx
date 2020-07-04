@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { func, shape } from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { WorkflowJobTemplatesAPI } from '../../../../../../api';
-import { getQSConfig, parseQueryString } from '../../../../../../util/qs';
-import PaginatedDataList from '../../../../../../components/PaginatedDataList';
-import DataListToolbar from '../../../../../../components/DataListToolbar';
 import CheckboxListItem from '../../../../../../components/CheckboxListItem';
+import DataListToolbar from '../../../../../../components/DataListToolbar';
+import PaginatedDataList from '../../../../../../components/PaginatedDataList';
+import { getQSConfig, parseQueryString } from '../../../../../../util/qs';
 
 const QS_CONFIG = getQSConfig('workflow_job_templates', {
   page: 1,
@@ -53,9 +54,9 @@ function WorkflowJobTemplatesList({
       hasContentLoading={isLoading}
       itemCount={count}
       items={workflowJobTemplates}
-      onRowClick={row => onUpdateNodeResource(row)}
+      onRowClick={(row) => onUpdateNodeResource(row)}
       qsConfig={QS_CONFIG}
-      renderItem={item => (
+      renderItem={(item) => (
         <CheckboxListItem
           isSelected={!!(nodeResource && nodeResource.id === item.id)}
           itemId={item.id}
@@ -67,7 +68,7 @@ function WorkflowJobTemplatesList({
           isRadio
         />
       )}
-      renderToolbar={props => <DataListToolbar {...props} fillWidth />}
+      renderToolbar={(props) => <DataListToolbar {...props} fillWidth />}
       showPageSizeOptions={false}
       toolbarSearchColumns={[
         {

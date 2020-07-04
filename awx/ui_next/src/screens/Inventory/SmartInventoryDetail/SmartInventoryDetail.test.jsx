@@ -1,13 +1,13 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-import SmartInventoryDetail from './SmartInventoryDetail';
 import { InventoriesAPI, UnifiedJobsAPI } from '../../../api';
-
 import mockSmartInventory from '../shared/data.smart_inventory.json';
+import SmartInventoryDetail from './SmartInventoryDetail';
 
 jest.mock('../../../api/models/UnifiedJobs');
 jest.mock('../../../api/models/Inventories');
@@ -40,7 +40,7 @@ describe('<SmartInventoryDetail />', () => {
           <SmartInventoryDetail inventory={mockSmartInventory} />
         );
       });
-      await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+      await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     });
 
     afterAll(() => {
@@ -103,7 +103,7 @@ describe('<SmartInventoryDetail />', () => {
       await waitForElement(
         wrapper,
         'Modal[title="Error!"]',
-        el => el.length === 1
+        (el) => el.length === 1
       );
       await act(async () => {
         wrapper.find('Modal[title="Error!"]').invoke('onClose')();
@@ -111,7 +111,7 @@ describe('<SmartInventoryDetail />', () => {
       await waitForElement(
         wrapper,
         'Modal[title="Error!"]',
-        el => el.length === 0
+        (el) => el.length === 0
       );
     });
   });
@@ -131,7 +131,7 @@ describe('<SmartInventoryDetail />', () => {
           <SmartInventoryDetail inventory={readOnlySmartInv} />
         );
       });
-      await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+      await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
       expect(wrapper.find('Button[aria-label="edit"]').length).toBe(0);
     });
 
@@ -146,7 +146,7 @@ describe('<SmartInventoryDetail />', () => {
         );
       });
       expect(UnifiedJobsAPI.read).toHaveBeenCalledTimes(1);
-      await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+      await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
       expect(wrapper.find('ContentError Title').text()).toEqual(
         'Something went wrong...'
       );

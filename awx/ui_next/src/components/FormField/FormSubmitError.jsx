@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useFormikContext } from 'formik';
 import { Alert } from '@patternfly/react-core';
+import { useFormikContext } from 'formik';
+import React, { useEffect, useState } from 'react';
 
 function FormSubmitError({ error }) {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -19,7 +19,7 @@ function FormSubmitError({ error }) {
       setErrors(errorMessages);
 
       let messages = [];
-      Object.values(error.response.data).forEach(value => {
+      Object.values(error.response.data).forEach((value) => {
         if (Array.isArray(value)) {
           messages = messages.concat(value);
         }
@@ -42,7 +42,7 @@ function FormSubmitError({ error }) {
       isInline
       title={
         Array.isArray(errorMessage)
-          ? errorMessage.map(msg => <div key={msg}>{msg}</div>)
+          ? errorMessage.map((msg) => <div key={msg}>{msg}</div>)
           : errorMessage
       }
     />

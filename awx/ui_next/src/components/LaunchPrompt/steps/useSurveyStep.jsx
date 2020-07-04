@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
 import { t } from '@lingui/macro';
-import useRequest from '../../../util/useRequest';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import { JobTemplatesAPI, WorkflowJobTemplatesAPI } from '../../../api';
-import SurveyStep from './SurveyStep';
+import useRequest from '../../../util/useRequest';
 import StepName from './StepName';
+import SurveyStep from './SurveyStep';
 
 const STEP_ID = 'survey';
 
@@ -27,12 +28,12 @@ export default function useSurveyStep(config, resource, visitedSteps, i18n) {
     fetchSurvey();
   }, [fetchSurvey]);
 
-  const validate = values => {
+  const validate = (values) => {
     if (!config.survey_enabled || !survey || !survey.spec) {
       return {};
     }
     const errors = {};
-    survey.spec.forEach(question => {
+    survey.spec.forEach((question) => {
       const errMessage = validateField(
         question,
         values[`survey_${question.variable}`],
@@ -56,12 +57,12 @@ export default function useSurveyStep(config, resource, visitedSteps, i18n) {
     isReady: !isLoading && !!survey,
     contentError: error,
     formError: stepErrors,
-    setTouched: setFieldsTouched => {
+    setTouched: (setFieldsTouched) => {
       if (!survey || !survey.spec) {
         return;
       }
       const fields = {};
-      survey.spec.forEach(question => {
+      survey.spec.forEach((question) => {
         fields[`survey_${question.variable}`] = true;
       });
       setFieldsTouched(fields);
@@ -109,7 +110,7 @@ function getInitialValues(config, survey) {
     return {};
   }
   const values = {};
-  survey.spec.forEach(question => {
+  survey.spec.forEach((question) => {
     if (question.type === 'multiselect') {
       values[`survey_${question.variable}`] = question.default.split('\n');
     } else {

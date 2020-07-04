@@ -1,13 +1,13 @@
 import {
-  shape,
-  exact,
   arrayOf,
-  number,
-  string,
   bool,
+  exact,
+  number,
   objectOf,
   oneOf,
   oneOfType,
+  shape,
+  string,
 } from 'prop-types';
 
 export const Role = shape({

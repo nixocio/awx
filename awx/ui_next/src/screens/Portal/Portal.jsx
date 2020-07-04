@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   PageSection,
   PageSectionVariants,
   Title,
 } from '@patternfly/react-core';
+import React, { Component, Fragment } from 'react';
 
 class Portal extends Component {
   render() {

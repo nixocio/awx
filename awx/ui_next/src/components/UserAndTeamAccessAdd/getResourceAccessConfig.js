@@ -1,11 +1,12 @@
 import { t } from '@lingui/macro';
+
 import {
-  JobTemplatesAPI,
-  WorkflowJobTemplatesAPI,
   CredentialsAPI,
   InventoriesAPI,
-  ProjectsAPI,
+  JobTemplatesAPI,
   OrganizationsAPI,
+  ProjectsAPI,
+  WorkflowJobTemplatesAPI,
 } from '../../api';
 
 export default function getResourceAccessConfig(i18n) {
@@ -38,7 +39,7 @@ export default function getResourceAccessConfig(i18n) {
           key: 'name',
         },
       ],
-      fetchItems: queryParams => JobTemplatesAPI.read(queryParams),
+      fetchItems: (queryParams) => JobTemplatesAPI.read(queryParams),
     },
     {
       selectedResource: 'workflowJobTemplate',
@@ -68,7 +69,7 @@ export default function getResourceAccessConfig(i18n) {
           key: 'name',
         },
       ],
-      fetchItems: queryParams => WorkflowJobTemplatesAPI.read(queryParams),
+      fetchItems: (queryParams) => WorkflowJobTemplatesAPI.read(queryParams),
     },
     {
       selectedResource: 'credential',
@@ -109,7 +110,7 @@ export default function getResourceAccessConfig(i18n) {
           key: 'name',
         },
       ],
-      fetchItems: queryParams => CredentialsAPI.read(queryParams),
+      fetchItems: (queryParams) => CredentialsAPI.read(queryParams),
     },
     {
       selectedResource: 'inventory',
@@ -135,7 +136,7 @@ export default function getResourceAccessConfig(i18n) {
           key: 'name',
         },
       ],
-      fetchItems: queryParams => InventoriesAPI.read(queryParams),
+      fetchItems: (queryParams) => InventoriesAPI.read(queryParams),
     },
     {
       selectedResource: 'project',
@@ -176,7 +177,7 @@ export default function getResourceAccessConfig(i18n) {
           key: 'name',
         },
       ],
-      fetchItems: queryParams => ProjectsAPI.read(queryParams),
+      fetchItems: (queryParams) => ProjectsAPI.read(queryParams),
     },
     {
       selectedResource: 'organization',
@@ -202,7 +203,7 @@ export default function getResourceAccessConfig(i18n) {
           key: 'name',
         },
       ],
-      fetchItems: queryParams => OrganizationsAPI.read(queryParams),
+      fetchItems: (queryParams) => OrganizationsAPI.read(queryParams),
     },
   ];
 }

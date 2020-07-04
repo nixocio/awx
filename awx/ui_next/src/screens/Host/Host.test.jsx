@@ -1,11 +1,12 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
-import { HostsAPI } from '../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
+import { HostsAPI } from '../../api';
 import mockHost from './data.host.json';
 import Host from './Host';
 
@@ -50,8 +51,8 @@ describe('<Host />', () => {
         context: { router: { history } },
       });
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 
   test('should show content error when user attempts to navigate to erroneous route', async () => {
@@ -63,6 +64,6 @@ describe('<Host />', () => {
         context: { router: { history } },
       });
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

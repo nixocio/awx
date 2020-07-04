@@ -1,14 +1,15 @@
-import React, { useCallback, useEffect } from 'react';
-import { func, bool } from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { bool, func } from 'prop-types';
+import React, { useCallback, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import { InventoriesAPI } from '../../api';
 import { Inventory } from '../../types';
-import Lookup from './Lookup';
-import OptionsList from '../OptionsList';
-import useRequest from '../../util/useRequest';
 import { getQSConfig, parseQueryString } from '../../util/qs';
+import useRequest from '../../util/useRequest';
+import OptionsList from '../OptionsList';
+import Lookup from './Lookup';
 import LookupErrorMessage from './shared/LookupErrorMessage';
 
 const QS_CONFIG = getQSConfig('inventory', {
@@ -81,8 +82,8 @@ function InventoryLookup({ value, onChange, onBlur, required, i18n, history }) {
             name="inventory"
             qsConfig={QS_CONFIG}
             readOnly={!canDelete}
-            selectItem={item => dispatch({ type: 'SELECT_ITEM', item })}
-            deselectItem={item => dispatch({ type: 'DESELECT_ITEM', item })}
+            selectItem={(item) => dispatch({ type: 'SELECT_ITEM', item })}
+            deselectItem={(item) => dispatch({ type: 'DESELECT_ITEM', item })}
           />
         )}
       />

@@ -1,12 +1,9 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import {
-  WorkflowDispatchContext,
-  WorkflowStateContext,
-} from '../../../../../contexts/Workflow';
-import {
-  waitForElement,
   mountWithContexts,
+  waitForElement,
 } from '../../../../../../testUtils/enzymeHelpers';
 import {
   InventorySourcesAPI,
@@ -14,6 +11,10 @@ import {
   ProjectsAPI,
   WorkflowJobTemplatesAPI,
 } from '../../../../../api';
+import {
+  WorkflowDispatchContext,
+  WorkflowStateContext,
+} from '../../../../../contexts/Workflow';
 import NodeModal from './NodeModal';
 
 jest.mock('../../../../../api/models/InventorySources');

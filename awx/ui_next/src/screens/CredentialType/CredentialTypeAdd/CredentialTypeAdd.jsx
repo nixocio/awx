@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
 import { Card, PageSection } from '@patternfly/react-core';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import CredentialTypeForm from '../shared/CredentialTypeForm';
-import { CardBody } from '../../../components/Card';
 import { CredentialTypesAPI } from '../../../api';
+import { CardBody } from '../../../components/Card';
 import { parseVariableField } from '../../../util/yaml';
+import CredentialTypeForm from '../shared/CredentialTypeForm';
 
 function CredentialTypeAdd() {
   const history = useHistory();
   const [submitError, setSubmitError] = useState(null);
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     try {
       const { data: response } = await CredentialTypesAPI.create({
         ...values,

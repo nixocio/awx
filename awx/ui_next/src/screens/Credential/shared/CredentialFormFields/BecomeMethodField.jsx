@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { useField } from 'formik';
-import { bool, shape, string } from 'prop-types';
 import {
   FormGroup,
   Select,
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core';
+import { useField } from 'formik';
+import { bool, shape, string } from 'prop-types';
+import React, { useState } from 'react';
+
 import { FieldTooltip } from '../../../../components/FormField';
 
 function BecomeMethodField({ fieldOptions, isRequired }) {
@@ -25,7 +26,7 @@ function BecomeMethodField({ fieldOptions, isRequired }) {
       'ksu',
       'machinectl',
       'sesu',
-    ].map(val => ({ value: val }))
+    ].map((val) => ({ value: val }))
   );
   const [becomeMethodField, meta, helpers] = useField({
     name: `inputs.${fieldOptions.id}`,
@@ -55,11 +56,11 @@ function BecomeMethodField({ fieldOptions, isRequired }) {
         isExpanded={isOpen}
         selections={becomeMethodField.value}
         isCreatable
-        onCreateOption={option => {
+        onCreateOption={(option) => {
           setOptions([...options, { value: option }]);
         }}
       >
-        {options.map(option => (
+        {options.map((option) => (
           <SelectOption key={option.value} value={option.value} />
         ))}
       </Select>

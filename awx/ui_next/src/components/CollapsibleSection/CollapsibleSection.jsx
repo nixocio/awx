@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { bool, string } from 'prop-types';
-import styled from 'styled-components';
 import { Button } from '@patternfly/react-core';
 import { AngleRightIcon } from '@patternfly/react-icons';
+import { bool, string } from 'prop-types';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+
 import omitProps from '../../util/omitProps';
 import ExpandingContainer from './ExpandingContainer';
 
@@ -26,7 +27,7 @@ const Arrow = styled(omitProps(AngleRightIcon, 'isExpanded'))`
   margin-left: 5px;
   transition: transform 0.1s ease-out;
   transform-origin: 50% 50%;
-  ${props => props.isExpanded && `transform: rotate(90deg);`}
+  ${(props) => props.isExpanded && `transform: rotate(90deg);`}
 `;
 
 function CollapsibleSection({ label, startExpanded, children }) {

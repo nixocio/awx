@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { useField, useFormikContext } from 'formik';
-import styled from 'styled-components';
+import { withI18n } from '@lingui/react';
 import { Button, Form, FormGroup, Tooltip } from '@patternfly/react-core';
 import { QuestionCircleIcon as PFQuestionCircleIcon } from '@patternfly/react-icons';
+import { useField, useFormikContext } from 'formik';
+import React, { useCallback, useEffect } from 'react';
+import styled from 'styled-components';
+
 import { CredentialTypesAPI } from '../../../../../../api';
 import AnsibleSelect from '../../../../../../components/AnsibleSelect';
 import ContentError from '../../../../../../components/ContentError';
@@ -42,7 +43,7 @@ function MetadataStep({ i18n }) {
         selectedCredential.value.credential_type ||
           selectedCredential.value.credential_type_id
       );
-      metadata.forEach(field => {
+      metadata.forEach((field) => {
         if (inputValues.value[field.id]) {
           form.initialValues.inputs[field.id] = inputValues.value[field.id];
         } else if (field.type === 'string' && field.choices) {
@@ -82,7 +83,7 @@ function MetadataStep({ i18n }) {
       {fields.length > 0 && (
         <Form>
           <FormFullWidthLayout>
-            {fields.map(field => {
+            {fields.map((field) => {
               if (field.type === 'string') {
                 if (field.choices) {
                   return (
@@ -101,7 +102,7 @@ function MetadataStep({ i18n }) {
                         name={`inputs.${field.id}`}
                         value={form.values.inputs[field.id]}
                         id={`credential-${field.id}`}
-                        data={field.choices.map(choice => {
+                        data={field.choices.map((choice) => {
                           return {
                             value: choice,
                             key: choice,

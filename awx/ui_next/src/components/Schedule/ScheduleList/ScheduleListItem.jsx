@@ -1,25 +1,27 @@
 import 'styled-components/macro';
-import React from 'react';
-import { bool, func } from 'prop-types';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
-import { Link } from 'react-router-dom';
+import { withI18n } from '@lingui/react';
 import {
   Button,
-  DataListAction as _DataListAction,
   DataListCheck,
   DataListItem,
-  DataListItemRow,
   DataListItemCells,
+  DataListItemRow,
   Tooltip,
+  DataListAction as _DataListAction,
 } from '@patternfly/react-core';
 import { PencilAltIcon } from '@patternfly/react-icons';
+import { bool, func } from 'prop-types';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import DataListCell from '../../DataListCell';
-import { DetailList, Detail } from '../../DetailList';
-import { ScheduleToggle } from '..';
+
 import { Schedule } from '../../../types';
 import { formatDateString } from '../../../util/dates';
+import DataListCell from '../../DataListCell';
+import { Detail, DetailList } from '../../DetailList';
+import { ScheduleToggle } from '..';
 
 const DataListAction = styled(_DataListAction)`
   align-items: center;

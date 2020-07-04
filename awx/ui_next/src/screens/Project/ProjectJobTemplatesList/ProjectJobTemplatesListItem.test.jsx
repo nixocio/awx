@@ -1,6 +1,6 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 
-import { createMemoryHistory } from 'history';
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import ProjectJobTemplatesListItem from './ProjectJobTemplatesListItem';
 

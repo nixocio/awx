@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   Dropdown,
   DropdownItem,
-  DropdownToggle,
   DropdownPosition,
+  DropdownToggle,
   PageHeaderTools,
   PageHeaderToolsGroup,
   PageHeaderToolsItem,
   Tooltip,
 } from '@patternfly/react-core';
 import { QuestionCircleIcon, UserIcon } from '@patternfly/react-icons';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 const DOCLINK =
   'https://docs.ansible.com/ansible-tower/latest/html/userguide/index.html';

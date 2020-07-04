@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import React, { useContext } from 'react';
+
 import { WorkflowDispatchContext } from '../../../../../contexts/Workflow';
 import NodeModal from './NodeModal';
 
 function NodeEditModal({ i18n }) {
   const dispatch = useContext(WorkflowDispatchContext);
 
-  const updateNode = resource => {
+  const updateNode = (resource) => {
     dispatch({
       type: 'UPDATE_NODE',
       node: {

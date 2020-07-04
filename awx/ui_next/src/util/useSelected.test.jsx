@@ -1,6 +1,7 @@
+import { mount } from 'enzyme';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
+
 import useSelected from './useSelected';
 
 const array = [{ id: '1' }, { id: '2' }, { id: '3' }];
@@ -10,7 +11,7 @@ const TestHook = ({ callback }) => {
   return null;
 };
 
-const testHook = callback => {
+const testHook = (callback) => {
   mount(<TestHook callback={callback} />);
 };
 

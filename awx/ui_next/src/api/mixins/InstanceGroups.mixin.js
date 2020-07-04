@@ -1,4 +1,4 @@
-const InstanceGroupsMixin = parent =>
+const InstanceGroupsMixin = (parent) =>
   class extends parent {
     readInstanceGroups(resourceId, params) {
       return this.http.get(`${this.baseUrl}${resourceId}/instance_groups/`, {

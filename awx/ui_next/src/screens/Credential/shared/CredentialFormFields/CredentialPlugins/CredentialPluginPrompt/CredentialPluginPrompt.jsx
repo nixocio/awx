@@ -1,9 +1,10 @@
-import React from 'react';
-import { func, shape } from 'prop-types';
-import { Formik, useField } from 'formik';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Wizard } from '@patternfly/react-core';
+import { Formik, useField } from 'formik';
+import { func, shape } from 'prop-types';
+import React from 'react';
+
 import CredentialsStep from './CredentialsStep';
 import MetadataStep from './MetadataStep';
 

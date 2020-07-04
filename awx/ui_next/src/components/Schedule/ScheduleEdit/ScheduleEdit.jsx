@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
 import { withI18n } from '@lingui/react';
+import { Card } from '@patternfly/react-core';
+import { shape } from 'prop-types';
+import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { RRule } from 'rrule';
-import { shape } from 'prop-types';
-import { Card } from '@patternfly/react-core';
-import { CardBody } from '../../Card';
+
 import { SchedulesAPI } from '../../../api';
+import { CardBody } from '../../Card';
 import buildRuleObj from '../shared/buildRuleObj';
 import ScheduleForm from '../shared/ScheduleForm';
 
@@ -16,7 +17,7 @@ function ScheduleEdit({ i18n, schedule }) {
   const { pathname } = location;
   const pathRoot = pathname.substr(0, pathname.indexOf('schedules'));
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     try {
       const rule = new RRule(buildRuleObj(values, i18n));
       const {

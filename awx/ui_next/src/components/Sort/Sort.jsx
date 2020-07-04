@@ -1,27 +1,27 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
-import { withRouter } from 'react-router-dom';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   Button,
   ButtonVariant,
   Dropdown,
+  DropdownItem,
   DropdownPosition,
   DropdownToggle,
-  DropdownItem,
   InputGroup,
 } from '@patternfly/react-core';
 import {
-  SortAlphaDownIcon,
   SortAlphaDownAltIcon,
-  SortNumericDownIcon,
+  SortAlphaDownIcon,
   SortNumericDownAltIcon,
+  SortNumericDownIcon,
 } from '@patternfly/react-icons';
-
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { QSConfig, SortColumns } from '../../types';
 import { parseQueryString } from '../../util/qs';
-import { SortColumns, QSConfig } from '../../types';
 
 const NoOptionDropdown = styled.div`
   align-self: stretch;
@@ -49,7 +49,7 @@ class Sort extends React.Component {
       sortOrder = 'ascending';
     }
 
-    if (qsConfig.integerFields.find(field => field === sortKey)) {
+    if (qsConfig.integerFields.find((field) => field === sortKey)) {
       isNumeric = true;
     } else {
       isNumeric = false;
@@ -80,7 +80,7 @@ class Sort extends React.Component {
 
     let isNumeric;
 
-    if (qsConfig.integerFields.find(field => field === sortKey)) {
+    if (qsConfig.integerFields.find((field) => field === sortKey)) {
       isNumeric = true;
     } else {
       isNumeric = false;

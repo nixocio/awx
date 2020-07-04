@@ -43,9 +43,11 @@
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-react-hooks": "^2.2.0",
     "http-proxy-middleware": "^1.0.3",
+    "import-sort-style-module": "^6.0.0",
     "jest-websocket-mock": "^2.0.2",
     "mock-socket": "^9.0.3",
-    "prettier": "^1.18.2",
+    "prettier": "^2.0.5",
+    "prettier-plugin-import-sort": "0.0.4",
     "react-scripts": "^3.4.1"
   },
   "scripts": {
@@ -60,6 +62,11 @@
     "compile-strings": "lingui compile",
     "prettier": "prettier --write \"src/**/*.{js,jsx,scss}\"",
     "prettier-check": "prettier --check \"src/**/*.{js,jsx,scss}\""
+  },
+  "importSort": {
+    ".js, .jsx, .ts, .tsx": {
+      "style": "module"
+    }
   },
   "browserslist": {
     "production": [

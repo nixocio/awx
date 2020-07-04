@@ -1,6 +1,7 @@
-import React from 'react';
-import { Formik } from 'formik';
 import { TextInput } from '@patternfly/react-core';
+import { Formik } from 'formik';
+import React from 'react';
+
 import { mountWithContexts } from '../../../../../../testUtils/enzymeHelpers';
 import CredentialPluginField from './CredentialPluginField';
 

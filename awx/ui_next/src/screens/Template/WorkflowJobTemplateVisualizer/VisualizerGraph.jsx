@@ -1,19 +1,12 @@
 import 'styled-components/macro';
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
-import styled from 'styled-components';
-import { bool } from 'prop-types';
+import { withI18n } from '@lingui/react';
 import * as d3 from 'd3';
-import {
-  WorkflowDispatchContext,
-  WorkflowStateContext,
-} from '../../../contexts/Workflow';
-import {
-  getScaleAndOffsetToFit,
-  constants as wfConstants,
-  getTranslatePointsForZoom,
-} from '../../../components/Workflow/WorkflowUtils';
+import { bool } from 'prop-types';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import styled from 'styled-components';
+
 import {
   WorkflowHelp,
   WorkflowLegend,
@@ -22,6 +15,15 @@ import {
   WorkflowStartNode,
   WorkflowTools,
 } from '../../../components/Workflow';
+import {
+  getScaleAndOffsetToFit,
+  getTranslatePointsForZoom,
+  constants as wfConstants,
+} from '../../../components/Workflow/WorkflowUtils';
+import {
+  WorkflowDispatchContext,
+  WorkflowStateContext,
+} from '../../../contexts/Workflow';
 import VisualizerLink from './VisualizerLink';
 import VisualizerNode from './VisualizerNode';
 
@@ -55,7 +57,7 @@ function VisualizerGraph({ i18n, readOnly }) {
 
   const dispatch = useContext(WorkflowDispatchContext);
 
-  const drawPotentialLinkToNode = node => {
+  const drawPotentialLinkToNode = (node) => {
     if (node.id !== addLinkSourceNode.id) {
       const sourceNodeX = nodePositions[addLinkSourceNode.id].x;
       const sourceNodeY =
@@ -78,7 +80,7 @@ function VisualizerGraph({ i18n, readOnly }) {
     dispatch({ type: 'CANCEL_LINK' });
   };
 
-  const drawPotentialLinkToCursor = e => {
+  const drawPotentialLinkToCursor = (e) => {
     const currentTransform = d3.zoomTransform(d3.select(gRef.current).node());
     const rect = e.target.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
@@ -92,10 +94,11 @@ function VisualizerGraph({ i18n, readOnly }) {
     d3.select('#workflow-potentialLink')
       .attr(
         'points',
-        `${startX},${startY} ${mouseX / currentTransform.k -
-          currentTransform.x / currentTransform.k},${mouseY /
-          currentTransform.k -
-          currentTransform.y / currentTransform.k}`
+        `${startX},${startY} ${
+          mouseX / currentTransform.k - currentTransform.x / currentTransform.k
+        },${
+          mouseY / currentTransform.k - currentTransform.y / currentTransform.k
+        }`
       )
       .raise();
   };
@@ -111,7 +114,7 @@ function VisualizerGraph({ i18n, readOnly }) {
     setZoomPercentage(d3.event.transform.k * 100);
   };
 
-  const handlePan = direction => {
+  const handlePan = (direction) => {
     const transform = d3.zoomTransform(d3.select(svgRef.current).node());
 
     let { x: xPos, y: yPos } = transform;
@@ -153,7 +156,7 @@ function VisualizerGraph({ i18n, readOnly }) {
     setZoomPercentage(100);
   };
 
-  const handleZoomChange = newScale => {
+  const handleZoomChange = (newScale) => {
     const svgBoundingClientRect = svgRef.current.getBoundingClientRect();
     const currentScaleAndOffset = d3.zoomTransform(
       d3.select(svgRef.current).node()
@@ -181,10 +184,7 @@ function VisualizerGraph({ i18n, readOnly }) {
       .node()
       .getBoundingClientRect();
 
-    const gBBoxDimensions = d3
-      .select(gRef.current)
-      .node()
-      .getBBox();
+    const gBBoxDimensions = d3.select(gRef.current).node().getBBox();
 
     const svgBoundingClientRect = svgRef.current.getBoundingClientRect();
 
@@ -203,10 +203,7 @@ function VisualizerGraph({ i18n, readOnly }) {
     setZoomPercentage(scaleToFit * 100);
   };
 
-  const zoomRef = d3
-    .zoom()
-    .scaleExtent([0.1, 2])
-    .on('zoom', zoom);
+  const zoomRef = d3.zoom().scaleExtent([0.1, 2]).on('zoom', zoom);
 
   // Initialize the zoom
   useEffect(() => {
@@ -254,7 +251,7 @@ function VisualizerGraph({ i18n, readOnly }) {
           opacity="0"
           width="100%"
           {...(addingLink && {
-            onMouseMove: e => drawPotentialLinkToCursor(e),
+            onMouseMove: (e) => drawPotentialLinkToCursor(e),
             onMouseOver: () =>
               setHelpText(
                 i18n._(
@@ -272,7 +269,7 @@ function VisualizerGraph({ i18n, readOnly }) {
               showActionTooltip={!readOnly}
               onUpdateHelpText={setHelpText}
             />,
-            links.map(link => {
+            links.map((link) => {
               if (
                 nodePositions[link.source.id] &&
                 nodePositions[link.target.id]
@@ -282,22 +279,22 @@ function VisualizerGraph({ i18n, readOnly }) {
                     key={`link-${link.source.id}-${link.target.id}`}
                     link={link}
                     readOnly={readOnly}
-                    updateLinkHelp={newLinkHelp => setLinkHelp(newLinkHelp)}
-                    updateHelpText={newHelpText => setHelpText(newHelpText)}
+                    updateLinkHelp={(newLinkHelp) => setLinkHelp(newLinkHelp)}
+                    updateHelpText={(newHelpText) => setHelpText(newHelpText)}
                   />
                 );
               }
               return null;
             }),
-            nodes.map(node => {
+            nodes.map((node) => {
               if (node.id > 1 && nodePositions[node.id] && !node.isDeleted) {
                 return (
                   <VisualizerNode
                     key={`node-${node.id}`}
                     node={node}
                     readOnly={readOnly}
-                    updateHelpText={newHelpText => setHelpText(newHelpText)}
-                    updateNodeHelp={newNodeHelp => setNodeHelp(newNodeHelp)}
+                    updateHelpText={(newHelpText) => setHelpText(newHelpText)}
+                    updateNodeHelp={(newNodeHelp) => setNodeHelp(newNodeHelp)}
                     {...(addingLink && {
                       onMouseOver: () => drawPotentialLinkToNode(node),
                     })}

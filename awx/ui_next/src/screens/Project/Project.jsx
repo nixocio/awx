@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { Switch, Route, withRouter, Redirect, Link } from 'react-router-dom';
-import { CaretLeftIcon } from '@patternfly/react-icons';
+import { withI18n } from '@lingui/react';
 import { Card, PageSection } from '@patternfly/react-core';
-import RoutedTabs from '../../components/RoutedTabs';
+import { CaretLeftIcon } from '@patternfly/react-icons';
+import React, { Component } from 'react';
+import { Link, Redirect, Route, Switch, withRouter } from 'react-router-dom';
+
+import { OrganizationsAPI, ProjectsAPI } from '../../api';
 import ContentError from '../../components/ContentError';
 import NotificationList from '../../components/NotificationList';
 import { ResourceAccessList } from '../../components/ResourceAccessList';
+import RoutedTabs from '../../components/RoutedTabs';
 import { Schedules } from '../../components/Schedule';
 import ProjectDetail from './ProjectDetail';
 import ProjectEdit from './ProjectEdit';
 import ProjectJobTemplatesList from './ProjectJobTemplatesList';
-import { OrganizationsAPI, ProjectsAPI } from '../../api';
 
 class Project extends Component {
   constructor(props) {

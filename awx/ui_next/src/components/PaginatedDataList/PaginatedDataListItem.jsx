@@ -1,12 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   DataListItem,
-  DataListItemRow,
   DataListItemCells,
+  DataListItemRow,
   TextContent,
 } from '@patternfly/react-core';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 import DataListCell from '../DataListCell';
 
 const DetailWrapper = styled(TextContent)`

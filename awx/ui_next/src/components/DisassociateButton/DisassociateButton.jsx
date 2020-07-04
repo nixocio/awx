@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { arrayOf, func, object, string } from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Button, Tooltip } from '@patternfly/react-core';
+import { arrayOf, func, object, string } from 'prop-types';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+
 import AlertModal from '../AlertModal';
 
 const ModalNote = styled.div`
@@ -31,7 +32,7 @@ function DisassociateButton({
   function renderTooltip() {
     const itemsUnableToDisassociate = itemsToDisassociate
       .filter(cannotDisassociate)
-      .map(item => item.name)
+      .map((item) => item.name)
       .join(', ');
 
     if (itemsToDisassociate.some(cannotDisassociate)) {
@@ -100,7 +101,7 @@ function DisassociateButton({
 
           <div>{i18n._(t`This action will disassociate the following:`)}</div>
 
-          {itemsToDisassociate.map(item => (
+          {itemsToDisassociate.map((item) => (
             <span key={item.id}>
               <strong>{item.name}</strong>
               <br />

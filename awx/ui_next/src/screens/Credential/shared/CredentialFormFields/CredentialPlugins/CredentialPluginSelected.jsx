@@ -1,10 +1,11 @@
-import React from 'react';
-import { func } from 'prop-types';
+import { Trans, t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
-import { t, Trans } from '@lingui/macro';
-import styled from 'styled-components';
 import { Button, ButtonVariant, Tooltip } from '@patternfly/react-core';
 import { KeyIcon } from '@patternfly/react-icons';
+import { func } from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
+
 import CredentialChip from '../../../../../components/CredentialChip';
 import { Credential } from '../../../../../types';
 

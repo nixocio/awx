@@ -1,10 +1,10 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-
 import InventoryForm from './InventoryForm';
 
 jest.mock('../../../api');
@@ -73,7 +73,7 @@ describe('<InventoryForm />', () => {
         />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
   });
 
   afterAll(() => {

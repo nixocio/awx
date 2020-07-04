@@ -1,10 +1,11 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { TeamsAPI, RolesAPI } from '../../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
+import { RolesAPI, TeamsAPI } from '../../../api';
 import TeamAccessList from './TeamAccessList';
 
 jest.mock('../../../api/models/Teams');
@@ -116,7 +117,7 @@ describe('<TeamAccessList />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<TeamAccessList />);
     });
-    waitForElement(wrapper, 'ContentEmpty', el => el.length === 0);
+    waitForElement(wrapper, 'ContentEmpty', (el) => el.length === 0);
 
     expect(wrapper.find(`Link#teamRole-2`).prop('to')).toBe(
       '/templates/job_template/15/details'
@@ -164,7 +165,7 @@ describe('<TeamAccessList />', () => {
       wrapper = mountWithContexts(<TeamAccessList />);
     });
 
-    waitForElement(wrapper, 'ContentEmpty', el => el.length === 0);
+    waitForElement(wrapper, 'ContentEmpty', (el) => el.length === 0);
     expect(wrapper.find('Button[aria-label="Add resource roles"]').length).toBe(
       0
     );
@@ -178,7 +179,7 @@ describe('<TeamAccessList />', () => {
       wrapper = mountWithContexts(<TeamAccessList />);
     });
 
-    waitForElement(wrapper, 'ContentEmpty', el => el.length === 0);
+    waitForElement(wrapper, 'ContentEmpty', (el) => el.length === 0);
 
     await act(async () =>
       wrapper.find('Chip[aria-label="Execute"]').prop('onClick')({
@@ -231,7 +232,7 @@ describe('<TeamAccessList />', () => {
       wrapper = mountWithContexts(<TeamAccessList />);
     });
 
-    waitForElement(wrapper, 'ContentEmpty', el => el.length === 0);
+    waitForElement(wrapper, 'ContentEmpty', (el) => el.length === 0);
 
     await act(async () =>
       wrapper.find('Chip[aria-label="Execute"]').prop('onClick')({
@@ -291,7 +292,7 @@ describe('<TeamAccessList />', () => {
     waitForElement(
       wrapper,
       'EmptyState[title="System Administrator"]',
-      el => el.length === 1
+      (el) => el.length === 1
     );
   });
 });

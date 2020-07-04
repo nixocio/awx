@@ -1,15 +1,16 @@
-import React, { useCallback, useEffect } from 'react';
-import { node, string, func, bool } from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { FormGroup } from '@patternfly/react-core';
+import { bool, func, node, string } from 'prop-types';
+import React, { useCallback, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import { ProjectsAPI } from '../../api';
 import { Project } from '../../types';
+import { getQSConfig, parseQueryString } from '../../util/qs';
+import useRequest from '../../util/useRequest';
 import { FieldTooltip } from '../FormField';
 import OptionsList from '../OptionsList';
-import useRequest from '../../util/useRequest';
-import { getQSConfig, parseQueryString } from '../../util/qs';
 import Lookup from './Lookup';
 import LookupErrorMessage from './shared/LookupErrorMessage';
 
@@ -123,8 +124,8 @@ function ProjectLookup({
             name="project"
             qsConfig={QS_CONFIG}
             readOnly={!canDelete}
-            selectItem={item => dispatch({ type: 'SELECT_ITEM', item })}
-            deselectItem={item => dispatch({ type: 'DESELECT_ITEM', item })}
+            selectItem={(item) => dispatch({ type: 'SELECT_ITEM', item })}
+            deselectItem={(item) => dispatch({ type: 'DESELECT_ITEM', item })}
           />
         )}
       />

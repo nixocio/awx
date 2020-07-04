@@ -1,13 +1,13 @@
-import React from 'react';
 import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
 import {
-  Title,
   EmptyState,
-  EmptyStateIcon,
   EmptyStateBody,
+  EmptyStateIcon,
+  Title,
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
+import React from 'react';
 
 const ContentEmpty = ({ i18n, title = '', message = '' }) => (
   <EmptyState variant="full">

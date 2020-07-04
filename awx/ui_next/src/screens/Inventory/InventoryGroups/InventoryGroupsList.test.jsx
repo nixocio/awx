@@ -1,12 +1,13 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { Route } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-import { InventoriesAPI, GroupsAPI } from '../../../api';
+import { GroupsAPI, InventoriesAPI } from '../../../api';
 import InventoryGroupsList from './InventoryGroupsList';
 
 jest.mock('../../../api');
@@ -86,7 +87,7 @@ describe('<InventoryGroupsList />', () => {
         }
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
   });
 
   test('initially renders successfully', () => {
@@ -125,21 +126,21 @@ describe('<InventoryGroupsList />', () => {
   });
 
   test('should check all row items when select all is checked', async () => {
-    wrapper.find('DataListCheck').forEach(el => {
+    wrapper.find('DataListCheck').forEach((el) => {
       expect(el.props().checked).toBe(false);
     });
     await act(async () => {
       wrapper.find('Checkbox#select-all').invoke('onChange')(true);
     });
     wrapper.update();
-    wrapper.find('DataListCheck').forEach(el => {
+    wrapper.find('DataListCheck').forEach((el) => {
       expect(el.props().checked).toBe(true);
     });
     await act(async () => {
       wrapper.find('Checkbox#select-all').invoke('onChange')(false);
     });
     wrapper.update();
-    wrapper.find('DataListCheck').forEach(el => {
+    wrapper.find('DataListCheck').forEach((el) => {
       expect(el.props().checked).toBe(false);
     });
   });
@@ -151,7 +152,7 @@ describe('<InventoryGroupsList />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<InventoryGroupsList />);
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 
   test('should show content error if groups are not successfully fetched from api', async () => {
@@ -168,14 +169,14 @@ describe('<InventoryGroupsList />', () => {
     await waitForElement(
       wrapper,
       'InventoryGroupsDeleteModal',
-      el => el.props().isModalOpen === true
+      (el) => el.props().isModalOpen === true
     );
     await act(async () => {
       wrapper
         .find('ModalBoxFooter Button[aria-label="Delete"]')
         .invoke('onClick')();
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 
   test('should show error modal when group is not successfully deleted from api', async () => {
@@ -200,7 +201,7 @@ describe('<InventoryGroupsList />', () => {
     await waitForElement(
       wrapper,
       'AlertModal[title="Delete Group?"]',
-      el => el.props().isOpen === true
+      (el) => el.props().isOpen === true
     );
     await act(async () => {
       wrapper.find('Radio[id="radio-delete"]').invoke('onChange')();
@@ -214,7 +215,7 @@ describe('<InventoryGroupsList />', () => {
     await waitForElement(
       wrapper,
       'AlertModal[title="Error!"] Modal',
-      el => el.props().isOpen === true && el.props().title === 'Error!'
+      (el) => el.props().isOpen === true && el.props().title === 'Error!'
     );
     await act(async () => {
       wrapper.find('ModalBoxCloseButton').invoke('onClose')();

@@ -1,12 +1,13 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { InventoriesAPI, HostsAPI } from '../../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-import InventoryHostList from './InventoryHostList';
+import { HostsAPI, InventoriesAPI } from '../../../api';
 import mockInventory from '../shared/data.inventory.json';
+import InventoryHostList from './InventoryHostList';
 
 jest.mock('../../../api');
 
@@ -96,7 +97,7 @@ describe('<InventoryHostList />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<InventoryHostList />);
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
   });
 
   afterEach(() => {
@@ -141,21 +142,21 @@ describe('<InventoryHostList />', () => {
   });
 
   test('should check all row items when select all is checked', async () => {
-    wrapper.find('DataListCheck').forEach(el => {
+    wrapper.find('DataListCheck').forEach((el) => {
       expect(el.props().checked).toBe(false);
     });
     await act(async () => {
       wrapper.find('Checkbox#select-all').invoke('onChange')(true);
     });
     wrapper.update();
-    wrapper.find('DataListCheck').forEach(el => {
+    wrapper.find('DataListCheck').forEach((el) => {
       expect(el.props().checked).toBe(true);
     });
     await act(async () => {
       wrapper.find('Checkbox#select-all').invoke('onChange')(false);
     });
     wrapper.update();
-    wrapper.find('DataListCheck').forEach(el => {
+    wrapper.find('DataListCheck').forEach((el) => {
       expect(el.props().checked).toBe(false);
     });
   });
@@ -186,12 +187,12 @@ describe('<InventoryHostList />', () => {
     await waitForElement(
       wrapper,
       'Modal',
-      el => el.props().isOpen === true && el.props().title === 'Error!'
+      (el) => el.props().isOpen === true && el.props().title === 'Error!'
     );
     await act(async () => {
       wrapper.find('ModalBoxCloseButton').invoke('onClose')();
     });
-    await waitForElement(wrapper, 'Modal', el => el.length === 0);
+    await waitForElement(wrapper, 'Modal', (el) => el.length === 0);
   });
 
   test('delete button is disabled if user does not have delete capabilities on a selected host', async () => {
@@ -239,12 +240,12 @@ describe('<InventoryHostList />', () => {
     await waitForElement(
       wrapper,
       'Modal',
-      el => el.props().isOpen === true && el.props().title === 'Error!'
+      (el) => el.props().isOpen === true && el.props().title === 'Error!'
     );
     await act(async () => {
       wrapper.find('ModalBoxCloseButton').invoke('onClose')();
     });
-    await waitForElement(wrapper, 'Modal', el => el.length === 0);
+    await waitForElement(wrapper, 'Modal', (el) => el.length === 0);
   });
 
   test('should show content error if hosts are not successfully fetched from api', async () => {
@@ -258,7 +259,7 @@ describe('<InventoryHostList />', () => {
     await act(async () => {
       wrapper.find('ToolbarDeleteButton').invoke('onDelete')();
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 
   test('should show Add button for users with ability to POST', async () => {
@@ -278,7 +279,7 @@ describe('<InventoryHostList />', () => {
         <InventoryHostList inventory={mockInventory} />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(wrapper.find('ToolbarAddButton').length).toBe(0);
   });
 
@@ -291,6 +292,6 @@ describe('<InventoryHostList />', () => {
         <InventoryHostList inventory={mockInventory} />
       );
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

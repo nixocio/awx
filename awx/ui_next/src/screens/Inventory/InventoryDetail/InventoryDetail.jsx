@@ -1,22 +1,23 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Button, Chip } from '@patternfly/react-core';
 import React, { useCallback, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { Button, Chip } from '@patternfly/react-core';
-import { CardBody, CardActionsRow } from '../../../components/Card';
-import {
-  DetailList,
-  Detail,
-  UserDateDetail,
-} from '../../../components/DetailList';
+
+import { InventoriesAPI } from '../../../api';
+import { CardActionsRow, CardBody } from '../../../components/Card';
+import ChipGroup from '../../../components/ChipGroup';
 import { VariablesDetail } from '../../../components/CodeMirrorInput';
-import DeleteButton from '../../../components/DeleteButton';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
-import ChipGroup from '../../../components/ChipGroup';
-import { InventoriesAPI } from '../../../api';
-import useRequest from '../../../util/useRequest';
+import DeleteButton from '../../../components/DeleteButton';
+import {
+  Detail,
+  DetailList,
+  UserDateDetail,
+} from '../../../components/DetailList';
 import { Inventory } from '../../../types';
+import useRequest from '../../../util/useRequest';
 
 function InventoryDetail({ inventory, i18n }) {
   const history = useHistory();
@@ -80,7 +81,7 @@ function InventoryDetail({ inventory, i18n }) {
           label={i18n._(t`Instance Groups`)}
           value={
             <ChipGroup numChips={5} totalChips={instanceGroups.length}>
-              {instanceGroups.map(ig => (
+              {instanceGroups.map((ig) => (
                 <Chip key={ig.id} isReadOnly>
                   {ig.name}
                 </Chip>

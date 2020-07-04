@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { getQSConfig, parseQueryString } from '../../../util/qs';
-import { InventoriesAPI, HostsAPI } from '../../../api';
+import { withI18n } from '@lingui/react';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 
+import { HostsAPI, InventoriesAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal';
 import DataListToolbar from '../../../components/DataListToolbar';
 import ErrorDetail from '../../../components/ErrorDetail';
@@ -12,6 +11,7 @@ import PaginatedDataList, {
   ToolbarAddButton,
   ToolbarDeleteButton,
 } from '../../../components/PaginatedDataList';
+import { getQSConfig, parseQueryString } from '../../../util/qs';
 import InventoryHostItem from './InventoryHostItem';
 
 const QS_CONFIG = getQSConfig('host', {
@@ -64,13 +64,13 @@ function InventoryHostList({ i18n }) {
     fetchData();
   }, [id, search]);
 
-  const handleSelectAll = isSelected => {
+  const handleSelectAll = (isSelected) => {
     setSelected(isSelected ? [...hosts] : []);
   };
 
-  const handleSelect = row => {
-    if (selected.some(s => s.id === row.id)) {
-      setSelected(selected.filter(s => s.id !== row.id));
+  const handleSelect = (row) => {
+    if (selected.some((s) => s.id === row.id)) {
+      setSelected(selected.filter((s) => s.id !== row.id));
     } else {
       setSelected(selected.concat(row));
     }
@@ -80,7 +80,7 @@ function InventoryHostList({ i18n }) {
     setIsLoading(true);
 
     try {
-      await Promise.all(selected.map(host => HostsAPI.destroy(host.id)));
+      await Promise.all(selected.map((host) => HostsAPI.destroy(host.id)));
     } catch (error) {
       setDeletionError(error);
     } finally {
@@ -133,7 +133,7 @@ function InventoryHostList({ i18n }) {
             isNumeric: true,
           },
         ]}
-        renderToolbar={props => (
+        renderToolbar={(props) => (
           <DataListToolbar
             {...props}
             showSelectAll
@@ -158,13 +158,13 @@ function InventoryHostList({ i18n }) {
             ]}
           />
         )}
-        renderItem={o => (
+        renderItem={(o) => (
           <InventoryHostItem
             key={o.id}
             host={o}
             detailUrl={`/inventories/inventory/${id}/hosts/${o.id}/details`}
             editUrl={`/inventories/inventory/${id}/hosts/${o.id}/edit`}
-            isSelected={selected.some(row => row.id === o.id)}
+            isSelected={selected.some((row) => row.id === o.id)}
             onSelect={() => handleSelect(o)}
           />
         )}

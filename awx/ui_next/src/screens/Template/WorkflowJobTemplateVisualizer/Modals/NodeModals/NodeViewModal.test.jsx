@@ -1,14 +1,15 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import {
-  WorkflowDispatchContext,
-  WorkflowStateContext,
-} from '../../../../../contexts/Workflow';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../../../testUtils/enzymeHelpers';
 import { JobTemplatesAPI, WorkflowJobTemplatesAPI } from '../../../../../api';
+import {
+  WorkflowDispatchContext,
+  WorkflowStateContext,
+} from '../../../../../contexts/Workflow';
 import NodeViewModal from './NodeViewModal';
 
 jest.mock('../../../../../api/models/JobTemplates');
@@ -44,7 +45,7 @@ function waitForLoaded(wrapper) {
   return waitForElement(
     wrapper,
     'NodeViewModal',
-    el => el.find('ContentLoading').length === 0
+    (el) => el.find('ContentLoading').length === 0
   );
 }
 

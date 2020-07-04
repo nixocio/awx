@@ -1,10 +1,10 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { GroupsAPI } from '../../../api';
-import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
+import { Route } from 'react-router-dom';
 
+import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
+import { GroupsAPI } from '../../../api';
 import InventoryGroupEdit from './InventoryGroupEdit';
 
 jest.mock('../../../api');

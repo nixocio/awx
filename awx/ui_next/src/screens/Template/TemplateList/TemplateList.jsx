@@ -1,24 +1,23 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Card, PageSection } from '@patternfly/react-core';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import {
   JobTemplatesAPI,
   UnifiedJobTemplatesAPI,
   WorkflowJobTemplatesAPI,
 } from '../../../api';
+import AddDropDownButton from '../../../components/AddDropDownButton';
 import AlertModal from '../../../components/AlertModal';
 import DatalistToolbar from '../../../components/DataListToolbar';
 import ErrorDetail from '../../../components/ErrorDetail';
 import PaginatedDataList, {
   ToolbarDeleteButton,
 } from '../../../components/PaginatedDataList';
-import useRequest, { useDeleteItems } from '../../../util/useRequest';
 import { getQSConfig, parseQueryString } from '../../../util/qs';
-
-import AddDropDownButton from '../../../components/AddDropDownButton';
+import useRequest, { useDeleteItems } from '../../../util/useRequest';
 import TemplateListItem from './TemplateListItem';
 
 // The type value in const QS_CONFIG below does not have a space between job_template and
@@ -100,13 +99,13 @@ function TemplateList({ i18n }) {
     setSelected([]);
   };
 
-  const handleSelectAll = isSelected => {
+  const handleSelectAll = (isSelected) => {
     setSelected(isSelected ? [...templates] : []);
   };
 
-  const handleSelect = template => {
-    if (selected.some(s => s.id === template.id)) {
-      setSelected(selected.filter(s => s.id !== template.id));
+  const handleSelect = (template) => {
+    if (selected.some((s) => s.id === template.id)) {
+      setSelected(selected.filter((s) => s.id !== template.id));
     } else {
       setSelected(selected.concat(template));
     }
@@ -204,7 +203,7 @@ function TemplateList({ i18n }) {
               key: 'type',
             },
           ]}
-          renderToolbar={props => (
+          renderToolbar={(props) => (
             <DatalistToolbar
               {...props}
               showSelectAll
@@ -223,14 +222,14 @@ function TemplateList({ i18n }) {
               ]}
             />
           )}
-          renderItem={template => (
+          renderItem={(template) => (
             <TemplateListItem
               key={template.id}
               value={template.name}
               template={template}
               detailUrl={`/templates/${template.type}/${template.id}`}
               onSelect={() => handleSelect(template)}
-              isSelected={selected.some(row => row.id === template.id)}
+              isSelected={selected.some((row) => row.id === template.id)}
               fetchTemplates={fetchTemplates}
             />
           )}

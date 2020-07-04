@@ -1,18 +1,19 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Card, PageSection } from '@patternfly/react-core';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { CredentialsAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal';
-import ErrorDetail from '../../../components/ErrorDetail';
 import DataListToolbar from '../../../components/DataListToolbar';
+import ErrorDetail from '../../../components/ErrorDetail';
 import PaginatedDataList, {
   ToolbarAddButton,
   ToolbarDeleteButton,
 } from '../../../components/PaginatedDataList';
-import useRequest, { useDeleteItems } from '../../../util/useRequest';
 import { getQSConfig, parseQueryString } from '../../../util/qs';
+import useRequest, { useDeleteItems } from '../../../util/useRequest';
 import CredentialListItem from './CredentialListItem';
 
 const QS_CONFIG = getQSConfig('credential', {
@@ -77,13 +78,13 @@ function CredentialList({ i18n }) {
     setSelected([]);
   };
 
-  const handleSelectAll = isSelected => {
+  const handleSelectAll = (isSelected) => {
     setSelected(isSelected ? [...credentials] : []);
   };
 
-  const handleSelect = row => {
-    if (selected.some(s => s.id === row.id)) {
-      setSelected(selected.filter(s => s.id !== row.id));
+  const handleSelect = (row) => {
+    if (selected.some((s) => s.id === row.id)) {
+      setSelected(selected.filter((s) => s.id !== row.id));
     } else {
       setSelected(selected.concat(row));
     }
@@ -102,17 +103,17 @@ function CredentialList({ i18n }) {
           itemCount={credentialCount}
           qsConfig={QS_CONFIG}
           onRowClick={handleSelect}
-          renderItem={item => (
+          renderItem={(item) => (
             <CredentialListItem
               key={item.id}
               credential={item}
               fetchCredentials={fetchCredentials}
               detailUrl={`/credentials/${item.id}/details`}
-              isSelected={selected.some(row => row.id === item.id)}
+              isSelected={selected.some((row) => row.id === item.id)}
               onSelect={() => handleSelect(item)}
             />
           )}
-          renderToolbar={props => (
+          renderToolbar={(props) => (
             <DataListToolbar
               {...props}
               showSelectAll

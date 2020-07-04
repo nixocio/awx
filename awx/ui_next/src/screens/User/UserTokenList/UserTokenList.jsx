@@ -1,15 +1,16 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import React, { useCallback, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { getQSConfig, parseQueryString } from '../../../util/qs';
+
+import { UsersAPI } from '../../../api';
+import DataListToolbar from '../../../components/DataListToolbar';
 import PaginatedDataList, {
   ToolbarAddButton,
 } from '../../../components/PaginatedDataList';
-import useSelected from '../../../util/useSelected';
+import { getQSConfig, parseQueryString } from '../../../util/qs';
 import useRequest from '../../../util/useRequest';
-import { UsersAPI } from '../../../api';
-import DataListToolbar from '../../../components/DataListToolbar';
+import useSelected from '../../../util/useSelected';
 import UserTokensListItem from './UserTokenListItem';
 
 const QS_CONFIG = getQSConfig('user', {
@@ -32,7 +33,7 @@ function UserTokenList({ i18n }) {
       const {
         data: { results, count },
       } = await UsersAPI.readTokens(id, params);
-      const modifiedResults = results.map(result => {
+      const modifiedResults = results.map((result) => {
         result.summary_fields = {
           user: result.summary_fields.user,
           application: result.summary_fields.application,
@@ -97,13 +98,15 @@ function UserTokenList({ i18n }) {
           key: 'modified',
         },
       ]}
-      renderToolbar={props => (
+      renderToolbar={(props) => (
         <DataListToolbar
           {...props}
           showSelectAll
           isAllSelected={isAllSelected}
           qsConfig={QS_CONFIG}
-          onSelectAll={isSelected => setSelected(isSelected ? [...tokens] : [])}
+          onSelectAll={(isSelected) =>
+            setSelected(isSelected ? [...tokens] : [])
+          }
           additionalControls={[
             ...(canAdd
               ? [
@@ -116,14 +119,14 @@ function UserTokenList({ i18n }) {
           ]}
         />
       )}
-      renderItem={token => (
+      renderItem={(token) => (
         <UserTokensListItem
           key={token.id}
           token={token}
           onSelect={() => {
             handleSelect(token);
           }}
-          isSelected={selected.some(row => row.id === token.id)}
+          isSelected={selected.some((row) => row.id === token.id)}
         />
       )}
       emptyStateControls={

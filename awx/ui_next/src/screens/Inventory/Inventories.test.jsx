@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
-
 import Inventories from './Inventories';
 
 describe('<Inventories />', () => {

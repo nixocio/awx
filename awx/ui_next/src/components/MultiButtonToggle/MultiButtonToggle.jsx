@@ -1,7 +1,8 @@
-import React from 'react';
-import { func, string } from 'prop-types';
-import styled from 'styled-components';
 import { Button } from '@patternfly/react-core';
+import { func, string } from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
+
 import ButtonGroup from './ButtonGroup';
 
 const SmallButton = styled(Button)`
@@ -10,7 +11,7 @@ const SmallButton = styled(Button)`
 `;
 
 function MultiButtonToggle({ buttons, value, onChange }) {
-  const setValue = newValue => {
+  const setValue = (newValue) => {
     if (value !== newValue) {
       onChange(newValue);
     }

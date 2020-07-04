@@ -1,14 +1,15 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Tooltip } from '@patternfly/react-core';
+import { ExclamationCircleIcon as PFExclamationCircleIcon } from '@patternfly/react-icons';
+import { useFormikContext } from 'formik';
+import yaml from 'js-yaml';
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { ExclamationCircleIcon as PFExclamationCircleIcon } from '@patternfly/react-icons';
-import { Tooltip } from '@patternfly/react-core';
-import { t } from '@lingui/macro';
-import { useFormikContext } from 'formik';
-import { withI18n } from '@lingui/react';
-import yaml from 'js-yaml';
-import mergeExtraVars, { maskPasswords } from '../mergeExtraVars';
-import getSurveyValues from '../getSurveyValues';
+
 import PromptDetail from '../../PromptDetail';
+import getSurveyValues from '../getSurveyValues';
+import mergeExtraVars, { maskPasswords } from '../mergeExtraVars';
 
 const ExclamationCircleIcon = styled(PFExclamationCircleIcon)`
   margin-left: 10px;
@@ -35,8 +36,8 @@ function PreviewStep({ resource, config, survey, formErrors, i18n }) {
       : resource.extra_vars;
     if (survey && survey.spec) {
       const passwordFields = survey.spec
-        .filter(q => q.type === 'password')
-        .map(q => q.variable);
+        .filter((q) => q.type === 'password')
+        .map((q) => q.variable);
       const masked = maskPasswords(surveyValues, passwordFields);
       overrides.extra_vars = yaml.safeDump(
         mergeExtraVars(initialExtraVars, masked)

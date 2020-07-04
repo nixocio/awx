@@ -1,9 +1,11 @@
 import 'styled-components/macro';
-import React, { useContext } from 'react';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Button as PFButton } from '@patternfly/react-core';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+
 import { WorkflowDispatchContext } from '../../../contexts/Workflow';
 
 const Button = styled(PFButton)`

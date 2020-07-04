@@ -1,11 +1,11 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-
 import { ApplicationsAPI } from '../../../api';
 import ApplicationAdd from './ApplicationAdd';
 
@@ -166,7 +166,7 @@ describe('<ApplicationAdd/>', () => {
       });
     });
 
-    waitForElement(wrapper, 'FormSubmitError', el => el.length > 0);
+    waitForElement(wrapper, 'FormSubmitError', (el) => el.length > 0);
   });
   test('should render content error on failed read options request', async () => {
     ApplicationsAPI.readOptions.mockRejectedValue(

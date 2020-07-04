@@ -27,7 +27,7 @@ describe('<AssociateModal />', () => {
         />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
   });
 
   afterEach(() => {
@@ -47,10 +47,7 @@ describe('<AssociateModal />', () => {
   test('should update selected list chips when items are selected', () => {
     expect(wrapper.find('SelectedList Chip')).toHaveLength(0);
     act(() => {
-      wrapper
-        .find('CheckboxListItem')
-        .first()
-        .invoke('onSelect')();
+      wrapper.find('CheckboxListItem').first().invoke('onSelect')();
     });
     wrapper.update();
     expect(wrapper.find('SelectedList Chip')).toHaveLength(1);
@@ -60,10 +57,7 @@ describe('<AssociateModal />', () => {
 
   test('save button should call onAssociate', () => {
     act(() => {
-      wrapper
-        .find('CheckboxListItem')
-        .first()
-        .invoke('onSelect')();
+      wrapper.find('CheckboxListItem').first().invoke('onSelect')();
     });
     wrapper.find('button[aria-label="Save"]').simulate('click');
     expect(onAssociate).toHaveBeenCalledTimes(1);

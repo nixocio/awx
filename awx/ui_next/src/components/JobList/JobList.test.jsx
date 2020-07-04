@@ -1,5 +1,6 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import {
   mountWithContexts,
   waitForElement,
@@ -100,7 +101,7 @@ function waitForLoaded(wrapper) {
   return waitForElement(
     wrapper,
     'JobList',
-    el => el.find('ContentLoading').length === 0
+    (el) => el.find('ContentLoading').length === 0
   );
 }
 
@@ -133,35 +134,23 @@ describe('<JobList />', () => {
     await waitForLoaded(wrapper);
 
     act(() => {
-      wrapper
-        .find('JobListItem')
-        .first()
-        .invoke('onSelect')(mockItem);
+      wrapper.find('JobListItem').first().invoke('onSelect')(mockItem);
     });
     wrapper.update();
-    expect(
-      wrapper
-        .find('JobListItem')
-        .first()
-        .prop('isSelected')
-    ).toEqual(true);
+    expect(wrapper.find('JobListItem').first().prop('isSelected')).toEqual(
+      true
+    );
     expect(
       wrapper.find('ToolbarDeleteButton').prop('itemsToDelete')
     ).toHaveLength(1);
 
     act(() => {
-      wrapper
-        .find('JobListItem')
-        .first()
-        .invoke('onSelect')(mockItem);
+      wrapper.find('JobListItem').first().invoke('onSelect')(mockItem);
     });
     wrapper.update();
-    expect(
-      wrapper
-        .find('JobListItem')
-        .first()
-        .prop('isSelected')
-    ).toEqual(false);
+    expect(wrapper.find('JobListItem').first().prop('isSelected')).toEqual(
+      false
+    );
     expect(
       wrapper.find('ToolbarDeleteButton').prop('itemsToDelete')
     ).toHaveLength(0);
@@ -246,10 +235,7 @@ describe('<JobList />', () => {
     });
     await waitForLoaded(wrapper);
     await act(async () => {
-      wrapper
-        .find('JobListItem')
-        .at(1)
-        .invoke('onSelect')();
+      wrapper.find('JobListItem').at(1).invoke('onSelect')();
     });
     wrapper.update();
 
@@ -260,7 +246,7 @@ describe('<JobList />', () => {
     await waitForElement(
       wrapper,
       'Modal',
-      el => el.props().isOpen === true && el.props().title === 'Error!'
+      (el) => el.props().isOpen === true && el.props().title === 'Error!'
     );
   });
 });

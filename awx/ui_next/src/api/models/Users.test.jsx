@@ -12,7 +12,7 @@ describe('UsersAPI', () => {
     jest.clearAllMocks();
   });
 
-  test('associate role calls post with expected params', async done => {
+  test('associate role calls post with expected params', async (done) => {
     await UsersAPI.associateRole(userId, roleId);
 
     expect(mockHttp.post).toHaveBeenCalledTimes(1);
@@ -23,7 +23,7 @@ describe('UsersAPI', () => {
     done();
   });
 
-  test('read users calls post with expected params', async done => {
+  test('read users calls post with expected params', async (done) => {
     await UsersAPI.disassociateRole(userId, roleId);
 
     expect(mockHttp.post).toHaveBeenCalledTimes(1);

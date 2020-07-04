@@ -1,7 +1,8 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { HostsAPI } from '../../api';
+
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
+import { HostsAPI } from '../../api';
 import HostToggle from './HostToggle';
 
 jest.mock('../../api');

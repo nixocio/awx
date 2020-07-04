@@ -1,14 +1,14 @@
+import { t } from '@lingui/macro';
+import { I18n } from '@lingui/react';
+import {
+  DropdownDirection,
+  Pagination as PFPagination,
+} from '@patternfly/react-core';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import {
-  Pagination as PFPagination,
-  DropdownDirection,
-} from '@patternfly/react-core';
-import { I18n } from '@lingui/react';
-import { t } from '@lingui/macro';
 
 const AWXPagination = styled(PFPagination)`
-  ${props =>
+  ${(props) =>
     props.perPageOptions &&
     !props.perPageOptions.length &&
     css`
@@ -18,7 +18,7 @@ const AWXPagination = styled(PFPagination)`
     `}
 `;
 
-export default props => (
+export default (props) => (
   <I18n>
     {({ i18n }) => (
       <AWXPagination

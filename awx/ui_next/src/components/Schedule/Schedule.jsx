@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
 import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
-
+import { CaretLeftIcon } from '@patternfly/react-icons';
+import React, { useEffect, useState } from 'react';
 import {
-  Switch,
-  Route,
   Link,
   Redirect,
+  Route,
+  Switch,
   useLocation,
   useParams,
 } from 'react-router-dom';
-import { CaretLeftIcon } from '@patternfly/react-icons';
-import RoutedTabs from '../RoutedTabs';
+
+import { SchedulesAPI } from '../../api';
 import ContentError from '../ContentError';
 import ContentLoading from '../ContentLoading';
+import RoutedTabs from '../RoutedTabs';
 import ScheduleDetail from './ScheduleDetail';
 import ScheduleEdit from './ScheduleEdit';
-import { SchedulesAPI } from '../../api';
 
 function Schedule({ i18n, setBreadcrumb, unifiedJobTemplate }) {
   const [schedule, setSchedule] = useState(null);

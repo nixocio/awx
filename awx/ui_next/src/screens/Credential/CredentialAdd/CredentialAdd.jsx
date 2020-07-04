@@ -1,17 +1,17 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import { Card, PageSection } from '@patternfly/react-core';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { PageSection, Card } from '@patternfly/react-core';
-import { CardBody } from '../../../components/Card';
-import ContentError from '../../../components/ContentError';
-import ContentLoading from '../../../components/ContentLoading';
 
 import {
   CredentialInputSourcesAPI,
   CredentialTypesAPI,
   CredentialsAPI,
 } from '../../../api';
-import CredentialForm from '../shared/CredentialForm';
+import { CardBody } from '../../../components/Card';
+import ContentError from '../../../components/ContentError';
+import ContentLoading from '../../../components/ContentLoading';
 import useRequest from '../../../util/useRequest';
+import CredentialForm from '../shared/CredentialForm';
 
 function CredentialAdd({ me }) {
   const [error, setError] = useState(null);
@@ -41,7 +41,7 @@ function CredentialAdd({ me }) {
         const pluginInputs = {};
         const possibleFields = credentialTypeInputs.fields || [];
 
-        possibleFields.forEach(field => {
+        possibleFields.forEach((field) => {
           const input = inputs[field.id];
           if (input.credential && input.inputs) {
             pluginInputs[field.id] = input;
@@ -111,7 +111,7 @@ function CredentialAdd({ me }) {
     history.push('/credentials');
   };
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     await submitRequest(values, credentialTypes);
   };
 

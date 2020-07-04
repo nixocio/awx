@@ -1,38 +1,37 @@
-import React, { useState } from 'react';
 import { t } from '@lingui/macro';
-import PropTypes, { shape } from 'prop-types';
-
 import { withI18n } from '@lingui/react';
-import { useField, withFormik } from 'formik';
 import {
+  Checkbox,
   Form,
   FormGroup,
-  Checkbox,
   TextInput,
   Title,
 } from '@patternfly/react-core';
-import { required } from '../../../util/validators';
+import { useField, withFormik } from 'formik';
+import PropTypes, { shape } from 'prop-types';
+import React, { useState } from 'react';
 
+import { VariablesField } from '../../../components/CodeMirrorInput';
+import ContentError from '../../../components/ContentError';
 import FieldWithPrompt from '../../../components/FieldWithPrompt';
+import FormActionGroup from '../../../components/FormActionGroup';
 import FormField, {
   FieldTooltip,
   FormSubmitError,
 } from '../../../components/FormField';
+import CheckboxField from '../../../components/FormField/CheckboxField';
 import {
+  FormCheckboxLayout,
   FormColumnLayout,
   FormFullWidthLayout,
-  FormCheckboxLayout,
   SubFormLayout,
 } from '../../../components/FormLayout';
-import OrganizationLookup from '../../../components/Lookup/OrganizationLookup';
 import { InventoryLookup } from '../../../components/Lookup';
-import { VariablesField } from '../../../components/CodeMirrorInput';
-import FormActionGroup from '../../../components/FormActionGroup';
-import ContentError from '../../../components/ContentError';
-import CheckboxField from '../../../components/FormField/CheckboxField';
+import OrganizationLookup from '../../../components/Lookup/OrganizationLookup';
+import { WorkFlowJobTemplate } from '../../../types';
+import { required } from '../../../util/validators';
 import LabelSelect from './LabelSelect';
 import WebhookSubForm from './WebhookSubForm';
-import { WorkFlowJobTemplate } from '../../../types';
 
 const urlOrigin = window.location.origin;
 
@@ -81,7 +80,7 @@ function WorkflowJobTemplateForm({
         />
         <OrganizationLookup
           helperTextInvalid={organizationMeta.error}
-          onChange={value => {
+          onChange={(value) => {
             organizationHelpers.setValue(value || null);
           }}
           value={organizationField.value}
@@ -100,7 +99,7 @@ function WorkflowJobTemplateForm({
           <InventoryLookup
             value={inventoryField.value}
             onBlur={() => inventoryHelpers.setTouched()}
-            onChange={value => {
+            onChange={(value) => {
               inventoryHelpers.setValue(value);
             }}
             required={askInventoryOnLaunchField.value}
@@ -132,7 +131,7 @@ function WorkflowJobTemplateForm({
             id="text-wfjt-limit"
             {...limitField}
             isValid={!limitMeta.touched || !limitMeta.error}
-            onChange={value => {
+            onChange={(value) => {
               limitHelpers.setValue(value);
             }}
           />
@@ -150,7 +149,7 @@ function WorkflowJobTemplateForm({
           <TextInput
             id="text-wfjt-scm-branch"
             {...scmField}
-            onChange={value => {
+            onChange={(value) => {
               scmHelpers.setValue(value);
             }}
           />
@@ -165,7 +164,7 @@ function WorkflowJobTemplateForm({
           />
           <LabelSelect
             value={labelsField.value}
-            onChange={labels => labelsHelpers.setValue(labels)}
+            onChange={(labels) => labelsHelpers.setValue(labels)}
             onError={setContentError}
             createText={i18n._(t`Create`)}
           />
@@ -199,7 +198,7 @@ function WorkflowJobTemplateForm({
             }
             id="wfjt-enabled-webhooks"
             isChecked={enableWebhooks}
-            onChange={checked => {
+            onChange={(checked) => {
               setEnableWebhooks(checked);
             }}
           />

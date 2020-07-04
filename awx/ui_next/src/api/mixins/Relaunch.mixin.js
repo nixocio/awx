@@ -1,4 +1,4 @@
-const RelaunchMixin = parent =>
+const RelaunchMixin = (parent) =>
   class extends parent {
     relaunch(id, data) {
       return this.http.post(`${this.baseUrl}${id}/relaunch/`, data);

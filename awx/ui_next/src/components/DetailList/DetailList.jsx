@@ -1,5 +1,5 @@
-import React from 'react';
 import { TextList, TextListVariants } from '@patternfly/react-core';
+import React from 'react';
 import styled from 'styled-components';
 
 const DetailList = ({ children, stacked, ...props }) => (
@@ -12,7 +12,7 @@ export default styled(DetailList)`
   display: grid;
   grid-gap: 20px;
   align-items: center;
-  ${props =>
+  ${(props) =>
     props.stacked
       ? `
     grid-template-columns: auto 1fr;

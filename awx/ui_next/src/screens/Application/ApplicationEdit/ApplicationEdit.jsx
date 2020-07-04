@@ -1,10 +1,10 @@
+import { Card, PageSection } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { Card, PageSection } from '@patternfly/react-core';
-import ApplicationForm from '../shared/ApplicationForm';
 import { ApplicationsAPI } from '../../../api';
 import { CardBody } from '../../../components/Card';
+import ApplicationForm from '../shared/ApplicationForm';
 
 function ApplicationEdit({
   application,

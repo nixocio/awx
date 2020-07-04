@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { OrganizationsAPI, WorkflowJobTemplatesAPI } from '../../../api';
 import { CardBody } from '../../../components/Card';
 import { getAddedAndRemoved } from '../../../util/lists';
-import { WorkflowJobTemplatesAPI, OrganizationsAPI } from '../../../api';
 import { WorkflowJobTemplateForm } from '../shared';
 
 function WorkflowJobTemplateEdit({ template }) {
   const history = useHistory();
   const [formSubmitError, setFormSubmitError] = useState(null);
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     const {
       labels,
       inventory,
@@ -53,10 +53,10 @@ function WorkflowJobTemplateEdit({ template }) {
       }
     }
 
-    const disassociationPromises = await removed.map(label =>
+    const disassociationPromises = await removed.map((label) =>
       WorkflowJobTemplatesAPI.disassociateLabel(template.id, label)
     );
-    const associationPromises = await added.map(label =>
+    const associationPromises = await added.map((label) =>
       WorkflowJobTemplatesAPI.associateLabel(template.id, label, orgId)
     );
     const results = [...disassociationPromises, ...associationPromises];

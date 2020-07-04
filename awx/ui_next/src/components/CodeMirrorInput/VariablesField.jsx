@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { string, bool } from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { useField } from 'formik';
-import styled from 'styled-components';
+import { withI18n } from '@lingui/react';
 import { Split, SplitItem } from '@patternfly/react-core';
+import { useField } from 'formik';
+import { bool, string } from 'prop-types';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+
+import { isJson, jsonToYaml, yamlToJson } from '../../util/yaml';
 import { CheckboxField, FieldTooltip } from '../FormField';
 import MultiButtonToggle from '../MultiButtonToggle';
-import { yamlToJson, jsonToYaml, isJson } from '../../util/yaml';
 import CodeMirrorInput from './CodeMirrorInput';
 import { JSON_MODE, YAML_MODE } from './constants';
 
@@ -49,7 +50,7 @@ function VariablesField({
                 [JSON_MODE, 'JSON'],
               ]}
               value={mode}
-              onChange={newMode => {
+              onChange={(newMode) => {
                 try {
                   const newVal =
                     newMode === YAML_MODE
@@ -76,7 +77,7 @@ function VariablesField({
         mode={mode}
         readOnly={readOnly}
         {...field}
-        onChange={newVal => {
+        onChange={(newVal) => {
           helpers.setValue(newVal);
         }}
         hasErrors={!!meta.error}

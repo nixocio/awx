@@ -1,19 +1,19 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import React from 'react';
 import { act } from 'react-dom/test-utils';
+import { Route } from 'react-router-dom';
 
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
-import WorkflowJobTemplate from './WorkflowJobTemplate';
 import { sleep } from '../../../testUtils/testUtils';
 import {
-  WorkflowJobTemplatesAPI,
   CredentialsAPI,
   OrganizationsAPI,
+  WorkflowJobTemplatesAPI,
 } from '../../api';
+import WorkflowJobTemplate from './WorkflowJobTemplate';
 
 jest.mock('../../api/models/WorkflowJobTemplates');
 jest.mock('../../api/models/Credentials');
@@ -119,10 +119,10 @@ describe('<WorkflowJobTemplate/>', () => {
       'Completed Jobs',
       'Survey',
     ];
-    waitForElement(wrapper, 'EmptyStateBody', el => el.length === 0);
+    waitForElement(wrapper, 'EmptyStateBody', (el) => el.length === 0);
     wrapper.update();
-    wrapper.find('TabContainer').forEach(tc => {
-      tabs.forEach(t => expect(tc.prop(`aria-label=[${t}]`)));
+    wrapper.find('TabContainer').forEach((tc) => {
+      tabs.forEach((t) => expect(tc.prop(`aria-label=[${t}]`)));
     });
   });
 
@@ -138,10 +138,10 @@ describe('<WorkflowJobTemplate/>', () => {
       'Completed Jobs',
       'Survey',
     ];
-    waitForElement(wrapper, 'EmptyStateBody', el => el.length === 0);
+    waitForElement(wrapper, 'EmptyStateBody', (el) => el.length === 0);
     wrapper.update();
-    wrapper.find('TabContainer').forEach(tc => {
-      tabs.forEach(t => expect(tc.prop(`aria-label=[${t}]`)));
+    wrapper.find('TabContainer').forEach((tc) => {
+      tabs.forEach((t) => expect(tc.prop(`aria-label=[${t}]`)));
     });
   });
 });

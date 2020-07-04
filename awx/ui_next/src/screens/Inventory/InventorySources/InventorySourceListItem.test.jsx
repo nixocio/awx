@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import InventorySourceListItem from './InventorySourceListItem';
 
@@ -50,26 +51,11 @@ describe('<InventorySourceListItem />', () => {
       />
     );
     expect(wrapper.find('StatusIcon').length).toBe(1);
-    expect(
-      wrapper
-        .find('Link')
-        .at(0)
-        .prop('to')
-    ).toBe('/jobs/inventory/664');
+    expect(wrapper.find('Link').at(0).prop('to')).toBe('/jobs/inventory/664');
     expect(wrapper.find('DataListCheck').length).toBe(1);
     expect();
-    expect(
-      wrapper
-        .find('DataListCell')
-        .at(1)
-        .text()
-    ).toBe('Foo');
-    expect(
-      wrapper
-        .find('DataListCell')
-        .at(2)
-        .text()
-    ).toBe('Source Bar');
+    expect(wrapper.find('DataListCell').at(1).text()).toBe('Foo');
+    expect(wrapper.find('DataListCell').at(2).text()).toBe('Source Bar');
     expect(wrapper.find('InventorySourceSyncButton').length).toBe(1);
     expect(wrapper.find('PencilAltIcon').length).toBe(1);
   });

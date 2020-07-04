@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { Card, PageSection } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { PageSection, Card } from '@patternfly/react-core';
 
 import { OrganizationsAPI } from '../../../api';
-import { Config } from '../../../contexts/Config';
 import { CardBody } from '../../../components/Card';
+import { Config } from '../../../contexts/Config';
 import OrganizationForm from '../shared/OrganizationForm';
 
 function OrganizationAdd() {
@@ -16,7 +16,7 @@ function OrganizationAdd() {
     try {
       const { data: response } = await OrganizationsAPI.create(values);
       await Promise.all(
-        groupsToAssociate.map(id =>
+        groupsToAssociate.map((id) =>
           OrganizationsAPI.associateInstanceGroup(response.id, id)
         )
       );

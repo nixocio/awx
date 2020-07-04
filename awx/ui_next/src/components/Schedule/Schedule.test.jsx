@@ -1,7 +1,8 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
+import React from 'react';
+import { act } from 'react-dom/test-utils';
+import { Route } from 'react-router-dom';
+
 import {
   mountWithContexts,
   waitForElement,
@@ -96,7 +97,7 @@ describe('<Schedule />', () => {
         }
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
   });
   afterAll(() => {
     wrapper.unmount();

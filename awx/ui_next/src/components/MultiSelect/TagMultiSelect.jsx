@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { func, string } from 'prop-types';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
+import { func, string } from 'prop-types';
+import React, { useState } from 'react';
+
 import { arrayToString, stringToArray } from '../../util/strings';
 
 function TagMultiSelect({ onChange, value }) {
@@ -11,19 +12,19 @@ function TagMultiSelect({ onChange, value }) {
   const onSelect = (event, item) => {
     let newValue;
     if (selections.includes(item)) {
-      newValue = selections.filter(i => i !== item);
+      newValue = selections.filter((i) => i !== item);
     } else {
       newValue = selections.concat(item);
     }
     onChange(arrayToString(newValue));
   };
 
-  const toggleExpanded = toggleValue => {
+  const toggleExpanded = (toggleValue) => {
     setIsExpanded(toggleValue);
   };
 
-  const renderOptions = opts => {
-    return opts.map(option => (
+  const renderOptions = (opts) => {
+    return opts.map((option) => (
       <SelectOption key={option} value={option}>
         {option}
       </SelectOption>
@@ -36,13 +37,13 @@ function TagMultiSelect({ onChange, value }) {
       onToggle={toggleExpanded}
       onSelect={onSelect}
       onClear={() => onChange('')}
-      onFilter={event => {
+      onFilter={(event) => {
         const str = event.target.value.toLowerCase();
-        const matches = options.filter(o => o.toLowerCase().includes(str));
+        const matches = options.filter((o) => o.toLowerCase().includes(str));
         return renderOptions(matches);
       }}
       isCreatable
-      onCreateOption={name => {
+      onCreateOption={(name) => {
         name = name.trim();
         if (!options.includes(name)) {
           setOptions(options.concat(name));

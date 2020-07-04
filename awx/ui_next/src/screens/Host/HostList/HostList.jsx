@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useLocation, useRouteMatch } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Card, PageSection } from '@patternfly/react-core';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation, useRouteMatch } from 'react-router-dom';
 
 import { HostsAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal';
@@ -12,9 +12,8 @@ import PaginatedDataList, {
   ToolbarAddButton,
   ToolbarDeleteButton,
 } from '../../../components/PaginatedDataList';
-import useRequest, { useDeleteItems } from '../../../util/useRequest';
 import { getQSConfig, parseQueryString } from '../../../util/qs';
-
+import useRequest, { useDeleteItems } from '../../../util/useRequest';
 import HostListItem from './HostListItem';
 
 const QS_CONFIG = getQSConfig('host', {
@@ -65,7 +64,7 @@ function HostList({ i18n }) {
     clearDeletionError,
   } = useDeleteItems(
     useCallback(async () => {
-      return Promise.all(selected.map(host => HostsAPI.destroy(host.id)));
+      return Promise.all(selected.map((host) => HostsAPI.destroy(host.id)));
     }, [selected]),
     {
       qsConfig: QS_CONFIG,
@@ -79,13 +78,13 @@ function HostList({ i18n }) {
     setSelected([]);
   };
 
-  const handleSelectAll = isSelected => {
+  const handleSelectAll = (isSelected) => {
     setSelected(isSelected ? [...hosts] : []);
   };
 
-  const handleSelect = host => {
-    if (selected.some(h => h.id === host.id)) {
-      setSelected(selected.filter(h => h.id !== host.id));
+  const handleSelect = (host) => {
+    if (selected.some((h) => h.id === host.id)) {
+      setSelected(selected.filter((h) => h.id !== host.id));
     } else {
       setSelected(selected.concat(host));
     }
@@ -126,7 +125,7 @@ function HostList({ i18n }) {
               key: 'name',
             },
           ]}
-          renderToolbar={props => (
+          renderToolbar={(props) => (
             <DataListToolbar
               {...props}
               showSelectAll
@@ -146,12 +145,12 @@ function HostList({ i18n }) {
               ]}
             />
           )}
-          renderItem={host => (
+          renderItem={(host) => (
             <HostListItem
               key={host.id}
               host={host}
               detailUrl={`${match.url}/${host.id}/details`}
-              isSelected={selected.some(row => row.id === host.id)}
+              isSelected={selected.some((row) => row.id === host.id)}
               onSelect={() => handleSelect(host)}
             />
           )}

@@ -1,27 +1,28 @@
-import React, { useEffect, useCallback } from 'react';
-import { SyncAltIcon } from '@patternfly/react-icons';
-import { useParams, useLocation } from 'react-router-dom';
 import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
 import {
-  FormGroup,
-  TextInput,
-  InputGroup,
   Button,
+  FormGroup,
+  InputGroup,
+  TextInput,
 } from '@patternfly/react-core';
+import { SyncAltIcon } from '@patternfly/react-icons';
 import { useField } from 'formik';
-import ContentError from '../../../components/ContentError';
-import ContentLoading from '../../../components/ContentLoading';
-import useRequest from '../../../util/useRequest';
-import { FormColumnLayout } from '../../../components/FormLayout';
-import { CredentialLookup } from '../../../components/Lookup';
-import AnsibleSelect from '../../../components/AnsibleSelect';
-import { FieldTooltip } from '../../../components/FormField';
+import React, { useCallback, useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+
 import {
+  CredentialTypesAPI,
   JobTemplatesAPI,
   WorkflowJobTemplatesAPI,
-  CredentialTypesAPI,
 } from '../../../api';
+import AnsibleSelect from '../../../components/AnsibleSelect';
+import ContentError from '../../../components/ContentError';
+import ContentLoading from '../../../components/ContentLoading';
+import { FieldTooltip } from '../../../components/FormField';
+import { FormColumnLayout } from '../../../components/FormLayout';
+import { CredentialLookup } from '../../../components/Lookup';
+import useRequest from '../../../util/useRequest';
 
 function WebhookSubForm({ i18n, templateType }) {
   const { id } = useParams();
@@ -211,7 +212,7 @@ function WebhookSubForm({ i18n, templateType }) {
             t`Optionally select the credential to use to send status updates back to the webhook service.`
           )}
           credentialTypeId={credTypeId}
-          onChange={value => {
+          onChange={(value) => {
             webhookCredentialHelpers.setValue(value || null);
           }}
           isValid={!webhookCredentialMeta.error}

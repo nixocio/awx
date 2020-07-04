@@ -1,18 +1,19 @@
-import React from 'react';
-import { withI18n } from '@lingui/react';
-import { Link } from 'react-router-dom';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   Button,
-  DataListItem,
-  DataListItemRow,
-  DataListCheck,
-  DataListItemCells,
-  DataListCell,
   DataListAction,
+  DataListCell,
+  DataListCheck,
+  DataListItem,
+  DataListItemCells,
+  DataListItemRow,
   Tooltip,
 } from '@patternfly/react-core';
 import { PencilAltIcon } from '@patternfly/react-icons';
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 import StatusIcon from '../../../components/StatusIcon';
 import InventorySourceSyncButton from '../shared/InventorySourceSyncButton';
 
@@ -24,7 +25,7 @@ function InventorySourceListItem({
   detailUrl,
   label,
 }) {
-  const generateLastJobTooltip = job => {
+  const generateLastJobTooltip = (job) => {
     return (
       <>
         <div>{i18n._(t`MOST RECENT SYNC`)}</div>

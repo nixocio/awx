@@ -1,13 +1,12 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 
-import { OrganizationsAPI } from '../../../api';
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
 import { sleep } from '../../../../testUtils/testUtils';
-
+import { OrganizationsAPI } from '../../../api';
 import OrganizationTeams from './OrganizationTeams';
 
 jest.mock('../../../api');
@@ -92,6 +91,6 @@ describe('<OrganizationTeams />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<OrganizationTeams id={1} />);
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

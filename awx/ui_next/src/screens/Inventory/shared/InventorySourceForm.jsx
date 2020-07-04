@@ -1,14 +1,11 @@
-import React, { useEffect, useCallback, useContext } from 'react';
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Form, FormGroup, Title } from '@patternfly/react-core';
 import { Formik, useField, useFormikContext } from 'formik';
 import { func, shape } from 'prop-types';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { Form, FormGroup, Title } from '@patternfly/react-core';
-import { InventorySourcesAPI } from '../../../api';
-import { ConfigContext } from '../../../contexts/Config';
-import useRequest from '../../../util/useRequest';
-import { required } from '../../../util/validators';
+import React, { useCallback, useContext, useEffect } from 'react';
 
+import { InventorySourcesAPI } from '../../../api';
 import AnsibleSelect from '../../../components/AnsibleSelect';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
@@ -21,7 +18,9 @@ import {
   FormColumnLayout,
   SubFormLayout,
 } from '../../../components/FormLayout';
-
+import { ConfigContext } from '../../../contexts/Config';
+import useRequest from '../../../util/useRequest';
+import { required } from '../../../util/validators';
 import {
   AzureSubForm,
   CloudFormsSubForm,
@@ -36,7 +35,7 @@ import {
   VirtualizationSubForm,
 } from './InventorySourceSubForms';
 
-const buildSourceChoiceOptions = options => {
+const buildSourceChoiceOptions = (options) => {
   const sourceChoices = options.actions.GET.source.choices.map(
     ([choice, label]) => ({ label, key: choice, value: choice })
   );
@@ -62,7 +61,7 @@ const InventorySourceFormFields = ({ sourceOptions, i18n }) => {
     key: 'default',
   };
 
-  const resetSubFormFields = sourceType => {
+  const resetSubFormFields = (sourceType) => {
     if (sourceType === initialValues.source) {
       resetForm({
         values: {
@@ -91,7 +90,7 @@ const InventorySourceFormFields = ({ sourceOptions, i18n }) => {
         update_on_project_update: false,
         verbosity: 1,
       };
-      Object.keys(defaults).forEach(label => {
+      Object.keys(defaults).forEach((label) => {
         setFieldValue(label, defaults[label]);
       });
     }
@@ -154,8 +153,8 @@ const InventorySourceFormFields = ({ sourceOptions, i18n }) => {
             data={[
               defaultVenv,
               ...custom_virtualenvs
-                .filter(value => value !== defaultVenv.value)
-                .map(value => ({ value, label: value, key: value })),
+                .filter((value) => value !== defaultVenv.value)
+                .map((value) => ({ value, label: value, key: value })),
             ]}
             {...venvField}
           />
@@ -245,11 +244,11 @@ const InventorySourceForm = ({
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={values => {
+      onSubmit={(values) => {
         onSubmit(values);
       }}
     >
-      {formik => (
+      {(formik) => (
         <Form autoComplete="off" onSubmit={formik.handleSubmit}>
           <FormColumnLayout>
             <InventorySourceFormFields

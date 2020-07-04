@@ -1,7 +1,8 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { ProjectsAPI } from '../../../api';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
+import { ProjectsAPI } from '../../../api';
 import ProjectList from './ProjectList';
 
 jest.mock('../../../api');
@@ -104,19 +105,13 @@ describe('<ProjectList />', () => {
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('ProjectListItem')
-        .first()
-        .invoke('onSelect')();
+      wrapper.find('ProjectListItem').first().invoke('onSelect')();
     });
     wrapper.update();
 
-    expect(
-      wrapper
-        .find('ProjectListItem')
-        .first()
-        .prop('isSelected')
-    ).toEqual(true);
+    expect(wrapper.find('ProjectListItem').first().prop('isSelected')).toEqual(
+      true
+    );
   });
 
   test('should select all', async () => {
@@ -133,16 +128,13 @@ describe('<ProjectList />', () => {
 
     const items = wrapper.find('ProjectListItem');
     expect(items).toHaveLength(3);
-    items.forEach(item => {
+    items.forEach((item) => {
       expect(item.prop('isSelected')).toEqual(true);
     });
 
-    expect(
-      wrapper
-        .find('ProjectListItem')
-        .first()
-        .prop('isSelected')
-    ).toEqual(true);
+    expect(wrapper.find('ProjectListItem').first().prop('isSelected')).toEqual(
+      true
+    );
   });
 
   test('should disable delete button', async () => {
@@ -153,10 +145,7 @@ describe('<ProjectList />', () => {
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('ProjectListItem')
-        .at(2)
-        .invoke('onSelect')();
+      wrapper.find('ProjectListItem').at(2).invoke('onSelect')();
     });
     wrapper.update();
 
@@ -173,17 +162,11 @@ describe('<ProjectList />', () => {
     wrapper.update();
 
     await act(async () => {
-      wrapper
-        .find('ProjectListItem')
-        .at(0)
-        .invoke('onSelect')();
+      wrapper.find('ProjectListItem').at(0).invoke('onSelect')();
     });
     wrapper.update();
     await act(async () => {
-      wrapper
-        .find('ProjectListItem')
-        .at(1)
-        .invoke('onSelect')();
+      wrapper.find('ProjectListItem').at(1).invoke('onSelect')();
     });
     wrapper.update();
     await act(async () => {
@@ -212,10 +195,7 @@ describe('<ProjectList />', () => {
     wrapper.update();
     expect(ProjectsAPI.read).toHaveBeenCalledTimes(1);
     await act(async () => {
-      wrapper
-        .find('ProjectListItem')
-        .at(0)
-        .invoke('onSelect')();
+      wrapper.find('ProjectListItem').at(0).invoke('onSelect')();
     });
     wrapper.update();
 

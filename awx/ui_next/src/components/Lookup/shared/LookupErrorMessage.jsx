@@ -1,6 +1,6 @@
-import React from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import React from 'react';
 
 function LookupErrorMessage({ error, i18n }) {
   if (!error) {

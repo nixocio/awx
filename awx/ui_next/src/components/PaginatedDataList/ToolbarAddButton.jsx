@@ -1,9 +1,9 @@
-import React from 'react';
-import { string, func } from 'prop-types';
-import { Link } from 'react-router-dom';
-import { Button, Tooltip } from '@patternfly/react-core';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Button, Tooltip } from '@patternfly/react-core';
+import { func, string } from 'prop-types';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function ToolbarAddButton({ linkTo, onClick, i18n, isDisabled }) {
   if (!linkTo && !onClick) {

@@ -1,19 +1,21 @@
 import 'styled-components/macro';
-import React from 'react';
-import styled from 'styled-components';
-import { useField } from 'formik';
+
+import { Trans, t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
-import { t, Trans } from '@lingui/macro';
-import { RRule } from 'rrule';
 import {
-  Checkbox as _Checkbox,
   FormGroup,
   Radio,
   TextInput,
+  Checkbox as _Checkbox,
 } from '@patternfly/react-core';
+import { useField } from 'formik';
+import React from 'react';
+import { RRule } from 'rrule';
+import styled from 'styled-components';
+
+import { required } from '../../../util/validators';
 import AnsibleSelect from '../../AnsibleSelect';
 import FormField from '../../FormField';
-import { required } from '../../../util/validators';
 
 const RunOnRadio = styled(Radio)`
   label {
@@ -42,7 +44,7 @@ const Checkbox = styled(_Checkbox)`
 `;
 
 export function requiredPositiveInteger(i18n) {
-  return value => {
+  return (value) => {
     if (typeof value === 'number') {
       if (!Number.isInteger(value)) {
         return i18n._(t`This field must be an integer`);
@@ -175,7 +177,7 @@ const FrequencyDetailSubform = ({ i18n }) => {
       daysOfWeekHelpers.setValue(newDaysOfWeek);
     } else {
       daysOfWeekHelpers.setValue(
-        newDaysOfWeek.filter(selectedDay => selectedDay !== day)
+        newDaysOfWeek.filter((selectedDay) => selectedDay !== day)
       );
     }
   };
@@ -268,7 +270,7 @@ const FrequencyDetailSubform = ({ i18n }) => {
             <Checkbox
               label={i18n._(t`Sun`)}
               isChecked={daysOfWeek.value.includes(RRule.SU)}
-              onChange={checked => {
+              onChange={(checked) => {
                 updateDaysOfWeek(RRule.SU, checked);
               }}
               aria-label={i18n._(t`Sunday`)}
@@ -278,7 +280,7 @@ const FrequencyDetailSubform = ({ i18n }) => {
             <Checkbox
               label={i18n._(t`Mon`)}
               isChecked={daysOfWeek.value.includes(RRule.MO)}
-              onChange={checked => {
+              onChange={(checked) => {
                 updateDaysOfWeek(RRule.MO, checked);
               }}
               aria-label={i18n._(t`Monday`)}
@@ -288,7 +290,7 @@ const FrequencyDetailSubform = ({ i18n }) => {
             <Checkbox
               label={i18n._(t`Tue`)}
               isChecked={daysOfWeek.value.includes(RRule.TU)}
-              onChange={checked => {
+              onChange={(checked) => {
                 updateDaysOfWeek(RRule.TU, checked);
               }}
               aria-label={i18n._(t`Tuesday`)}
@@ -298,7 +300,7 @@ const FrequencyDetailSubform = ({ i18n }) => {
             <Checkbox
               label={i18n._(t`Wed`)}
               isChecked={daysOfWeek.value.includes(RRule.WE)}
-              onChange={checked => {
+              onChange={(checked) => {
                 updateDaysOfWeek(RRule.WE, checked);
               }}
               aria-label={i18n._(t`Wednesday`)}
@@ -308,7 +310,7 @@ const FrequencyDetailSubform = ({ i18n }) => {
             <Checkbox
               label={i18n._(t`Thu`)}
               isChecked={daysOfWeek.value.includes(RRule.TH)}
-              onChange={checked => {
+              onChange={(checked) => {
                 updateDaysOfWeek(RRule.TH, checked);
               }}
               aria-label={i18n._(t`Thursday`)}
@@ -318,7 +320,7 @@ const FrequencyDetailSubform = ({ i18n }) => {
             <Checkbox
               label={i18n._(t`Fri`)}
               isChecked={daysOfWeek.value.includes(RRule.FR)}
-              onChange={checked => {
+              onChange={(checked) => {
                 updateDaysOfWeek(RRule.FR, checked);
               }}
               aria-label={i18n._(t`Friday`)}
@@ -328,7 +330,7 @@ const FrequencyDetailSubform = ({ i18n }) => {
             <Checkbox
               label={i18n._(t`Sat`)}
               isChecked={daysOfWeek.value.includes(RRule.SA)}
-              onChange={checked => {
+              onChange={(checked) => {
                 updateDaysOfWeek(RRule.SA, checked);
               }}
               aria-label={i18n._(t`Saturday`)}

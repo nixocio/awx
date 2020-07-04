@@ -1,18 +1,19 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-import JobTemplateAdd from './JobTemplateAdd';
 import {
-  CredentialsAPI,
   CredentialTypesAPI,
+  CredentialsAPI,
   JobTemplatesAPI,
   LabelsAPI,
   ProjectsAPI,
 } from '../../../api';
+import JobTemplateAdd from './JobTemplateAdd';
 
 jest.mock('../../../api');
 CredentialsAPI.read.mockResolvedValue({
@@ -96,7 +97,7 @@ describe('<JobTemplateAdd />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<JobTemplateAdd />);
     });
-    await waitForElement(wrapper, 'EmptyStateBody', el => el.length === 0);
+    await waitForElement(wrapper, 'EmptyStateBody', (el) => el.length === 0);
     expect(wrapper.find('input#template-description').text()).toBe(
       defaultProps.description
     );
@@ -130,7 +131,7 @@ describe('<JobTemplateAdd />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<JobTemplateAdd />);
     });
-    await waitForElement(wrapper, 'EmptyStateBody', el => el.length === 0);
+    await waitForElement(wrapper, 'EmptyStateBody', (el) => el.length === 0);
     act(() => {
       wrapper.find('input#template-name').simulate('change', {
         target: { value: 'Bar', name: 'name' },
@@ -192,7 +193,7 @@ describe('<JobTemplateAdd />', () => {
         context: { router: { history } },
       });
     });
-    await waitForElement(wrapper, 'EmptyStateBody', el => el.length === 0);
+    await waitForElement(wrapper, 'EmptyStateBody', (el) => el.length === 0);
     act(() => {
       wrapper.find('input#template-name').simulate('change', {
         target: { value: 'Foo', name: 'name' },
@@ -240,7 +241,7 @@ describe('<JobTemplateAdd />', () => {
         context: { router: { history } },
       });
     });
-    await waitForElement(wrapper, 'EmptyStateBody', el => el.length === 0);
+    await waitForElement(wrapper, 'EmptyStateBody', (el) => el.length === 0);
     wrapper.find('button[aria-label="Cancel"]').invoke('onClick')();
     expect(history.location.pathname).toEqual('/templates');
   });

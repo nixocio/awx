@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { useField } from 'formik';
+import { withI18n } from '@lingui/react';
 import { FileUpload, FormGroup } from '@patternfly/react-core';
+import { useField } from 'formik';
+import React, { useState } from 'react';
 
 function GceFileUploadField({ i18n }) {
   const [fileError, setFileError] = useState(null);
@@ -32,7 +32,7 @@ function GceFileUploadField({ i18n }) {
         value={file}
         filename={filename}
         filenamePlaceholder={i18n._(t`Choose a .json file`)}
-        onChange={async value => {
+        onChange={async (value) => {
           if (value) {
             try {
               setFile(value);

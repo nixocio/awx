@@ -1,16 +1,15 @@
-import React, { Component, Fragment } from 'react';
-import { number, shape, string, bool } from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-
-import AlertModal from '../AlertModal';
-import ErrorDetail from '../ErrorDetail';
-import NotificationListItem from './NotificationListItem';
-import PaginatedDataList from '../PaginatedDataList';
-import { getQSConfig, parseQueryString } from '../../util/qs';
+import { withI18n } from '@lingui/react';
+import { bool, number, shape, string } from 'prop-types';
+import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import { NotificationTemplatesAPI } from '../../api';
+import { getQSConfig, parseQueryString } from '../../util/qs';
+import AlertModal from '../AlertModal';
+import ErrorDetail from '../ErrorDetail';
+import PaginatedDataList from '../PaginatedDataList';
+import NotificationListItem from './NotificationListItem';
 
 const QS_CONFIG = getQSConfig('notification', {
   page: 1,
@@ -72,7 +71,7 @@ class NotificationList extends Component {
 
       let idMatchParams;
       if (notifications.length > 0) {
-        idMatchParams = { id__in: notifications.map(n => n.id).join(',') };
+        idMatchParams = { id__in: notifications.map((n) => n.id).join(',') };
       } else {
         idMatchParams = {};
       }
@@ -90,9 +89,9 @@ class NotificationList extends Component {
       const stateToUpdate = {
         itemCount,
         notifications,
-        startedTemplateIds: startedTemplates.results.map(st => st.id),
-        successTemplateIds: successTemplates.results.map(su => su.id),
-        errorTemplateIds: errorTemplates.results.map(e => e.id),
+        startedTemplateIds: startedTemplates.results.map((st) => st.id),
+        successTemplateIds: successTemplates.results.map((su) => su.id),
+        errorTemplateIds: errorTemplates.results.map((e) => e.id),
       };
 
       if (!typeLabels) {
@@ -135,14 +134,14 @@ class NotificationList extends Component {
     let stateUpdateFunction;
     if (isCurrentlyOn) {
       // when switching off, remove the toggled notification id from the array
-      stateUpdateFunction = prevState => ({
+      stateUpdateFunction = (prevState) => ({
         [stateArrayName]: prevState[stateArrayName].filter(
-          i => i !== notificationId
+          (i) => i !== notificationId
         ),
       });
     } else {
       // when switching on, add the toggled notification id to the array
-      stateUpdateFunction = prevState => ({
+      stateUpdateFunction = (prevState) => ({
         [stateArrayName]: prevState[stateArrayName].concat(notificationId),
       });
     }
@@ -170,7 +169,7 @@ class NotificationList extends Component {
     } finally {
       this.setState(({ loadingToggleIds }) => ({
         loadingToggleIds: loadingToggleIds.filter(
-          item => item !== notificationId
+          (item) => item !== notificationId
         ),
       }));
     }
@@ -241,7 +240,7 @@ class NotificationList extends Component {
               key: 'name',
             },
           ]}
-          renderItem={notification => (
+          renderItem={(notification) => (
             <NotificationListItem
               key={notification.id}
               notification={notification}

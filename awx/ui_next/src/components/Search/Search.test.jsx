@@ -1,7 +1,8 @@
-import React from 'react';
 import { Toolbar, ToolbarContent } from '@patternfly/react-core';
 import { createMemoryHistory } from 'history';
+import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
 import Search from './Search';
 

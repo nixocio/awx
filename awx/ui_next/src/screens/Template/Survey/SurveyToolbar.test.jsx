@@ -1,5 +1,6 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import SurveyToolbar from './SurveyToolbar';
 
@@ -100,12 +101,9 @@ describe('<SurveyToolbar />', () => {
         />
       );
     });
-    expect(
-      wrapper
-        .find('Toolbar')
-        .find('Checkbox')
-        .prop('isDisabled')
-    ).toBe(true);
+    expect(wrapper.find('Toolbar').find('Checkbox').prop('isDisabled')).toBe(
+      true
+    );
     expect(wrapper.find('Switch').prop('isDisabled')).toBe(true);
     expect(wrapper.find('ToolbarAddButton').prop('isDisabled')).toBe(true);
     expect(wrapper.find('Button[variant="danger"]').prop('isDisabled')).toBe(

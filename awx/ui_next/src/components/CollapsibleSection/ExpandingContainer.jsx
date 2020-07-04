@@ -1,12 +1,13 @@
 import 'styled-components/macro';
-import React, { useState, useEffect, useRef } from 'react';
+
 import { bool } from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
   margin: 15px 0;
   transition: height 0.2s ease-out;
-  ${props => props.hideOverflow && `overflow: hidden;`}
+  ${(props) => props.hideOverflow && `overflow: hidden;`}
 `;
 
 function ExpandingContainer({ isExpanded, children }) {

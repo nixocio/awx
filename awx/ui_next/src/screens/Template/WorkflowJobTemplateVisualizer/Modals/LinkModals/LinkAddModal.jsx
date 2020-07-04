@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
-import { Title } from '@patternfly/react-core';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Title } from '@patternfly/react-core';
+import React, { useContext } from 'react';
+
 import { WorkflowDispatchContext } from '../../../../../contexts/Workflow';
 import LinkModal from './LinkModal';
 
@@ -14,7 +15,7 @@ function LinkAddModal({ i18n }) {
           {i18n._(t`Add Link`)}
         </Title>
       }
-      onConfirm={linkType => dispatch({ type: 'CREATE_LINK', linkType })}
+      onConfirm={(linkType) => dispatch({ type: 'CREATE_LINK', linkType })}
     />
   );
 }

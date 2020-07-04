@@ -1,13 +1,15 @@
 import 'styled-components/macro';
-import React, { Fragment, useContext } from 'react';
-import { Button } from '@patternfly/react-core';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Button } from '@patternfly/react-core';
+import React, { Fragment, useContext } from 'react';
+
+import AlertModal from '../../../../../components/AlertModal';
 import {
   WorkflowDispatchContext,
   WorkflowStateContext,
 } from '../../../../../contexts/Workflow';
-import AlertModal from '../../../../../components/AlertModal';
 
 function NodeDeleteModal({ i18n }) {
   const dispatch = useContext(WorkflowDispatchContext);

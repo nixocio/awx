@@ -1,6 +1,6 @@
 import Base from '../Base';
-import NotificationsMixin from '../mixins/Notifications.mixin';
 import InstanceGroupsMixin from '../mixins/InstanceGroups.mixin';
+import NotificationsMixin from '../mixins/Notifications.mixin';
 import SchedulesMixin from '../mixins/Schedules.mixin';
 
 class JobTemplates extends SchedulesMixin(

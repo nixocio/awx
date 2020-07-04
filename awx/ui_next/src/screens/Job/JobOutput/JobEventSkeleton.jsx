@@ -1,9 +1,10 @@
 import React from 'react';
+
 import {
   JobEventLine,
-  JobEventLineToggle,
   JobEventLineNumber,
   JobEventLineText,
+  JobEventLineToggle,
 } from './shared';
 
 function JobEventSkeletonContent({ contentLength }) {

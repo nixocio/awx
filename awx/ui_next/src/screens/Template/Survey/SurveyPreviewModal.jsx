@@ -1,18 +1,18 @@
-import React from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { Formik } from 'formik';
-
+import { withI18n } from '@lingui/react';
 import {
   Form,
   FormGroup,
   Modal,
-  TextInput,
-  TextArea,
   Select,
   SelectOption,
   SelectVariant,
+  TextArea,
+  TextInput,
 } from '@patternfly/react-core';
+import { Formik } from 'formik';
+import React from 'react';
+
 import { PasswordField } from '../../../components/FormField';
 
 function SurveyPreviewModal({
@@ -22,7 +22,7 @@ function SurveyPreviewModal({
   i18n,
 }) {
   const initialValues = {};
-  questions.forEach(q => {
+  questions.forEach((q) => {
     initialValues[q.variable] = q.default;
     return initialValues;
   });
@@ -38,7 +38,7 @@ function SurveyPreviewModal({
       <Formik initialValues={initialValues}>
         {() => (
           <Form>
-            {questions.map(q => (
+            {questions.map((q) => (
               <div key={q.variable}>
                 {['text', 'integer', 'float'].includes(q.type) && (
                   <FormGroup
@@ -107,7 +107,7 @@ function SurveyPreviewModal({
                       {q.choices.length > 0 &&
                         q.choices
                           .split('\n')
-                          .map(option => (
+                          .map((option) => (
                             <SelectOption key={option} value={option} />
                           ))}
                     </Select>

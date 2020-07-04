@@ -1,11 +1,12 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
-import { OrganizationsAPI } from '../../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
+import { OrganizationsAPI } from '../../../api';
 import OrganizationEdit from './OrganizationEdit';
 
 jest.mock('../../../api');
@@ -81,7 +82,7 @@ describe('<OrganizationEdit />', () => {
         { context: { router: { history } } }
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     await act(async () => {
       wrapper.find('button[aria-label="Cancel"]').invoke('onClick')();
     });

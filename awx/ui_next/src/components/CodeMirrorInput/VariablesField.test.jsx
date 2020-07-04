@@ -1,7 +1,8 @@
-import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
 import { Formik } from 'formik';
+import React from 'react';
+import { act } from 'react-dom/test-utils';
+
 import VariablesField from './VariablesField';
 
 describe('VariablesField', () => {
@@ -59,10 +60,7 @@ describe('VariablesField', () => {
         )}
       </Formik>
     );
-    wrapper
-      .find('Button')
-      .at(1)
-      .simulate('click');
+    wrapper.find('Button').at(1).simulate('click');
     wrapper.update();
 
     const field = wrapper.find('CodeMirrorInput');
@@ -91,7 +89,7 @@ describe('VariablesField', () => {
     const handleSubmit = jest.fn();
     const wrapper = mount(
       <Formik initialValues={{ variables: value }} onSubmit={handleSubmit}>
-        {formik => (
+        {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             <VariablesField id="the-field" name="variables" label="Variables" />
             <button type="submit" id="submit">
@@ -118,7 +116,7 @@ describe('VariablesField', () => {
     const value = '{"foo": "bar"}';
     const wrapper = mount(
       <Formik initialValues={{ variables: value }} onSubmit={jest.fn()}>
-        {formik => (
+        {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             <VariablesField id="the-field" name="variables" label="Variables" />
             <button type="submit" id="submit">

@@ -1,21 +1,21 @@
 import 'styled-components/macro';
-import React from 'react';
-import { shape } from 'prop-types';
+
+import { Trans, t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
-import { t, Trans } from '@lingui/macro';
+import { Chip, Divider } from '@patternfly/react-core';
+import { shape } from 'prop-types';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Chip, Divider } from '@patternfly/react-core';
+
 import { toTitleCase } from '../../util/strings';
-
-import CredentialChip from '../CredentialChip';
 import ChipGroup from '../ChipGroup';
-import { DetailList, Detail, UserDateDetail } from '../DetailList';
 import { VariablesDetail } from '../CodeMirrorInput';
-
-import PromptProjectDetail from './PromptProjectDetail';
+import CredentialChip from '../CredentialChip';
+import { Detail, DetailList, UserDateDetail } from '../DetailList';
 import PromptInventorySourceDetail from './PromptInventorySourceDetail';
 import PromptJobTemplateDetail from './PromptJobTemplateDetail';
+import PromptProjectDetail from './PromptProjectDetail';
 import PromptWFJobTemplateDetail from './PromptWFJobTemplateDetail';
 
 const PromptHeader = styled.h2`
@@ -71,7 +71,7 @@ function omitOverrides(resource, overrides) {
     ...resource,
     summary_fields: { ...resource.summary_fields },
   };
-  Object.keys(overrides).forEach(keyToOmit => {
+  Object.keys(overrides).forEach((keyToOmit) => {
     delete clonedResource[keyToOmit];
     delete clonedResource.summary_fields[keyToOmit];
   });
@@ -152,7 +152,7 @@ function PromptDetail({ i18n, resource, launchConfig = {}, overrides = {} }) {
                     numChips={5}
                     totalChips={overrides.credentials.length}
                   >
-                    {overrides.credentials.map(cred => (
+                    {overrides.credentials.map((cred) => (
                       <CredentialChip
                         key={cred.id}
                         credential={cred}
@@ -193,7 +193,7 @@ function PromptDetail({ i18n, resource, launchConfig = {}, overrides = {} }) {
                     numChips={5}
                     totalChips={overrides.job_tags.split(',').length}
                   >
-                    {overrides.job_tags.split(',').map(jobTag => (
+                    {overrides.job_tags.split(',').map((jobTag) => (
                       <Chip key={jobTag} isReadOnly>
                         {jobTag}
                       </Chip>
@@ -211,7 +211,7 @@ function PromptDetail({ i18n, resource, launchConfig = {}, overrides = {} }) {
                     numChips={5}
                     totalChips={overrides.skip_tags.split(',').length}
                   >
-                    {overrides.skip_tags.split(',').map(skipTag => (
+                    {overrides.skip_tags.split(',').map((skipTag) => (
                       <Chip key={skipTag} isReadOnly>
                         {skipTag}
                       </Chip>

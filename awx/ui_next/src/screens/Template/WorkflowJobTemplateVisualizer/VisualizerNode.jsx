@@ -1,8 +1,5 @@
-import React, { useContext, useRef, useState } from 'react';
-import styled from 'styled-components';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { bool, func, shape } from 'prop-types';
+import { withI18n } from '@lingui/react';
 import {
   InfoIcon,
   LinkIcon,
@@ -10,26 +7,30 @@ import {
   PlusIcon,
   TrashAltIcon,
 } from '@patternfly/react-icons';
-import {
-  WorkflowDispatchContext,
-  WorkflowStateContext,
-} from '../../../contexts/Workflow';
-import { constants as wfConstants } from '../../../components/Workflow/WorkflowUtils';
+import { bool, func, shape } from 'prop-types';
+import React, { useContext, useRef, useState } from 'react';
+import styled from 'styled-components';
+
 import {
   WorkflowActionTooltip,
   WorkflowActionTooltipItem,
   WorkflowNodeTypeLetter,
 } from '../../../components/Workflow';
+import { constants as wfConstants } from '../../../components/Workflow/WorkflowUtils';
+import {
+  WorkflowDispatchContext,
+  WorkflowStateContext,
+} from '../../../contexts/Workflow';
 
 const NodeG = styled.g`
-  pointer-events: ${props => (props.noPointerEvents ? 'none' : 'initial')};
-  cursor: ${props => (props.job ? 'pointer' : 'default')};
+  pointer-events: ${(props) => (props.noPointerEvents ? 'none' : 'initial')};
+  cursor: ${(props) => (props.job ? 'pointer' : 'default')};
 `;
 
 const NodeContents = styled.div`
   font-size: 13px;
   padding: 0px 10px;
-  background-color: ${props =>
+  background-color: ${(props) =>
     props.isInvalidLinkTarget ? '#D7D7D7' : '#FFFFFF'};
 `;
 
@@ -171,8 +172,9 @@ function VisualizerNode({
       onMouseEnter={handleNodeMouseEnter}
       onMouseLeave={handleNodeMouseLeave}
       ref={ref}
-      transform={`translate(${nodePositions[node.id].x},${nodePositions[node.id]
-        .y - nodePositions[1].y})`}
+      transform={`translate(${nodePositions[node.id].x},${
+        nodePositions[node.id].y - nodePositions[1].y
+      })`}
     >
       <rect
         fill="#FFFFFF"

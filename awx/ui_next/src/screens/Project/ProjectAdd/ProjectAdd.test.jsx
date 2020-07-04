@@ -1,12 +1,13 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
+import { CredentialTypesAPI, ProjectsAPI } from '../../../api';
 import ProjectAdd from './ProjectAdd';
-import { ProjectsAPI, CredentialTypesAPI } from '../../../api';
 
 jest.mock('../../../api');
 
@@ -99,7 +100,7 @@ describe('<ProjectAdd />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<ProjectAdd />);
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     wrapper.find('ProjectForm').invoke('handleSubmit')(projectData);
     expect(ProjectsAPI.create).toHaveBeenCalledTimes(1);
   });
@@ -116,7 +117,7 @@ describe('<ProjectAdd />', () => {
         context: { config },
       });
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     await act(async () => {
       wrapper.find('ProjectForm').prop('handleSubmit')(
         { ...projectData },
@@ -135,7 +136,7 @@ describe('<ProjectAdd />', () => {
         context: { router: { history } },
       });
     });
-    await waitForElement(wrapper, 'EmptyStateBody', el => el.length === 0);
+    await waitForElement(wrapper, 'EmptyStateBody', (el) => el.length === 0);
     await act(async () => {
       wrapper.find('ProjectAdd button[aria-label="Cancel"]').simulate('click');
     });

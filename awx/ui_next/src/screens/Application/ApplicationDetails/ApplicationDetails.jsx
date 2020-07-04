@@ -1,16 +1,16 @@
-import React, { useCallback } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { Link, useHistory } from 'react-router-dom';
+import { withI18n } from '@lingui/react';
 import { Button } from '@patternfly/react-core';
+import React, { useCallback } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
-import { useDeleteItems } from '../../../util/useRequest';
-import AlertModal from '../../../components/AlertModal';
-import { CardBody, CardActionsRow } from '../../../components/Card';
-import { Detail, DetailList } from '../../../components/DetailList';
 import { ApplicationsAPI } from '../../../api';
+import AlertModal from '../../../components/AlertModal';
+import { CardActionsRow, CardBody } from '../../../components/Card';
 import DeleteButton from '../../../components/DeleteButton';
+import { Detail, DetailList } from '../../../components/DetailList';
 import ErrorDetail from '../../../components/ErrorDetail';
+import { useDeleteItems } from '../../../util/useRequest';
 
 function ApplicationDetails({
   i18n,
@@ -31,9 +31,9 @@ function ApplicationDetails({
     }, [application.id, history])
   );
 
-  const getAuthorizationGrantType = type => {
+  const getAuthorizationGrantType = (type) => {
     let value;
-    authorizationOptions.filter(option => {
+    authorizationOptions.filter((option) => {
       if (option.value === type) {
         value = option.label;
       }
@@ -41,9 +41,9 @@ function ApplicationDetails({
     });
     return value;
   };
-  const getClientType = type => {
+  const getClientType = (type) => {
     let value;
-    clientTypeOptions.filter(option => {
+    clientTypeOptions.filter((option) => {
       if (option.value === type) {
         value = option.label;
       }

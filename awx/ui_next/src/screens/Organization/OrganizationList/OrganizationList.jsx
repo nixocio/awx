@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useLocation, useRouteMatch } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Card, PageSection } from '@patternfly/react-core';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation, useRouteMatch } from 'react-router-dom';
 
 import { OrganizationsAPI } from '../../../api';
-import useRequest, { useDeleteItems } from '../../../util/useRequest';
 import AlertModal from '../../../components/AlertModal';
 import DataListToolbar from '../../../components/DataListToolbar';
 import ErrorDetail from '../../../components/ErrorDetail';
@@ -14,6 +13,7 @@ import PaginatedDataList, {
   ToolbarDeleteButton,
 } from '../../../components/PaginatedDataList';
 import { getQSConfig, parseQueryString } from '../../../util/qs';
+import useRequest, { useDeleteItems } from '../../../util/useRequest';
 import OrganizationListItem from './OrganizationListItem';
 
 const QS_CONFIG = getQSConfig('organization', {
@@ -87,13 +87,13 @@ function OrganizationsList({ i18n }) {
   const hasContentLoading = isDeleteLoading || isOrgsLoading;
   const canAdd = actions && actions.POST;
 
-  const handleSelectAll = isSelected => {
+  const handleSelectAll = (isSelected) => {
     setSelected(isSelected ? [...organizations] : []);
   };
 
-  const handleSelect = row => {
-    if (selected.some(s => s.id === row.id)) {
-      setSelected(selected.filter(s => s.id !== row.id));
+  const handleSelect = (row) => {
+    if (selected.some((s) => s.id === row.id)) {
+      setSelected(selected.filter((s) => s.id !== row.id));
     } else {
       setSelected(selected.concat(row));
     }
@@ -132,7 +132,7 @@ function OrganizationsList({ i18n }) {
                 key: 'name',
               },
             ]}
-            renderToolbar={props => (
+            renderToolbar={(props) => (
               <DataListToolbar
                 {...props}
                 showSelectAll
@@ -152,12 +152,12 @@ function OrganizationsList({ i18n }) {
                 ]}
               />
             )}
-            renderItem={o => (
+            renderItem={(o) => (
               <OrganizationListItem
                 key={o.id}
                 organization={o}
                 detailUrl={`${match.url}/${o.id}`}
-                isSelected={selected.some(row => row.id === o.id)}
+                isSelected={selected.some((row) => row.id === o.id)}
                 onSelect={() => handleSelect(o)}
               />
             )}

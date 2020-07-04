@@ -1,9 +1,10 @@
+import { Card, PageSection } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Card, PageSection } from '@patternfly/react-core';
+
+import { JobTemplatesAPI, OrganizationsAPI } from '../../../api';
 import { CardBody } from '../../../components/Card';
 import JobTemplateForm from '../shared/JobTemplateForm';
-import { JobTemplatesAPI, OrganizationsAPI } from '../../../api';
 
 function JobTemplateAdd() {
   const [formSubmitError, setFormSubmitError] = useState(null);
@@ -50,7 +51,7 @@ function JobTemplateAdd() {
         throw err;
       }
     }
-    const associationPromises = labels.map(label =>
+    const associationPromises = labels.map((label) =>
       JobTemplatesAPI.associateLabel(templateId, label, orgId)
     );
 
@@ -58,14 +59,14 @@ function JobTemplateAdd() {
   }
 
   function submitInstanceGroups(templateId, addedGroups = []) {
-    const associatePromises = addedGroups.map(group =>
+    const associatePromises = addedGroups.map((group) =>
       JobTemplatesAPI.associateInstanceGroup(templateId, group.id)
     );
     return Promise.all(associatePromises);
   }
 
   function submitCredentials(templateId, credentials = []) {
-    const associateCredentials = credentials.map(cred =>
+    const associateCredentials = credentials.map((cred) =>
       JobTemplatesAPI.associateCredentials(templateId, cred.id)
     );
     return Promise.all(associateCredentials);

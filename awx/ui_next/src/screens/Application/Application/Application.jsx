@@ -1,24 +1,24 @@
-import React, { useCallback, useEffect } from 'react';
-import {
-  Route,
-  Switch,
-  Redirect,
-  useParams,
-  useLocation,
-  Link,
-} from 'react-router-dom';
 import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
-import { CaretLeftIcon } from '@patternfly/react-icons';
 import { Card, PageSection } from '@patternfly/react-core';
+import { CaretLeftIcon } from '@patternfly/react-icons';
+import React, { useCallback, useEffect } from 'react';
+import {
+  Link,
+  Redirect,
+  Route,
+  Switch,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 
-import useRequest from '../../../util/useRequest';
 import { ApplicationsAPI } from '../../../api';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
-import ApplicationEdit from '../ApplicationEdit';
-import ApplicationDetails from '../ApplicationDetails';
 import RoutedTabs from '../../../components/RoutedTabs';
+import useRequest from '../../../util/useRequest';
+import ApplicationDetails from '../ApplicationDetails';
+import ApplicationEdit from '../ApplicationEdit';
 
 function Application({ setBreadcrumb, i18n }) {
   const { id } = useParams();
@@ -35,14 +35,14 @@ function Application({ setBreadcrumb, i18n }) {
         ApplicationsAPI.readOptions(),
       ]);
       const authorization = options.data.actions.GET.authorization_grant_type.choices.map(
-        choice => ({
+        (choice) => ({
           value: choice[0],
           label: choice[1],
           key: choice[0],
         })
       );
       const clientType = options.data.actions.GET.client_type.choices.map(
-        choice => ({
+        (choice) => ({
           value: choice[0],
           label: choice[1],
           key: choice[0],

@@ -1,22 +1,20 @@
-import React, { useCallback, useEffect } from 'react';
 import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
+import { Card, PageSection } from '@patternfly/react-core';
+import React, { useCallback, useEffect } from 'react';
 import { useLocation, useRouteMatch } from 'react-router-dom';
 
-import { Card, PageSection } from '@patternfly/react-core';
+import { ApplicationsAPI } from '../../../api';
+import AlertModal from '../../../components/AlertModal';
+import DatalistToolbar from '../../../components/DataListToolbar';
+import ErrorDetail from '../../../components/ErrorDetail';
+import PaginatedDataList, {
+  ToolbarAddButton,
+  ToolbarDeleteButton,
+} from '../../../components/PaginatedDataList';
 import { getQSConfig, parseQueryString } from '../../../util/qs';
 import useRequest, { useDeleteItems } from '../../../util/useRequest';
-import ErrorDetail from '../../../components/ErrorDetail';
-import AlertModal from '../../../components/AlertModal';
-
-import DatalistToolbar from '../../../components/DataListToolbar';
-import { ApplicationsAPI } from '../../../api';
-import PaginatedDataList, {
-  ToolbarDeleteButton,
-  ToolbarAddButton,
-} from '../../../components/PaginatedDataList';
 import useSelected from '../../../util/useSelected';
-
 import ApplicationListItem from './ApplicationListItem';
 
 const QS_CONFIG = getQSConfig('applications', {
@@ -127,13 +125,13 @@ function ApplicationsList({ i18n }) {
                 key: 'description',
               },
             ]}
-            renderToolbar={props => (
+            renderToolbar={(props) => (
               <DatalistToolbar
                 {...props}
                 showSelectAll
                 showExpandCollapse
                 isAllSelected={isAllSelected}
-                onSelectAll={isSelected =>
+                onSelectAll={(isSelected) =>
                   setSelected(isSelected ? [...applications] : [])
                 }
                 qsConfig={QS_CONFIG}
@@ -155,14 +153,14 @@ function ApplicationsList({ i18n }) {
                 ]}
               />
             )}
-            renderItem={application => (
+            renderItem={(application) => (
               <ApplicationListItem
                 key={application.id}
                 value={application.name}
                 application={application}
                 detailUrl={`${match.url}/${application.id}/details`}
                 onSelect={() => handleSelect(application)}
-                isSelected={selected.some(row => row.id === application.id)}
+                isSelected={selected.some((row) => row.id === application.id)}
               />
             )}
             emptyStateControls={

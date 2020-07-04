@@ -1,6 +1,7 @@
 import React from 'react';
-import { WorkflowStateContext } from '../../../contexts/Workflow';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
+import { WorkflowStateContext } from '../../../contexts/Workflow';
 import WorkflowOutputNode from './WorkflowOutputNode';
 
 const nodeWithJT = {

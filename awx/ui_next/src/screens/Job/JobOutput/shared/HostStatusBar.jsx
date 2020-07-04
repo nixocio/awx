@@ -1,8 +1,8 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Badge, Tooltip } from '@patternfly/react-core';
 import React from 'react';
 import styled from 'styled-components';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { Badge, Tooltip } from '@patternfly/react-core';
 
 const BarWrapper = styled.div`
   background-color: #d7d7d7;
@@ -13,8 +13,8 @@ const BarWrapper = styled.div`
 `;
 
 const BarSegment = styled.div`
-  background-color: ${props => props.color || 'inherit'};
-  flex-grow: ${props => props.count || 0};
+  background-color: ${(props) => props.color || 'inherit'};
+  flex-grow: ${(props) => props.count || 0};
 `;
 BarSegment.displayName = 'BarSegment';
 
@@ -52,7 +52,7 @@ const HostStatusBar = ({ i18n, counts = {} }) => {
     },
   };
 
-  const barSegments = Object.keys(hostStatus).map(key => {
+  const barSegments = Object.keys(hostStatus).map((key) => {
     const count = counts[key] || 0;
     return (
       <Tooltip

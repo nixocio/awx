@@ -1,16 +1,17 @@
-import React, { useState, useCallback } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import React, { useCallback, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+
 import useRequest, { useDismissableError } from '../../util/useRequest';
-import SelectableCard from '../SelectableCard';
-import AlertModal from '../AlertModal';
-import ErrorDetail from '../ErrorDetail';
-import Wizard from '../Wizard/Wizard';
 import useSelected from '../../util/useSelected';
 import SelectResourceStep from '../AddRole/SelectResourceStep';
 import SelectRoleStep from '../AddRole/SelectRoleStep';
+import AlertModal from '../AlertModal';
+import ErrorDetail from '../ErrorDetail';
+import SelectableCard from '../SelectableCard';
+import Wizard from '../Wizard/Wizard';
 import getResourceAccessConfig from './getResourceAccessConfig';
 
 const Grid = styled.div`
@@ -44,12 +45,12 @@ function UserAndTeamAccessAdd({
   const { request: handleWizardSave, error: saveError } = useRequest(
     useCallback(async () => {
       const roleRequests = [];
-      const resourceRolesTypes = resourcesSelected.flatMap(resource =>
+      const resourceRolesTypes = resourcesSelected.flatMap((resource) =>
         Object.values(resource.summary_fields.object_roles)
       );
 
-      rolesSelected.map(role =>
-        resourceRolesTypes.forEach(rolename => {
+      rolesSelected.map((role) =>
+        resourceRolesTypes.forEach((rolename) => {
           if (rolename.name === role.name) {
             roleRequests.push(apiModel.associateRole(userId, rolename.id));
           }
@@ -70,7 +71,7 @@ function UserAndTeamAccessAdd({
       name: i18n._(t`Add resource type`),
       component: (
         <Grid>
-          {getResourceAccessConfig(i18n).map(resource => (
+          {getResourceAccessConfig(i18n).map((resource) => (
             <SelectableCard
               key={resource.selectedResource}
               isSelected={

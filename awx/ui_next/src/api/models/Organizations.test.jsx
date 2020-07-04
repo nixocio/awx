@@ -12,7 +12,7 @@ describe('OrganizationsAPI', () => {
     jest.clearAllMocks();
   });
 
-  test('read access list calls get with expected params', async done => {
+  test('read access list calls get with expected params', async (done) => {
     const testParams = { foo: 'bar' };
     const testParamsDuplicates = { foo: ['bar', 'baz'] };
 
@@ -34,7 +34,7 @@ describe('OrganizationsAPI', () => {
     done();
   });
 
-  test('read teams calls get with expected params', async done => {
+  test('read teams calls get with expected params', async (done) => {
     const testParams = { foo: 'bar' };
     const testParamsDuplicates = { foo: ['bar', 'baz'] };
 

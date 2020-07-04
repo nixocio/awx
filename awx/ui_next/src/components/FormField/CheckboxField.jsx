@@ -1,8 +1,8 @@
-import React from 'react';
-import { string, func, node } from 'prop-types';
-import { useField } from 'formik';
 import { Checkbox, Tooltip } from '@patternfly/react-core';
 import { QuestionCircleIcon as PFQuestionCircleIcon } from '@patternfly/react-icons';
+import { useField } from 'formik';
+import { func, node, string } from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
 
 const QuestionCircleIcon = styled(PFQuestionCircleIcon)`

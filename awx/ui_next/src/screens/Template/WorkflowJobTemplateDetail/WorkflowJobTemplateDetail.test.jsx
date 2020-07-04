@@ -1,7 +1,7 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import React from 'react';
 import { act } from 'react-dom/test-utils';
+import { Route } from 'react-router-dom';
 
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import WorkflowJobTemplateDetail from './WorkflowJobTemplateDetail';
@@ -143,13 +143,13 @@ describe('<WorkflowJobTemplateDetail/>', () => {
     expect(labels.length).toBe(3);
     expect(sparkline.length).toBe(3);
 
-    const assertValue = value => {
+    const assertValue = (value) => {
       expect(wrapper.find(`${value.element}`).prop(`${value.prop}`)).toEqual(
         `${value.value}`
       );
     };
 
-    renderedValues.map(value => assertValue(value));
+    renderedValues.map((value) => assertValue(value));
   });
 
   test('link out resource have the correct url', () => {

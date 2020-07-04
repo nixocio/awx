@@ -1,21 +1,21 @@
-import React from 'react';
-import { Formik, useField } from 'formik';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { func, number, shape } from 'prop-types';
-
+import { withI18n } from '@lingui/react';
 import { Form } from '@patternfly/react-core';
+import { Formik, useField } from 'formik';
+import { func, number, shape } from 'prop-types';
+import React from 'react';
+
 import { VariablesField } from '../../../components/CodeMirrorInput';
-import FormField, { FormSubmitError } from '../../../components/FormField';
 import FormActionGroup from '../../../components/FormActionGroup';
-import { required } from '../../../util/validators';
-import InstanceGroupsLookup from '../../../components/Lookup/InstanceGroupsLookup';
-import OrganizationLookup from '../../../components/Lookup/OrganizationLookup';
-import CredentialLookup from '../../../components/Lookup/CredentialLookup';
+import FormField, { FormSubmitError } from '../../../components/FormField';
 import {
   FormColumnLayout,
   FormFullWidthLayout,
 } from '../../../components/FormLayout';
+import CredentialLookup from '../../../components/Lookup/CredentialLookup';
+import InstanceGroupsLookup from '../../../components/Lookup/InstanceGroupsLookup';
+import OrganizationLookup from '../../../components/Lookup/OrganizationLookup';
+import { required } from '../../../util/validators';
 
 function InventoryFormFields({ i18n, credentialTypeId }) {
   const [organizationField, organizationMeta, organizationHelpers] = useField({
@@ -49,7 +49,7 @@ function InventoryFormFields({ i18n, credentialTypeId }) {
         helperTextInvalid={organizationMeta.error}
         isValid={!organizationMeta.touched || !organizationMeta.error}
         onBlur={() => organizationHelpers.setTouched()}
-        onChange={value => {
+        onChange={(value) => {
           organizationHelpers.setValue(value);
         }}
         value={organizationField.value}
@@ -60,12 +60,12 @@ function InventoryFormFields({ i18n, credentialTypeId }) {
       <CredentialLookup
         label={i18n._(t`Insights Credential`)}
         credentialTypeId={credentialTypeId}
-        onChange={value => insightsCredentialHelpers.setValue(value)}
+        onChange={(value) => insightsCredentialHelpers.setValue(value)}
         value={insightsCredentialField.value}
       />
       <InstanceGroupsLookup
         value={instanceGroupsField.value}
-        onChange={value => {
+        onChange={(value) => {
           instanceGroupsHelpers.setValue(value);
         }}
       />
@@ -108,11 +108,11 @@ function InventoryForm({
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={values => {
+      onSubmit={(values) => {
         onSubmit(values);
       }}
     >
-      {formik => (
+      {(formik) => (
         <Form autoComplete="off" onSubmit={formik.handleSubmit}>
           <FormColumnLayout>
             <InventoryFormFields {...rest} />

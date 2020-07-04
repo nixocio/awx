@@ -1,10 +1,10 @@
-import React from 'react';
 import { createMemoryHistory } from 'history';
+import React from 'react';
+
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
 import { sleep } from '../../../testUtils/testUtils';
-
-import LaunchButton from './LaunchButton';
 import { JobTemplatesAPI, WorkflowJobTemplatesAPI } from '../../api';
+import LaunchButton from './LaunchButton';
 
 jest.mock('../../api/models/WorkflowJobTemplates');
 jest.mock('../../api/models/JobTemplates');

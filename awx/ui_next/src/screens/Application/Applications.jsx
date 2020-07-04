@@ -1,12 +1,12 @@
-import React, { useState, useCallback } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import React, { useCallback, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import ApplicationsList from './ApplicationsList';
-import ApplicationAdd from './ApplicationAdd';
-import Application from './Application';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import Application from './Application';
+import ApplicationAdd from './ApplicationAdd';
+import ApplicationsList from './ApplicationsList';
 
 function Applications({ i18n }) {
   const [breadcrumbConfig, setBreadcrumbConfig] = useState({
@@ -15,7 +15,7 @@ function Applications({ i18n }) {
   });
 
   const buildBreadcrumbConfig = useCallback(
-    application => {
+    (application) => {
       if (!application) {
         return;
       }

@@ -1,21 +1,20 @@
-import React, { useEffect, useCallback } from 'react';
-import { useLocation, useRouteMatch } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Card, PageSection } from '@patternfly/react-core';
+import React, { useCallback, useEffect } from 'react';
+import { useLocation, useRouteMatch } from 'react-router-dom';
 
 import { CredentialTypesAPI } from '../../../api';
+import AlertModal from '../../../components/AlertModal';
+import DatalistToolbar from '../../../components/DataListToolbar';
+import ErrorDetail from '../../../components/ErrorDetail';
+import PaginatedDataList, {
+  ToolbarAddButton,
+  ToolbarDeleteButton,
+} from '../../../components/PaginatedDataList';
 import { getQSConfig, parseQueryString } from '../../../util/qs';
 import useRequest, { useDeleteItems } from '../../../util/useRequest';
 import useSelected from '../../../util/useSelected';
-import PaginatedDataList, {
-  ToolbarDeleteButton,
-  ToolbarAddButton,
-} from '../../../components/PaginatedDataList';
-import ErrorDetail from '../../../components/ErrorDetail';
-import AlertModal from '../../../components/AlertModal';
-import DatalistToolbar from '../../../components/DataListToolbar';
-
 import CredentialTypeListItem from './CredentialTypeListItem';
 
 const QS_CONFIG = getQSConfig('credential_type', {
@@ -101,13 +100,13 @@ function CredentialTypeList({ i18n }) {
             pluralizedItemName={i18n._(t`Credential Types`)}
             qsConfig={QS_CONFIG}
             onRowClick={handleSelect}
-            renderToolbar={props => (
+            renderToolbar={(props) => (
               <DatalistToolbar
                 {...props}
                 showSelectAll
                 showExpandCollapse
                 isAllSelected={isAllSelected}
-                onSelectAll={isSelected =>
+                onSelectAll={(isSelected) =>
                   setSelected(isSelected ? [...credentialTypes] : [])
                 }
                 qsConfig={QS_CONFIG}
@@ -129,14 +128,16 @@ function CredentialTypeList({ i18n }) {
                 ]}
               />
             )}
-            renderItem={credentialType => (
+            renderItem={(credentialType) => (
               <CredentialTypeListItem
                 key={credentialTypes.id}
                 value={credentialType.name}
                 credentialType={credentialType}
                 detailUrl={`${match.url}/${credentialType.id}/details`}
                 onSelect={() => handleSelect(credentialType)}
-                isSelected={selected.some(row => row.id === credentialType.id)}
+                isSelected={selected.some(
+                  (row) => row.id === credentialType.id
+                )}
               />
             )}
             emptyStateControls={

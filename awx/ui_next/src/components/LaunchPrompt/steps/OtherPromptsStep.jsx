@@ -1,13 +1,14 @@
-import React from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { useField } from 'formik';
+import { withI18n } from '@lingui/react';
 import { Form, FormGroup, Switch } from '@patternfly/react-core';
+import { useField } from 'formik';
+import React from 'react';
 import styled from 'styled-components';
-import FormField, { FieldTooltip } from '../../FormField';
-import { TagMultiSelect } from '../../MultiSelect';
+
 import AnsibleSelect from '../../AnsibleSelect';
 import { VariablesField } from '../../CodeMirrorInput';
+import FormField, { FieldTooltip } from '../../FormField';
+import { TagMultiSelect } from '../../MultiSelect';
 
 const FieldHeader = styled.div`
   display: flex;

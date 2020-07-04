@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
 import { object } from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
+import { CredentialTypesAPI, InventoriesAPI } from '../../../api';
 import { CardBody } from '../../../components/Card';
-import { InventoriesAPI, CredentialTypesAPI } from '../../../api';
 import ContentLoading from '../../../components/ContentLoading';
-import InventoryForm from '../shared/InventoryForm';
 import { getAddedAndRemoved } from '../../../util/lists';
+import InventoryForm from '../shared/InventoryForm';
 
 function InventoryEdit({ inventory }) {
   const [error, setError] = useState(null);
@@ -61,7 +61,7 @@ function InventoryEdit({ inventory }) {
     history.push(`${url}`);
   };
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     const {
       instanceGroups,
       insights_credential,
@@ -82,10 +82,10 @@ function InventoryEdit({ inventory }) {
           instanceGroups
         );
 
-        const associatePromises = added.map(async ig =>
+        const associatePromises = added.map(async (ig) =>
           InventoriesAPI.associateInstanceGroup(inventory.id, ig.id)
         );
-        const disassociatePromises = removed.map(async ig =>
+        const disassociatePromises = removed.map(async (ig) =>
           InventoriesAPI.disassociateInstanceGroup(inventory.id, ig.id)
         );
         await Promise.all([...associatePromises, ...disassociatePromises]);

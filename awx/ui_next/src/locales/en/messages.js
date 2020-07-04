@@ -1,6 +1,6 @@
 /* eslint-disable */ module.exports = {
   languageData: {
-    plurals: function(n, ord) {
+    plurals: function (n, ord) {
       var s = String(n).split('.'),
         v0 = !s[1],
         t0 = Number(s[0]) == n,
@@ -36,7 +36,7 @@
     Applications: 'Applications',
     'Apply roles': 'Apply roles',
     'Are you sure you want to delete:': 'Are you sure you want to delete:',
-    'Are you sure you want to remove {0} access from {1}?  Doing so affects all members of the team.': function(
+    'Are you sure you want to remove {0} access from {1}?  Doing so affects all members of the team.': function (
       a
     ) {
       return [
@@ -47,7 +47,9 @@
         '?  Doing so affects all members of the team.',
       ];
     },
-    'Are you sure you want to remove {0} access from {username}?': function(a) {
+    'Are you sure you want to remove {0} access from {username}?': function (
+      a
+    ) {
       return [
         'Are you sure you want to remove ',
         a('0'),
@@ -62,7 +64,7 @@
     Cancel: 'Cancel',
     'Cannot find organization with ID': 'Cannot find organization with ID',
     'Cannot find resource.': 'Cannot find resource.',
-    'Cannot find route {0}.': function(a) {
+    'Cannot find route {0}.': function (a) {
       return ['Cannot find route ', a('0'), '.'];
     },
     Close: 'Close',
@@ -76,10 +78,10 @@
     'Current page': 'Current page',
     Dashboard: 'Dashboard',
     Delete: 'Delete',
-    'Delete {0}': function(a) {
+    'Delete {0}': function (a) {
       return ['Delete ', a('0')];
     },
-    'Delete {itemName}': function(a) {
+    'Delete {itemName}': function (a) {
       return ['Delete ', a('itemName')];
     },
     Description: 'Description',
@@ -94,7 +96,7 @@
     'Go to next page': 'Go to next page',
     'Go to previous page': 'Go to previous page',
     Help: 'Help',
-    'If you {0} want to remove access for this particular user, please remove them from the team.': function(
+    'If you {0} want to remove access for this particular user, please remove them from the team.': function (
       a
     ) {
       return [
@@ -112,7 +114,7 @@
     'Inventory Scripts': 'Inventory Scripts',
     'Items Per Page': 'Items Per Page',
     'Items per page': 'Items per page',
-    'Items {itemMin} \u2013 {itemMax} of {count}': function(a) {
+    'Items {itemMin} \u2013 {itemMax} of {count}': function (a) {
       return [
         'Items ',
         a('itemMin'),
@@ -136,7 +138,7 @@
     'My View': 'My View',
     Name: 'Name',
     Next: 'Next',
-    'No {0} Found': function(a) {
+    'No {0} Found': function (a) {
       return ['No ', a('0'), ' Found'];
     },
     'Notification Templates': 'Notification Templates',
@@ -146,17 +148,17 @@
     Organizations: 'Organizations',
     'Organizations List': 'Organizations List',
     Page: 'Page',
-    'Page <0/> of {pageCount}': function(a) {
+    'Page <0/> of {pageCount}': function (a) {
       return ['Page <0/> of ', a('pageCount')];
     },
     'Page Number': 'Page Number',
     Pagination: 'Pagination',
     Password: 'Password',
     'Per Page': 'Per Page',
-    'Please add {0} to populate this list': function(a) {
+    'Please add {0} to populate this list': function (a) {
       return ['Please add ', a('0'), ' to populate this list'];
     },
-    'Please add {0} {itemName} to populate this list': function(a) {
+    'Please add {0} {itemName} to populate this list': function (a) {
       return [
         'Please add ',
         a('0'),
@@ -169,7 +171,7 @@
     Previous: 'Previous',
     'Primary Navigation': 'Primary Navigation',
     Projects: 'Projects',
-    'Remove {0} Access': function(a) {
+    'Remove {0} Access': function (a) {
       return ['Remove ', a('0'), ' Access'];
     },
     Resources: 'Resources',
@@ -185,7 +187,7 @@
     'Select items from list': 'Select items from list',
     'Select the Instance Groups for this Organization to run on.':
       'Select the Instance Groups for this Organization to run on.',
-    'Select {header}': function(a) {
+    'Select {header}': function (a) {
       return ['Select ', a('header')];
     },
     Selected: 'Selected',
@@ -199,12 +201,12 @@
     Teams: 'Teams',
     Templates: 'Templates',
     'This field must not be blank': 'This field must not be blank',
-    'This field must not exceed {max} characters': function(a) {
+    'This field must not exceed {max} characters': function (a) {
       return ['This field must not exceed ', a('max'), ' characters'];
     },
     'Toggle notification failure': 'Toggle notification failure',
     'Toggle notification success': 'Toggle notification success',
-    'Use Default {label}': function(a) {
+    'Use Default {label}': function (a) {
       return ['Use Default ', a('label')];
     },
     User: 'User',
@@ -215,10 +217,10 @@
     Username: 'Username',
     Users: 'Users',
     Views: 'Views',
-    'Welcome to Ansible {brandName}! Please Sign In.': function(a) {
+    'Welcome to Ansible {brandName}! Please Sign In.': function (a) {
       return ['Welcome to Ansible ', a('brandName'), '! Please Sign In.'];
     },
-    'You do not have permission to delete the following {0}: {itemsUnableToDelete}': function(
+    'You do not have permission to delete the following {0}: {itemsUnableToDelete}': function (
       a
     ) {
       return [
@@ -229,15 +231,15 @@
       ];
     },
     'You have been logged out.': 'You have been logged out.',
-    'add {currentTab}': function(a) {
+    'add {currentTab}': function (a) {
       return ['add ', a('currentTab')];
     },
-    'adding {currentTab}': function(a) {
+    'adding {currentTab}': function (a) {
       return ['adding ', a('currentTab')];
     },
     'cancel delete': 'cancel delete',
     'confirm delete': 'confirm delete',
-    'confirm removal of {currentTab}/cancel and go back to {currentTab} view.': function(
+    'confirm removal of {currentTab}/cancel and go back to {currentTab} view.': function (
       a
     ) {
       return [
@@ -248,36 +250,36 @@
         ' view.',
       ];
     },
-    'delete {currentTab}': function(a) {
+    'delete {currentTab}': function (a) {
       return ['delete ', a('currentTab')];
     },
-    'deleting {currentTab} association with orgs': function(a) {
+    'deleting {currentTab} association with orgs': function (a) {
       return ['deleting ', a('currentTab'), ' association with orgs'];
     },
     'edit view': 'edit view',
     items: 'items',
-    'of {pageCount}': function(a) {
+    'of {pageCount}': function (a) {
       return ['of ', a('pageCount')];
     },
     pages: 'pages',
     'per page': 'per page',
     'save/cancel and go back to view': 'save/cancel and go back to view',
-    'save/cancel and go back to {currentTab} view': function(a) {
+    'save/cancel and go back to {currentTab} view': function (a) {
       return ['save/cancel and go back to ', a('currentTab'), ' view'];
     },
-    'select organization {itemId}': function(a) {
+    'select organization {itemId}': function (a) {
       return ['select organization ', a('itemId')];
     },
-    '{0}': function(a) {
+    '{0}': function (a) {
       return [a('0')];
     },
-    '{0} List': function(a) {
+    '{0} List': function (a) {
       return [a('0'), ' List'];
     },
-    '{currentTab} detail view': function(a) {
+    '{currentTab} detail view': function (a) {
       return [a('currentTab'), ' detail view'];
     },
-    '{itemMin} - {itemMax} of {count}': function(a) {
+    '{itemMin} - {itemMax} of {count}': function (a) {
       return [a('itemMin'), ' - ', a('itemMax'), ' of ', a('count')];
     },
   },

@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Switch, Route, useParams, useLocation } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Route, Switch, useLocation, useParams } from 'react-router-dom';
+
 import { JobTemplatesAPI, WorkflowJobTemplatesAPI } from '../../api';
-import ContentError from '../../components/ContentError';
 import AlertModal from '../../components/AlertModal';
+import ContentError from '../../components/ContentError';
 import ErrorDetail from '../../components/ErrorDetail';
 import useRequest, { useDismissableError } from '../../util/useRequest';
 import { SurveyList, SurveyQuestionAdd, SurveyQuestionEdit } from './Survey';
@@ -37,7 +38,7 @@ function TemplateSurvey({ template, canEdit, i18n }) {
 
   const { request: updateSurvey, error: updateError } = useRequest(
     useCallback(
-      async updatedSurvey => {
+      async (updatedSurvey) => {
         if (templateType === 'workflow_job_template') {
           await WorkflowJobTemplatesAPI.updateSurvey(
             template.id,
@@ -51,7 +52,7 @@ function TemplateSurvey({ template, canEdit, i18n }) {
       [template.id, setSurvey, templateType]
     )
   );
-  const updateSurveySpec = spec => {
+  const updateSurveySpec = (spec) => {
     updateSurvey({
       name: survey.name || '',
       description: survey.description || '',

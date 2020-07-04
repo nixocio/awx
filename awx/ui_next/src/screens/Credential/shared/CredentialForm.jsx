@@ -1,15 +1,16 @@
-import React from 'react';
-import { Formik, useField } from 'formik';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { arrayOf, func, object, shape } from 'prop-types';
+import { withI18n } from '@lingui/react';
 import { Form, FormGroup } from '@patternfly/react-core';
-import FormField, { FormSubmitError } from '../../../components/FormField';
-import FormActionGroup from '../../../components/FormActionGroup/FormActionGroup';
+import { Formik, useField } from 'formik';
+import { arrayOf, func, object, shape } from 'prop-types';
+import React from 'react';
+
 import AnsibleSelect from '../../../components/AnsibleSelect';
-import { required } from '../../../util/validators';
-import OrganizationLookup from '../../../components/Lookup/OrganizationLookup';
+import FormActionGroup from '../../../components/FormActionGroup/FormActionGroup';
+import FormField, { FormSubmitError } from '../../../components/FormField';
 import { FormColumnLayout } from '../../../components/FormLayout';
+import OrganizationLookup from '../../../components/Lookup/OrganizationLookup';
+import { required } from '../../../util/validators';
 import TypeInputsSubForm from './TypeInputsSubForm';
 
 function CredentialFormFields({
@@ -25,7 +26,7 @@ function CredentialFormFields({
   });
 
   const credentialTypeOptions = Object.keys(credentialTypes)
-    .map(key => {
+    .map((key) => {
       return {
         value: credentialTypes[key].id,
         key: credentialTypes[key].id,
@@ -93,7 +94,7 @@ function CredentialFormFields({
         helperTextInvalid={orgMeta.error}
         isValid={!orgMeta.touched || !orgMeta.error}
         onBlur={() => orgHelpers.setTouched()}
-        onChange={value => {
+        onChange={(value) => {
           orgHelpers.setValue(value);
         }}
         value={orgField.value}
@@ -156,7 +157,7 @@ function CredentialForm({
     passwordPrompts: {},
   };
 
-  Object.values(credentialTypes).forEach(credentialType => {
+  Object.values(credentialTypes).forEach((credentialType) => {
     const fields = credentialType.inputs.fields || [];
     fields.forEach(
       ({ ask_at_runtime, type, id, choices, default: defaultValue }) => {
@@ -190,7 +191,7 @@ function CredentialForm({
     );
   });
 
-  Object.values(inputSources).forEach(inputSource => {
+  Object.values(inputSources).forEach((inputSource) => {
     initialValues.inputs[inputSource.input_field_name] = {
       credential: inputSource.summary_fields.source_credential,
       inputs: inputSource.metadata,
@@ -200,11 +201,11 @@ function CredentialForm({
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={values => {
+      onSubmit={(values) => {
         onSubmit(values);
       }}
     >
-      {formik => (
+      {(formik) => (
         <Form autoComplete="off" onSubmit={formik.handleSubmit}>
           <FormColumnLayout>
             <CredentialFormFields

@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import useThrottle from './useThrottle';
+
 import { parseQueryString } from '../../util/qs';
 import sortJobs from './sortJobs';
+import useThrottle from './useThrottle';
 
 export default function useWsJobs(initialJobs, fetchJobsById, qsConfig) {
   const location = useLocation();
@@ -15,9 +16,9 @@ export default function useWsJobs(initialJobs, fetchJobsById, qsConfig) {
     setJobs(initialJobs);
   }, [initialJobs]);
 
-  const enqueueJobId = id => {
+  const enqueueJobId = (id) => {
     if (!jobsToFetch.includes(id)) {
-      setJobsToFetch(ids => ids.concat(id));
+      setJobsToFetch((ids) => ids.concat(id));
     }
   };
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function useWsJobs(initialJobs, fetchJobsById, qsConfig) {
       setJobsToFetch([]);
       const newJobs = await fetchJobsById(throttledJobsToFetch);
       const deduplicated = newJobs.filter(
-        job => !jobs.find(j => j.id === job.id)
+        (job) => !jobs.find((j) => j.id === job.id)
       );
       if (deduplicated.length) {
         const params = parseQueryString(qsConfig, location.search);
@@ -53,7 +54,7 @@ export default function useWsJobs(initialJobs, fetchJobsById, qsConfig) {
     }
 
     const jobId = lastMessage.unified_job_id;
-    const index = jobs.findIndex(j => j.id === jobId);
+    const index = jobs.findIndex((j) => j.id === jobId);
     if (index > -1) {
       setJobs(sortJobs(updateJob(jobs, index, lastMessage), params));
     } else {
@@ -83,11 +84,11 @@ export default function useWsJobs(initialJobs, fetchJobsById, qsConfig) {
     };
     ws.current.onopen = connect;
 
-    ws.current.onmessage = e => {
+    ws.current.onmessage = (e) => {
       setLastMessage(JSON.parse(e.data));
     };
 
-    ws.current.onclose = e => {
+    ws.current.onclose = (e) => {
       // eslint-disable-next-line no-console
       console.debug('Socket closed. Reconnecting...', e);
       setTimeout(() => {
@@ -95,7 +96,7 @@ export default function useWsJobs(initialJobs, fetchJobsById, qsConfig) {
       }, 1000);
     };
 
-    ws.current.onerror = err => {
+    ws.current.onerror = (err) => {
       // eslint-disable-next-line no-console
       console.debug('Socket error: ', err, 'Disconnecting...');
       ws.current.close();

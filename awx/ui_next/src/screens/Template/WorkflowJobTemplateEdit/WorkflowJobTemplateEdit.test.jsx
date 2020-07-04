@@ -1,13 +1,14 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
-import {
-  WorkflowJobTemplatesAPI,
-  OrganizationsAPI,
-  LabelsAPI,
-} from '../../../api';
+import React from 'react';
+import { act } from 'react-dom/test-utils';
+import { Route } from 'react-router-dom';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
+import {
+  LabelsAPI,
+  OrganizationsAPI,
+  WorkflowJobTemplatesAPI,
+} from '../../../api';
 import WorkflowJobTemplateEdit from './WorkflowJobTemplateEdit';
 
 jest.mock('../../../api/models/WorkflowJobTemplates');
@@ -96,10 +97,7 @@ describe('<WorkflowJobTemplateEdit/>', () => {
       wrapper.find('input#wfjt-description').simulate('change', {
         target: { value: '5000', name: 'limit' },
       });
-      wrapper
-        .find('LabelSelect')
-        .find('SelectToggle')
-        .simulate('click');
+      wrapper.find('LabelSelect').find('SelectToggle').simulate('click');
     });
 
     wrapper.update();

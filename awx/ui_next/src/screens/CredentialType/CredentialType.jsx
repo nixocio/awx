@@ -1,4 +1,8 @@
-import React, { useEffect, useCallback } from 'react';
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Card, PageSection } from '@patternfly/react-core';
+import { CaretLeftIcon } from '@patternfly/react-icons';
+import React, { useCallback, useEffect } from 'react';
 import {
   Link,
   Redirect,
@@ -7,17 +11,12 @@ import {
   useLocation,
   useParams,
 } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { Card, PageSection } from '@patternfly/react-core';
-import { CaretLeftIcon } from '@patternfly/react-icons';
 
-import useRequest from '../../util/useRequest';
 import { CredentialTypesAPI } from '../../api';
-import RoutedTabs from '../../components/RoutedTabs';
 import ContentError from '../../components/ContentError';
 import ContentLoading from '../../components/ContentLoading';
-
+import RoutedTabs from '../../components/RoutedTabs';
+import useRequest from '../../util/useRequest';
 import CredentialTypeDetails from './CredentialTypeDetails';
 import CredentialTypeEdit from './CredentialTypeEdit';
 

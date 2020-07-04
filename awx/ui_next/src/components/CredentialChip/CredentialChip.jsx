@@ -1,8 +1,9 @@
-import React from 'react';
-import { shape } from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Chip } from '@patternfly/react-core';
+import { shape } from 'prop-types';
+import React from 'react';
+
 import { Credential } from '../../types';
 import { toTitleCase } from '../../util/strings';
 

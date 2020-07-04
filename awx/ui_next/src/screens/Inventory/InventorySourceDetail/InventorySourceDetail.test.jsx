@@ -1,13 +1,14 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-import InventorySourceDetail from './InventorySourceDetail';
-import mockInvSource from '../shared/data.inventory_source.json';
 import { InventorySourcesAPI } from '../../../api';
+import mockInvSource from '../shared/data.inventory_source.json';
+import InventorySourceDetail from './InventorySourceDetail';
 
 jest.mock('../../../api/models/InventorySources');
 InventorySourcesAPI.readOptions.mockResolvedValue({
@@ -54,7 +55,7 @@ describe('InventorySourceDetail', () => {
         <InventorySourceDetail inventorySource={mockInvSource} />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(wrapper.find('InventorySourceDetail')).toHaveLength(1);
     assertDetail(wrapper, 'Name', 'mock inv source');
     assertDetail(wrapper, 'Description', 'mock description');
@@ -96,7 +97,7 @@ describe('InventorySourceDetail', () => {
     expect(wrapper.find('VariablesDetail').prop('value')).toEqual(
       '---\nfoo: bar'
     );
-    wrapper.find('Detail[label="Options"] li').forEach(option => {
+    wrapper.find('Detail[label="Options"] li').forEach((option) => {
       expect([
         'Overwrite',
         'Overwrite variables',
@@ -112,7 +113,7 @@ describe('InventorySourceDetail', () => {
         <InventorySourceDetail inventorySource={mockInvSource} />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     const editButton = wrapper.find('Button[aria-label="edit"]');
     expect(editButton.text()).toEqual('Edit');
     expect(editButton.prop('to')).toBe(
@@ -137,7 +138,7 @@ describe('InventorySourceDetail', () => {
         <InventorySourceDetail inventorySource={invSource} />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(wrapper.find('Button[aria-label="edit"]')).toHaveLength(0);
     expect(wrapper.find('DeleteButton')).toHaveLength(0);
     expect(wrapper.find('InventorySourceSyncButton')).toHaveLength(0);
@@ -180,7 +181,7 @@ describe('InventorySourceDetail', () => {
       );
     });
     expect(InventorySourcesAPI.readOptions).toHaveBeenCalledTimes(1);
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
     expect(wrapper.find('ContentError Title').text()).toEqual(
       'Something went wrong...'
     );
@@ -195,7 +196,7 @@ describe('InventorySourceDetail', () => {
         <InventorySourceDetail inventorySource={mockInvSource} />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(wrapper.find('Modal[title="Error!"]')).toHaveLength(0);
     await act(async () => {
       wrapper.find('DeleteButton').invoke('onConfirm')();
@@ -203,7 +204,7 @@ describe('InventorySourceDetail', () => {
     await waitForElement(
       wrapper,
       'Modal[title="Error!"]',
-      el => el.length === 1
+      (el) => el.length === 1
     );
     await act(async () => {
       wrapper.find('Modal[title="Error!"]').invoke('onClose')();
@@ -211,7 +212,7 @@ describe('InventorySourceDetail', () => {
     await waitForElement(
       wrapper,
       'Modal[title="Error!"]',
-      el => el.length === 0
+      (el) => el.length === 0
     );
   });
 });

@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { CardBody } from '../../../components/Card';
-import HostForm from '../../../components/HostForm';
 
 import { HostsAPI } from '../../../api';
+import { CardBody } from '../../../components/Card';
+import HostForm from '../../../components/HostForm';
 
 function InventoryHostAdd({ inventory }) {
   const [formError, setFormError] = useState(null);
   const hostsUrl = `/inventories/inventory/${inventory.id}/hosts`;
   const history = useHistory();
 
-  const handleSubmit = async formData => {
+  const handleSubmit = async (formData) => {
     try {
       const values = {
         ...formData,

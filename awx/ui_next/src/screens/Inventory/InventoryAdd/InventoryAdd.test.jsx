@@ -1,13 +1,13 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
 import { sleep } from '../../../../testUtils/testUtils';
-
-import { InventoriesAPI, CredentialTypesAPI } from '../../../api';
+import { CredentialTypesAPI, InventoriesAPI } from '../../../api';
 import InventoryAdd from './InventoryAdd';
 
 jest.mock('../../../api');
@@ -49,7 +49,7 @@ describe('<InventoryAdd />', () => {
       { name: 'Bizz', id: 1 },
       { name: 'Buzz', id: 2 },
     ];
-    await waitForElement(wrapper, 'isLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'isLoading', (el) => el.length === 0);
 
     wrapper.find('InventoryForm').prop('onSubmit')({
       name: 'new Foo',
@@ -63,7 +63,7 @@ describe('<InventoryAdd />', () => {
       organization: 2,
       insights_credential: 47,
     });
-    instanceGroups.map(IG =>
+    instanceGroups.map((IG) =>
       expect(InventoriesAPI.associateInstanceGroup).toHaveBeenCalledWith(
         13,
         IG.id
@@ -73,7 +73,7 @@ describe('<InventoryAdd />', () => {
   });
 
   test('handleCancel should return the user back to the inventories list', async () => {
-    await waitForElement(wrapper, 'isLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'isLoading', (el) => el.length === 0);
     wrapper.find('Button[aria-label="Cancel"]').simulate('click');
     expect(history.location.pathname).toEqual('/inventories');
   });

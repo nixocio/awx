@@ -1,18 +1,18 @@
-import React from 'react';
-import { func, shape } from 'prop-types';
-import { Formik } from 'formik';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-
+import { withI18n } from '@lingui/react';
 import { Form } from '@patternfly/react-core';
+import { Formik } from 'formik';
+import { func, shape } from 'prop-types';
+import React from 'react';
+
 import { VariablesField } from '../../../components/CodeMirrorInput';
-import FormField, { FormSubmitError } from '../../../components/FormField';
 import FormActionGroup from '../../../components/FormActionGroup';
-import { required } from '../../../util/validators';
+import FormField, { FormSubmitError } from '../../../components/FormField';
 import {
   FormColumnLayout,
   FormFullWidthLayout,
 } from '../../../components/FormLayout';
+import { required } from '../../../util/validators';
 
 function CredentialTypeFormFields({ i18n }) {
   return (
@@ -69,8 +69,11 @@ function CredentialTypeForm({
     injectors: credentialType.injectors || '---',
   };
   return (
-    <Formik initialValues={initialValues} onSubmit={values => onSubmit(values)}>
-      {formik => (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={(values) => onSubmit(values)}
+    >
+      {(formik) => (
         <Form autoComplete="off" onSubmit={formik.handleSubmit}>
           <FormColumnLayout>
             <CredentialTypeFormFields {...rest} />

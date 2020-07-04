@@ -1,16 +1,17 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { object } from 'prop-types';
-import { CardBody } from '../../../components/Card';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import {
-  CredentialsAPI,
   CredentialInputSourcesAPI,
   CredentialTypesAPI,
+  CredentialsAPI,
 } from '../../../api';
+import { CardBody } from '../../../components/Card';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
-import CredentialForm from '../shared/CredentialForm';
 import useRequest from '../../../util/useRequest';
+import CredentialForm from '../shared/CredentialForm';
 
 function CredentialEdit({ credential, me }) {
   const [error, setError] = useState(null);
@@ -37,7 +38,7 @@ function CredentialEdit({ credential, me }) {
         const pluginInputs = {};
         const possibleFields = credentialTypeInputs.fields || [];
 
-        possibleFields.forEach(field => {
+        possibleFields.forEach((field) => {
           const input = inputs[field.id];
           if (input.credential && input.inputs) {
             pluginInputs[field.id] = input;
@@ -72,7 +73,7 @@ function CredentialEdit({ credential, me }) {
           });
 
         const destroyInputSources = () =>
-          Object.values(inputSourceMap).map(inputSource => {
+          Object.values(inputSourceMap).map((inputSource) => {
             const { id, input_field_name } = inputSource;
             if (!inputs[input_field_name]?.credential) {
               return CredentialInputSourcesAPI.destroy(id);
@@ -146,7 +147,7 @@ function CredentialEdit({ credential, me }) {
     history.push(`${url}`);
   };
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     await submitRequest(values, credentialTypes, inputSources);
   };
 

@@ -1,9 +1,10 @@
+import { Formik } from 'formik';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { Formik } from 'formik';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
-import InventoryStep from './InventoryStep';
 import { InventoriesAPI } from '../../../api';
+import InventoryStep from './InventoryStep';
 
 jest.mock('../../../api/models/Inventories');
 

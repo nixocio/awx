@@ -1,14 +1,13 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import {
+  Breadcrumb,
+  BreadcrumbHeading,
+  BreadcrumbItem,
   PageSection as PFPageSection,
   PageSectionVariants,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbHeading,
 } from '@patternfly/react-core';
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 import { Link, Route, useRouteMatch } from 'react-router-dom';
-
 import styled from 'styled-components';
 
 const PageSection = styled(PFPageSection)`

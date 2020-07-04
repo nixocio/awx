@@ -1,14 +1,13 @@
-import React, { useState, useCallback } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import React, { useCallback, useState } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import { Config } from '../../contexts/Config';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
-
-import HostList from './HostList';
-import HostAdd from './HostAdd';
+import { Config } from '../../contexts/Config';
 import Host from './Host';
+import HostAdd from './HostAdd';
+import HostList from './HostList';
 
 function Hosts({ i18n }) {
   const [breadcrumbConfig, setBreadcrumbConfig] = useState({
@@ -17,7 +16,7 @@ function Hosts({ i18n }) {
   });
 
   const buildBreadcrumbConfig = useCallback(
-    host => {
+    (host) => {
       if (!host) {
         return;
       }

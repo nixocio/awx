@@ -1,12 +1,14 @@
 import 'styled-components/macro';
-import React, { Fragment, useState, useEffect, useCallback } from 'react';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Switch, Tooltip } from '@patternfly/react-core';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
+
+import { HostsAPI } from '../../api';
+import useRequest from '../../util/useRequest';
 import AlertModal from '../AlertModal';
 import ErrorDetail from '../ErrorDetail';
-import useRequest from '../../util/useRequest';
-import { HostsAPI } from '../../api';
 
 function HostToggle({ host, onToggle, className, i18n }) {
   const [isEnabled, setIsEnabled] = useState(host.enabled);

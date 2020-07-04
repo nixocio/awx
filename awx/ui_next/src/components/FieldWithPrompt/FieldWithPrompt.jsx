@@ -1,8 +1,9 @@
-import React from 'react';
-import { bool, node, string } from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { bool, node, string } from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
+
 import { CheckboxField, FieldTooltip } from '../FormField';
 
 const FieldHeader = styled.div`

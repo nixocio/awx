@@ -1,5 +1,5 @@
-import React from 'react';
 import { CardActions } from '@patternfly/react-core';
+import React from 'react';
 import styled from 'styled-components';
 
 const CardActionsWrapper = styled.div`

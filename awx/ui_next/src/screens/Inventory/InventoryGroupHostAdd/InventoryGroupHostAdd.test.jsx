@@ -1,10 +1,11 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
-import InventoryGroupHostAdd from './InventoryGroupHostAdd';
-import mockHost from '../shared/data.host.json';
 import { GroupsAPI } from '../../../api';
+import mockHost from '../shared/data.host.json';
+import InventoryGroupHostAdd from './InventoryGroupHostAdd';
 
 jest.mock('../../../api');
 

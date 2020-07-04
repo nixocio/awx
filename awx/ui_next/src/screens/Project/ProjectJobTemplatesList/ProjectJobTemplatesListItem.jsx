@@ -1,25 +1,26 @@
 import 'styled-components/macro';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Button,
-  DataListAction as _DataListAction,
-  DataListCheck,
-  DataListItem,
-  DataListItemRow,
-  DataListItemCells,
-  Tooltip,
-} from '@patternfly/react-core';
+
 import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
+import {
+  Button,
+  DataListCheck,
+  DataListItem,
+  DataListItemCells,
+  DataListItemRow,
+  Tooltip,
+  DataListAction as _DataListAction,
+} from '@patternfly/react-core';
 import {
   ExclamationTriangleIcon,
   PencilAltIcon,
   RocketIcon,
 } from '@patternfly/react-icons';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import DataListCell from '../../../components/DataListCell';
 
+import DataListCell from '../../../components/DataListCell';
 import LaunchButton from '../../../components/LaunchButton';
 import Sparkline from '../../../components/Sparkline';
 import { toTitleCase } from '../../../util/strings';

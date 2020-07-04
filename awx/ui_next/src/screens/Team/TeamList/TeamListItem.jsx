@@ -1,23 +1,23 @@
 import 'styled-components/macro';
-import React, { Fragment } from 'react';
-import { string, bool, func } from 'prop-types';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   Button,
-  DataListAction as _DataListAction,
   DataListCheck,
   DataListItem,
   DataListItemCells,
   DataListItemRow,
   Tooltip,
+  DataListAction as _DataListAction,
 } from '@patternfly/react-core';
-
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { PencilAltIcon } from '@patternfly/react-icons';
-import DataListCell from '../../../components/DataListCell';
+import { bool, func, string } from 'prop-types';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
+import DataListCell from '../../../components/DataListCell';
 import { Team } from '../../../types';
 
 const DataListAction = styled(_DataListAction)`

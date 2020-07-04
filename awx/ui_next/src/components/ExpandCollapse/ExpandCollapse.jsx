@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   Button as PFButton,
   ToolbarItem as PFToolbarItem,
 } from '@patternfly/react-core';
 import { BarsIcon, EqualsIcon } from '@patternfly/react-icons';
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 const Button = styled(PFButton)`
@@ -14,7 +14,7 @@ const Button = styled(PFButton)`
   margin: 0;
   height: 30px;
   width: 30px;
-  ${props =>
+  ${(props) =>
     props.isActive
       ? `
       background-color: #007bba;

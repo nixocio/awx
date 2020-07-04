@@ -1,10 +1,12 @@
 import 'styled-components/macro';
-import React from 'react';
+
+import { Trans, t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
-import { t, Trans } from '@lingui/macro';
-import styled from 'styled-components';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import { shape } from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
+
 import { secondsToHHMMSS } from '../../util/dates';
 
 const GridDL = styled.dl`
@@ -21,7 +23,7 @@ const GridDL = styled.dl`
 `;
 
 const ResourceDeleted = styled.p`
-  margin-bottom: ${props => (props.job ? '10px' : '0px')};
+  margin-bottom: ${(props) => (props.job ? '10px' : '0px')};
 `;
 
 const StyledExclamationTriangleIcon = styled(ExclamationTriangleIcon)`

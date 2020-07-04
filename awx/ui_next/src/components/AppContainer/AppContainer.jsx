@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory, useLocation, withRouter } from 'react-router-dom';
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   Nav,
   NavList,
-  Page,
   PageHeader as PFPageHeader,
+  Page,
   PageSidebar,
 } from '@patternfly/react-core';
-import { t } from '@lingui/macro';
-import { withI18n } from '@lingui/react';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ConfigAPI, MeAPI, RootAPI } from '../../api';

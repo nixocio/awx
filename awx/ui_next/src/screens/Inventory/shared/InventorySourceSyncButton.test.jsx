@@ -1,7 +1,8 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { InventoryUpdatesAPI, InventorySourcesAPI } from '../../../api';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
+import { InventorySourcesAPI, InventoryUpdatesAPI } from '../../../api';
 import InventorySourceSyncButton from './InventorySourceSyncButton';
 
 jest.mock('../../../api/models/InventoryUpdates');

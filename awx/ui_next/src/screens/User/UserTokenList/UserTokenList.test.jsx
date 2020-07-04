@@ -1,5 +1,6 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import {
   mountWithContexts,
   waitForElement,
@@ -140,7 +141,7 @@ describe('<UserTokenList />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<UserTokenList />);
     });
-    waitForElement(wrapper, 'ContentEmpty', el => el.length === 0);
+    waitForElement(wrapper, 'ContentEmpty', (el) => el.length === 0);
   });
 
   test('should enable edit button', async () => {
@@ -148,7 +149,7 @@ describe('<UserTokenList />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<UserTokenList />);
     });
-    waitForElement(wrapper, 'ContentEmpty', el => el.length === 0);
+    waitForElement(wrapper, 'ContentEmpty', (el) => el.length === 0);
     expect(
       wrapper.find('DataListCheck[id="select-token-3"]').props().checked
     ).toBe(false);

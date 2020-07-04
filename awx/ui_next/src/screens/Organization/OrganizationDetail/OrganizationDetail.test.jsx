@@ -1,12 +1,11 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 
-import { OrganizationsAPI } from '../../../api';
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-
+import { OrganizationsAPI } from '../../../api';
 import OrganizationDetail from './OrganizationDetail';
 
 jest.mock('../../../api');
@@ -63,11 +62,11 @@ describe('<OrganizationDetail />', () => {
         <OrganizationDetail organization={mockOrganization} />
       );
     });
-    await waitForElement(component, 'ContentLoading', el => el.length === 0);
+    await waitForElement(component, 'ContentLoading', (el) => el.length === 0);
     expect(
       component
         .find('Chip')
-        .findWhere(el => el.text() === 'One')
+        .findWhere((el) => el.text() === 'One')
         .exists()
     ).toBe(true);
   });
@@ -157,7 +156,7 @@ describe('<OrganizationDetail />', () => {
         <OrganizationDetail organization={mockOrganization} />
       );
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 
   test('Error dialog shown for failed deletion', async () => {
@@ -181,7 +180,7 @@ describe('<OrganizationDetail />', () => {
     await waitForElement(
       wrapper,
       'Modal[title="Error!"]',
-      el => el.length === 1
+      (el) => el.length === 1
     );
     await act(async () => {
       wrapper.find('Modal[title="Error!"]').invoke('onClose')();
@@ -189,7 +188,7 @@ describe('<OrganizationDetail />', () => {
     await waitForElement(
       wrapper,
       'Modal[title="Error!"]',
-      el => el.length === 0
+      (el) => el.length === 0
     );
   });
 });

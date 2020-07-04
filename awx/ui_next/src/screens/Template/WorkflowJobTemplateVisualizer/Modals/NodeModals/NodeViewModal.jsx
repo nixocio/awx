@@ -1,22 +1,22 @@
-import React, { useContext, useEffect, useCallback } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Button, Modal } from '@patternfly/react-core';
-import {
-  WorkflowDispatchContext,
-  WorkflowStateContext,
-} from '../../../../../contexts/Workflow';
+import React, { useCallback, useContext, useEffect } from 'react';
 
-import ContentError from '../../../../../components/ContentError';
-import ContentLoading from '../../../../../components/ContentLoading';
-import PromptDetail from '../../../../../components/PromptDetail';
-import useRequest from '../../../../../util/useRequest';
 import {
   InventorySourcesAPI,
   JobTemplatesAPI,
   ProjectsAPI,
   WorkflowJobTemplatesAPI,
 } from '../../../../../api';
+import ContentError from '../../../../../components/ContentError';
+import ContentLoading from '../../../../../components/ContentLoading';
+import PromptDetail from '../../../../../components/PromptDetail';
+import {
+  WorkflowDispatchContext,
+  WorkflowStateContext,
+} from '../../../../../contexts/Workflow';
+import useRequest from '../../../../../util/useRequest';
 
 function getNodeType(node) {
   const ujtType = node.type || node.unified_job_type;

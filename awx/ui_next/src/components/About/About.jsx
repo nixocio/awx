@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   AboutModal,
   TextContent,
   TextList,
   TextListItem,
 } from '@patternfly/react-core';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import { BrandName } from '../../variables';
 import brandLogoImg from './brand-logo.svg';

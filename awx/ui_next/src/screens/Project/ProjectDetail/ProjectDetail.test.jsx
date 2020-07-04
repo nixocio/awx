@@ -1,6 +1,7 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
+
 import {
   mountWithContexts,
   waitForElement,
@@ -135,7 +136,7 @@ describe('<ProjectDetail />', () => {
     await waitForElement(
       wrapper,
       'Detail[label="Name"]',
-      el => el.length === 1
+      (el) => el.length === 1
     );
   });
 
@@ -201,7 +202,7 @@ describe('<ProjectDetail />', () => {
     await waitForElement(
       wrapper,
       'Modal[title="Error!"]',
-      el => el.length === 1
+      (el) => el.length === 1
     );
     await act(async () => {
       wrapper.find('Modal[title="Error!"]').invoke('onClose')();
@@ -209,7 +210,7 @@ describe('<ProjectDetail />', () => {
     await waitForElement(
       wrapper,
       'Modal[title="Error!"]',
-      el => el.length === 0
+      (el) => el.length === 0
     );
   });
 });

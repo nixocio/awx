@@ -1,9 +1,10 @@
+import { Formik } from 'formik';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { Formik } from 'formik';
+
 import { mountWithContexts } from '../../../../../testUtils/enzymeHelpers';
-import SatelliteSubForm from './SatelliteSubForm';
 import { CredentialsAPI } from '../../../../api';
+import SatelliteSubForm from './SatelliteSubForm';
 
 jest.mock('../../../../api/models/Credentials');
 

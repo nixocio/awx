@@ -1,23 +1,23 @@
-import React, { useEffect, useCallback } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import {
-  Switch,
-  Route,
-  Redirect,
-  Link,
-  useRouteMatch,
-  useLocation,
-} from 'react-router-dom';
+import { withI18n } from '@lingui/react';
 import { Card } from '@patternfly/react-core';
 import { CaretLeftIcon } from '@patternfly/react-icons';
-import useRequest from '../../../util/useRequest';
+import React, { useCallback, useEffect } from 'react';
+import {
+  Link,
+  Redirect,
+  Route,
+  Switch,
+  useLocation,
+  useRouteMatch,
+} from 'react-router-dom';
 
 import { InventoriesAPI } from '../../../api';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
-import RoutedTabs from '../../../components/RoutedTabs';
 import JobList from '../../../components/JobList';
+import RoutedTabs from '../../../components/RoutedTabs';
+import useRequest from '../../../util/useRequest';
 import InventoryHostDetail from '../InventoryHostDetail';
 import InventoryHostEdit from '../InventoryHostEdit';
 import InventoryHostFacts from '../InventoryHostFacts';
@@ -109,7 +109,7 @@ function InventoryHost({ i18n, setBreadcrumb, inventory }) {
   }
 
   let showCardHeader = true;
-  if (['edit'].some(name => location.pathname.includes(name))) {
+  if (['edit'].some((name) => location.pathname.includes(name))) {
     showCardHeader = false;
   }
 

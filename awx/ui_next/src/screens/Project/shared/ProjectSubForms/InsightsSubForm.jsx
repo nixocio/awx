@@ -1,7 +1,8 @@
-import React from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { useField } from 'formik';
+import React from 'react';
+
 import CredentialLookup from '../../../../components/Lookup/CredentialLookup';
 import { required } from '../../../../util/validators';
 import { ScmTypeOptions } from './SharedFields';
@@ -27,7 +28,7 @@ const InsightsSubForm = ({
         helperTextInvalid={credMeta.error}
         isValid={!credMeta.touched || !credMeta.error}
         onBlur={() => credHelpers.setTouched()}
-        onChange={value => {
+        onChange={(value) => {
           onCredentialSelection('insights', value);
           credHelpers.setValue(value.id);
         }}

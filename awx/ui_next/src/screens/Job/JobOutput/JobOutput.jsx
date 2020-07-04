@@ -1,8 +1,7 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import styled from 'styled-components';
 import {
   AutoSizer,
   CellMeasurer,
@@ -10,27 +9,27 @@ import {
   InfiniteLoader,
   List,
 } from 'react-virtualized';
+import styled from 'styled-components';
 
+import {
+  AdHocCommandsAPI,
+  InventoriesAPI,
+  JobsAPI,
+  ProjectUpdatesAPI,
+  SystemJobsAPI,
+  WorkflowJobsAPI,
+} from '../../../api';
 import AlertModal from '../../../components/AlertModal';
 import { CardBody } from '../../../components/Card';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
 import ErrorDetail from '../../../components/ErrorDetail';
 import StatusIcon from '../../../components/StatusIcon';
-
+import HostEventModal from './HostEventModal';
 import JobEvent from './JobEvent';
 import JobEventSkeleton from './JobEventSkeleton';
 import PageControls from './PageControls';
-import HostEventModal from './HostEventModal';
 import { HostStatusBar, OutputToolbar } from './shared';
-import {
-  JobsAPI,
-  ProjectUpdatesAPI,
-  SystemJobsAPI,
-  WorkflowJobsAPI,
-  InventoriesAPI,
-  AdHocCommandsAPI,
-} from '../../../api';
 
 const HeaderTitle = styled.div`
   display: inline-flex;
@@ -82,11 +81,11 @@ function connectJobSocket({ type, id }, onMessage) {
     );
   };
 
-  ws.onmessage = e => {
+  ws.onmessage = (e) => {
     onMessage(JSON.parse(e.data));
   };
 
-  ws.onclose = e => {
+  ws.onclose = (e) => {
     // eslint-disable-next-line no-console
     console.debug('Socket closed. Reconnecting...', e);
     setTimeout(() => {
@@ -94,7 +93,7 @@ function connectJobSocket({ type, id }, onMessage) {
     }, 1000);
   };
 
-  ws.onerror = err => {
+  ws.onerror = (err) => {
     // eslint-disable-next-line no-console
     console.debug('Socket error: ', err, 'Disconnecting...');
     ws.close();
@@ -151,7 +150,7 @@ class JobOutput extends Component {
     this._isMounted = true;
     this.loadJobEvents();
 
-    connectJobSocket(job, data => {
+    connectJobSocket(job, (data) => {
       if (data.counter && data.counter > this.jobSocketCounter) {
         this.jobSocketCounter = data.counter;
       } else if (data.final_counter && data.unified_job_id === job.id) {
@@ -167,8 +166,8 @@ class JobOutput extends Component {
     const { currentlyLoading } = this.state;
     let shouldRecomputeRowHeights = false;
     prevState.currentlyLoading
-      .filter(n => !currentlyLoading.includes(n))
-      .forEach(n => {
+      .filter((n) => !currentlyLoading.includes(n))
+      .forEach((n) => {
         shouldRecomputeRowHeights = true;
         this.cache.clear(n);
       });
@@ -213,7 +212,7 @@ class JobOutput extends Component {
       });
       this._isMounted &&
         this.setState(({ results }) => {
-          newResults.forEach(jobEvent => {
+          newResults.forEach((jobEvent) => {
             results[jobEvent.counter] = jobEvent;
           });
           return { results, remoteRowCount: count + 1 };
@@ -225,7 +224,7 @@ class JobOutput extends Component {
         this.setState(({ currentlyLoading }) => ({
           hasContentLoading: false,
           currentlyLoading: currentlyLoading.filter(
-            n => !loadRange.includes(n)
+            (n) => !loadRange.includes(n)
           ),
         }));
     }
@@ -283,7 +282,7 @@ class JobOutput extends Component {
   rowRenderer({ index, parent, key, style }) {
     const { results } = this.state;
 
-    const isHostEvent = jobEvent => {
+    const isHostEvent = (jobEvent) => {
       const { event, event_data, host, type } = jobEvent;
       let isHost;
       if (typeof host === 'number' || (event_data && event_data.res)) {
@@ -345,16 +344,16 @@ class JobOutput extends Component {
       order_by: 'start_line',
     };
 
-    return JobsAPI.readEvents(job.id, type, params).then(response => {
+    return JobsAPI.readEvents(job.id, type, params).then((response) => {
       this._isMounted &&
         this.setState(({ results, currentlyLoading }) => {
-          response.data.results.forEach(jobEvent => {
+          response.data.results.forEach((jobEvent) => {
             results[jobEvent.counter] = jobEvent;
           });
           return {
             results,
             currentlyLoading: currentlyLoading.filter(
-              n => !loadRange.includes(n)
+              (n) => !loadRange.includes(n)
             ),
           };
         });
@@ -448,7 +447,7 @@ class JobOutput extends Component {
                 {({ width, height }) => {
                   return (
                     <List
-                      ref={ref => {
+                      ref={(ref) => {
                         this.listRef = ref;
                         registerChild(ref);
                       }}

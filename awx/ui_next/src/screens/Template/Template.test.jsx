@@ -1,14 +1,14 @@
-import React from 'react';
 import { createMemoryHistory } from 'history';
+import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { JobTemplatesAPI, OrganizationsAPI } from '../../api';
 
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
-import Template from './Template';
+import { JobTemplatesAPI, OrganizationsAPI } from '../../api';
 import mockJobTemplateData from './shared/data.job_template.json';
+import Template from './Template';
 
 jest.mock('../../api/models/JobTemplates');
 jest.mock('../../api/models/Organizations');
@@ -48,7 +48,7 @@ describe('<Template />', () => {
     expect(JobTemplatesAPI.readDetail).toBeCalled();
     expect(OrganizationsAPI.read).toBeCalled();
   });
-  test('notifications tab shown for admins', async done => {
+  test('notifications tab shown for admins', async (done) => {
     let wrapper;
     await act(async () => {
       wrapper = mountWithContexts(
@@ -59,12 +59,12 @@ describe('<Template />', () => {
     const tabs = await waitForElement(
       wrapper,
       '.pf-c-tabs__item',
-      el => el.length === 7
+      (el) => el.length === 7
     );
     expect(tabs.at(3).text()).toEqual('Notifications');
     done();
   });
-  test('notifications tab hidden with reduced permissions', async done => {
+  test('notifications tab hidden with reduced permissions', async (done) => {
     OrganizationsAPI.read.mockResolvedValue({
       data: {
         count: 0,
@@ -83,9 +83,9 @@ describe('<Template />', () => {
     const tabs = await waitForElement(
       wrapper,
       '.pf-c-tabs__item',
-      el => el.length === 6
+      (el) => el.length === 6
     );
-    tabs.forEach(tab => expect(tab.text()).not.toEqual('Notifications'));
+    tabs.forEach((tab) => expect(tab.text()).not.toEqual('Notifications'));
     done();
   });
 
@@ -115,6 +115,6 @@ describe('<Template />', () => {
       );
     });
 
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

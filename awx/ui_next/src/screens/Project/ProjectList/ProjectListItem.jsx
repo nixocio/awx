@@ -1,30 +1,31 @@
 import 'styled-components/macro';
-import React, { Fragment, useState, useCallback } from 'react';
-import { string, bool, func } from 'prop-types';
+
+import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
 import {
   Button,
-  DataListAction as _DataListAction,
   DataListCheck,
   DataListItem,
-  DataListItemRow,
   DataListItemCells,
+  DataListItemRow,
   Tooltip,
+  DataListAction as _DataListAction,
 } from '@patternfly/react-core';
-
-import { t } from '@lingui/macro';
-import { Link } from 'react-router-dom';
 import { PencilAltIcon, SyncIcon } from '@patternfly/react-icons';
+import { bool, func, string } from 'prop-types';
+import React, { Fragment, useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { timeOfDay } from '../../../util/dates';
+
 import { ProjectsAPI } from '../../../api';
 import ClipboardCopyButton from '../../../components/ClipboardCopyButton';
-import StatusIcon from '../../../components/StatusIcon';
-import DataListCell from '../../../components/DataListCell';
-import { toTitleCase } from '../../../util/strings';
 import CopyButton from '../../../components/CopyButton';
-import ProjectSyncButton from '../shared/ProjectSyncButton';
+import DataListCell from '../../../components/DataListCell';
+import StatusIcon from '../../../components/StatusIcon';
 import { Project } from '../../../types';
+import { timeOfDay } from '../../../util/dates';
+import { toTitleCase } from '../../../util/strings';
+import ProjectSyncButton from '../shared/ProjectSyncButton';
 
 const DataListAction = styled(_DataListAction)`
   align-items: center;
@@ -60,7 +61,7 @@ function ProjectListItem({
     await fetchProjects();
   }, [project.id, project.name, fetchProjects]);
 
-  const generateLastJobTooltip = job => {
+  const generateLastJobTooltip = (job) => {
     return (
       <Fragment>
         <div>{i18n._(t`MOST RECENT SYNC`)}</div>
@@ -148,7 +149,7 @@ function ProjectListItem({
           {project.summary_fields.user_capabilities.start ? (
             <Tooltip content={i18n._(t`Sync Project`)} position="top">
               <ProjectSyncButton projectId={project.id}>
-                {handleSync => (
+                {(handleSync) => (
                   <Button
                     isDisabled={isDisabled}
                     aria-label={i18n._(t`Sync Project`)}

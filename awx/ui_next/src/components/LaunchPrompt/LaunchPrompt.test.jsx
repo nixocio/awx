@@ -1,20 +1,21 @@
 import React from 'react';
 import { act, isElementOfType } from 'react-dom/test-utils';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
-import LaunchPrompt from './LaunchPrompt';
-import InventoryStep from './steps/InventoryStep';
-import CredentialsStep from './steps/CredentialsStep';
-import OtherPromptsStep from './steps/OtherPromptsStep';
-import PreviewStep from './steps/PreviewStep';
 import {
-  InventoriesAPI,
-  CredentialsAPI,
   CredentialTypesAPI,
+  CredentialsAPI,
+  InventoriesAPI,
   JobTemplatesAPI,
 } from '../../api';
+import LaunchPrompt from './LaunchPrompt';
+import CredentialsStep from './steps/CredentialsStep';
+import InventoryStep from './steps/InventoryStep';
+import OtherPromptsStep from './steps/OtherPromptsStep';
+import PreviewStep from './steps/PreviewStep';
 
 jest.mock('../../api/models/Inventories');
 jest.mock('../../api/models/CredentialTypes');

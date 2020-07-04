@@ -1,23 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   Button,
-  DataListAction as _DataListAction,
   DataListCheck,
   DataListItem,
-  DataListItemRow,
   DataListItemCells,
+  DataListItemRow,
   Tooltip,
+  DataListAction as _DataListAction,
 } from '@patternfly/react-core';
 import { RocketIcon } from '@patternfly/react-icons';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { JOB_TYPE_URL_SEGMENTS } from '../../constants';
+import { formatDateString } from '../../util/dates';
 import DataListCell from '../DataListCell';
 import LaunchButton from '../LaunchButton';
 import StatusIcon from '../StatusIcon';
-import { formatDateString } from '../../util/dates';
-import { JOB_TYPE_URL_SEGMENTS } from '../../constants';
 
 const DataListAction = styled(_DataListAction)`
   align-items: center;

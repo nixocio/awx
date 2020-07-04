@@ -13,7 +13,7 @@ describe('RootAPI', () => {
     jest.clearAllMocks();
   });
 
-  test('login calls get and post with expected content headers', async done => {
+  test('login calls get and post with expected content headers', async (done) => {
     const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
 
     await RootAPI.login('username', 'password');
@@ -27,7 +27,7 @@ describe('RootAPI', () => {
     done();
   });
 
-  test('login sends expected data', async done => {
+  test('login sends expected data', async (done) => {
     await RootAPI.login('foo', 'bar');
     await RootAPI.login('foo', 'bar', 'baz');
 
@@ -42,7 +42,7 @@ describe('RootAPI', () => {
     done();
   });
 
-  test('logout calls expected http method', async done => {
+  test('logout calls expected http method', async (done) => {
     await RootAPI.logout();
 
     expect(mockHttp.get).toHaveBeenCalledTimes(1);

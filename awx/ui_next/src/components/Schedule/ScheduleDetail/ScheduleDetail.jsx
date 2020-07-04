@@ -1,26 +1,28 @@
 import 'styled-components/macro';
+
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Button, Chip, Title } from '@patternfly/react-core';
 import React, { useCallback, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { RRule, rrulestr } from 'rrule';
 import styled from 'styled-components';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { Chip, Title, Button } from '@patternfly/react-core';
+
+import { SchedulesAPI } from '../../../api';
 import { Schedule } from '../../../types';
+import { formatDateString } from '../../../util/dates';
+import useRequest, { useDismissableError } from '../../../util/useRequest';
 import AlertModal from '../../AlertModal';
-import { CardBody, CardActionsRow } from '../../Card';
+import { CardActionsRow, CardBody } from '../../Card';
+import ChipGroup from '../../ChipGroup';
 import ContentError from '../../ContentError';
 import ContentLoading from '../../ContentLoading';
 import CredentialChip from '../../CredentialChip';
-import { DetailList, Detail, UserDateDetail } from '../../DetailList';
+import DeleteButton from '../../DeleteButton';
+import { Detail, DetailList, UserDateDetail } from '../../DetailList';
+import ErrorDetail from '../../ErrorDetail';
 import ScheduleOccurrences from '../ScheduleOccurrences';
 import ScheduleToggle from '../ScheduleToggle';
-import { formatDateString } from '../../../util/dates';
-import useRequest, { useDismissableError } from '../../../util/useRequest';
-import { SchedulesAPI } from '../../../api';
-import DeleteButton from '../../DeleteButton';
-import ErrorDetail from '../../ErrorDetail';
-import ChipGroup from '../../ChipGroup';
 
 const PromptTitle = styled(Title)`
   --pf-c-title--m-md--FontWeight: 700;
@@ -92,7 +94,7 @@ function ScheduleDetail({ schedule, i18n }) {
   const repeatFrequency =
     rule.options.freq === RRule.MINUTELY && dtstart === dtend
       ? i18n._(t`None (Run Once)`)
-      : rule.toText().replace(/^\w/, c => c.toUpperCase());
+      : rule.toText().replace(/^\w/, (c) => c.toUpperCase());
   const showPromptedFields =
     (credentials && credentials.length > 0) ||
     job_type ||
@@ -178,7 +180,7 @@ function ScheduleDetail({ schedule, i18n }) {
                 label={i18n._(t`Credentials`)}
                 value={
                   <ChipGroup numChips={5} totalChips={credentials.length}>
-                    {credentials.map(c => (
+                    {credentials.map((c) => (
                       <CredentialChip key={c.id} credential={c} isReadOnly />
                     ))}
                   </ChipGroup>
@@ -194,7 +196,7 @@ function ScheduleDetail({ schedule, i18n }) {
                     numChips={5}
                     totalChips={job_tags.split(',').length}
                   >
-                    {job_tags.split(',').map(jobTag => (
+                    {job_tags.split(',').map((jobTag) => (
                       <Chip key={jobTag} isReadOnly>
                         {jobTag}
                       </Chip>
@@ -212,7 +214,7 @@ function ScheduleDetail({ schedule, i18n }) {
                     numChips={5}
                     totalChips={skip_tags.split(',').length}
                   >
-                    {skip_tags.split(',').map(skipTag => (
+                    {skip_tags.split(',').map((skipTag) => (
                       <Chip key={skipTag} isReadOnly>
                         {skipTag}
                       </Chip>

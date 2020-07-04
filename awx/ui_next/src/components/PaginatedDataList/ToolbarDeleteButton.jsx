@@ -1,19 +1,20 @@
-import React, { Fragment } from 'react';
-import {
-  func,
-  bool,
-  number,
-  string,
-  arrayOf,
-  shape,
-  checkPropTypes,
-} from 'prop-types';
-import { Button, Tooltip } from '@patternfly/react-core';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Button, Tooltip } from '@patternfly/react-core';
+import {
+  arrayOf,
+  bool,
+  checkPropTypes,
+  func,
+  number,
+  shape,
+  string,
+} from 'prop-types';
+import React, { Fragment } from 'react';
+
 import AlertModal from '../AlertModal';
 
-const requireNameOrUsername = props => {
+const requireNameOrUsername = (props) => {
   const { name, username } = props;
   if (!name && !username) {
     return new Error(
@@ -100,7 +101,7 @@ class ToolbarDeleteButton extends React.Component {
 
     const itemsUnableToDelete = itemsToDelete
       .filter(cannotDelete)
-      .map(item => item.name)
+      .map((item) => item.name)
       .join(', ');
     if (itemsToDelete.some(cannotDelete)) {
       return (
@@ -168,7 +169,7 @@ class ToolbarDeleteButton extends React.Component {
             ]}
           >
             <div>{i18n._(t`This action will delete the following:`)}</div>
-            {itemsToDelete.map(item => (
+            {itemsToDelete.map((item) => (
               <span key={item.id}>
                 <strong>{item.name || item.username}</strong>
                 <br />

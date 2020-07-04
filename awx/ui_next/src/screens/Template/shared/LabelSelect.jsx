@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { func, arrayOf, number, shape, string, oneOfType } from 'prop-types';
 import { Select, SelectOption, SelectVariant } from '@patternfly/react-core';
+import { arrayOf, func, number, oneOfType, shape, string } from 'prop-types';
+import React, { useEffect, useState } from 'react';
+
 import { LabelsAPI } from '../../../api';
 import { useSyncedSelectValue } from '../../../components/MultiSelect';
 
@@ -37,7 +38,7 @@ function LabelSelect({ value, placeholder, onChange, onError, createText }) {
   );
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleExpanded = toggleValue => {
+  const toggleExpanded = (toggleValue) => {
     setIsExpanded(toggleValue);
   };
 
@@ -49,8 +50,8 @@ function LabelSelect({ value, placeholder, onChange, onError, createText }) {
     /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
-  const renderOptions = opts => {
-    return opts.map(option => (
+  const renderOptions = (opts) => {
+    return opts.map((option) => (
       <SelectOption key={option.id} aria-label={option.name} value={option}>
         {option.name}
       </SelectOption>
@@ -68,13 +69,15 @@ function LabelSelect({ value, placeholder, onChange, onError, createText }) {
         onSelect(e, item);
       }}
       onClear={() => onChange([])}
-      onFilter={event => {
+      onFilter={(event) => {
         const str = event.target.value.toLowerCase();
-        const matches = options.filter(o => o.name.toLowerCase().includes(str));
+        const matches = options.filter((o) =>
+          o.name.toLowerCase().includes(str)
+        );
         return renderOptions(matches);
       }}
       isCreatable
-      onCreateOption={label => {
+      onCreateOption={(label) => {
         label = label.trim();
         if (!options.includes(label)) {
           setOptions(options.concat({ name: label, id: label }));

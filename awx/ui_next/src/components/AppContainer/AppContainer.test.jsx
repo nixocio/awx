@@ -6,7 +6,6 @@ import {
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
 import { ConfigAPI, MeAPI, RootAPI } from '../../api';
-
 import AppContainer from './AppContainer';
 
 jest.mock('../../api');
@@ -91,7 +90,7 @@ describe('<AppContainer />', () => {
 
     // open about modal
     (
-      await waitForElement(wrapper, aboutButton, el => !el.props().disabled)
+      await waitForElement(wrapper, aboutButton, (el) => !el.props().disabled)
     ).simulate('click');
 
     // check about modal content

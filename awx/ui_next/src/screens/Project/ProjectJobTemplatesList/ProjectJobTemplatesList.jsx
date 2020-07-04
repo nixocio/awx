@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Card } from '@patternfly/react-core';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 
 import {
   JobTemplatesAPI,
@@ -103,14 +103,14 @@ function ProjectJobTemplatesList({ i18n }) {
     [pathname, search, count, projectId]
   );
 
-  const handleSelectAll = isSelected => {
+  const handleSelectAll = (isSelected) => {
     const selectedItems = isSelected ? [...templates] : [];
     setSelected(selectedItems);
   };
 
-  const handleSelect = template => {
-    if (selected.some(s => s.id === template.id)) {
-      setSelected(selected.filter(s => s.id !== template.id));
+  const handleSelect = (template) => {
+    if (selected.some((s) => s.id === template.id)) {
+      setSelected(selected.filter((s) => s.id !== template.id));
     } else {
       setSelected(selected.concat(template));
     }
@@ -210,7 +210,7 @@ function ProjectJobTemplatesList({ i18n }) {
               key: 'type',
             },
           ]}
-          renderToolbar={props => (
+          renderToolbar={(props) => (
             <DatalistToolbar
               {...props}
               showSelectAll
@@ -229,14 +229,14 @@ function ProjectJobTemplatesList({ i18n }) {
               ]}
             />
           )}
-          renderItem={template => (
+          renderItem={(template) => (
             <ProjectTemplatesListItem
               key={template.id}
               value={template.name}
               template={template}
               detailUrl={`/templates/${template.type}/${template.id}/details`}
               onSelect={() => handleSelect(template)}
-              isSelected={selected.some(row => row.id === template.id)}
+              isSelected={selected.some((row) => row.id === template.id)}
             />
           )}
           emptyStateControls={canAddJT && addButton}

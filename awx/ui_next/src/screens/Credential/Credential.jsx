@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from 'react';
 import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
-import { CaretLeftIcon } from '@patternfly/react-icons';
 import { Card, PageSection } from '@patternfly/react-core';
+import { CaretLeftIcon } from '@patternfly/react-icons';
+import React, { useEffect, useState } from 'react';
 import {
-  Switch,
-  useParams,
-  useLocation,
-  useRouteMatch,
-  Route,
-  Redirect,
   Link,
+  Redirect,
+  Route,
+  Switch,
+  useLocation,
+  useParams,
+  useRouteMatch,
 } from 'react-router-dom';
-import { ResourceAccessList } from '../../components/ResourceAccessList';
+
+import { CredentialsAPI } from '../../api';
 import ContentError from '../../components/ContentError';
+import { ResourceAccessList } from '../../components/ResourceAccessList';
 import RoutedTabs from '../../components/RoutedTabs';
 import CredentialDetail from './CredentialDetail';
 import CredentialEdit from './CredentialEdit';
-import { CredentialsAPI } from '../../api';
 
 function Credential({ i18n, setBreadcrumb }) {
   const [credential, setCredential] = useState(null);

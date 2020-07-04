@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { Card, PageSection } from '@patternfly/react-core';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { PageSection, Card } from '@patternfly/react-core';
+
+import { CredentialTypesAPI, InventoriesAPI } from '../../../api';
 import { CardBody } from '../../../components/Card';
 import ContentLoading from '../../../components/ContentLoading';
-
-import { InventoriesAPI, CredentialTypesAPI } from '../../../api';
 import InventoryForm from '../shared/InventoryForm';
 
 function InventoryAdd() {
@@ -33,7 +33,7 @@ function InventoryAdd() {
     history.push('/inventories');
   };
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     const {
       instanceGroups,
       organization,
@@ -51,7 +51,7 @@ function InventoryAdd() {
         ...remainingValues,
       });
       if (instanceGroups) {
-        const associatePromises = instanceGroups.map(async ig =>
+        const associatePromises = instanceGroups.map(async (ig) =>
           InventoriesAPI.associateInstanceGroup(inventoryId, ig.id)
         );
         await Promise.all(associatePromises);

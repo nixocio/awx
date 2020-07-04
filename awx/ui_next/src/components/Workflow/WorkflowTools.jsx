@@ -1,9 +1,7 @@
 import 'styled-components/macro';
-import React, { useContext } from 'react';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
-import styled from 'styled-components';
-import { func, number } from 'prop-types';
+import { withI18n } from '@lingui/react';
 import { Button, Tooltip } from '@patternfly/react-core';
 import {
   CaretDownIcon,
@@ -16,6 +14,10 @@ import {
   PlusIcon,
   TimesIcon,
 } from '@patternfly/react-icons';
+import { func, number } from 'prop-types';
+import React, { useContext } from 'react';
+import styled from 'styled-components';
+
 import { WorkflowDispatchContext } from '../../contexts/Workflow';
 
 const Wrapper = styled.div`
@@ -110,7 +112,7 @@ function WorkflowTools({
           id="zoom-slider"
           max="200"
           min="10"
-          onChange={event =>
+          onChange={(event) =>
             onZoomChange(parseInt(event.target.value, 10) / 100)
           }
           step="10"

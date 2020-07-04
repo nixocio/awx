@@ -1,5 +1,6 @@
-import React from 'react';
 import { Formik } from 'formik';
+import React from 'react';
+
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
 import PasswordInput from './PasswordInput';
 

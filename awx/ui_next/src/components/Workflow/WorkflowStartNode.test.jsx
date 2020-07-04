@@ -1,5 +1,6 @@
-import React from 'react';
 import { mount } from 'enzyme';
+import React from 'react';
+
 import { WorkflowStateContext } from '../../contexts/Workflow';
 import WorkflowStartNode from './WorkflowStartNode';
 

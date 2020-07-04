@@ -1,9 +1,10 @@
 import React from 'react';
+
+import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import {
   WorkflowDispatchContext,
   WorkflowStateContext,
 } from '../../../contexts/Workflow';
-import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import VisualizerLink from './VisualizerLink';
 
 const link = {
@@ -68,34 +69,19 @@ describe('VisualizerLink', () => {
 
   test('Displays action tooltip on hover and updates help text on hover', () => {
     expect(wrapper.find('WorkflowActionTooltip').length).toBe(0);
-    wrapper
-      .find('g')
-      .first()
-      .simulate('mouseenter');
+    wrapper.find('g').first().simulate('mouseenter');
     expect(wrapper.find('WorkflowActionTooltip').length).toBe(1);
     expect(wrapper.find('WorkflowActionTooltipItem').length).toBe(3);
-    wrapper
-      .find('g')
-      .first()
-      .simulate('mouseleave');
+    wrapper.find('g').first().simulate('mouseleave');
     expect(wrapper.find('WorkflowActionTooltip').length).toBe(0);
-    wrapper
-      .find('#link-2-3-overlay')
-      .first()
-      .simulate('mouseenter');
+    wrapper.find('#link-2-3-overlay').first().simulate('mouseenter');
     expect(updateLinkHelp).toHaveBeenCalledWith(link);
-    wrapper
-      .find('#link-2-3-overlay')
-      .first()
-      .simulate('mouseleave');
+    wrapper.find('#link-2-3-overlay').first().simulate('mouseleave');
     expect(updateLinkHelp).toHaveBeenCalledWith(null);
   });
 
   test('Add Node tooltip action hover/click updates help text and dispatches properly', () => {
-    wrapper
-      .find('g')
-      .first()
-      .simulate('mouseenter');
+    wrapper.find('g').first().simulate('mouseenter');
     wrapper
       .find('WorkflowActionTooltipItem#link-add-node')
       .simulate('mouseenter');
@@ -116,10 +102,7 @@ describe('VisualizerLink', () => {
   });
 
   test('Edit tooltip action hover/click updates help text and dispatches properly', () => {
-    wrapper
-      .find('g')
-      .first()
-      .simulate('mouseenter');
+    wrapper.find('g').first().simulate('mouseenter');
     wrapper.find('WorkflowActionTooltipItem#link-edit').simulate('mouseenter');
     expect(updateHelpText).toHaveBeenCalledWith('Edit this link');
     wrapper.find('WorkflowActionTooltipItem#link-edit').simulate('mouseleave');
@@ -133,10 +116,7 @@ describe('VisualizerLink', () => {
   });
 
   test('Delete tooltip action hover/click updates help text and dispatches properly', () => {
-    wrapper
-      .find('g')
-      .first()
-      .simulate('mouseenter');
+    wrapper.find('g').first().simulate('mouseenter');
     wrapper
       .find('WorkflowActionTooltipItem#link-delete')
       .simulate('mouseenter');

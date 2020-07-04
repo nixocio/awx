@@ -1,8 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { ActionGroup, Button } from '@patternfly/react-core';
+import PropTypes from 'prop-types';
+import React from 'react';
+
 import { FormFullWidthLayout } from '../FormLayout';
 
 const FormActionGroup = ({ onSubmit, submitDisabled, onCancel, i18n }) => (

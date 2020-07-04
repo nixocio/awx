@@ -1,9 +1,9 @@
 import React from 'react';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import { sleep } from '../../../../testUtils/testUtils';
-
-import ProjectSyncButton from './ProjectSyncButton';
 import { ProjectsAPI } from '../../../api';
+import ProjectSyncButton from './ProjectSyncButton';
 
 jest.mock('../../../api');
 
@@ -14,7 +14,7 @@ describe('ProjectSyncButton', () => {
     },
   });
 
-  const children = handleSync => (
+  const children = (handleSync) => (
     <button type="submit" onClick={() => handleSync()} />
   );
 
@@ -24,7 +24,7 @@ describe('ProjectSyncButton', () => {
     );
     expect(wrapper).toHaveLength(1);
   });
-  test('correct api calls are made on sync', async done => {
+  test('correct api calls are made on sync', async (done) => {
     ProjectsAPI.sync.mockResolvedValue({
       data: {
         id: 9000,
@@ -40,7 +40,7 @@ describe('ProjectSyncButton', () => {
     expect(ProjectsAPI.sync).toHaveBeenCalledWith(1);
     done();
   });
-  test('displays error modal after unsuccessful sync', async done => {
+  test('displays error modal after unsuccessful sync', async (done) => {
     ProjectsAPI.sync.mockRejectedValue(
       new Error({
         response: {

@@ -1,7 +1,7 @@
 import React from 'react';
+
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
 import mockTemplate from './data.job_template.json';
-
 import PromptDetail from './PromptDetail';
 
 const mockPromptLaunch = {
@@ -138,7 +138,7 @@ describe('PromptDetail', () => {
         'Job Tags',
         'Skip Tags',
         'Diff Mode',
-      ].forEach(label => assertNoDetail(label));
+      ].forEach((label) => assertNoDetail(label));
       expect(overrideDetails.find('PromptDetail h2').length).toBe(0);
       expect(overrideDetails.find('VariablesDetail').length).toBe(0);
     });

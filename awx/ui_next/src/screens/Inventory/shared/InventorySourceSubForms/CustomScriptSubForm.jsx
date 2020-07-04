@@ -1,8 +1,9 @@
-import React from 'react';
-import { useField } from 'formik';
-import { useParams } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { useField } from 'formik';
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
 import CredentialLookup from '../../../../components/Lookup/CredentialLookup';
 import InventoryScriptLookup from '../../../../components/Lookup/InventoryScriptLookup';
 import { OptionsField, SourceVarsField, VerbosityField } from './SharedFields';
@@ -18,7 +19,7 @@ const CustomScriptSubForm = ({ i18n }) => {
         credentialTypeNamespace="cloud"
         label={i18n._(t`Credential`)}
         value={credentialField.value}
-        onChange={value => {
+        onChange={(value) => {
           credentialHelpers.setValue(value);
         }}
       />
@@ -26,7 +27,7 @@ const CustomScriptSubForm = ({ i18n }) => {
         helperTextInvalid={scriptMeta.error}
         isValid={!scriptMeta.touched || !scriptMeta.error}
         onBlur={() => scriptHelpers.setTouched()}
-        onChange={value => {
+        onChange={(value) => {
           scriptHelpers.setValue(value);
         }}
         inventoryId={id}

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { func } from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   Dropdown,
   DropdownItem,
   DropdownPosition,
   DropdownToggle,
 } from '@patternfly/react-core';
+import { func } from 'prop-types';
+import React, { useState } from 'react';
 
 function AddHostDropdown({ i18n, onAddNew, onAddExisting }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +40,7 @@ function AddHostDropdown({ i18n, onAddNew, onAddExisting }) {
           id="add-host-dropdown"
           aria-label="add host"
           isPrimary
-          onToggle={() => setIsOpen(prevState => !prevState)}
+          onToggle={() => setIsOpen((prevState) => !prevState)}
         >
           {i18n._(t`Add`)}
         </DropdownToggle>

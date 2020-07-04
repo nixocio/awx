@@ -1,17 +1,16 @@
+import { Card, PageSection } from '@patternfly/react-core';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { Card, PageSection } from '@patternfly/react-core';
+import { OrganizationsAPI, WorkflowJobTemplatesAPI } from '../../../api';
 import { CardBody } from '../../../components/Card';
-
-import { WorkflowJobTemplatesAPI, OrganizationsAPI } from '../../../api';
 import WorkflowJobTemplateForm from '../shared/WorkflowJobTemplateForm';
 
 function WorkflowJobTemplateAdd() {
   const history = useHistory();
   const [formSubmitError, setFormSubmitError] = useState(null);
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     const {
       labels,
       inventory,
@@ -47,7 +46,7 @@ function WorkflowJobTemplateAdd() {
         throw err;
       }
     }
-    const associatePromises = labels.map(label =>
+    const associatePromises = labels.map((label) =>
       WorkflowJobTemplatesAPI.associateLabel(templateId, label, organizationId)
     );
     return [...associatePromises];

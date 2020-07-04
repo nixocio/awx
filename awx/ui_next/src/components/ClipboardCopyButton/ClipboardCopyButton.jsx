@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { Button, Tooltip } from '@patternfly/react-core';
 import { CopyIcon } from '@patternfly/react-icons';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 export const clipboardCopyFunc = (event, text) => {
   const clipboard = event.currentTarget.parentElement;
@@ -24,7 +24,7 @@ class ClipboardCopyButton extends React.Component {
     this.handleCopyClick = this.handleCopyClick.bind(this);
   }
 
-  handleCopyClick = event => {
+  handleCopyClick = (event) => {
     const { stringToCopy, switchDelay } = this.props;
     if (this.timer) {
       window.clearTimeout(this.timer);

@@ -2,7 +2,6 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
-
 import CredentialTypeListItem from './CredentialTypeListItem';
 
 describe('<CredentialTypeListItem/>', () => {

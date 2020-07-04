@@ -1,10 +1,10 @@
 import React from 'react';
-import { UsersAPI } from '../../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-
+import { UsersAPI } from '../../../api';
 import UsersList, { _UsersList } from './UserList';
 
 jest.mock('../../../api');
@@ -124,7 +124,7 @@ describe('UsersList with full permissions', () => {
   });
 
   test('Users are retrieved from the api and the components finishes loading', async () => {
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(loadUsers).toHaveBeenCalled();
   });
 
@@ -132,12 +132,12 @@ describe('UsersList with full permissions', () => {
     await waitForElement(
       wrapper,
       'UsersList',
-      el => el.state('hasContentLoading') === false
+      (el) => el.state('hasContentLoading') === false
     );
     expect(
       wrapper
         .find('input[type="checkbox"]')
-        .findWhere(n => n.prop('checked') === true).length
+        .findWhere((n) => n.prop('checked') === true).length
     ).toBe(0);
     wrapper
       .find('UserListItem')
@@ -149,7 +149,7 @@ describe('UsersList with full permissions', () => {
     expect(
       wrapper
         .find('input[type="checkbox"]')
-        .findWhere(n => n.prop('checked') === true).length
+        .findWhere((n) => n.prop('checked') === true).length
     ).toBe(1);
   });
 
@@ -157,32 +157,26 @@ describe('UsersList with full permissions', () => {
     await waitForElement(
       wrapper,
       'UsersList',
-      el => el.state('hasContentLoading') === false
+      (el) => el.state('hasContentLoading') === false
     );
     expect(
       wrapper
         .find('input[type="checkbox"]')
-        .findWhere(n => n.prop('checked') === true).length
+        .findWhere((n) => n.prop('checked') === true).length
     ).toBe(0);
-    wrapper
-      .find('Checkbox#select-all')
-      .props()
-      .onChange(true);
+    wrapper.find('Checkbox#select-all').props().onChange(true);
     wrapper.update();
     expect(
       wrapper
         .find('input[type="checkbox"]')
-        .findWhere(n => n.prop('checked') === true).length
+        .findWhere((n) => n.prop('checked') === true).length
     ).toBe(3);
-    wrapper
-      .find('Checkbox#select-all')
-      .props()
-      .onChange(false);
+    wrapper.find('Checkbox#select-all').props().onChange(false);
     wrapper.update();
     expect(
       wrapper
         .find('input[type="checkbox"]')
-        .findWhere(n => n.prop('checked') === true).length
+        .findWhere((n) => n.prop('checked') === true).length
     ).toBe(0);
   });
 
@@ -196,7 +190,7 @@ describe('UsersList with full permissions', () => {
     await waitForElement(
       wrapper,
       'ToolbarDeleteButton * button',
-      el => el.getDOMNode().disabled === false
+      (el) => el.getDOMNode().disabled === false
     );
     wrapper.find('UsersList').setState({
       selected: mockUsers,
@@ -204,7 +198,7 @@ describe('UsersList with full permissions', () => {
     await waitForElement(
       wrapper,
       'ToolbarDeleteButton * button',
-      el => el.getDOMNode().disabled === true
+      (el) => el.getDOMNode().disabled === true
     );
   });
 
@@ -244,12 +238,12 @@ describe('UsersList with full permissions', () => {
     await waitForElement(
       wrapper,
       'Modal',
-      el => el.props().isOpen === true && el.props().title === 'Error!'
+      (el) => el.props().isOpen === true && el.props().title === 'Error!'
     );
   });
 
   test('Add button shown for users with ability to POST', async () => {
-    await waitForElement(wrapper, 'ToolbarAddButton', el => el.length === 1);
+    await waitForElement(wrapper, 'ToolbarAddButton', (el) => el.length === 1);
   });
 });
 
@@ -264,8 +258,8 @@ describe('UsersList without full permissions', () => {
     });
 
     wrapper = mountWithContexts(<UsersList />);
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 1);
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 1);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(wrapper.find('ToolbarAddButton').length).toBe(0);
   });
 });

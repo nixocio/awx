@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Modal, Tab, Tabs, TabTitleText } from '@patternfly/react-core';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import styled from 'styled-components';
+import { withI18n } from '@lingui/react';
+import { Modal, Tab, TabTitleText, Tabs } from '@patternfly/react-core';
 import { AllHtmlEntities } from 'html-entities';
-import StatusIcon from '../../../components/StatusIcon';
-import { DetailList, Detail } from '../../../components/DetailList';
-import ContentEmpty from '../../../components/ContentEmpty';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+
 import CodeMirrorInput from '../../../components/CodeMirrorInput';
+import ContentEmpty from '../../../components/ContentEmpty';
+import { Detail, DetailList } from '../../../components/DetailList';
+import StatusIcon from '../../../components/StatusIcon';
 
 const entities = new AllHtmlEntities();
 
@@ -19,7 +20,7 @@ const HostNameDetailValue = styled.div`
   grid-template-columns: auto auto;
 `;
 
-const processEventStatus = event => {
+const processEventStatus = (event) => {
   let status = null;
   if (event.event === 'runner_on_unreachable') {
     status = 'unreachable';
@@ -45,7 +46,7 @@ const processEventStatus = event => {
   return status;
 };
 
-const processCodeMirrorValue = value => {
+const processCodeMirrorValue = (value) => {
   let codeMirrorValue;
   if (value === undefined) {
     codeMirrorValue = false;
@@ -59,7 +60,7 @@ const processCodeMirrorValue = value => {
   return codeMirrorValue;
 };
 
-const processStdOutValue = hostEvent => {
+const processStdOutValue = (hostEvent) => {
   const taskAction = hostEvent?.event_data?.taskAction;
   const res = hostEvent?.event_data?.res;
 

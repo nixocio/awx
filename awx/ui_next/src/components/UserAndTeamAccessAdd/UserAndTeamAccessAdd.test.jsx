@@ -1,10 +1,11 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { UsersAPI, JobTemplatesAPI } from '../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
+import { JobTemplatesAPI, UsersAPI } from '../../api';
 import UserAndTeamAccessAdd from './UserAndTeamAccessAdd';
 
 jest.mock('../../api/models/Teams');
@@ -129,7 +130,7 @@ describe('<UserAndTeamAccessAdd/>', () => {
       page_size: 5,
     });
 
-    await waitForElement(wrapper, 'SelectResourceStep', el => el.length > 0);
+    await waitForElement(wrapper, 'SelectResourceStep', (el) => el.length > 0);
     expect(JobTemplatesAPI.read).toHaveBeenCalled();
     await act(async () =>
       wrapper
@@ -150,10 +151,7 @@ describe('<UserAndTeamAccessAdd/>', () => {
     expect(wrapper.find('RolesStep').length).toBe(1);
 
     await act(async () =>
-      wrapper
-        .find('CheckboxCard')
-        .first()
-        .prop('onSelect')()
+      wrapper.find('CheckboxCard').first().prop('onSelect')()
     );
 
     await act(async () =>
@@ -197,7 +195,7 @@ describe('<UserAndTeamAccessAdd/>', () => {
     await act(async () =>
       wrapper.find('Button[type="submit"]').prop('onClick')()
     );
-    await waitForElement(wrapper, 'SelectResourceStep', el => el.length > 0);
+    await waitForElement(wrapper, 'SelectResourceStep', (el) => el.length > 0);
     expect(JobTemplatesAPI.read).toHaveBeenCalled();
     await act(async () =>
       wrapper
@@ -218,10 +216,7 @@ describe('<UserAndTeamAccessAdd/>', () => {
     expect(wrapper.find('RolesStep').length).toBe(1);
 
     await act(async () =>
-      wrapper
-        .find('CheckboxCard')
-        .first()
-        .prop('onSelect')()
+      wrapper.find('CheckboxCard').first().prop('onSelect')()
     );
 
     await act(async () =>

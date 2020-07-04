@@ -1,19 +1,20 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { PlusIcon } from '@patternfly/react-icons';
+import { bool, func } from 'prop-types';
 import React, { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { bool, func } from 'prop-types';
-import { PlusIcon } from '@patternfly/react-icons';
+
 import {
   WorkflowDispatchContext,
   WorkflowStateContext,
 } from '../../contexts/Workflow';
-import { constants as wfConstants } from './WorkflowUtils';
 import WorkflowActionTooltip from './WorkflowActionTooltip';
 import WorkflowActionTooltipItem from './WorkflowActionTooltipItem';
+import { constants as wfConstants } from './WorkflowUtils';
 
 const StartG = styled.g`
-  pointer-events: ${props => (props.ignorePointerEvents ? 'none' : 'auto')};
+  pointer-events: ${(props) => (props.ignorePointerEvents ? 'none' : 'auto')};
 `;
 
 function WorkflowStartNode({ i18n, onUpdateHelpText, showActionTooltip }) {

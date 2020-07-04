@@ -1,12 +1,13 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-import UserAdd from './UserAdd';
 import { UsersAPI } from '../../../api';
+import UserAdd from './UserAdd';
 
 jest.mock('../../../api');
 let wrapper;

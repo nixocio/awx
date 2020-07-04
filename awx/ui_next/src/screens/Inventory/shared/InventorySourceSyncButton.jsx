@@ -1,13 +1,14 @@
-import React, { useCallback } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import PropTypes from 'prop-types';
+import { withI18n } from '@lingui/react';
 import { Button, Tooltip } from '@patternfly/react-core';
-import { SyncIcon, MinusCircleIcon } from '@patternfly/react-icons';
-import useRequest, { useDismissableError } from '../../../util/useRequest';
+import { MinusCircleIcon, SyncIcon } from '@patternfly/react-icons';
+import PropTypes from 'prop-types';
+import React, { useCallback } from 'react';
+
+import { InventorySourcesAPI, InventoryUpdatesAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal/AlertModal';
 import ErrorDetail from '../../../components/ErrorDetail/ErrorDetail';
-import { InventoryUpdatesAPI, InventorySourcesAPI } from '../../../api';
+import useRequest, { useDismissableError } from '../../../util/useRequest';
 
 function InventorySourceSyncButton({ source, icon, i18n }) {
   const {

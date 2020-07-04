@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
 import { withI18n } from '@lingui/react';
-import { useHistory, useParams } from 'react-router-dom';
 import { Card } from '@patternfly/react-core';
-import { GroupsAPI } from '../../../api';
+import React, { useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 
+import { GroupsAPI } from '../../../api';
 import InventoryGroupForm from '../shared/InventoryGroupForm';
 
 function InventoryGroupsAdd() {
@@ -11,7 +11,7 @@ function InventoryGroupsAdd() {
   const { id } = useParams();
   const history = useHistory();
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     values.inventory = id;
     try {
       const { data } = await GroupsAPI.create(values);

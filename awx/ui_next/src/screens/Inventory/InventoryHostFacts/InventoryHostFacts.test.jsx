@@ -1,13 +1,14 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-import InventoryHostFacts from './InventoryHostFacts';
 import { HostsAPI } from '../../../api';
 import mockHost from '../shared/data.host.json';
 import mockHostFacts from '../shared/data.hostFacts.json';
+import InventoryHostFacts from './InventoryHostFacts';
 
 jest.mock('../../../api/models/Hosts');
 jest.mock('react-router-dom', () => ({
@@ -26,7 +27,7 @@ describe('<InventoryHostFacts />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<InventoryHostFacts host={mockHost} />);
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
   });
 
   afterEach(() => {
@@ -54,6 +55,6 @@ describe('<InventoryHostFacts />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<InventoryHostFacts host={mockHost} />);
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

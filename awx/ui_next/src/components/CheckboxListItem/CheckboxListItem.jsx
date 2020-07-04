@@ -1,12 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import {
-  DataListItem,
-  DataListItemRow,
-  DataListItemCells,
   DataListCheck,
+  DataListItem,
+  DataListItemCells,
+  DataListItemRow,
   Radio,
 } from '@patternfly/react-core';
+import PropTypes from 'prop-types';
+import React from 'react';
+
 import DataListCell from '../DataListCell';
 
 const CheckboxListItem = ({

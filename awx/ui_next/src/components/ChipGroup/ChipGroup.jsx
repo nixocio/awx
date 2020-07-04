@@ -1,8 +1,8 @@
-import React from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { ChipGroup as PFChipGroup } from '@patternfly/react-core';
 import { number, shape } from 'prop-types';
+import React from 'react';
 
 function ChipGroup({ i18n, numChips, totalChips, i18nHash, ...props }) {
   return (

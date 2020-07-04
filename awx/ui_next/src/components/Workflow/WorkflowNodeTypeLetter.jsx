@@ -1,7 +1,7 @@
+import { PauseIcon } from '@patternfly/react-icons';
+import { shape } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { shape } from 'prop-types';
-import { PauseIcon } from '@patternfly/react-icons';
 
 const NodeTypeLetter = styled.div`
   background-color: #393f43;

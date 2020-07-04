@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import { Route, withRouter, Switch, Redirect, Link } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { CaretLeftIcon } from '@patternfly/react-icons';
+import { withI18n } from '@lingui/react';
 import { Card, PageSection } from '@patternfly/react-core';
+import { CaretLeftIcon } from '@patternfly/react-icons';
+import React, { Component } from 'react';
+import { Link, Redirect, Route, Switch, withRouter } from 'react-router-dom';
+
 import { JobsAPI } from '../../api';
 import ContentError from '../../components/ContentError';
 import RoutedTabs from '../../components/RoutedTabs';
-
+import { JOB_TYPE_URL_SEGMENTS } from '../../constants';
 import JobDetail from './JobDetail';
 import JobOutput from './JobOutput';
 import WorkflowDetail from './WorkflowDetail';
 import { WorkflowOutput } from './WorkflowOutput';
-import { JOB_TYPE_URL_SEGMENTS } from '../../constants';
 
 class Job extends Component {
   constructor(props) {

@@ -1,7 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   Button,
   EmptyState,
@@ -10,16 +8,18 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
-import { getQSConfig, parseQueryString } from '../../../util/qs';
-import { UsersAPI, RolesAPI } from '../../../api';
-import useRequest, { useDeleteItems } from '../../../util/useRequest';
-import PaginatedDataList from '../../../components/PaginatedDataList';
-import ErrorDetail from '../../../components/ErrorDetail';
-import AlertModal from '../../../components/AlertModal';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 
+import { RolesAPI, UsersAPI } from '../../../api';
+import AlertModal from '../../../components/AlertModal';
 import DatalistToolbar from '../../../components/DataListToolbar';
-import UserAccessListItem from './UserAccessListItem';
+import ErrorDetail from '../../../components/ErrorDetail';
+import PaginatedDataList from '../../../components/PaginatedDataList';
 import UserAndTeamAccessAdd from '../../../components/UserAndTeamAccessAdd/UserAndTeamAccessAdd';
+import { getQSConfig, parseQueryString } from '../../../util/qs';
+import useRequest, { useDeleteItems } from '../../../util/useRequest';
+import UserAccessListItem from './UserAccessListItem';
 
 const QS_CONFIG = getQSConfig('roles', {
   page: 1,
@@ -89,7 +89,7 @@ function UserAccessList({ i18n }) {
     fetchRoles();
   };
 
-  const detailUrl = role => {
+  const detailUrl = (role) => {
     const { resource_id, resource_type } = role.summary_fields;
 
     if (!role || !resource_type) {
@@ -104,7 +104,7 @@ function UserAccessList({ i18n }) {
     }
     return `/${resource_type}s/${resource_id}/details`;
   };
-  const isSysAdmin = roles.some(role => role.name === 'System Administrator');
+  const isSysAdmin = roles.some((role) => role.name === 'System Administrator');
   if (isSysAdmin) {
     return (
       <EmptyState variant="full">
@@ -142,7 +142,7 @@ function UserAccessList({ i18n }) {
             key: 'id',
           },
         ]}
-        renderItem={role => {
+        renderItem={(role) => {
           return (
             <UserAccessListItem
               key={role.id}
@@ -150,13 +150,13 @@ function UserAccessList({ i18n }) {
               role={role}
               detailUrl={detailUrl(role)}
               isSelected={false}
-              onSelect={item => {
+              onSelect={(item) => {
                 setRoleToDisassociate(item);
               }}
             />
           );
         }}
-        renderToolbar={props => (
+        renderToolbar={(props) => (
           <DatalistToolbar
             {...props}
             qsConfig={QS_CONFIG}

@@ -1,13 +1,13 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-import HostDetail from './HostDetail';
 import { HostsAPI } from '../../../api';
-
 import mockHost from '../data.host.json';
+import HostDetail from './HostDetail';
 
 jest.mock('../../../api');
 
@@ -59,7 +59,7 @@ describe('<HostDetail />', () => {
       await waitForElement(
         wrapper,
         'Modal[title="Error!"]',
-        el => el.length === 1
+        (el) => el.length === 1
       );
       await act(async () => {
         wrapper.find('Modal[title="Error!"]').invoke('onClose')();
@@ -67,7 +67,7 @@ describe('<HostDetail />', () => {
       await waitForElement(
         wrapper,
         'Modal[title="Error!"]',
-        el => el.length === 0
+        (el) => el.length === 0
       );
     });
   });

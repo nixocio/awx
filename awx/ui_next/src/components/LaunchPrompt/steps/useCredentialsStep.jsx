@@ -1,5 +1,6 @@
-import React from 'react';
 import { t } from '@lingui/macro';
+import React from 'react';
+
 import CredentialsStep from './CredentialsStep';
 
 const STEP_ID = 'credentials';
@@ -21,7 +22,7 @@ export default function useCredentialsStep(
     isReady: true,
     contentError: null,
     formError: null,
-    setTouched: setFieldsTouched => {
+    setTouched: (setFieldsTouched) => {
       setFieldsTouched({
         credentials: true,
       });

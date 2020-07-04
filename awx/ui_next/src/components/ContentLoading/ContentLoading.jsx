@@ -1,11 +1,11 @@
-import React from 'react';
 import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
-import styled from 'styled-components';
 import {
-  EmptyState as PFEmptyState,
   EmptyStateBody,
+  EmptyState as PFEmptyState,
 } from '@patternfly/react-core';
+import React from 'react';
+import styled from 'styled-components';
 
 const EmptyState = styled(PFEmptyState)`
   --pf-c-empty-state--m-lg--MaxWidth: none;

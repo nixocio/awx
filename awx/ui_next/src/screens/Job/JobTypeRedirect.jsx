@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { Redirect, Link } from 'react-router-dom';
-import { PageSection, Card } from '@patternfly/react-core';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Card, PageSection } from '@patternfly/react-core';
+import React, { Component } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 
 import { UnifiedJobsAPI } from '../../api';
 import ContentError from '../../components/ContentError';

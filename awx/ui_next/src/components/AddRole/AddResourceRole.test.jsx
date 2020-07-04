@@ -1,9 +1,10 @@
+import { shallow } from 'enzyme';
 /* eslint-disable react/jsx-pascal-case */
 import React from 'react';
-import { shallow } from 'enzyme';
+
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
-import AddResourceRole, { _AddResourceRole } from './AddResourceRole';
 import { TeamsAPI, UsersAPI } from '../../api';
+import AddResourceRole, { _AddResourceRole } from './AddResourceRole';
 
 jest.mock('../../api');
 
@@ -35,7 +36,7 @@ describe('<_AddResourceRole />', () => {
         onClose={() => {}}
         onSave={() => {}}
         roles={roles}
-        i18n={{ _: val => val.toString() }}
+        i18n={{ _: (val) => val.toString() }}
       />
     );
   });
@@ -45,7 +46,7 @@ describe('<_AddResourceRole />', () => {
         onClose={() => {}}
         onSave={() => {}}
         roles={roles}
-        i18n={{ _: val => val.toString() }}
+        i18n={{ _: (val) => val.toString() }}
       />
     );
     wrapper.setState({
@@ -82,7 +83,7 @@ describe('<_AddResourceRole />', () => {
         onClose={() => {}}
         onSave={() => {}}
         roles={roles}
-        i18n={{ _: val => val.toString() }}
+        i18n={{ _: (val) => val.toString() }}
       />
     );
     wrapper.setState({
@@ -130,7 +131,7 @@ describe('<_AddResourceRole />', () => {
         onClose={() => {}}
         onSave={() => {}}
         roles={roles}
-        i18n={{ _: val => val.toString() }}
+        i18n={{ _: (val) => val.toString() }}
       />
     );
     wrapper.setState({

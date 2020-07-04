@@ -1,14 +1,15 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
-import { CredentialsAPI } from '../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
-import mockCredential from './shared/data.scmCredential.json';
-import mockOrgCredential from './shared/data.orgCredential.json';
+import { CredentialsAPI } from '../../api';
 import Credential from './Credential';
+import mockOrgCredential from './shared/data.orgCredential.json';
+import mockCredential from './shared/data.scmCredential.json';
 
 jest.mock('../../api');
 jest.mock('react-router-dom', () => ({
@@ -30,8 +31,8 @@ describe('<Credential />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<Credential setBreadcrumb={() => {}} />);
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
-    await waitForElement(wrapper, '.pf-c-tabs__item', el => el.length === 2);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
+    await waitForElement(wrapper, '.pf-c-tabs__item', (el) => el.length === 2);
   });
 
   test('initially renders org-based credential succesfully', async () => {
@@ -42,9 +43,9 @@ describe('<Credential />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<Credential setBreadcrumb={() => {}} />);
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     // org-based credential detail needs access tab
-    await waitForElement(wrapper, '.pf-c-tabs__item', el => el.length === 3);
+    await waitForElement(wrapper, '.pf-c-tabs__item', (el) => el.length === 3);
   });
 
   test('should show content error when user attempts to navigate to erroneous route', async () => {
@@ -68,6 +69,6 @@ describe('<Credential />', () => {
         },
       });
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

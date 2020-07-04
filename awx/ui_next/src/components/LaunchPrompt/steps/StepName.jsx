@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Tooltip } from '@patternfly/react-core';
 import { ExclamationCircleIcon as PFExclamationCircleIcon } from '@patternfly/react-icons';
+import React from 'react';
+import styled from 'styled-components';
 
 const AlertText = styled.div`
   color: var(--pf-global--danger-color--200);

@@ -1,13 +1,8 @@
 import 'styled-components/macro';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+
 import * as d3 from 'd3';
-import { WorkflowStateContext } from '../../../contexts/Workflow';
-import {
-  getScaleAndOffsetToFit,
-  getTranslatePointsForZoom,
-} from '../../../components/Workflow/WorkflowUtils';
-import WorkflowOutputLink from './WorkflowOutputLink';
-import WorkflowOutputNode from './WorkflowOutputNode';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+
 import {
   WorkflowHelp,
   WorkflowLegend,
@@ -16,6 +11,13 @@ import {
   WorkflowStartNode,
   WorkflowTools,
 } from '../../../components/Workflow';
+import {
+  getScaleAndOffsetToFit,
+  getTranslatePointsForZoom,
+} from '../../../components/Workflow/WorkflowUtils';
+import { WorkflowStateContext } from '../../../contexts/Workflow';
+import WorkflowOutputLink from './WorkflowOutputLink';
+import WorkflowOutputNode from './WorkflowOutputNode';
 
 function WorkflowOutputGraph() {
   const [linkHelp, setLinkHelp] = useState();
@@ -39,7 +41,7 @@ function WorkflowOutputGraph() {
     setZoomPercentage(d3.event.transform.k * 100);
   };
 
-  const handlePan = direction => {
+  const handlePan = (direction) => {
     const transform = d3.zoomTransform(d3.select(svgRef.current).node());
 
     let { x: xPos, y: yPos } = transform;
@@ -81,7 +83,7 @@ function WorkflowOutputGraph() {
     setZoomPercentage(100);
   };
 
-  const handleZoomChange = newScale => {
+  const handleZoomChange = (newScale) => {
     const svgBoundingClientRect = svgRef.current.getBoundingClientRect();
     const currentScaleAndOffset = d3.zoomTransform(
       d3.select(svgRef.current).node()
@@ -109,10 +111,7 @@ function WorkflowOutputGraph() {
       .node()
       .getBoundingClientRect();
 
-    const gBBoxDimensions = d3
-      .select(gRef.current)
-      .node()
-      .getBBox();
+    const gBBoxDimensions = d3.select(gRef.current).node().getBBox();
 
     const svgBoundingClientRect = svgRef.current.getBoundingClientRect();
 
@@ -131,10 +130,7 @@ function WorkflowOutputGraph() {
     setZoomPercentage(scaleToFit * 100);
   };
 
-  const zoomRef = d3
-    .zoom()
-    .scaleExtent([0.1, 2])
-    .on('zoom', zoom);
+  const zoomRef = d3.zoom().scaleExtent([0.1, 2]).on('zoom', zoom);
 
   // Initialize the zoom
   useEffect(() => {
@@ -168,7 +164,7 @@ function WorkflowOutputGraph() {
         <g id="workflow-g" ref={gRef}>
           {nodePositions && [
             <WorkflowStartNode key="start" showActionTooltip={false} />,
-            links.map(link => (
+            links.map((link) => (
               <WorkflowOutputLink
                 key={`link-${link.source.id}-${link.target.id}`}
                 link={link}
@@ -176,7 +172,7 @@ function WorkflowOutputGraph() {
                 mouseLeave={() => setLinkHelp(null)}
               />
             )),
-            nodes.map(node => {
+            nodes.map((node) => {
               if (node.id > 1) {
                 return (
                   <WorkflowOutputNode

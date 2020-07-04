@@ -1,23 +1,23 @@
-import React, { useEffect, useCallback, useState } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { getQSConfig, mergeParams, parseQueryString } from '../../../util/qs';
-import { GroupsAPI, InventoriesAPI } from '../../../api';
+import { withI18n } from '@lingui/react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 
+import { GroupsAPI, InventoriesAPI } from '../../../api';
+import AlertModal from '../../../components/AlertModal';
+import AssociateModal from '../../../components/AssociateModal';
+import DataListToolbar from '../../../components/DataListToolbar';
+import DisassociateButton from '../../../components/DisassociateButton';
+import ErrorDetail from '../../../components/ErrorDetail';
+import PaginatedDataList from '../../../components/PaginatedDataList';
+import { getQSConfig, mergeParams, parseQueryString } from '../../../util/qs';
 import useRequest, {
   useDeleteItems,
   useDismissableError,
 } from '../../../util/useRequest';
 import useSelected from '../../../util/useSelected';
-import AlertModal from '../../../components/AlertModal';
-import DataListToolbar from '../../../components/DataListToolbar';
-import ErrorDetail from '../../../components/ErrorDetail';
-import PaginatedDataList from '../../../components/PaginatedDataList';
-import AssociateModal from '../../../components/AssociateModal';
-import DisassociateButton from '../../../components/DisassociateButton';
-import InventoryGroupHostListItem from './InventoryGroupHostListItem';
 import AddHostDropdown from './AddHostDropdown';
+import InventoryGroupHostListItem from './InventoryGroupHostListItem';
 
 const QS_CONFIG = getQSConfig('host', {
   page: 1,
@@ -71,7 +71,7 @@ function InventoryGroupHostList({ i18n }) {
   } = useDeleteItems(
     useCallback(async () => {
       return Promise.all(
-        selected.map(host => GroupsAPI.disassociateHost(groupId, host))
+        selected.map((host) => GroupsAPI.disassociateHost(groupId, host))
       );
     }, [groupId, selected]),
     {
@@ -87,7 +87,7 @@ function InventoryGroupHostList({ i18n }) {
   };
 
   const fetchHostsToAssociate = useCallback(
-    params => {
+    (params) => {
       return InventoriesAPI.readHosts(
         inventoryId,
         mergeParams(params, { not__groups: groupId })
@@ -98,9 +98,9 @@ function InventoryGroupHostList({ i18n }) {
 
   const { request: handleAssociate, error: associateErr } = useRequest(
     useCallback(
-      async hostsToAssociate => {
+      async (hostsToAssociate) => {
         await Promise.all(
-          hostsToAssociate.map(host =>
+          hostsToAssociate.map((host) =>
             GroupsAPI.associateHost(groupId, host.id)
           )
         );
@@ -154,12 +154,12 @@ function InventoryGroupHostList({ i18n }) {
             key: 'name',
           },
         ]}
-        renderToolbar={props => (
+        renderToolbar={(props) => (
           <DataListToolbar
             {...props}
             showSelectAll
             isAllSelected={isAllSelected}
-            onSelectAll={isSelected =>
+            onSelectAll={(isSelected) =>
               setSelected(isSelected ? [...hosts] : [])
             }
             qsConfig={QS_CONFIG}
@@ -187,13 +187,13 @@ function InventoryGroupHostList({ i18n }) {
             ]}
           />
         )}
-        renderItem={o => (
+        renderItem={(o) => (
           <InventoryGroupHostListItem
             key={o.id}
             host={o}
             detailUrl={`/inventories/inventory/${inventoryId}/hosts/${o.id}/details`}
             editUrl={`/inventories/inventory/${inventoryId}/hosts/${o.id}/edit`}
-            isSelected={selected.some(row => row.id === o.id)}
+            isSelected={selected.some((row) => row.id === o.id)}
             onSelect={() => handleSelect(o)}
           />
         )}

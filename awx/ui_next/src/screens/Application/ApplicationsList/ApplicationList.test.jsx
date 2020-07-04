@@ -46,7 +46,7 @@ describe('<ApplicationsList/>', () => {
     await act(async () => {
       wrapper = mountWithContexts(<ApplicationsList />);
     });
-    await waitForElement(wrapper, 'ApplicationsList', el => el.length > 0);
+    await waitForElement(wrapper, 'ApplicationsList', (el) => el.length > 0);
   });
   test('should have data fetched and render 2 rows', async () => {
     ApplicationsAPI.read.mockResolvedValue(applications);
@@ -54,7 +54,7 @@ describe('<ApplicationsList/>', () => {
     await act(async () => {
       wrapper = mountWithContexts(<ApplicationsList />);
     });
-    await waitForElement(wrapper, 'ApplicationsList', el => el.length > 0);
+    await waitForElement(wrapper, 'ApplicationsList', (el) => el.length > 0);
     expect(wrapper.find('ApplicationListItem').length).toBe(2);
     expect(ApplicationsAPI.read).toBeCalled();
     expect(ApplicationsAPI.readOptions).toBeCalled();
@@ -66,7 +66,7 @@ describe('<ApplicationsList/>', () => {
     await act(async () => {
       wrapper = mountWithContexts(<ApplicationsList />);
     });
-    waitForElement(wrapper, 'ApplicationsList', el => el.length > 0);
+    waitForElement(wrapper, 'ApplicationsList', (el) => el.length > 0);
 
     wrapper
       .find('input#select-application-1')
@@ -108,7 +108,7 @@ describe('<ApplicationsList/>', () => {
       wrapper = mountWithContexts(<ApplicationsList />);
     });
 
-    await waitForElement(wrapper, 'ApplicationsList', el => el.length > 0);
+    await waitForElement(wrapper, 'ApplicationsList', (el) => el.length > 0);
     expect(wrapper.find('ContentError').length).toBe(1);
   });
 
@@ -129,7 +129,7 @@ describe('<ApplicationsList/>', () => {
     await act(async () => {
       wrapper = mountWithContexts(<ApplicationsList />);
     });
-    waitForElement(wrapper, 'ApplicationsList', el => el.length > 0);
+    waitForElement(wrapper, 'ApplicationsList', (el) => el.length > 0);
 
     wrapper.find('input#select-application-1').simulate('change', 'a');
 
@@ -160,7 +160,7 @@ describe('<ApplicationsList/>', () => {
     await act(async () => {
       wrapper = mountWithContexts(<ApplicationsList />);
     });
-    waitForElement(wrapper, 'ApplicationsList', el => el.length > 0);
+    waitForElement(wrapper, 'ApplicationsList', (el) => el.length > 0);
     expect(wrapper.find('ToolbarAddButton').length).toBe(0);
   });
   test('should not render edit button for first list item', async () => {
@@ -172,18 +172,12 @@ describe('<ApplicationsList/>', () => {
     await act(async () => {
       wrapper = mountWithContexts(<ApplicationsList />);
     });
-    waitForElement(wrapper, 'ApplicationsList', el => el.length > 0);
+    waitForElement(wrapper, 'ApplicationsList', (el) => el.length > 0);
     expect(
-      wrapper
-        .find('ApplicationListItem')
-        .at(0)
-        .find('PencilAltIcon').length
+      wrapper.find('ApplicationListItem').at(0).find('PencilAltIcon').length
     ).toBe(0);
     expect(
-      wrapper
-        .find('ApplicationListItem')
-        .at(1)
-        .find('PencilAltIcon').length
+      wrapper.find('ApplicationListItem').at(1).find('PencilAltIcon').length
     ).toBe(1);
   });
 });

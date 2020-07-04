@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { Formik, useField } from 'formik';
+import { withI18n } from '@lingui/react';
 import { Form, FormGroup } from '@patternfly/react-core';
+import { Formik, useField } from 'formik';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+
 import AnsibleSelect from '../../../components/AnsibleSelect';
 import FormActionGroup from '../../../components/FormActionGroup/FormActionGroup';
 import FormField, {
-  PasswordField,
   FormSubmitError,
+  PasswordField,
 } from '../../../components/FormField';
+import { FormColumnLayout } from '../../../components/FormLayout';
 import OrganizationLookup from '../../../components/Lookup/OrganizationLookup';
 import { required, requiredEmail } from '../../../util/validators';
-import { FormColumnLayout } from '../../../components/FormLayout';
 
 function UserFormFields({ user, i18n }) {
   const [organization, setOrganization] = useState(null);
@@ -105,7 +106,7 @@ function UserFormFields({ user, i18n }) {
           helperTextInvalid={organizationMeta.error}
           isValid={!organizationMeta.touched || !organizationMeta.error}
           onBlur={() => organizationHelpers.setTouched()}
-          onChange={value => {
+          onChange={(value) => {
             organizationHelpers.setValue(value.id);
             setOrganization(value);
           }}
@@ -175,7 +176,7 @@ function UserForm({ user, handleCancel, handleSubmit, submitError, i18n }) {
       }}
       onSubmit={handleValidateAndSubmit}
     >
-      {formik => (
+      {(formik) => (
         <Form autoComplete="off" onSubmit={formik.handleSubmit}>
           <FormColumnLayout>
             <UserFormFields user={user} i18n={i18n} />

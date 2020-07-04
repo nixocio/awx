@@ -1,17 +1,17 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { FormGroup } from '@patternfly/react-core';
+import { bool, func, node, number, oneOfType, string } from 'prop-types';
 import React, { useCallback, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { func, bool, number, node, string, oneOfType } from 'prop-types';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
 
-import { FormGroup } from '@patternfly/react-core';
-import Lookup from './Lookup';
-import LookupErrorMessage from './shared/LookupErrorMessage';
-import OptionsList from '../OptionsList';
 import { InventoriesAPI, InventoryScriptsAPI } from '../../api';
 import { InventoryScript } from '../../types';
+import { getQSConfig, mergeParams, parseQueryString } from '../../util/qs';
 import useRequest from '../../util/useRequest';
-import { getQSConfig, parseQueryString, mergeParams } from '../../util/qs';
+import OptionsList from '../OptionsList';
+import Lookup from './Lookup';
+import LookupErrorMessage from './shared/LookupErrorMessage';
 
 const QS_CONFIG = getQSConfig('inventory_scripts', {
   order_by: 'name',
@@ -84,8 +84,8 @@ function InventoryScriptLookup({
             options={inventoryScripts}
             qsConfig={QS_CONFIG}
             readOnly={!canDelete}
-            deselectItem={item => dispatch({ type: 'DESELECT_ITEM', item })}
-            selectItem={item => dispatch({ type: 'SELECT_ITEM', item })}
+            deselectItem={(item) => dispatch({ type: 'DESELECT_ITEM', item })}
+            selectItem={(item) => dispatch({ type: 'SELECT_ITEM', item })}
             value={state.selectedItems}
             searchColumns={[
               {

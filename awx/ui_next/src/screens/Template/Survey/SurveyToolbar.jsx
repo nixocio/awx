@@ -1,18 +1,18 @@
-import React from 'react';
-import { useRouteMatch } from 'react-router-dom';
 import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
-import styled from 'styled-components';
-
 import {
-  Switch,
-  Checkbox,
   Button,
-  Toolbar as _Toolbar,
+  Checkbox,
+  Switch,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
+  Toolbar as _Toolbar,
 } from '@patternfly/react-core';
+import React from 'react';
+import { useRouteMatch } from 'react-router-dom';
+import styled from 'styled-components';
+
 import { ToolbarAddButton } from '../../../components/PaginatedDataList';
 
 const Toolbar = styled(_Toolbar)`
@@ -38,7 +38,7 @@ function SurveyToolbar({
           <Checkbox
             isDisabled={!canEdit}
             isChecked={isAllSelected}
-            onChange={isChecked => {
+            onChange={(isChecked) => {
               onSelectAll(isChecked);
             }}
             aria-label={i18n._(t`Select all`)}

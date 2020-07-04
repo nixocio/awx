@@ -1,16 +1,17 @@
-import React, { Fragment } from 'react';
-import { arrayOf, object } from 'prop-types';
-import { withI18n } from '@lingui/react';
-import { Link as _Link } from 'react-router-dom';
-import { Tooltip } from '@patternfly/react-core';
-import styled from 'styled-components';
 import { t } from '@lingui/macro';
-import StatusIcon from '../StatusIcon';
-import { formatDateString } from '../../util/dates';
+import { withI18n } from '@lingui/react';
+import { Tooltip } from '@patternfly/react-core';
+import { arrayOf, object } from 'prop-types';
+import React, { Fragment } from 'react';
+import { Link as _Link } from 'react-router-dom';
+import styled from 'styled-components';
+
 import { JOB_TYPE_URL_SEGMENTS } from '../../constants';
+import { formatDateString } from '../../util/dates';
+import StatusIcon from '../StatusIcon';
 
 /* eslint-disable react/jsx-pascal-case */
-const Link = styled(props => <_Link {...props} />)`
+const Link = styled((props) => <_Link {...props} />)`
   margin-right: 5px;
 `;
 
@@ -20,7 +21,7 @@ const Wrapper = styled.div`
 /* eslint-enable react/jsx-pascal-case */
 
 const Sparkline = ({ i18n, jobs }) => {
-  const generateTooltip = job => (
+  const generateTooltip = (job) => (
     <Fragment>
       <div>
         {i18n._(t`JOB ID:`)} {job.id}
@@ -36,7 +37,7 @@ const Sparkline = ({ i18n, jobs }) => {
     </Fragment>
   );
 
-  const statusIcons = jobs.map(job => (
+  const statusIcons = jobs.map((job) => (
     <Tooltip position="top" content={generateTooltip(job)} key={job.id}>
       <Link
         aria-label={i18n._(t`View job ${job.id}`)}

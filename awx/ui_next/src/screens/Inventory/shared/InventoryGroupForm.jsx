@@ -1,18 +1,18 @@
-import React from 'react';
-import { withI18n } from '@lingui/react';
-import { Formik } from 'formik';
-import { Form, Card } from '@patternfly/react-core';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Card, Form } from '@patternfly/react-core';
+import { Formik } from 'formik';
+import React from 'react';
 
 import { CardBody } from '../../../components/Card';
-import FormField from '../../../components/FormField';
-import FormActionGroup from '../../../components/FormActionGroup/FormActionGroup';
 import { VariablesField } from '../../../components/CodeMirrorInput';
-import { required } from '../../../util/validators';
+import FormActionGroup from '../../../components/FormActionGroup/FormActionGroup';
+import FormField from '../../../components/FormField';
 import {
   FormColumnLayout,
   FormFullWidthLayout,
 } from '../../../components/FormLayout';
+import { required } from '../../../util/validators';
 
 function InventoryGroupForm({
   i18n,
@@ -31,7 +31,7 @@ function InventoryGroupForm({
     <Card>
       <CardBody>
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-          {formik => (
+          {(formik) => (
             <Form autoComplete="off" onSubmit={formik.handleSubmit}>
               <FormColumnLayout>
                 <FormField

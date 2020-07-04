@@ -1,6 +1,6 @@
 import React from 'react';
-import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 
+import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import JobEvent from './JobEvent';
 
 const mockOnPlayStartEvent = {
@@ -33,7 +33,7 @@ describe('<JobEvent />', () => {
     let wrapper = mountWithContexts(<JobEvent {...mockOnPlayStartEvent} />);
     let lineText = wrapper.find(selectors.lineText);
     expect(
-      lineText.filterWhere(e => e.text().includes('18:11:22'))
+      lineText.filterWhere((e) => e.text().includes('18:11:22'))
     ).toHaveLength(1);
 
     const singleDigitTimestampEvent = {
@@ -43,7 +43,7 @@ describe('<JobEvent />', () => {
     wrapper = mountWithContexts(<JobEvent {...singleDigitTimestampEvent} />);
     lineText = wrapper.find(selectors.lineText);
     expect(
-      lineText.filterWhere(e => e.text().includes('08:01:02'))
+      lineText.filterWhere((e) => e.text().includes('08:01:02'))
     ).toHaveLength(1);
   });
 

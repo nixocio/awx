@@ -1,13 +1,13 @@
-import React from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Chip, List, ListItem } from '@patternfly/react-core';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Chip, List, ListItem } from '@patternfly/react-core';
-import { Detail, DeletedDetail } from '../DetailList';
+import ChipGroup from '../ChipGroup';
 import { VariablesDetail } from '../CodeMirrorInput';
 import CredentialChip from '../CredentialChip';
-import ChipGroup from '../ChipGroup';
+import { DeletedDetail, Detail } from '../DetailList';
 
 function PromptInventorySourceDetail({ i18n, resource }) {
   const {
@@ -111,7 +111,7 @@ function PromptInventorySourceDetail({ i18n, resource }) {
         <Detail
           fullWidth
           label={i18n._(t`Credential`)}
-          value={summary_fields.credentials.map(cred => (
+          value={summary_fields.credentials.map((cred) => (
             <CredentialChip key={cred?.id} credential={cred} isReadOnly />
           ))}
         />
@@ -125,7 +125,7 @@ function PromptInventorySourceDetail({ i18n, resource }) {
               numChips={5}
               totalChips={source_regions.split(',').length}
             >
-              {source_regions.split(',').map(region => (
+              {source_regions.split(',').map((region) => (
                 <Chip key={region} isReadOnly>
                   {region}
                 </Chip>
@@ -143,7 +143,7 @@ function PromptInventorySourceDetail({ i18n, resource }) {
               numChips={5}
               totalChips={instance_filters.split(',').length}
             >
-              {instance_filters.split(',').map(filter => (
+              {instance_filters.split(',').map((filter) => (
                 <Chip key={filter} isReadOnly>
                   {filter}
                 </Chip>
@@ -158,7 +158,7 @@ function PromptInventorySourceDetail({ i18n, resource }) {
           label={i18n._(t`Only Group By`)}
           value={
             <ChipGroup numChips={5} totalChips={group_by.split(',').length}>
-              {group_by.split(',').map(group => (
+              {group_by.split(',').map((group) => (
                 <Chip key={group} isReadOnly>
                   {group}
                 </Chip>

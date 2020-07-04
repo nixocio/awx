@@ -1,16 +1,18 @@
 import 'styled-components/macro';
-import React, { Fragment, useState, useCallback, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
-import { ToolbarItem, Alert } from '@patternfly/react-core';
-import { CredentialsAPI, CredentialTypesAPI } from '../../api';
+import { withI18n } from '@lingui/react';
+import { Alert, ToolbarItem } from '@patternfly/react-core';
+import PropTypes from 'prop-types';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
+
+import { CredentialTypesAPI, CredentialsAPI } from '../../api';
+import { getQSConfig, parseQueryString } from '../../util/qs';
+import useRequest from '../../util/useRequest';
 import AnsibleSelect from '../AnsibleSelect';
 import CredentialChip from '../CredentialChip';
 import OptionsList from '../OptionsList';
-import useRequest from '../../util/useRequest';
-import { getQSConfig, parseQueryString } from '../../util/qs';
 import Lookup from './Lookup';
 
 const QS_CONFIG = getQSConfig('credentials', {
@@ -37,7 +39,7 @@ function MultiCredentialsLookup(props) {
   } = useRequest(
     useCallback(async () => {
       const types = await CredentialTypesAPI.loadAllTypes();
-      const match = types.find(type => type.kind === 'ssh') || types[0];
+      const match = types.find((type) => type.kind === 'ssh') || types[0];
       setSelectedType(match);
       return types;
     }, []),
@@ -127,7 +129,7 @@ function MultiCredentialsLookup(props) {
                   css="flex: 1 1 75%;"
                   id="multiCredentialsLookUp-select"
                   label={i18n._(t`Selected Category`)}
-                  data={credentialTypes.map(type => ({
+                  data={credentialTypes.map((type) => ({
                     key: type.id,
                     value: type.id,
                     label: type.name,
@@ -136,7 +138,7 @@ function MultiCredentialsLookup(props) {
                   value={selectedType && selectedType.id}
                   onChange={(e, id) => {
                     setSelectedType(
-                      credentialTypes.find(o => o.id === parseInt(id, 10))
+                      credentialTypes.find((o) => o.id === parseInt(id, 10))
                     );
                   }}
                 />
@@ -172,12 +174,12 @@ function MultiCredentialsLookup(props) {
               name="credentials"
               qsConfig={QS_CONFIG}
               readOnly={!canDelete}
-              selectItem={item => {
-                const hasSameVaultID = val =>
+              selectItem={(item) => {
+                const hasSameVaultID = (val) =>
                   val?.inputs?.vault_id !== undefined &&
                   val?.inputs?.vault_id === item?.inputs?.vault_id;
-                const hasSameKind = val => val.kind === item.kind;
-                const selectedItems = state.selectedItems.filter(i =>
+                const hasSameKind = (val) => val.kind === item.kind;
+                const selectedItems = state.selectedItems.filter((i) =>
                   isVault ? !hasSameVaultID(i) : !hasSameKind(i)
                 );
                 selectedItems.push(item);
@@ -186,7 +188,7 @@ function MultiCredentialsLookup(props) {
                   selectedItems,
                 });
               }}
-              deselectItem={item => dispatch({ type: 'DESELECT_ITEM', item })}
+              deselectItem={(item) => dispatch({ type: 'DESELECT_ITEM', item })}
               renderItemChip={renderChip}
             />
           </Fragment>

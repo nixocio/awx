@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import {
-  Switch,
-  Route,
-  Redirect,
-  Link,
-  useRouteMatch,
-  useLocation,
-} from 'react-router-dom';
-import { CaretLeftIcon } from '@patternfly/react-icons';
+import { withI18n } from '@lingui/react';
 import { Card, PageSection } from '@patternfly/react-core';
-import RoutedTabs from '../../components/RoutedTabs';
+import { CaretLeftIcon } from '@patternfly/react-icons';
+import React, { useEffect, useState } from 'react';
+import {
+  Link,
+  Redirect,
+  Route,
+  Switch,
+  useLocation,
+  useRouteMatch,
+} from 'react-router-dom';
+
+import { HostsAPI } from '../../api';
 import ContentError from '../../components/ContentError';
 import ContentLoading from '../../components/ContentLoading';
 import JobList from '../../components/JobList';
-import HostFacts from './HostFacts';
+import RoutedTabs from '../../components/RoutedTabs';
 import HostDetail from './HostDetail';
 import HostEdit from './HostEdit';
+import HostFacts from './HostFacts';
 import HostGroups from './HostGroups';
-import { HostsAPI } from '../../api';
 
 function Host({ i18n, setBreadcrumb }) {
   const [host, setHost] = useState(null);

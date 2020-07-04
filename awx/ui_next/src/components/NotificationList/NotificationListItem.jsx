@@ -1,16 +1,17 @@
-import React from 'react';
-import { shape, number, string, bool, func } from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { Link } from 'react-router-dom';
+import { withI18n } from '@lingui/react';
 import {
-  DataListAction as _DataListAction,
   DataListItem,
   DataListItemCells,
   DataListItemRow,
   Switch,
+  DataListAction as _DataListAction,
 } from '@patternfly/react-core';
+import { bool, func, number, shape, string } from 'prop-types';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
 import DataListCell from '../DataListCell';
 
 const DataListAction = styled(_DataListAction)`

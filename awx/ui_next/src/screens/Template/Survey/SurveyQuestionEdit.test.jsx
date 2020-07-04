@@ -1,7 +1,8 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
+import React from 'react';
+import { act } from 'react-dom/test-utils';
+import { Route, Switch } from 'react-router-dom';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import SurveyQuestionEdit from './SurveyQuestionEdit';
 

@@ -1,6 +1,6 @@
 import Base from '../Base';
-import NotificationsMixin from '../mixins/Notifications.mixin';
 import InstanceGroupsMixin from '../mixins/InstanceGroups.mixin';
+import NotificationsMixin from '../mixins/Notifications.mixin';
 
 class Organizations extends InstanceGroupsMixin(NotificationsMixin(Base)) {
   constructor(http) {

@@ -1,11 +1,9 @@
-import React from 'react';
 import { withI18n } from '@lingui/react';
-
-import { Switch, Route } from 'react-router-dom';
-
-import InventoryGroupAdd from '../InventoryGroupAdd/InventoryGroupAdd';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 import InventoryGroup from '../InventoryGroup/InventoryGroup';
+import InventoryGroupAdd from '../InventoryGroupAdd/InventoryGroupAdd';
 import InventoryGroupsList from './InventoryGroupsList';
 
 function InventoryGroups({ setBreadcrumb, inventory }) {

@@ -1,27 +1,27 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Button, Chip, List, ListItem } from '@patternfly/react-core';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
 
-import { Button, Chip, List, ListItem } from '@patternfly/react-core';
+import { InventorySourcesAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal';
-import { CardBody, CardActionsRow } from '../../../components/Card';
+import { CardActionsRow, CardBody } from '../../../components/Card';
 import ChipGroup from '../../../components/ChipGroup';
 import { VariablesDetail } from '../../../components/CodeMirrorInput';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
 import CredentialChip from '../../../components/CredentialChip';
 import DeleteButton from '../../../components/DeleteButton';
-import { FieldTooltip } from '../../../components/FormField';
-import InventorySourceSyncButton from '../shared/InventorySourceSyncButton';
 import {
-  DetailList,
   Detail,
+  DetailList,
   UserDateDetail,
 } from '../../../components/DetailList';
 import ErrorDetail from '../../../components/ErrorDetail';
+import { FieldTooltip } from '../../../components/FormField';
 import useRequest from '../../../util/useRequest';
-import { InventorySourcesAPI } from '../../../api';
+import InventorySourceSyncButton from '../shared/InventorySourceSyncButton';
 
 function InventorySourceDetail({ inventorySource, i18n }) {
   const {
@@ -233,7 +233,7 @@ function InventorySourceDetail({ inventorySource, i18n }) {
           <Detail
             fullWidth
             label={i18n._(t`Credential`)}
-            value={credentials.map(cred => (
+            value={credentials.map((cred) => (
               <CredentialChip key={cred?.id} credential={cred} isReadOnly />
             ))}
           />
@@ -247,7 +247,7 @@ function InventorySourceDetail({ inventorySource, i18n }) {
                 numChips={5}
                 totalChips={source_regions.split(',').length}
               >
-                {source_regions.split(',').map(region => (
+                {source_regions.split(',').map((region) => (
                   <Chip key={region} isReadOnly>
                     {region}
                   </Chip>
@@ -265,7 +265,7 @@ function InventorySourceDetail({ inventorySource, i18n }) {
                 numChips={5}
                 totalChips={instance_filters.split(',').length}
               >
-                {instance_filters.split(',').map(filter => (
+                {instance_filters.split(',').map((filter) => (
                   <Chip key={filter} isReadOnly>
                     {filter}
                   </Chip>
@@ -280,7 +280,7 @@ function InventorySourceDetail({ inventorySource, i18n }) {
             label={i18n._(t`Only group by`)}
             value={
               <ChipGroup numChips={5} totalChips={group_by.split(',').length}>
-                {group_by.split(',').map(group => (
+                {group_by.split(',').map((group) => (
                   <Chip key={group} isReadOnly>
                     {group}
                   </Chip>

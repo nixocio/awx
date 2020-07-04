@@ -1,19 +1,21 @@
 import 'styled-components/macro';
-import React, { useState, useCallback, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
-import { useField } from 'formik';
+import { withI18n } from '@lingui/react';
 import { ToolbarItem } from '@patternfly/react-core';
-import { CredentialsAPI, CredentialTypesAPI } from '../../../api';
-import AnsibleSelect from '../../AnsibleSelect';
-import OptionsList from '../../OptionsList';
-import ContentLoading from '../../ContentLoading';
-import CredentialChip from '../../CredentialChip';
-import ContentError from '../../ContentError';
+import { useField } from 'formik';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import { CredentialTypesAPI, CredentialsAPI } from '../../../api';
 import { getQSConfig, parseQueryString } from '../../../util/qs';
 import useRequest from '../../../util/useRequest';
 import { required } from '../../../util/validators';
+import AnsibleSelect from '../../AnsibleSelect';
+import ContentError from '../../ContentError';
+import ContentLoading from '../../ContentLoading';
+import CredentialChip from '../../CredentialChip';
+import OptionsList from '../../OptionsList';
 
 const QS_CONFIG = getQSConfig('credential', {
   page: 1,
@@ -39,7 +41,7 @@ function CredentialsStep({ i18n }) {
       const loadedTypes = await CredentialTypesAPI.loadAllTypes();
       if (loadedTypes.length) {
         const match =
-          loadedTypes.find(type => type.kind === 'ssh') || loadedTypes[0];
+          loadedTypes.find((type) => type.kind === 'ssh') || loadedTypes[0];
         setSelectedType(match);
       }
       return loadedTypes;
@@ -108,7 +110,7 @@ function CredentialsStep({ i18n }) {
             css="flex: 1 1 75%;"
             id="multiCredentialsLookUp-select"
             label={i18n._(t`Selected Category`)}
-            data={types.map(type => ({
+            data={types.map((type) => ({
               key: type.id,
               value: type.id,
               label: type.name,
@@ -116,7 +118,7 @@ function CredentialsStep({ i18n }) {
             }))}
             value={selectedType && selectedType.id}
             onChange={(e, id) => {
-              setSelectedType(types.find(o => o.id === parseInt(id, 10)));
+              setSelectedType(types.find((o) => o.id === parseInt(id, 10)));
             }}
           />
         </ToolbarItem>
@@ -152,19 +154,19 @@ function CredentialsStep({ i18n }) {
           name="credentials"
           qsConfig={QS_CONFIG}
           readOnly={false}
-          selectItem={item => {
-            const hasSameVaultID = val =>
+          selectItem={(item) => {
+            const hasSameVaultID = (val) =>
               val?.inputs?.vault_id !== undefined &&
               val?.inputs?.vault_id === item?.inputs?.vault_id;
-            const hasSameKind = val => val.kind === item.kind;
-            const newItems = field.value.filter(i =>
+            const hasSameKind = (val) => val.kind === item.kind;
+            const newItems = field.value.filter((i) =>
               isVault ? !hasSameVaultID(i) : !hasSameKind(i)
             );
             newItems.push(item);
             helpers.setValue(newItems);
           }}
-          deselectItem={item => {
-            helpers.setValue(field.value.filter(i => i.id !== item.id));
+          deselectItem={(item) => {
+            helpers.setValue(field.value.filter((i) => i.id !== item.id));
           }}
           renderItemChip={renderChip}
         />

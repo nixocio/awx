@@ -1,9 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-
+import { withI18n } from '@lingui/react';
 import {
   Button,
   EmptyState,
@@ -12,15 +8,18 @@ import {
   Title,
 } from '@patternfly/react-core';
 import { CubesIcon } from '@patternfly/react-icons';
-import { TeamsAPI, RolesAPI } from '../../../api';
-import useRequest, { useDeleteItems } from '../../../util/useRequest';
-import DataListToolbar from '../../../components/DataListToolbar';
-import PaginatedDataList from '../../../components/PaginatedDataList';
-import { getQSConfig, parseQueryString } from '../../../util/qs';
-import ErrorDetail from '../../../components/ErrorDetail';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+
+import { RolesAPI, TeamsAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal';
-import TeamAccessListItem from './TeamAccessListItem';
+import DataListToolbar from '../../../components/DataListToolbar';
+import ErrorDetail from '../../../components/ErrorDetail';
+import PaginatedDataList from '../../../components/PaginatedDataList';
 import UserAndTeamAccessAdd from '../../../components/UserAndTeamAccessAdd/UserAndTeamAccessAdd';
+import { getQSConfig, parseQueryString } from '../../../util/qs';
+import useRequest, { useDeleteItems } from '../../../util/useRequest';
+import TeamAccessListItem from './TeamAccessListItem';
 
 const QS_CONFIG = getQSConfig('roles', {
   page: 1,
@@ -88,7 +87,7 @@ function TeamAccessList({ i18n }) {
   const canAdd =
     options && Object.prototype.hasOwnProperty.call(options, 'POST');
 
-  const detailUrl = role => {
+  const detailUrl = (role) => {
     const { resource_id, resource_type } = role.summary_fields;
 
     if (!role || !resource_type) {
@@ -104,7 +103,7 @@ function TeamAccessList({ i18n }) {
     return `/${resource_type}s/${resource_id}/details`;
   };
 
-  const isSysAdmin = roles.some(role => role.name === 'System Administrator');
+  const isSysAdmin = roles.some((role) => role.name === 'System Administrator');
   if (isSysAdmin) {
     return (
       <EmptyState variant="full">
@@ -143,7 +142,7 @@ function TeamAccessList({ i18n }) {
             key: 'id',
           },
         ]}
-        renderToolbar={props => (
+        renderToolbar={(props) => (
           <DataListToolbar
             {...props}
             qsConfig={QS_CONFIG}
@@ -164,12 +163,12 @@ function TeamAccessList({ i18n }) {
             ]}
           />
         )}
-        renderItem={role => (
+        renderItem={(role) => (
           <TeamAccessListItem
             key={role.id}
             role={role}
             detailUrl={detailUrl(role)}
-            onSelect={item => {
+            onSelect={(item) => {
               setRoleToDisassociate(item);
             }}
           />

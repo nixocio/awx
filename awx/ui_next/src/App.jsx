@@ -1,25 +1,23 @@
+import { I18n, I18nProvider } from '@lingui/react';
 import React from 'react';
 import {
-  useRouteMatch,
-  useLocation,
   BrowserRouter,
+  Redirect,
   Route,
   Switch,
-  Redirect,
+  useLocation,
+  useRouteMatch,
 } from 'react-router-dom';
-import { I18n, I18nProvider } from '@lingui/react';
 
 import AppContainer from './components/AppContainer';
 import Background from './components/Background';
-import NotFound from './screens/NotFound';
-import Login from './screens/Login';
-
-import ja from './locales/ja/messages';
 import en from './locales/en/messages';
+import ja from './locales/ja/messages';
+import getRouteConfig from './routeConfig';
+import Login from './screens/Login';
+import NotFound from './screens/NotFound';
 import { isAuthenticated } from './util/auth';
 import { getLanguageWithoutRegionCode } from './util/language';
-
-import getRouteConfig from './routeConfig';
 
 const ProtectedRoute = ({ children, ...rest }) =>
   isAuthenticated(document.cookie) ? (

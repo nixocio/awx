@@ -1,22 +1,24 @@
 import 'styled-components/macro';
-import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
-import { bool, node, func } from 'prop-types';
+import { withI18n } from '@lingui/react';
 import {
   Button,
   WizardContextConsumer,
   WizardFooter,
 } from '@patternfly/react-core';
+import { bool, func, node } from 'prop-types';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
+import Wizard from '../../../../../components/Wizard';
 import {
   WorkflowDispatchContext,
   WorkflowStateContext,
 } from '../../../../../contexts/Workflow';
-import Wizard from '../../../../../components/Wizard';
+import NodeNextButton from './NodeNextButton';
 import { NodeTypeStep } from './NodeTypeStep';
 import RunStep from './RunStep';
-import NodeNextButton from './NodeNextButton';
 
 function NodeModal({ askLinkType, i18n, onSave, title }) {
   const history = useHistory();
@@ -85,7 +87,7 @@ function NodeModal({ askLinkType, i18n, onSave, title }) {
 
   const clearQueryParams = () => {
     const parts = history.location.search.replace(/^\?/, '').split('&');
-    const otherParts = parts.filter(param =>
+    const otherParts = parts.filter((param) =>
       /^!(job_templates\.|projects\.|inventory_sources\.|workflow_job_templates\.)/.test(
         param
       )
@@ -114,7 +116,7 @@ function NodeModal({ askLinkType, i18n, onSave, title }) {
     dispatch({ type: 'CANCEL_NODE_MODAL' });
   };
 
-  const handleNodeTypeChange = newNodeType => {
+  const handleNodeTypeChange = (newNodeType) => {
     setNodeType(newNodeType);
     setNodeResource(null);
     setApprovalName('');

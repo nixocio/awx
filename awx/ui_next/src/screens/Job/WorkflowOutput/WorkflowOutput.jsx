@@ -1,19 +1,20 @@
-import React, { useEffect, useReducer } from 'react';
 import { withI18n } from '@lingui/react';
-import styled from 'styled-components';
-import { shape } from 'prop-types';
 import { CardBody as PFCardBody } from '@patternfly/react-core';
-import {
-  WorkflowDispatchContext,
-  WorkflowStateContext,
-} from '../../../contexts/Workflow';
-import { layoutGraph } from '../../../components/Workflow/WorkflowUtils';
+import { shape } from 'prop-types';
+import React, { useEffect, useReducer } from 'react';
+import styled from 'styled-components';
+
+import { WorkflowJobsAPI } from '../../../api';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
 import workflowReducer, {
   initReducer,
 } from '../../../components/Workflow/workflowReducer';
-import { WorkflowJobsAPI } from '../../../api';
+import { layoutGraph } from '../../../components/Workflow/WorkflowUtils';
+import {
+  WorkflowDispatchContext,
+  WorkflowStateContext,
+} from '../../../contexts/Workflow';
 import WorkflowOutputGraph from './WorkflowOutputGraph';
 import WorkflowOutputToolbar from './WorkflowOutputToolbar';
 
@@ -71,7 +72,7 @@ function WorkflowOutput({ job, i18n }) {
       const newNodePositions = {};
       const g = layoutGraph(nodes, links);
 
-      g.nodes().forEach(node => {
+      g.nodes().forEach((node) => {
         newNodePositions[node] = g.node(node);
       });
 

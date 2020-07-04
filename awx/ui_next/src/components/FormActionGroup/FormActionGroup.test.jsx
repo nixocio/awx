@@ -1,6 +1,6 @@
 import React from 'react';
-import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
 
+import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
 import FormActionGroup from './FormActionGroup';
 
 describe('FormActionGroup', () => {

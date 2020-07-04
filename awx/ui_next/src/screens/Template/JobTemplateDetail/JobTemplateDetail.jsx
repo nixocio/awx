@@ -1,34 +1,34 @@
-import React, { Fragment, useState, useEffect, useCallback } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
 import {
   Button,
   Chip,
+  Label,
   TextList,
   TextListItem,
   TextListItemVariants,
   TextListVariants,
-  Label,
 } from '@patternfly/react-core';
-import { t } from '@lingui/macro';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import { Link, useHistory, useParams } from 'react-router-dom';
 
+import { JobTemplatesAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal';
-import { CardBody, CardActionsRow } from '../../../components/Card';
+import { CardActionsRow, CardBody } from '../../../components/Card';
 import ChipGroup from '../../../components/ChipGroup';
+import { VariablesDetail } from '../../../components/CodeMirrorInput';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
 import CredentialChip from '../../../components/CredentialChip';
+import DeleteButton from '../../../components/DeleteButton';
 import {
+  DeletedDetail,
   Detail,
   DetailList,
-  DeletedDetail,
   UserDateDetail,
 } from '../../../components/DetailList';
-import DeleteButton from '../../../components/DeleteButton';
 import ErrorDetail from '../../../components/ErrorDetail';
 import LaunchButton from '../../../components/LaunchButton';
-import { VariablesDetail } from '../../../components/CodeMirrorInput';
-import { JobTemplatesAPI } from '../../../api';
 import useRequest, { useDismissableError } from '../../../util/useRequest';
 
 function JobTemplateDetail({ i18n, template }) {
@@ -106,7 +106,7 @@ function JobTemplateDetail({ i18n, template }) {
     { verbosity: 5, details: i18n._(t`5 (WinRM Debug)`) },
   ];
   const verbosityDetails = verbosityOptions.filter(
-    option => option.verbosity === verbosity
+    (option) => option.verbosity === verbosity
   );
   const generateCallBackUrl = `${window.location.origin + url}callback/`;
   const renderOptionsField =
@@ -287,7 +287,7 @@ function JobTemplateDetail({ i18n, template }) {
                 numChips={5}
                 totalChips={summary_fields.credentials.length}
               >
-                {summary_fields.credentials.map(c => (
+                {summary_fields.credentials.map((c) => (
                   <CredentialChip key={c.id} credential={c} isReadOnly />
                 ))}
               </ChipGroup>
@@ -303,7 +303,7 @@ function JobTemplateDetail({ i18n, template }) {
                 numChips={5}
                 totalChips={summary_fields.labels.results.length}
               >
-                {summary_fields.labels.results.map(l => (
+                {summary_fields.labels.results.map((l) => (
                   <Chip key={l.id} isReadOnly>
                     {l.name}
                   </Chip>
@@ -318,7 +318,7 @@ function JobTemplateDetail({ i18n, template }) {
             label={i18n._(t`Instance Groups`)}
             value={
               <ChipGroup numChips={5} totalChips={instanceGroups.length}>
-                {instanceGroups.map(ig => (
+                {instanceGroups.map((ig) => (
                   <Chip key={ig.id} isReadOnly>
                     {ig.name}
                   </Chip>
@@ -333,7 +333,7 @@ function JobTemplateDetail({ i18n, template }) {
             label={i18n._(t`Job Tags`)}
             value={
               <ChipGroup numChips={5} totalChips={job_tags.split(',').length}>
-                {job_tags.split(',').map(jobTag => (
+                {job_tags.split(',').map((jobTag) => (
                   <Chip key={jobTag} isReadOnly>
                     {jobTag}
                   </Chip>
@@ -348,7 +348,7 @@ function JobTemplateDetail({ i18n, template }) {
             label={i18n._(t`Skip Tags`)}
             value={
               <ChipGroup numChips={5} totalChips={skip_tags.split(',').length}>
-                {skip_tags.split(',').map(skipTag => (
+                {skip_tags.split(',').map((skipTag) => (
                   <Chip key={skipTag} isReadOnly>
                     {skipTag}
                   </Chip>

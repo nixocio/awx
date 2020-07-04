@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Button, Tooltip } from '@patternfly/react-core';
-import { getQSConfig, parseQueryString } from '../../../util/qs';
-import { InventoriesAPI, GroupsAPI } from '../../../api';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+
+import { GroupsAPI, InventoriesAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal';
-import ErrorDetail from '../../../components/ErrorDetail';
 import DataListToolbar from '../../../components/DataListToolbar';
+import ErrorDetail from '../../../components/ErrorDetail';
 import PaginatedDataList, {
   ToolbarAddButton,
 } from '../../../components/PaginatedDataList';
-import InventoryGroupItem from './InventoryGroupItem';
+import { getQSConfig, parseQueryString } from '../../../util/qs';
 import InventoryGroupsDeleteModal from '../shared/InventoryGroupsDeleteModal';
+import InventoryGroupItem from './InventoryGroupItem';
 
 const QS_CONFIG = getQSConfig('group', {
   page: 1,
@@ -81,13 +82,13 @@ function InventoryGroupsList({ i18n }) {
     fetchData();
   }, [inventoryId, search]);
 
-  const handleSelectAll = isSelected => {
+  const handleSelectAll = (isSelected) => {
     setSelected(isSelected ? [...groups] : []);
   };
 
-  const handleSelect = row => {
-    if (selected.some(s => s.id === row.id)) {
-      setSelected(selected.filter(s => s.id !== row.id));
+  const handleSelect = (row) => {
+    if (selected.some((s) => s.id === row.id)) {
+      setSelected(selected.filter((s) => s.id !== row.id));
     } else {
       setSelected(selected.concat(row));
     }
@@ -96,7 +97,7 @@ function InventoryGroupsList({ i18n }) {
   const renderTooltip = () => {
     const itemsUnableToDelete = selected
       .filter(cannotDelete)
-      .map(item => item.name)
+      .map((item) => item.name)
       .join(', ');
 
     if (selected.some(cannotDelete)) {
@@ -114,7 +115,7 @@ function InventoryGroupsList({ i18n }) {
     return i18n._(t`Select a row to delete`);
   };
 
-  const handleDelete = async option => {
+  const handleDelete = async (option) => {
     setIsLoading(true);
 
     try {
@@ -193,16 +194,16 @@ function InventoryGroupsList({ i18n }) {
             key: 'name',
           },
         ]}
-        renderItem={item => (
+        renderItem={(item) => (
           <InventoryGroupItem
             key={item.id}
             group={item}
             inventoryId={inventoryId}
-            isSelected={selected.some(row => row.id === item.id)}
+            isSelected={selected.some((row) => row.id === item.id)}
             onSelect={() => handleSelect(item)}
           />
         )}
-        renderToolbar={props => (
+        renderToolbar={(props) => (
           <DataListToolbar
             {...props}
             showSelectAll

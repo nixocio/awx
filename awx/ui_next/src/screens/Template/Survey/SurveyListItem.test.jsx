@@ -1,5 +1,6 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import SurveyListItem from './SurveyListItem';
 
@@ -25,18 +26,8 @@ describe('<SurveyListItem />', () => {
     const moveDown = wrapper.find('Button[aria-label="move down"]');
     expect(moveUp.length).toBe(1);
     expect(moveDown.length).toBe(1);
-    expect(
-      wrapper
-        .find('b')
-        .at(0)
-        .text()
-    ).toBe('Type:');
-    expect(
-      wrapper
-        .find('b')
-        .at(1)
-        .text()
-    ).toBe('Default:');
+    expect(wrapper.find('b').at(0).text()).toBe('Type:');
+    expect(wrapper.find('b').at(1).text()).toBe('Default:');
     expect(wrapper.find('DataListCheck').length).toBe(1);
     expect(wrapper.find('DataListCell').length).toBe(3);
   });
@@ -99,8 +90,8 @@ describe('<SurveyListItem />', () => {
     expect(wrapper.find('Chip').length).toBe(6);
     wrapper
       .find('Chip')
-      .filter(chip => chip.prop('isOverFlowChip') !== true)
-      .map(chip => expect(chip.prop('isReadOnly')).toBe(true));
+      .filter((chip) => chip.prop('isOverFlowChip') !== true)
+      .map((chip) => expect(chip.prop('isReadOnly')).toBe(true));
   });
   test('items that are no required should have no an asterisk', () => {
     const newItem = {

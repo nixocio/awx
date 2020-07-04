@@ -1,13 +1,13 @@
-import React from 'react';
-import { node, bool } from 'prop-types';
 import { TextListItem, TextListItemVariants } from '@patternfly/react-core';
+import { bool, node } from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
 
 const DetailName = styled(({ fullWidth, ...props }) => (
   <TextListItem {...props} />
 ))`
   font-weight: var(--pf-global--FontWeight--bold);
-  ${props =>
+  ${(props) =>
     props.fullWidth &&
     `
     grid-column: 1;
@@ -18,12 +18,12 @@ const DetailValue = styled(({ fullWidth, isEncrypted, ...props }) => (
   <TextListItem {...props} />
 ))`
   word-break: break-all;
-  ${props =>
+  ${(props) =>
     props.fullWidth &&
     `
     grid-column: 2 / -1;
   `}
-  ${props =>
+  ${(props) =>
     props.isEncrypted &&
     `
     text-transform: uppercase

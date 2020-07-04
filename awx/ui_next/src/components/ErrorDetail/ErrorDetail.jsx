@@ -1,14 +1,14 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-
+import { withI18n } from '@lingui/react';
 import {
   Card as PFCard,
   CardBody as PFCardBody,
   ExpandableSection as PFExpandable,
 } from '@patternfly/react-core';
+import PropTypes from 'prop-types';
+import React, { Component, Fragment } from 'react';
+import styled from 'styled-components';
+
 import getErrorMessage from './getErrorMessage';
 
 const Card = styled(PFCard)`
@@ -64,7 +64,7 @@ class ErrorDetail extends Component {
         <CardBody>
           {Array.isArray(message) ? (
             <ul>
-              {message.map(m => (
+              {message.map((m) => (
                 <li key={m}>{m}</li>
               ))}
             </ul>

@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
-import { Button, Modal } from '@patternfly/react-core';
+import { Trans, t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
-import { t, Trans } from '@lingui/macro';
+import { Button, Modal } from '@patternfly/react-core';
 import { func } from 'prop-types';
+import React, { useContext } from 'react';
+
 import { WorkflowDispatchContext } from '../../../../contexts/Workflow';
 
 function UnsavedChangesModal({ i18n, onSaveAndExit, onExit }) {

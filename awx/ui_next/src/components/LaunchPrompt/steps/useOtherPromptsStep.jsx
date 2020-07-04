@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
 import { t } from '@lingui/macro';
+import React, { useState } from 'react';
+
 import OtherPromptsStep from './OtherPromptsStep';
 import StepName from './StepName';
 
@@ -8,7 +9,7 @@ const STEP_ID = 'other';
 export default function useOtherPrompt(config, resource, visitedSteps, i18n) {
   const [stepErrors, setStepErrors] = useState({});
 
-  const validate = values => {
+  const validate = (values) => {
     const errors = {};
     if (config.ask_job_type_on_launch && !values.job_type) {
       errors.job_type = i18n._(t`This field must not be blank`);
@@ -26,7 +27,7 @@ export default function useOtherPrompt(config, resource, visitedSteps, i18n) {
     isReady: true,
     contentError: null,
     formError: stepErrors,
-    setTouched: setFieldsTouched => {
+    setTouched: (setFieldsTouched) => {
       setFieldsTouched({
         job_type: true,
         limit: true,

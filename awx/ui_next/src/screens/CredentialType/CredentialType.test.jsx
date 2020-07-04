@@ -1,13 +1,12 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
 
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
 import { CredentialTypesAPI } from '../../api';
-
 import CredentialType from './CredentialType';
 
 jest.mock('../../api');
@@ -53,6 +52,6 @@ describe('<CredentialType/>', () => {
         },
       });
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

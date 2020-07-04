@@ -1,12 +1,13 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-import InventorySourceEdit from './InventorySourceEdit';
 import { CredentialsAPI, InventorySourcesAPI, ProjectsAPI } from '../../../api';
+import InventorySourceEdit from './InventorySourceEdit';
 
 jest.mock('../../../api/models/Projects');
 jest.mock('../../../api/models/Credentials');
@@ -95,7 +96,7 @@ describe('<InventorySourceAdd />', () => {
         context: { router: { history } },
       });
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
   });
 
   afterAll(() => {

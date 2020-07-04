@@ -1,7 +1,8 @@
 import React from 'react';
+
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
-import PromptInventorySourceDetail from './PromptInventorySourceDetail';
 import mockInvSource from './data.inventory_source.json';
+import PromptInventorySourceDetail from './PromptInventorySourceDetail';
 
 function assertDetail(wrapper, label, value) {
   expect(wrapper.find(`Detail[label="${label}"] dt`).text()).toBe(label);

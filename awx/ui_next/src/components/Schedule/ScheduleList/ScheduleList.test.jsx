@@ -1,9 +1,10 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import { SchedulesAPI } from '../../../api';
-import ScheduleList from './ScheduleList';
 import mockSchedules from '../data.schedules.json';
+import ScheduleList from './ScheduleList';
 
 jest.mock('../../../api/models/Schedules');
 
@@ -21,7 +22,7 @@ SchedulesAPI.readOptions.mockResolvedValue({
   },
 });
 
-const loadSchedules = params => SchedulesAPI.read(params);
+const loadSchedules = (params) => SchedulesAPI.read(params);
 const loadScheduleOptions = () => SchedulesAPI.readOptions();
 
 describe('ScheduleList', () => {
@@ -82,21 +83,21 @@ describe('ScheduleList', () => {
     });
 
     test('should check all row items when select all is checked', async () => {
-      wrapper.find('DataListCheck').forEach(el => {
+      wrapper.find('DataListCheck').forEach((el) => {
         expect(el.props().checked).toBe(false);
       });
       await act(async () => {
         wrapper.find('Checkbox#select-all').invoke('onChange')(true);
       });
       wrapper.update();
-      wrapper.find('DataListCheck').forEach(el => {
+      wrapper.find('DataListCheck').forEach((el) => {
         expect(el.props().checked).toBe(true);
       });
       await act(async () => {
         wrapper.find('Checkbox#select-all').invoke('onChange')(false);
       });
       wrapper.update();
-      wrapper.find('DataListCheck').forEach(el => {
+      wrapper.find('DataListCheck').forEach((el) => {
         expect(el.props().checked).toBe(false);
       });
     });

@@ -2,7 +2,6 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
-
 import ApplicationListItem from './ApplicationListItem';
 
 describe('<ApplicationListItem/>', () => {

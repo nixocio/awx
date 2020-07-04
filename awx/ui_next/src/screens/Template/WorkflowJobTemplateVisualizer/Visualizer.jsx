@@ -1,16 +1,22 @@
+import { withI18n } from '@lingui/react';
+import { shape } from 'prop-types';
 import React, { useEffect, useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import styled from 'styled-components';
-import { shape } from 'prop-types';
+
+import {
+  WorkflowApprovalTemplatesAPI,
+  WorkflowJobTemplateNodesAPI,
+  WorkflowJobTemplatesAPI,
+} from '../../../api';
+import ContentError from '../../../components/ContentError';
+import ContentLoading from '../../../components/ContentLoading';
+import workflowReducer from '../../../components/Workflow/workflowReducer';
+import { layoutGraph } from '../../../components/Workflow/WorkflowUtils';
 import {
   WorkflowDispatchContext,
   WorkflowStateContext,
 } from '../../../contexts/Workflow';
-import { layoutGraph } from '../../../components/Workflow/WorkflowUtils';
-import ContentError from '../../../components/ContentError';
-import ContentLoading from '../../../components/ContentLoading';
-import workflowReducer from '../../../components/Workflow/workflowReducer';
 import { DeleteAllNodesModal, UnsavedChangesModal } from './Modals';
 import {
   LinkAddModal,
@@ -19,18 +25,13 @@ import {
 } from './Modals/LinkModals';
 import {
   NodeAddModal,
-  NodeEditModal,
   NodeDeleteModal,
+  NodeEditModal,
   NodeViewModal,
 } from './Modals/NodeModals';
 import VisualizerGraph from './VisualizerGraph';
 import VisualizerStartScreen from './VisualizerStartScreen';
 import VisualizerToolbar from './VisualizerToolbar';
-import {
-  WorkflowApprovalTemplatesAPI,
-  WorkflowJobTemplateNodesAPI,
-  WorkflowJobTemplatesAPI,
-} from '../../../api';
 
 const CenteredContent = styled.div`
   align-items: center;
@@ -119,7 +120,7 @@ function Visualizer({ template, i18n }) {
 
   const associateNodes = (newLinks, originalLinkMap) => {
     const associateNodeRequests = [];
-    newLinks.forEach(link => {
+    newLinks.forEach((link) => {
       switch (link.linkType) {
         case 'success':
           associateNodeRequests.push(
@@ -154,9 +155,9 @@ function Visualizer({ template, i18n }) {
 
   const disassociateNodes = (originalLinkMap, deletedNodeIds, linkMap) => {
     const disassociateNodeRequests = [];
-    Object.keys(originalLinkMap).forEach(key => {
+    Object.keys(originalLinkMap).forEach((key) => {
       const node = originalLinkMap[key];
-      node.success_nodes.forEach(successNodeId => {
+      node.success_nodes.forEach((successNodeId) => {
         if (
           !deletedNodeIds.includes(successNodeId) &&
           (!linkMap[node.id] ||
@@ -171,7 +172,7 @@ function Visualizer({ template, i18n }) {
           );
         }
       });
-      node.failure_nodes.forEach(failureNodeId => {
+      node.failure_nodes.forEach((failureNodeId) => {
         if (
           !deletedNodeIds.includes(failureNodeId) &&
           (!linkMap[node.id] ||
@@ -186,7 +187,7 @@ function Visualizer({ template, i18n }) {
           );
         }
       });
-      node.always_nodes.forEach(alwaysNodeId => {
+      node.always_nodes.forEach((alwaysNodeId) => {
         if (
           !deletedNodeIds.includes(alwaysNodeId) &&
           (!linkMap[node.id] ||
@@ -206,11 +207,11 @@ function Visualizer({ template, i18n }) {
     return disassociateNodeRequests;
   };
 
-  const generateLinkMapAndNewLinks = originalLinkMap => {
+  const generateLinkMapAndNewLinks = (originalLinkMap) => {
     const linkMap = {};
     const newLinks = [];
 
-    links.forEach(link => {
+    links.forEach((link) => {
       if (link.source.id !== 1) {
         const realLinkSourceId = originalLinkMap[link.source.id].id;
         const realLinkTargetId = originalLinkMap[link.target.id].id;
@@ -259,7 +260,7 @@ function Visualizer({ template, i18n }) {
     const approvalTemplateRequests = [];
     const originalLinkMap = {};
     const deletedNodeIds = [];
-    nodes.forEach(node => {
+    nodes.forEach((node) => {
       // node with id=1 is the artificial start node
       if (node.id === 1) {
         return;
@@ -397,10 +398,10 @@ function Visualizer({ template, i18n }) {
   useEffect(() => {
     if (nodes) {
       const newNodePositions = {};
-      const nonDeletedNodes = nodes.filter(node => !node.isDeleted);
+      const nonDeletedNodes = nodes.filter((node) => !node.isDeleted);
       const g = layoutGraph(nonDeletedNodes, links);
 
-      g.nodes().forEach(node => {
+      g.nodes().forEach((node) => {
         newNodePositions[node] = g.node(node);
       });
 

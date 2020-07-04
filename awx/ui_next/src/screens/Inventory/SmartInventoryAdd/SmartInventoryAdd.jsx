@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import { PageSection } from '@patternfly/react-core';
+import React, { Component } from 'react';
 
 class SmartInventoryAdd extends Component {
   render() {

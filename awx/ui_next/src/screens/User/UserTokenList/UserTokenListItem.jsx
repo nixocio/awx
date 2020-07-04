@@ -1,17 +1,17 @@
-import React from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
-  DataListItemCells,
   DataListCheck,
-  DataListItemRow,
   DataListItem,
+  DataListItemCells,
+  DataListItemRow,
 } from '@patternfly/react-core';
+import React from 'react';
 import styled from 'styled-components';
-import { toTitleCase } from '../../../util/strings';
 
-import { formatDateStringUTC } from '../../../util/dates';
 import DataListCell from '../../../components/DataListCell';
+import { formatDateStringUTC } from '../../../util/dates';
+import { toTitleCase } from '../../../util/strings';
 
 const Label = styled.b`
   margin-right: 20px;

@@ -1,15 +1,15 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
+import {
+  mountWithContexts,
+  waitForElement,
+} from '../../../../testUtils/enzymeHelpers';
 import {
   JobTemplatesAPI,
   UnifiedJobTemplatesAPI,
   WorkflowJobTemplatesAPI,
 } from '../../../api';
-import {
-  mountWithContexts,
-  waitForElement,
-} from '../../../../testUtils/enzymeHelpers';
-
 import TemplateList from './TemplateList';
 
 jest.mock('../../../api');
@@ -112,7 +112,7 @@ describe('<TemplateList />', () => {
     });
     expect(UnifiedJobTemplatesAPI.read).toBeCalled();
     await act(async () => {
-      await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+      await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     });
     expect(wrapper.find('TemplateListItem').length).toEqual(5);
   });
@@ -120,12 +120,9 @@ describe('<TemplateList />', () => {
   test('handleSelect is called when a template list item is selected', async () => {
     const wrapper = mountWithContexts(<TemplateList />);
     await act(async () => {
-      await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+      await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     });
-    const checkBox = wrapper
-      .find('TemplateListItem')
-      .at(1)
-      .find('input');
+    const checkBox = wrapper.find('TemplateListItem').at(1).find('input');
 
     checkBox.simulate('change', {
       target: {
@@ -137,18 +134,15 @@ describe('<TemplateList />', () => {
       },
     });
 
-    expect(
-      wrapper
-        .find('TemplateListItem')
-        .at(1)
-        .prop('isSelected')
-    ).toBe(true);
+    expect(wrapper.find('TemplateListItem').at(1).prop('isSelected')).toBe(
+      true
+    );
   });
 
   test('handleSelectAll is called when a template list item is selected', async () => {
     const wrapper = mountWithContexts(<TemplateList />);
     await act(async () => {
-      await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+      await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     });
     expect(wrapper.find('Checkbox#select-all').prop('isChecked')).toBe(false);
 
@@ -163,12 +157,9 @@ describe('<TemplateList />', () => {
   test('delete button is disabled if user does not have delete capabilities on a selected template', async () => {
     const wrapper = mountWithContexts(<TemplateList />);
     await act(async () => {
-      await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+      await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     });
-    const deleteableItem = wrapper
-      .find('TemplateListItem')
-      .at(0)
-      .find('input');
+    const deleteableItem = wrapper.find('TemplateListItem').at(0).find('input');
     const nonDeleteableItem = wrapper
       .find('TemplateListItem')
       .at(4)
@@ -222,12 +213,9 @@ describe('<TemplateList />', () => {
   test('api is called to delete templates for each selected template.', async () => {
     const wrapper = mountWithContexts(<TemplateList />);
     await act(async () => {
-      await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+      await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     });
-    const jobTemplate = wrapper
-      .find('TemplateListItem')
-      .at(1)
-      .find('input');
+    const jobTemplate = wrapper.find('TemplateListItem').at(1).find('input');
     const workflowJobTemplate = wrapper
       .find('TemplateListItem')
       .at(3)
@@ -282,12 +270,9 @@ describe('<TemplateList />', () => {
     );
     const wrapper = mountWithContexts(<TemplateList />);
     await act(async () => {
-      await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+      await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     });
-    const checkBox = wrapper
-      .find('TemplateListItem')
-      .at(1)
-      .find('input');
+    const checkBox = wrapper.find('TemplateListItem').at(1).find('input');
 
     checkBox.simulate('change', {
       target: {
@@ -309,14 +294,14 @@ describe('<TemplateList />', () => {
     await waitForElement(
       wrapper,
       'Modal[aria-label="Deletion Error"]',
-      el => el.props().isOpen === true && el.props().title === 'Error!'
+      (el) => el.props().isOpen === true && el.props().title === 'Error!'
     );
   });
   test('should properly copy template', async () => {
     JobTemplatesAPI.copy.mockResolvedValue({});
     const wrapper = mountWithContexts(<TemplateList />);
     await act(async () => {
-      await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+      await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     });
     await act(async () =>
       wrapper.find('Button[aria-label="Copy"]').prop('onClick')()

@@ -1,29 +1,31 @@
 import 'styled-components/macro';
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
-import { withRouter } from 'react-router-dom';
+import { withI18n } from '@lingui/react';
 import {
   Button,
   ButtonVariant,
   Dropdown,
+  DropdownItem,
   DropdownPosition,
   DropdownToggle,
-  DropdownItem,
   InputGroup,
   Select,
   SelectOption,
   SelectVariant,
   TextInput,
+  ToolbarFilter,
   ToolbarGroup,
   ToolbarItem,
-  ToolbarFilter,
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import { parseQueryString } from '../../util/qs';
+
 import { QSConfig, SearchColumns } from '../../types';
+import { parseQueryString } from '../../util/qs';
 
 const NoOptionDropdown = styled.div`
   align-self: stretch;
@@ -41,7 +43,7 @@ class Search extends React.Component {
 
     this.state = {
       isSearchDropdownOpen: false,
-      searchKey: columns.find(col => col.isDefault).key,
+      searchKey: columns.find((col) => col.isDefault).key,
       searchValue: '',
       isFilterDropdownOpen: false,
     };
@@ -81,8 +83,8 @@ class Search extends React.Component {
 
     if (searchValue) {
       const isNonStringField =
-        qsConfig.integerFields.find(field => field === searchKey) ||
-        qsConfig.dateFields.find(field => field === searchKey);
+        qsConfig.integerFields.find((field) => field === searchKey) ||
+        qsConfig.dateFields.find((field) => field === searchKey);
 
       const actualSearchKey = isNonStringField
         ? searchKey
@@ -146,7 +148,7 @@ class Search extends React.Component {
 
     const filterDefaultParams = (paramsArr, config) => {
       const defaultParamsKeys = Object.keys(config.defaultParams || {});
-      return paramsArr.filter(key => defaultParamsKeys.indexOf(key) === -1);
+      return paramsArr.filter((key) => defaultParamsKeys.indexOf(key) === -1);
     };
 
     const getLabelFromValue = (value, colKey) => {
@@ -171,7 +173,7 @@ class Search extends React.Component {
         qsConfig
       );
 
-      nonDefaultParams.forEach(key => {
+      nonDefaultParams.forEach((key) => {
         const columnKey = key.replace('__icontains', '').replace('or__', '');
         const label = columns.filter(
           ({ key: keyToCheck }) => columnKey === keyToCheck
@@ -183,7 +185,7 @@ class Search extends React.Component {
         queryParamsByKey[columnKey] = { key, label, chips: [] };
 
         if (Array.isArray(queryParams[key])) {
-          queryParams[key].forEach(val =>
+          queryParams[key].forEach((val) =>
             queryParamsByKey[columnKey].chips.push({
               key: `${key}:${val}`,
               node: getLabelFromValue(val, columnKey),
@@ -247,7 +249,7 @@ class Search extends React.Component {
                     onSelect={(event, selection) =>
                       this.handleFilterDropdownSelect(key, event, selection)
                     }
-                    selections={chipsByKey[key].chips.map(chip => {
+                    selections={chipsByKey[key].chips.map((chip) => {
                       const [, ...value] = chip.key.split(':');
                       return value.join(':');
                     })}
@@ -287,7 +289,7 @@ class Search extends React.Component {
                     <TextInput
                       type={
                         (qsConfig.integerFields.find(
-                          field => field === searchKey
+                          (field) => field === searchKey
                         ) &&
                           'number') ||
                         'search'

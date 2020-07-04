@@ -49,10 +49,10 @@ export function getScaleAndOffsetToFit(
 export function generateLine(points) {
   const line = d3
     .line()
-    .x(d => {
+    .x((d) => {
       return d.x;
     })
-    .y(d => {
+    .y((d) => {
       return d.y;
     });
 
@@ -143,7 +143,7 @@ export function layoutGraph(nodes, links) {
     return {};
   });
 
-  nodes.forEach(node => {
+  nodes.forEach((node) => {
     if (node.id === 1) {
       g.setNode(node.id, {
         label: '',
@@ -159,7 +159,7 @@ export function layoutGraph(nodes, links) {
     }
   });
 
-  links.forEach(link => {
+  links.forEach((link) => {
     g.setEdge(link.source.id, link.target.id);
   });
 

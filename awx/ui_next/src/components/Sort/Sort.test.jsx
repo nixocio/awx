@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
 import Sort from './Sort';
 

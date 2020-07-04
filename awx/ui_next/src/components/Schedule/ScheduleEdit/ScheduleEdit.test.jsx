@@ -1,6 +1,7 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { RRule } from 'rrule';
+
 import {
   mountWithContexts,
   waitForElement,
@@ -65,7 +66,7 @@ describe('<ScheduleEdit />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<ScheduleEdit schedule={mockSchedule} />);
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
   });
   afterEach(() => {
     jest.clearAllMocks();

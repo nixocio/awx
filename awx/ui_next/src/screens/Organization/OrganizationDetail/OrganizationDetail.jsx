@@ -1,20 +1,21 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { Link, useHistory, useRouteMatch } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Button, Chip } from '@patternfly/react-core';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
+
 import { OrganizationsAPI } from '../../../api';
-import {
-  DetailList,
-  Detail,
-  UserDateDetail,
-} from '../../../components/DetailList';
-import { CardBody, CardActionsRow } from '../../../components/Card';
 import AlertModal from '../../../components/AlertModal';
+import { CardActionsRow, CardBody } from '../../../components/Card';
 import ChipGroup from '../../../components/ChipGroup';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
 import DeleteButton from '../../../components/DeleteButton';
+import {
+  Detail,
+  DetailList,
+  UserDateDetail,
+} from '../../../components/DetailList';
 import ErrorDetail from '../../../components/ErrorDetail';
 import useRequest, { useDismissableError } from '../../../util/useRequest';
 
@@ -104,7 +105,7 @@ function OrganizationDetail({ i18n, organization }) {
             label={i18n._(t`Instance Groups`)}
             value={
               <ChipGroup numChips={5} totalChips={instanceGroups.length}>
-                {instanceGroups.map(ig => (
+                {instanceGroups.map((ig) => (
                   <Chip key={ig.id} isReadOnly>
                     {ig.name}
                   </Chip>

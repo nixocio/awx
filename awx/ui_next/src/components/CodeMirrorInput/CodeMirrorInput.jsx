@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { oneOf, bool, number, string, func } from 'prop-types';
-import { Controlled as ReactCodeMirror } from 'react-codemirror2';
-import styled from 'styled-components';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/yaml/yaml';
 import 'codemirror/mode/jinja2/jinja2';
 import 'codemirror/lib/codemirror.css';
+
+import { bool, func, number, oneOf, string } from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { Controlled as ReactCodeMirror } from 'react-codemirror2';
+import styled from 'styled-components';
 
 const LINE_HEIGHT = 24;
 const PADDING = 12;
@@ -17,12 +18,12 @@ const CodeMirror = styled(ReactCodeMirror)`
   }
 
   & > .CodeMirror {
-    height: ${props =>
+    height: ${(props) =>
       props.fullHeight ? 'auto' : `${props.rows * LINE_HEIGHT + PADDING}px`};
     font-family: var(--pf-global--FontFamily--monospace);
   }
 
-  ${props =>
+  ${(props) =>
     props.hasErrors &&
     `
     && {
@@ -34,7 +35,7 @@ const CodeMirror = styled(ReactCodeMirror)`
       border-bottom-width: var(--pf-c-form-control--invalid--BorderBottomWidth);
     }`}
 
-  ${props =>
+  ${(props) =>
     props.options &&
     props.options.readOnly &&
     `

@@ -1,20 +1,21 @@
-import React from 'react';
-import { useField, useFormikContext } from 'formik';
-import { shape, string } from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   FormGroup,
   InputGroup,
   TextArea,
   TextInput,
 } from '@patternfly/react-core';
-import { FieldTooltip, PasswordInput } from '../../../../components/FormField';
+import { useField, useFormikContext } from 'formik';
+import { shape, string } from 'prop-types';
+import React from 'react';
+
 import AnsibleSelect from '../../../../components/AnsibleSelect';
+import { FieldTooltip, PasswordInput } from '../../../../components/FormField';
 import { CredentialType } from '../../../../types';
 import { required } from '../../../../util/validators';
-import { CredentialPluginField } from './CredentialPlugins';
 import BecomeMethodField from './BecomeMethodField';
+import { CredentialPluginField } from './CredentialPlugins';
 
 function CredentialInput({ fieldOptions, credentialKind, ...rest }) {
   const [subFormField, meta] = useField(`inputs.${fieldOptions.id}`);
@@ -94,7 +95,7 @@ function CredentialField({ credentialType, fieldOptions, i18n }) {
   const isValid = !(meta.touched && meta.error);
 
   if (fieldOptions.choices) {
-    const selectOptions = fieldOptions.choices.map(choice => {
+    const selectOptions = fieldOptions.choices.map((choice) => {
       return {
         value: choice,
         key: choice,

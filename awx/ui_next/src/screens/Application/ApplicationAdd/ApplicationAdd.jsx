@@ -1,12 +1,12 @@
+import { Card, PageSection } from '@patternfly/react-core';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { Card, PageSection } from '@patternfly/react-core';
-import useRequest from '../../../util/useRequest';
-import ContentError from '../../../components/ContentError';
-import ApplicationForm from '../shared/ApplicationForm';
 import { ApplicationsAPI } from '../../../api';
 import { CardBody } from '../../../components/Card';
+import ContentError from '../../../components/ContentError';
+import useRequest from '../../../util/useRequest';
+import ApplicationForm from '../shared/ApplicationForm';
 
 function ApplicationAdd() {
   const history = useHistory();
@@ -29,12 +29,12 @@ function ApplicationAdd() {
         },
       } = await ApplicationsAPI.readOptions();
 
-      const authorization = authChoices.map(choice => ({
+      const authorization = authChoices.map((choice) => ({
         value: choice[0],
         label: choice[1],
         key: choice[0],
       }));
-      const clientType = clientChoices.map(choice => ({
+      const clientType = clientChoices.map((choice) => ({
         value: choice[0],
         label: choice[1],
         key: choice[0],

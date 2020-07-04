@@ -1,6 +1,7 @@
+import { mount, shallow } from 'enzyme';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { shallow, mount } from 'enzyme';
+
 import VariablesDetail from './VariablesDetail';
 
 jest.mock('../../api');

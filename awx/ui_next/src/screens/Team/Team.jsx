@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Card, PageSection } from '@patternfly/react-core';
+import { CaretLeftIcon } from '@patternfly/react-icons';
+import React, { useEffect, useState } from 'react';
 import {
   Link,
   Redirect,
@@ -9,14 +11,13 @@ import {
   useLocation,
   useParams,
 } from 'react-router-dom';
-import { CaretLeftIcon } from '@patternfly/react-icons';
-import { Card, PageSection } from '@patternfly/react-core';
-import RoutedTabs from '../../components/RoutedTabs';
+
+import { TeamsAPI } from '../../api';
 import ContentError from '../../components/ContentError';
+import RoutedTabs from '../../components/RoutedTabs';
+import TeamAccessList from './TeamAccess';
 import TeamDetail from './TeamDetail';
 import TeamEdit from './TeamEdit';
-import { TeamsAPI } from '../../api';
-import TeamAccessList from './TeamAccess';
 
 function Team({ i18n, setBreadcrumb }) {
   const [team, setTeam] = useState(null);

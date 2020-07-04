@@ -1,17 +1,18 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
+
+import { TeamsAPI, UsersAPI } from '../../api';
 import SelectableCard from '../SelectableCard';
 import Wizard from '../Wizard';
 import SelectResourceStep from './SelectResourceStep';
 import SelectRoleStep from './SelectRoleStep';
-import { TeamsAPI, UsersAPI } from '../../api';
 
-const readUsers = async queryParams =>
+const readUsers = async (queryParams) =>
   UsersAPI.read(Object.assign(queryParams, { is_superuser: false }));
 
-const readTeams = async queryParams => TeamsAPI.read(queryParams);
+const readTeams = async (queryParams) => TeamsAPI.read(queryParams);
 
 class AddResourceRole extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class AddResourceRole extends React.Component {
     const { selectedResourceRows, currentStepId } = this.state;
 
     const selectedIndex = selectedResourceRows.findIndex(
-      selectedRow => selectedRow.id === user.id
+      (selectedRow) => selectedRow.id === user.id
     );
 
     if (selectedIndex > -1) {
@@ -50,7 +51,7 @@ class AddResourceRole extends React.Component {
       }
       this.setState(stateToUpdate);
     } else {
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         selectedResourceRows: [...prevState.selectedResourceRows, user],
       }));
     }
@@ -60,14 +61,14 @@ class AddResourceRole extends React.Component {
     const { selectedRoleRows } = this.state;
 
     const selectedIndex = selectedRoleRows.findIndex(
-      selectedRow => selectedRow.id === role.id
+      (selectedRow) => selectedRow.id === role.id
     );
 
     if (selectedIndex > -1) {
       selectedRoleRows.splice(selectedIndex, 1);
       this.setState({ selectedRoleRows });
     } else {
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         selectedRoleRows: [...prevState.selectedRoleRows, role],
       }));
     }
@@ -146,7 +147,7 @@ class AddResourceRole extends React.Component {
     // showing role choices for team access
     const selectableRoles = { ...roles };
     if (selectedResource === 'teams') {
-      Object.keys(roles).forEach(key => {
+      Object.keys(roles).forEach((key) => {
         if (selectableRoles[key].user_only) {
           delete selectableRoles[key];
         }
@@ -298,7 +299,7 @@ class AddResourceRole extends React.Component {
       },
     ];
 
-    const currentStep = steps.find(step => step.id === currentStepId);
+    const currentStep = steps.find((step) => step.id === currentStepId);
 
     // TODO: somehow internationalize steps and currentStep.nextButtonText
     return (

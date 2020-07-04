@@ -1,29 +1,29 @@
-import React, { useEffect, useCallback } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { CaretLeftIcon } from '@patternfly/react-icons';
+import React, { useCallback, useEffect } from 'react';
 import {
   Link,
-  Switch,
-  Route,
   Redirect,
-  useRouteMatch,
+  Route,
+  Switch,
   useLocation,
+  useRouteMatch,
 } from 'react-router-dom';
-import { CaretLeftIcon } from '@patternfly/react-icons';
-import useRequest from '../../../util/useRequest';
 
 import {
   InventoriesAPI,
   InventorySourcesAPI,
   OrganizationsAPI,
 } from '../../../api';
-import { Schedules } from '../../../components/Schedule';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
+import NotificationList from '../../../components/NotificationList/NotificationList';
 import RoutedTabs from '../../../components/RoutedTabs';
+import { Schedules } from '../../../components/Schedule';
+import useRequest from '../../../util/useRequest';
 import InventorySourceDetail from '../InventorySourceDetail';
 import InventorySourceEdit from '../InventorySourceEdit';
-import NotificationList from '../../../components/NotificationList/NotificationList';
 
 function InventorySource({ i18n, inventory, setBreadcrumb, me }) {
   const location = useLocation();
@@ -62,10 +62,10 @@ function InventorySource({ i18n, inventory, setBreadcrumb, me }) {
     }
   }, [inventory, source, setBreadcrumb]);
 
-  const loadSchedules = params =>
+  const loadSchedules = (params) =>
     InventorySourcesAPI.readSchedules(source?.id, params);
 
-  const createSchedule = data =>
+  const createSchedule = (data) =>
     InventorySourcesAPI.createSchedule(source?.id, data);
 
   const loadScheduleOptions = () =>
@@ -111,7 +111,7 @@ function InventorySource({ i18n, inventory, setBreadcrumb, me }) {
 
   let showCardHeader = true;
 
-  if (['edit', 'schedules/'].some(name => location.pathname.includes(name))) {
+  if (['edit', 'schedules/'].some((name) => location.pathname.includes(name))) {
     showCardHeader = false;
   }
 

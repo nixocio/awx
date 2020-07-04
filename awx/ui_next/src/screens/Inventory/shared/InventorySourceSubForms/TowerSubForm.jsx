@@ -1,7 +1,8 @@
-import React from 'react';
-import { useField } from 'formik';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { useField } from 'formik';
+import React from 'react';
+
 import CredentialLookup from '../../../../components/Lookup/CredentialLookup';
 import {
   InstanceFiltersField,
@@ -22,7 +23,7 @@ const TowerSubForm = ({ i18n }) => {
         helperTextInvalid={credentialMeta.error}
         isValid={!credentialMeta.touched || !credentialMeta.error}
         onBlur={() => credentialHelpers.setTouched()}
-        onChange={value => {
+        onChange={(value) => {
           credentialHelpers.setValue(value);
         }}
         value={credentialField.value}

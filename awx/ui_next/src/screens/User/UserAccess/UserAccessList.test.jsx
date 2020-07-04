@@ -1,10 +1,11 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { UsersAPI, RolesAPI } from '../../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
+import { RolesAPI, UsersAPI } from '../../../api';
 import UserAccessList from './UserAccessList';
 
 jest.mock('../../../api/models/Users');
@@ -116,7 +117,7 @@ describe('<UserAccessList />', () => {
       wrapper = mountWithContexts(<UserAccessList />);
     });
 
-    waitForElement(wrapper, 'ContentEmpty', el => el.length === 0);
+    waitForElement(wrapper, 'ContentEmpty', (el) => el.length === 0);
 
     expect(wrapper.find(`Link#userRole-2`).prop('to')).toBe(
       '/templates/job_template/15/details'
@@ -180,7 +181,7 @@ describe('<UserAccessList />', () => {
       wrapper = mountWithContexts(<UserAccessList />);
     });
 
-    waitForElement(wrapper, 'ContentEmpty', el => el.length === 0);
+    waitForElement(wrapper, 'ContentEmpty', (el) => el.length === 0);
     expect(wrapper.find('Button[aria-label="Add resource roles"]').length).toBe(
       0
     );
@@ -191,7 +192,7 @@ describe('<UserAccessList />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<UserAccessList />);
     });
-    waitForElement(wrapper, 'ContentEmpty', el => el.length === 0);
+    waitForElement(wrapper, 'ContentEmpty', (el) => el.length === 0);
     await act(async () =>
       wrapper.find('Button[aria-label="Add resource roles"]').prop('onClick')()
     );
@@ -211,7 +212,7 @@ describe('<UserAccessList />', () => {
       wrapper = mountWithContexts(<UserAccessList />);
     });
 
-    waitForElement(wrapper, 'ContentEmpty', el => el.length === 0);
+    waitForElement(wrapper, 'ContentEmpty', (el) => el.length === 0);
 
     await act(async () =>
       wrapper.find('Chip[aria-label="Execute"]').prop('onClick')({
@@ -263,7 +264,7 @@ describe('<UserAccessList />', () => {
       wrapper = mountWithContexts(<UserAccessList />);
     });
 
-    waitForElement(wrapper, 'ContentEmpty', el => el.length === 0);
+    waitForElement(wrapper, 'ContentEmpty', (el) => el.length === 0);
 
     await act(async () =>
       wrapper.find('Chip[aria-label="Execute"]').prop('onClick')({
@@ -322,7 +323,7 @@ describe('<UserAccessList />', () => {
     waitForElement(
       wrapper,
       'EmptyState[title="System Administrator"]',
-      el => el.length === 1
+      (el) => el.length === 1
     );
   });
 });

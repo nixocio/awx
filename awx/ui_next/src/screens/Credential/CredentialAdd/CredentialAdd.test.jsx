@@ -1,15 +1,15 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-
 import {
-  CredentialsAPI,
   CredentialInputSourcesAPI,
   CredentialTypesAPI,
+  CredentialsAPI,
 } from '../../../api';
 import CredentialAdd from './CredentialAdd';
 
@@ -123,7 +123,7 @@ describe('<CredentialAdd />', () => {
     });
 
     test('handleSubmit should call the api and redirect to details page', async () => {
-      await waitForElement(wrapper, 'isLoading', el => el.length === 0);
+      await waitForElement(wrapper, 'isLoading', (el) => el.length === 0);
       await act(async () => {
         wrapper.find('CredentialForm').prop('onSubmit')({
           user: 1,
@@ -180,7 +180,7 @@ describe('<CredentialAdd />', () => {
     });
 
     test('handleCancel should return the user back to the credentials list', async () => {
-      await waitForElement(wrapper, 'isLoading', el => el.length === 0);
+      await waitForElement(wrapper, 'isLoading', (el) => el.length === 0);
       wrapper.find('Button[aria-label="Cancel"]').simulate('click');
       expect(history.location.pathname).toEqual('/credentials');
     });

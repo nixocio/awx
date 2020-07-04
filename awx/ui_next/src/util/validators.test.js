@@ -1,13 +1,13 @@
 import {
-  required,
-  minLength,
-  maxLength,
-  noWhiteSpace,
-  integer,
   combine,
+  integer,
+  maxLength,
+  minLength,
+  noWhiteSpace,
+  required,
 } from './validators';
 
-const i18n = { _: val => val };
+const i18n = { _: (val) => val };
 
 describe('validators', () => {
   test('required returns undefined if value given', () => {

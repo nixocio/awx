@@ -1,7 +1,8 @@
 import React from 'react';
+
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
-import PromptProjectDetail from './PromptProjectDetail';
 import mockProject from './data.project.json';
+import PromptProjectDetail from './PromptProjectDetail';
 
 function assertDetail(wrapper, label, value) {
   expect(wrapper.find(`Detail[label="${label}"] dt`).text()).toBe(label);

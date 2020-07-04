@@ -1,11 +1,10 @@
-import React, { Fragment, useState, useEffect, useCallback } from 'react';
-import { useLocation, useRouteMatch } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Card, PageSection } from '@patternfly/react-core';
+import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import { useLocation, useRouteMatch } from 'react-router-dom';
 
 import { TeamsAPI } from '../../../api';
-import useRequest, { useDeleteItems } from '../../../util/useRequest';
 import AlertModal from '../../../components/AlertModal';
 import DataListToolbar from '../../../components/DataListToolbar';
 import ErrorDetail from '../../../components/ErrorDetail';
@@ -14,7 +13,7 @@ import PaginatedDataList, {
   ToolbarDeleteButton,
 } from '../../../components/PaginatedDataList';
 import { getQSConfig, parseQueryString } from '../../../util/qs';
-
+import useRequest, { useDeleteItems } from '../../../util/useRequest';
 import TeamListItem from './TeamListItem';
 
 const QS_CONFIG = getQSConfig('team', {
@@ -65,7 +64,7 @@ function TeamList({ i18n }) {
     clearDeletionError,
   } = useDeleteItems(
     useCallback(async () => {
-      return Promise.all(selected.map(team => TeamsAPI.destroy(team.id)));
+      return Promise.all(selected.map((team) => TeamsAPI.destroy(team.id)));
     }, [selected]),
     {
       qsConfig: QS_CONFIG,
@@ -82,13 +81,13 @@ function TeamList({ i18n }) {
   const hasContentLoading = isDeleteLoading || isLoading;
   const canAdd = actions && actions.POST;
 
-  const handleSelectAll = isSelected => {
+  const handleSelectAll = (isSelected) => {
     setSelected(isSelected ? [...teams] : []);
   };
 
-  const handleSelect = row => {
-    if (selected.some(s => s.id === row.id)) {
-      setSelected(selected.filter(s => s.id !== row.id));
+  const handleSelect = (row) => {
+    if (selected.some((s) => s.id === row.id)) {
+      setSelected(selected.filter((s) => s.id !== row.id));
     } else {
       setSelected(selected.concat(row));
     }
@@ -131,7 +130,7 @@ function TeamList({ i18n }) {
                 key: 'name',
               },
             ]}
-            renderToolbar={props => (
+            renderToolbar={(props) => (
               <DataListToolbar
                 {...props}
                 showSelectAll
@@ -156,12 +155,12 @@ function TeamList({ i18n }) {
                 ]}
               />
             )}
-            renderItem={o => (
+            renderItem={(o) => (
               <TeamListItem
                 key={o.id}
                 team={o}
                 detailUrl={`${match.url}/${o.id}`}
-                isSelected={selected.some(row => row.id === o.id)}
+                isSelected={selected.some((row) => row.id === o.id)}
                 onSelect={() => handleSelect(o)}
               />
             )}

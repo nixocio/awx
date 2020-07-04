@@ -1,22 +1,23 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { getQSConfig, parseQueryString, mergeParams } from '../../../util/qs';
-import useRequest, {
-  useDismissableError,
-  useDeleteItems,
-} from '../../../util/useRequest';
-import useSelected from '../../../util/useSelected';
+import { withI18n } from '@lingui/react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+
 import { HostsAPI, InventoriesAPI } from '../../../api';
-import DataListToolbar from '../../../components/DataListToolbar';
 import AlertModal from '../../../components/AlertModal';
+import AssociateModal from '../../../components/AssociateModal';
+import DataListToolbar from '../../../components/DataListToolbar';
+import DisassociateButton from '../../../components/DisassociateButton';
 import ErrorDetail from '../../../components/ErrorDetail';
 import PaginatedDataList, {
   ToolbarAddButton,
 } from '../../../components/PaginatedDataList';
-import AssociateModal from '../../../components/AssociateModal';
-import DisassociateButton from '../../../components/DisassociateButton';
+import { getQSConfig, mergeParams, parseQueryString } from '../../../util/qs';
+import useRequest, {
+  useDeleteItems,
+  useDismissableError,
+} from '../../../util/useRequest';
+import useSelected from '../../../util/useSelected';
 import InventoryHostGroupItem from './InventoryHostGroupItem';
 
 const QS_CONFIG = getQSConfig('group', {
@@ -76,7 +77,7 @@ function InventoryHostGroupsList({ i18n }) {
   } = useDeleteItems(
     useCallback(async () => {
       return Promise.all(
-        selected.map(group => HostsAPI.disassociateGroup(hostId, group))
+        selected.map((group) => HostsAPI.disassociateGroup(hostId, group))
       );
     }, [hostId, selected]),
     {
@@ -92,7 +93,7 @@ function InventoryHostGroupsList({ i18n }) {
   };
 
   const fetchGroupsToAssociate = useCallback(
-    params => {
+    (params) => {
       return InventoriesAPI.readGroups(
         invId,
         mergeParams(params, { not__hosts: hostId })
@@ -103,9 +104,9 @@ function InventoryHostGroupsList({ i18n }) {
 
   const { request: handleAssociate, error: associateError } = useRequest(
     useCallback(
-      async groupsToAssociate => {
+      async (groupsToAssociate) => {
         await Promise.all(
-          groupsToAssociate.map(group =>
+          groupsToAssociate.map((group) =>
             HostsAPI.associateGroup(hostId, group.id)
           )
         );
@@ -152,21 +153,21 @@ function InventoryHostGroupsList({ i18n }) {
             key: 'name',
           },
         ]}
-        renderItem={item => (
+        renderItem={(item) => (
           <InventoryHostGroupItem
             key={item.id}
             group={item}
             inventoryId={item.summary_fields.inventory.id}
-            isSelected={selected.some(row => row.id === item.id)}
+            isSelected={selected.some((row) => row.id === item.id)}
             onSelect={() => handleSelect(item)}
           />
         )}
-        renderToolbar={props => (
+        renderToolbar={(props) => (
           <DataListToolbar
             {...props}
             showSelectAll
             isAllSelected={isAllSelected}
-            onSelectAll={isSelected =>
+            onSelectAll={(isSelected) =>
               setSelected(isSelected ? [...groups] : [])
             }
             qsConfig={QS_CONFIG}

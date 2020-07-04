@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { Trans, t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
-import { t, Trans } from '@lingui/macro';
-import { useField } from 'formik';
 import {
   FormGroup,
   Select,
   SelectOption,
   SelectVariant,
 } from '@patternfly/react-core';
-import { arrayToString, stringToArray } from '../../../../util/strings';
-import { minMaxValue } from '../../../../util/validators';
-import { BrandName } from '../../../../variables';
+import { useField } from 'formik';
+import React, { useEffect, useState } from 'react';
+
 import AnsibleSelect from '../../../../components/AnsibleSelect';
 import { VariablesField } from '../../../../components/CodeMirrorInput';
 import FormField, {
@@ -18,9 +16,12 @@ import FormField, {
   FieldTooltip,
 } from '../../../../components/FormField';
 import {
-  FormFullWidthLayout,
   FormCheckboxLayout,
+  FormFullWidthLayout,
 } from '../../../../components/FormLayout';
+import { arrayToString, stringToArray } from '../../../../util/strings';
+import { minMaxValue } from '../../../../util/validators';
+import { BrandName } from '../../../../variables';
 
 export const SourceVarsField = withI18n()(({ i18n }) => (
   <FormFullWidthLayout>
@@ -40,8 +41,8 @@ export const RegionsField = withI18n()(({ i18n, regionOptions }) => {
     ...regionOptions.map(([key, val]) => ({ [key]: val }))
   );
   const selected = stringToArray(field?.value)
-    .filter(i => options[i])
-    .map(val => options[val]);
+    .filter((i) => options[i])
+    .map((val) => options[val]);
 
   return (
     <FormGroup
@@ -68,12 +69,12 @@ export const RegionsField = withI18n()(({ i18n, regionOptions }) => {
         onSelect={(event, option) => {
           let selectedValues;
           if (selected.includes(option)) {
-            selectedValues = selected.filter(o => o !== option);
+            selectedValues = selected.filter((o) => o !== option);
           } else {
             selectedValues = selected.concat(option);
           }
-          const selectedKeys = selectedValues.map(val =>
-            Object.keys(options).find(key => options[key] === val)
+          const selectedKeys = selectedValues.map((val) =>
+            Object.keys(options).find((key) => options[key] === val)
           );
           helpers.setValue(arrayToString(selectedKeys));
         }}
@@ -94,26 +95,28 @@ export const GroupByField = withI18n()(
     const [field, meta, helpers] = useField('group_by');
     const fixedOptionLabels = fixedOptions && Object.values(fixedOptions);
     const selections = fixedOptions
-      ? stringToArray(field.value).map(o => fixedOptions[o])
+      ? stringToArray(field.value).map((o) => fixedOptions[o])
       : stringToArray(field.value);
     const [options, setOptions] = useState(selections);
     const [isOpen, setIsOpen] = useState(false);
 
-    const renderOptions = opts => {
-      return opts.map(option => (
+    const renderOptions = (opts) => {
+      return opts.map((option) => (
         <SelectOption key={option} value={option}>
           {option}
         </SelectOption>
       ));
     };
 
-    const handleFilter = event => {
+    const handleFilter = (event) => {
       const str = event.target.value.toLowerCase();
       let matches;
       if (fixedOptions) {
-        matches = fixedOptionLabels.filter(o => o.toLowerCase().includes(str));
+        matches = fixedOptionLabels.filter((o) =>
+          o.toLowerCase().includes(str)
+        );
       } else {
-        matches = options.filter(o => o.toLowerCase().includes(str));
+        matches = options.filter((o) => o.toLowerCase().includes(str));
       }
       return renderOptions(matches);
     };
@@ -121,13 +124,13 @@ export const GroupByField = withI18n()(
     const handleSelect = (e, option) => {
       let selectedValues;
       if (selections.includes(option)) {
-        selectedValues = selections.filter(o => o !== option);
+        selectedValues = selections.filter((o) => o !== option);
       } else {
         selectedValues = selections.concat(option);
       }
       if (fixedOptions) {
-        selectedValues = selectedValues.map(val =>
-          Object.keys(fixedOptions).find(key => fixedOptions[key] === val)
+        selectedValues = selectedValues.map((val) =>
+          Object.keys(fixedOptions).find((key) => fixedOptions[key] === val)
         );
       }
       helpers.setValue(arrayToString(selectedValues));
@@ -196,9 +199,9 @@ export const GroupByField = withI18n()(
           onClear={() => helpers.setValue('')}
           isCreatable={isCreatable}
           createText={i18n._(t`Create`)}
-          onCreateOption={name => {
+          onCreateOption={(name) => {
             name = name.trim();
-            if (!options.find(opt => opt === name)) {
+            if (!options.find((opt) => opt === name)) {
               setOptions(options.concat(name));
             }
             return name;

@@ -1,27 +1,28 @@
-import React, { useEffect, useCallback } from 'react';
 import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
-import { CaretLeftIcon } from '@patternfly/react-icons';
 import { Card, PageSection } from '@patternfly/react-core';
+import { CaretLeftIcon } from '@patternfly/react-icons';
+import React, { useCallback, useEffect } from 'react';
 import {
-  Switch,
-  Route,
-  Redirect,
   Link,
+  Redirect,
+  Route,
+  Switch,
   useLocation,
   useParams,
   useRouteMatch,
 } from 'react-router-dom';
-import RoutedTabs from '../../components/RoutedTabs';
-import useRequest from '../../util/useRequest';
+
+import { JobTemplatesAPI, OrganizationsAPI } from '../../api';
 import ContentError from '../../components/ContentError';
 import JobList from '../../components/JobList';
 import NotificationList from '../../components/NotificationList';
-import { Schedules } from '../../components/Schedule';
 import { ResourceAccessList } from '../../components/ResourceAccessList';
+import RoutedTabs from '../../components/RoutedTabs';
+import { Schedules } from '../../components/Schedule';
+import useRequest from '../../util/useRequest';
 import JobTemplateDetail from './JobTemplateDetail';
 import JobTemplateEdit from './JobTemplateEdit';
-import { JobTemplatesAPI, OrganizationsAPI } from '../../api';
 import TemplateSurvey from './TemplateSurvey';
 
 function Template({ i18n, me, setBreadcrumb }) {
@@ -62,7 +63,7 @@ function Template({ i18n, me, setBreadcrumb }) {
     loadTemplateAndRoles();
   }, [loadTemplateAndRoles, location.pathname]);
 
-  const createSchedule = data => {
+  const createSchedule = (data) => {
     return JobTemplatesAPI.createSchedule(templateId, data);
   };
 
@@ -70,7 +71,7 @@ function Template({ i18n, me, setBreadcrumb }) {
     return JobTemplatesAPI.readScheduleOptions(templateId);
   };
 
-  const loadSchedules = params => {
+  const loadSchedules = (params) => {
     return JobTemplatesAPI.readSchedules(templateId, params);
   };
 

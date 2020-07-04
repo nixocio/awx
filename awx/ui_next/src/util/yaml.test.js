@@ -1,4 +1,4 @@
-import { yamlToJson, jsonToYaml, parseVariableField } from './yaml';
+import { jsonToYaml, parseVariableField, yamlToJson } from './yaml';
 
 describe('yamlToJson', () => {
   test('should convert to json', () => {

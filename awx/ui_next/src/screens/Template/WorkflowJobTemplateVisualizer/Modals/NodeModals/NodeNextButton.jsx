@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { func, number, shape, string } from 'prop-types';
 import { Button } from '@patternfly/react-core';
+import { func, number, shape, string } from 'prop-types';
+import React, { useEffect } from 'react';
 
 function NodeNextButton({
   activeStep,

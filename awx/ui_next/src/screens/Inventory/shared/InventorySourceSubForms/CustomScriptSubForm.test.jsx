@@ -1,13 +1,14 @@
+import { Formik } from 'formik';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { Formik } from 'formik';
+
 import { mountWithContexts } from '../../../../../testUtils/enzymeHelpers';
-import CustomScriptSubForm from './CustomScriptSubForm';
 import {
   CredentialsAPI,
   InventoriesAPI,
   InventoryScriptsAPI,
 } from '../../../../api';
+import CustomScriptSubForm from './CustomScriptSubForm';
 
 jest.mock('../../../../api/models/Credentials');
 jest.mock('../../../../api/models/Inventories');

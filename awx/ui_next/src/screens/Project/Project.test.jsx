@@ -1,10 +1,11 @@
-import React from 'react';
 import { createMemoryHistory } from 'history';
-import { OrganizationsAPI, ProjectsAPI } from '../../api';
+import React from 'react';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
+import { OrganizationsAPI, ProjectsAPI } from '../../api';
 import mockOrganization from '../../util/data.organization.json';
 import mockDetails from './data.project.json';
 import Project from './Project';
@@ -34,7 +35,7 @@ describe('<Project />', () => {
     mountWithContexts(<Project setBreadcrumb={() => {}} me={mockMe} />);
   });
 
-  test('notifications tab shown for admins', async done => {
+  test('notifications tab shown for admins', async (done) => {
     ProjectsAPI.readDetail.mockResolvedValue({ data: mockDetails });
     OrganizationsAPI.read.mockImplementation(getOrganizations);
 
@@ -44,13 +45,13 @@ describe('<Project />', () => {
     const tabs = await waitForElement(
       wrapper,
       '.pf-c-tabs__item',
-      el => el.length === 6
+      (el) => el.length === 6
     );
     expect(tabs.at(3).text()).toEqual('Notifications');
     done();
   });
 
-  test('notifications tab hidden with reduced permissions', async done => {
+  test('notifications tab hidden with reduced permissions', async (done) => {
     ProjectsAPI.readDetail.mockResolvedValue({ data: mockDetails });
     OrganizationsAPI.read.mockResolvedValue({
       count: 0,
@@ -65,13 +66,13 @@ describe('<Project />', () => {
     const tabs = await waitForElement(
       wrapper,
       '.pf-c-tabs__item',
-      el => el.length === 5
+      (el) => el.length === 5
     );
-    tabs.forEach(tab => expect(tab.text()).not.toEqual('Notifications'));
+    tabs.forEach((tab) => expect(tab.text()).not.toEqual('Notifications'));
     done();
   });
 
-  test('schedules tab shown for scm based projects.', async done => {
+  test('schedules tab shown for scm based projects.', async (done) => {
     ProjectsAPI.readDetail.mockResolvedValue({ data: mockDetails });
     OrganizationsAPI.read.mockResolvedValue({
       count: 0,
@@ -86,13 +87,13 @@ describe('<Project />', () => {
     const tabs = await waitForElement(
       wrapper,
       '.pf-c-tabs__item',
-      el => el.length === 5
+      (el) => el.length === 5
     );
     expect(tabs.at(4).text()).toEqual('Schedules');
     done();
   });
 
-  test('schedules tab hidden for manual projects.', async done => {
+  test('schedules tab hidden for manual projects.', async (done) => {
     const manualDetails = Object.assign(mockDetails, { scm_type: '' });
     ProjectsAPI.readDetail.mockResolvedValue({ data: manualDetails });
     OrganizationsAPI.read.mockResolvedValue({
@@ -108,9 +109,9 @@ describe('<Project />', () => {
     const tabs = await waitForElement(
       wrapper,
       '.pf-c-tabs__item',
-      el => el.length === 4
+      (el) => el.length === 4
     );
-    tabs.forEach(tab => expect(tab.text()).not.toEqual('Schedules'));
+    tabs.forEach((tab) => expect(tab.text()).not.toEqual('Schedules'));
     done();
   });
 
@@ -136,6 +137,6 @@ describe('<Project />', () => {
         },
       }
     );
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

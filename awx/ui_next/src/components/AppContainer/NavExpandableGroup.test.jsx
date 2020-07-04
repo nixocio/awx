@@ -1,8 +1,8 @@
+import { Nav } from '@patternfly/react-core';
+import { mount } from 'enzyme';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { mount } from 'enzyme';
 
-import { Nav } from '@patternfly/react-core';
 import NavExpandableGroup from './NavExpandableGroup';
 
 describe('NavExpandableGroup', () => {

@@ -1,14 +1,13 @@
-import React, { Fragment, useState, useCallback } from 'react';
-import { Route, useRouteMatch, Switch } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import React, { Fragment, useCallback, useState } from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import { Config } from '../../contexts/Config';
-
-import UsersList from './UserList/UserList';
-import UserAdd from './UserAdd/UserAdd';
 import User from './User';
+import UserAdd from './UserAdd/UserAdd';
+import UsersList from './UserList/UserList';
 
 function Users({ i18n }) {
   const [breadcrumbConfig, setBreadcrumbConfig] = useState({
@@ -18,7 +17,7 @@ function Users({ i18n }) {
   const match = useRouteMatch();
 
   const addUserBreadcrumb = useCallback(
-    user => {
+    (user) => {
       if (!user) {
         return;
       }

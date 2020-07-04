@@ -1,12 +1,13 @@
-import React, { Fragment, useEffect, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Button, Modal } from '@patternfly/react-core';
-import OptionsList from '../OptionsList';
-import useRequest from '../../util/useRequest';
+import React, { Fragment, useCallback, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { getQSConfig, parseQueryString } from '../../util/qs';
+import useRequest from '../../util/useRequest';
 import useSelected from '../../util/useSelected';
+import OptionsList from '../OptionsList';
 
 const QS_CONFIG = getQSConfig('associate', {
   page: 1,
@@ -56,7 +57,7 @@ function AssociateModal({
   const clearQSParams = () => {
     const parts = history.location.search.replace(/^\?/, '').split('&');
     const ns = QS_CONFIG.namespace;
-    const otherParts = parts.filter(param => !param.startsWith(`${ns}.`));
+    const otherParts = parts.filter((param) => !param.startsWith(`${ns}.`));
     history.replace(`${history.location.pathname}?${otherParts.join('&')}`);
   };
 

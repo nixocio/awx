@@ -1,21 +1,19 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { useLocation, useRouteMatch } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Card, PageSection } from '@patternfly/react-core';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation, useRouteMatch } from 'react-router-dom';
 
 import { InventoriesAPI } from '../../../api';
-import useRequest, { useDeleteItems } from '../../../util/useRequest';
+import AddDropDownButton from '../../../components/AddDropDownButton';
 import AlertModal from '../../../components/AlertModal';
 import DatalistToolbar from '../../../components/DataListToolbar';
 import ErrorDetail from '../../../components/ErrorDetail';
 import PaginatedDataList, {
   ToolbarDeleteButton,
 } from '../../../components/PaginatedDataList';
-
 import { getQSConfig, parseQueryString } from '../../../util/qs';
-import AddDropDownButton from '../../../components/AddDropDownButton';
+import useRequest, { useDeleteItems } from '../../../util/useRequest';
 import InventoryListItem from './InventoryListItem';
 
 const QS_CONFIG = getQSConfig('inventory', {
@@ -67,7 +65,9 @@ function InventoryList({ i18n }) {
     clearDeletionError,
   } = useDeleteItems(
     useCallback(async () => {
-      return Promise.all(selected.map(team => InventoriesAPI.destroy(team.id)));
+      return Promise.all(
+        selected.map((team) => InventoriesAPI.destroy(team.id))
+      );
     }, [selected]),
     {
       qsConfig: QS_CONFIG,
@@ -84,13 +84,13 @@ function InventoryList({ i18n }) {
   const hasContentLoading = isDeleteLoading || isLoading;
   const canAdd = actions && actions.POST;
 
-  const handleSelectAll = isSelected => {
+  const handleSelectAll = (isSelected) => {
     setSelected(isSelected ? [...inventories] : []);
   };
 
-  const handleSelect = row => {
-    if (selected.some(s => s.id === row.id)) {
-      setSelected(selected.filter(s => s.id !== row.id));
+  const handleSelect = (row) => {
+    if (selected.some((s) => s.id === row.id)) {
+      setSelected(selected.filter((s) => s.id !== row.id));
     } else {
       setSelected(selected.concat(row));
     }
@@ -143,7 +143,7 @@ function InventoryList({ i18n }) {
               key: 'name',
             },
           ]}
-          renderToolbar={props => (
+          renderToolbar={(props) => (
             <DatalistToolbar
               {...props}
               showSelectAll
@@ -162,7 +162,7 @@ function InventoryList({ i18n }) {
               ]}
             />
           )}
-          renderItem={inventory => (
+          renderItem={(inventory) => (
             <InventoryListItem
               key={inventory.id}
               value={inventory.name}
@@ -174,7 +174,7 @@ function InventoryList({ i18n }) {
                   : `${match.url}/inventory/${inventory.id}/details`
               }
               onSelect={() => handleSelect(inventory)}
-              isSelected={selected.some(row => row.id === inventory.id)}
+              isSelected={selected.some((row) => row.id === inventory.id)}
             />
           )}
           emptyStateControls={canAdd && addButton}

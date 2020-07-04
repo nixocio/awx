@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { Checkbox as PFCheckbox } from '@patternfly/react-core';
+import PropTypes from 'prop-types';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 
 const CheckboxWrapper = styled.div`

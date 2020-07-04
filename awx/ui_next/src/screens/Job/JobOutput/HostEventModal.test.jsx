@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import HostEventModal from './HostEventModal';
 
@@ -67,7 +68,7 @@ let jsonSection;
 let standardOutSection;
 let standardErrorSection;
 
-const findSections = wrapper => {
+const findSections = (wrapper) => {
   detailsSection = wrapper.find('section').at(0);
   jsonSection = wrapper.find('section').at(1);
   standardOutSection = wrapper.find('section').at(2);

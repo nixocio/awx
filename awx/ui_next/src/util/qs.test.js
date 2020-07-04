@@ -1,12 +1,12 @@
 import {
-  encodeQueryString,
-  encodeNonDefaultQueryString,
-  parseQueryString,
-  getQSConfig,
-  removeParams,
-  _stringToObject,
   _addDefaultsToObject,
+  _stringToObject,
+  encodeNonDefaultQueryString,
+  encodeQueryString,
+  getQSConfig,
   mergeParams,
+  parseQueryString,
+  removeParams,
   replaceParams,
 } from './qs';
 

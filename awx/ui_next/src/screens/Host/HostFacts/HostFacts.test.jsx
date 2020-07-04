@@ -1,13 +1,14 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-import HostFacts from './HostFacts';
 import { HostsAPI } from '../../../api';
 import mockHost from '../data.host.json';
 import mockHostFacts from '../data.hostFacts.json';
+import HostFacts from './HostFacts';
 
 jest.mock('../../../api/models/Hosts');
 jest.mock('react-router-dom', () => ({
@@ -26,7 +27,7 @@ describe('<HostFacts />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<HostFacts host={mockHost} />);
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
   });
 
   afterEach(() => {
@@ -54,6 +55,6 @@ describe('<HostFacts />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<HostFacts host={mockHost} />);
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

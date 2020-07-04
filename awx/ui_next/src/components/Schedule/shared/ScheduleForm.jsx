@@ -1,21 +1,22 @@
-import React, { useEffect, useCallback } from 'react';
-import { shape, func } from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { Formik, useField } from 'formik';
-import { RRule } from 'rrule';
+import { withI18n } from '@lingui/react';
 import { Form, FormGroup, Title } from '@patternfly/react-core';
-import { Config } from '../../../contexts/Config';
+import { Formik, useField } from 'formik';
+import { func, shape } from 'prop-types';
+import React, { useCallback, useEffect } from 'react';
+import { RRule } from 'rrule';
+
 import { SchedulesAPI } from '../../../api';
+import { Config } from '../../../contexts/Config';
+import { dateToInputDateTime, formatDateStringUTC } from '../../../util/dates';
+import useRequest from '../../../util/useRequest';
+import { required } from '../../../util/validators';
 import AnsibleSelect from '../../AnsibleSelect';
 import ContentError from '../../ContentError';
 import ContentLoading from '../../ContentLoading';
 import FormActionGroup from '../../FormActionGroup/FormActionGroup';
 import FormField, { FormSubmitError } from '../../FormField';
 import { FormColumnLayout, SubFormLayout } from '../../FormLayout';
-import { dateToInputDateTime, formatDateStringUTC } from '../../../util/dates';
-import useRequest from '../../../util/useRequest';
-import { required } from '../../../util/validators';
 import FrequencyDetailSubform from './FrequencyDetailSubform';
 
 const generateRunOnTheDay = (days = []) => {
@@ -28,18 +29,18 @@ const generateRunOnTheDay = (days = []) => {
       RRule.FR,
       RRule.SA,
       RRule.SU,
-    ].every(element => days.indexOf(element) > -1)
+    ].every((element) => days.indexOf(element) > -1)
   ) {
     return 'day';
   }
   if (
     [RRule.MO, RRule.TU, RRule.WE, RRule.TH, RRule.FR].every(
-      element => days.indexOf(element) > -1
+      (element) => days.indexOf(element) > -1
     )
   ) {
     return 'weekday';
   }
-  if ([RRule.SA, RRule.SU].every(element => days.indexOf(element) > -1)) {
+  if ([RRule.SA, RRule.SU].every((element) => days.indexOf(element) > -1)) {
     return 'weekendDay';
   }
   if (days.indexOf(RRule.MO) > -1) {
@@ -305,7 +306,7 @@ function ScheduleForm({
   } = useRequest(
     useCallback(async () => {
       const { data } = await SchedulesAPI.readZoneInfo();
-      return data.map(zone => {
+      return data.map((zone) => {
         return {
           value: zone.name,
           key: zone.name,
@@ -334,7 +335,7 @@ function ScheduleForm({
           <Formik
             initialValues={Object.assign(initialValues, overriddenValues)}
             onSubmit={handleSubmit}
-            validate={values => {
+            validate={(values) => {
               const errors = {};
               const {
                 end,
@@ -367,7 +368,7 @@ function ScheduleForm({
               return errors;
             }}
           >
-            {formik => (
+            {(formik) => (
               <Form autoComplete="off" onSubmit={formik.handleSubmit}>
                 <FormColumnLayout>
                   <ScheduleFormFields

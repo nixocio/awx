@@ -1,19 +1,19 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Card, PageSection } from '@patternfly/react-core';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
 
-import { PageSection, Card } from '@patternfly/react-core';
+import { SchedulesAPI } from '../../api';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import { ScheduleList } from '../../components/Schedule';
-import { SchedulesAPI } from '../../api';
 
 function AllSchedules({ i18n }) {
   const loadScheduleOptions = () => {
     return SchedulesAPI.readOptions();
   };
 
-  const loadSchedules = params => {
+  const loadSchedules = (params) => {
     return SchedulesAPI.read(params);
   };
 

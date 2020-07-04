@@ -2,11 +2,12 @@ import Ansi from 'ansi-to-html';
 import hasAnsi from 'has-ansi';
 import { AllHtmlEntities } from 'html-entities';
 import React from 'react';
+
 import {
   JobEventLine,
-  JobEventLineToggle,
   JobEventLineNumber,
   JobEventLineText,
+  JobEventLineToggle,
 } from './shared';
 
 const EVENT_START_TASK = 'playbook_on_task_start';

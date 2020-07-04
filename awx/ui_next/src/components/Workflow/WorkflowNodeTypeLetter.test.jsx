@@ -1,6 +1,7 @@
-import React from 'react';
-import { mount } from 'enzyme';
 import { PauseIcon } from '@patternfly/react-icons';
+import { mount } from 'enzyme';
+import React from 'react';
+
 import WorkflowNodeTypeLetter from './WorkflowNodeTypeLetter';
 
 describe('WorkflowNodeTypeLetter', () => {

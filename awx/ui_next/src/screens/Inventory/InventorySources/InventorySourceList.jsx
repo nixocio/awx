@@ -1,23 +1,23 @@
-import React, { useCallback, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Button, Tooltip } from '@patternfly/react-core';
+import React, { useCallback, useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 
-import useRequest, {
-  useDeleteItems,
-  useDismissableError,
-} from '../../../util/useRequest';
-import { getQSConfig, parseQueryString } from '../../../util/qs';
 import { InventoriesAPI, InventorySourcesAPI } from '../../../api';
+import AlertModal from '../../../components/AlertModal/AlertModal';
+import DatalistToolbar from '../../../components/DataListToolbar';
+import ErrorDetail from '../../../components/ErrorDetail/ErrorDetail';
 import PaginatedDataList, {
   ToolbarAddButton,
   ToolbarDeleteButton,
 } from '../../../components/PaginatedDataList';
+import { getQSConfig, parseQueryString } from '../../../util/qs';
+import useRequest, {
+  useDeleteItems,
+  useDismissableError,
+} from '../../../util/useRequest';
 import useSelected from '../../../util/useSelected';
-import DatalistToolbar from '../../../components/DataListToolbar';
-import AlertModal from '../../../components/AlertModal/AlertModal';
-import ErrorDetail from '../../../components/ErrorDetail/ErrorDetail';
 import InventorySourceListItem from './InventorySourceListItem';
 
 const QS_CONFIG = getQSConfig('inventory', {
@@ -58,7 +58,7 @@ function InventorySourceList({ i18n }) {
   );
   const canSyncSources =
     sources.length > 0 &&
-    sources.every(source => source.summary_fields.user_capabilities.start);
+    sources.every((source) => source.summary_fields.user_capabilities.start);
   const {
     isLoading: isSyncAllLoading,
     error: syncAllError,
@@ -118,12 +118,12 @@ function InventorySourceList({ i18n }) {
         itemCount={sourceCount}
         pluralizedItemName={i18n._(t`Inventory Sources`)}
         qsConfig={QS_CONFIG}
-        renderToolbar={props => (
+        renderToolbar={(props) => (
           <DatalistToolbar
             {...props}
             showSelectAll
             isAllSelected={isAllSelected}
-            onSelectAll={isSelected =>
+            onSelectAll={(isSelected) =>
               setSelected(isSelected ? [...sources] : [])
             }
             qsConfig={QS_CONFIG}
@@ -157,7 +157,7 @@ function InventorySourceList({ i18n }) {
             ]}
           />
         )}
-        renderItem={inventorySource => {
+        renderItem={(inventorySource) => {
           let label;
           sourceChoices.forEach(([scMatch, scLabel]) => {
             if (inventorySource.source === scMatch) {
@@ -171,7 +171,7 @@ function InventorySourceList({ i18n }) {
               onSelect={() => handleSelect(inventorySource)}
               label={label}
               detailUrl={`${listUrl}${inventorySource.id}`}
-              isSelected={selected.some(row => row.id === inventorySource.id)}
+              isSelected={selected.some((row) => row.id === inventorySource.id)}
             />
           );
         }}

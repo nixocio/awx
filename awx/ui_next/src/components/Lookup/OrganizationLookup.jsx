@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { node, func, bool } from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { FormGroup } from '@patternfly/react-core';
+import { bool, func, node } from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import { OrganizationsAPI } from '../../api';
 import { Organization } from '../../types';
 import { getQSConfig, parseQueryString } from '../../util/qs';
@@ -92,8 +93,8 @@ function OrganizationLookup({
               },
             ]}
             readOnly={!canDelete}
-            selectItem={item => dispatch({ type: 'SELECT_ITEM', item })}
-            deselectItem={item => dispatch({ type: 'DESELECT_ITEM', item })}
+            selectItem={(item) => dispatch({ type: 'SELECT_ITEM', item })}
+            deselectItem={(item) => dispatch({ type: 'DESELECT_ITEM', item })}
           />
         )}
       />

@@ -1,10 +1,10 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-
 import TeamForm from './TeamForm';
 
 jest.mock('../../../api');
@@ -80,7 +80,7 @@ describe('<TeamForm />', () => {
         />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(handleSubmit).not.toHaveBeenCalled();
     await act(async () => {
       wrapper.find('button[aria-label="Save"]').simulate('click');

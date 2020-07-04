@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { Route, withRouter, Switch } from 'react-router-dom';
+import { withI18n } from '@lingui/react';
+import React, { Component } from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
-import { Config } from '../../contexts/Config';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
-import { TemplateList } from './TemplateList';
-import Template from './Template';
-import WorkflowJobTemplate from './WorkflowJobTemplate';
+import { Config } from '../../contexts/Config';
 import JobTemplateAdd from './JobTemplateAdd';
+import Template from './Template';
+import { TemplateList } from './TemplateList';
+import WorkflowJobTemplate from './WorkflowJobTemplate';
 import WorkflowJobTemplateAdd from './WorkflowJobTemplateAdd';
 
 class Templates extends Component {
@@ -65,12 +65,15 @@ class Templates extends Component {
       [`/templates/${template.type}/${template.id}/schedules/add`]: i18n._(
         t`Create New Schedule`
       ),
-      [`/templates/${template.type}/${template.id}/schedules/${schedule &&
-        schedule.id}`]: `${schedule && schedule.name}`,
-      [`/templates/${template.type}/${template.id}/schedules/${schedule &&
-        schedule.id}/details`]: i18n._(t`Schedule Details`),
-      [`/templates/${template.type}/${template.id}/schedules/${schedule &&
-        schedule.id}/edit`]: i18n._(t`Edit Details`),
+      [`/templates/${template.type}/${template.id}/schedules/${
+        schedule && schedule.id
+      }`]: `${schedule && schedule.name}`,
+      [`/templates/${template.type}/${template.id}/schedules/${
+        schedule && schedule.id
+      }/details`]: i18n._(t`Schedule Details`),
+      [`/templates/${template.type}/${template.id}/schedules/${
+        schedule && schedule.id
+      }/edit`]: i18n._(t`Edit Details`),
     };
     this.setState({ breadcrumbConfig });
   };

@@ -1,13 +1,14 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
 import { UsersAPI } from '../../../api';
-import UserDetail from './UserDetail';
 import mockDetails from '../data.user.json';
+import UserDetail from './UserDetail';
 
 jest.mock('../../../api');
 
@@ -118,7 +119,7 @@ describe('<UserDetail />', () => {
     await waitForElement(
       wrapper,
       'Modal[title="Error!"]',
-      el => el.length === 1
+      (el) => el.length === 1
     );
     await act(async () => {
       wrapper.find('Modal[title="Error!"]').invoke('onClose')();
@@ -126,7 +127,7 @@ describe('<UserDetail />', () => {
     await waitForElement(
       wrapper,
       'Modal[title="Error!"]',
-      el => el.length === 0
+      (el) => el.length === 0
     );
   });
 });

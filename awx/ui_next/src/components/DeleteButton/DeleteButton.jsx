@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Button } from '@patternfly/react-core';
+import React, { useState } from 'react';
+
 import AlertModal from '../AlertModal';
 
 function DeleteButton({

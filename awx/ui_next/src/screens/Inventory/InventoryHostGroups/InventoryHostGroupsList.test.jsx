@@ -1,7 +1,8 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { Route } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+
 import {
   mountWithContexts,
   waitForElement,
@@ -95,7 +96,7 @@ describe('<InventoryHostGroupsList />', () => {
         }
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
   });
 
   afterEach(() => {
@@ -139,21 +140,21 @@ describe('<InventoryHostGroupsList />', () => {
   });
 
   test('should check all row items when select all is checked', async () => {
-    wrapper.find('DataListCheck').forEach(el => {
+    wrapper.find('DataListCheck').forEach((el) => {
       expect(el.props().checked).toBe(false);
     });
     await act(async () => {
       wrapper.find('Checkbox#select-all').invoke('onChange')(true);
     });
     wrapper.update();
-    wrapper.find('DataListCheck').forEach(el => {
+    wrapper.find('DataListCheck').forEach((el) => {
       expect(el.props().checked).toBe(true);
     });
     await act(async () => {
       wrapper.find('Checkbox#select-all').invoke('onChange')(false);
     });
     wrapper.update();
-    wrapper.find('DataListCheck').forEach(el => {
+    wrapper.find('DataListCheck').forEach((el) => {
       expect(el.props().checked).toBe(false);
     });
   });
@@ -165,7 +166,7 @@ describe('<InventoryHostGroupsList />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<InventoryHostGroupsList />);
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 
   test('should show add button according to permissions', async () => {
@@ -180,7 +181,7 @@ describe('<InventoryHostGroupsList />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<InventoryHostGroupsList />);
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(wrapper.find('ToolbarAddButton').length).toBe(0);
   });
 
@@ -202,18 +203,15 @@ describe('<InventoryHostGroupsList />', () => {
     await act(async () => {
       wrapper.find('ToolbarAddButton').simulate('click');
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     wrapper.update();
     await act(async () => {
-      wrapper
-        .find('CheckboxListItem')
-        .first()
-        .invoke('onSelect')();
+      wrapper.find('CheckboxListItem').first().invoke('onSelect')();
     });
     await act(async () => {
       wrapper.find('button[aria-label="Save"]').simulate('click');
     });
-    await waitForElement(wrapper, 'AssociateModal', el => el.length === 0);
+    await waitForElement(wrapper, 'AssociateModal', (el) => el.length === 0);
     expect(InventoriesAPI.readGroups).toHaveBeenCalledTimes(1);
     expect(HostsAPI.associateGroup).toHaveBeenCalledTimes(1);
   });
@@ -222,14 +220,14 @@ describe('<InventoryHostGroupsList />', () => {
     expect(HostsAPI.disassociateGroup).toHaveBeenCalledTimes(0);
     expect(HostsAPI.readAllGroups).toHaveBeenCalledTimes(1);
     expect(wrapper.find('DataListCheck').length).toBe(3);
-    wrapper.find('DataListCheck').forEach(el => {
+    wrapper.find('DataListCheck').forEach((el) => {
       expect(el.props().checked).toBe(false);
     });
     await act(async () => {
       wrapper.find('Checkbox#select-all').invoke('onChange')(true);
     });
     wrapper.update();
-    wrapper.find('DataListCheck').forEach(el => {
+    wrapper.find('DataListCheck').forEach((el) => {
       expect(el.props().checked).toBe(true);
     });
     wrapper.find('button[aria-label="Disassociate"]').simulate('click');

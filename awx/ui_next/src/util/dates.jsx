@@ -1,9 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 import { t } from '@lingui/macro';
 import { RRule } from 'rrule';
+
 import { getLanguage } from './language';
 
-const prependZeros = value => value.toString().padStart(2, 0);
+const prependZeros = (value) => value.toString().padStart(2, 0);
 
 export function formatDateString(dateString, lang = getLanguage(navigator)) {
   return new Date(dateString).toLocaleString(lang);

@@ -1,11 +1,12 @@
-/* eslint no-nested-ternary: 0 */
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { Formik, useField } from 'formik';
+import { withI18n } from '@lingui/react';
 import { Form, FormGroup, Title } from '@patternfly/react-core';
-import { Config } from '../../../contexts/Config';
+import { Formik, useField } from 'formik';
+import PropTypes from 'prop-types';
+/* eslint no-nested-ternary: 0 */
+import React, { useEffect, useState } from 'react';
+
+import { CredentialTypesAPI, ProjectsAPI } from '../../../api';
 import AnsibleSelect from '../../../components/AnsibleSelect';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
@@ -14,22 +15,22 @@ import FormField, {
   FieldTooltip,
   FormSubmitError,
 } from '../../../components/FormField';
-import OrganizationLookup from '../../../components/Lookup/OrganizationLookup';
-import { CredentialTypesAPI, ProjectsAPI } from '../../../api';
-import { required } from '../../../util/validators';
 import {
   FormColumnLayout,
   SubFormLayout,
 } from '../../../components/FormLayout';
+import OrganizationLookup from '../../../components/Lookup/OrganizationLookup';
+import { Config } from '../../../contexts/Config';
+import { required } from '../../../util/validators';
 import {
   GitSubForm,
   HgSubForm,
-  SvnSubForm,
   InsightsSubForm,
   ManualSubForm,
+  SvnSubForm,
 } from './ProjectSubForms';
 
-const fetchCredentials = async credential => {
+const fetchCredentials = async (credential) => {
   const [
     {
       data: {
@@ -101,10 +102,10 @@ function ProjectFormFields({
   });
 
   /* Save current scm subform field values to state */
-  const saveSubFormState = form => {
+  const saveSubFormState = (form) => {
     const currentScmFormFields = { ...scmFormFields };
 
-    Object.keys(currentScmFormFields).forEach(label => {
+    Object.keys(currentScmFormFields).forEach((label) => {
       currentScmFormFields[label] = form.values[label];
     });
 
@@ -122,7 +123,7 @@ function ProjectFormFields({
       saveSubFormState(formik);
     }
 
-    Object.keys(scmFormFields).forEach(label => {
+    Object.keys(scmFormFields).forEach((label) => {
       if (value === form.initialValues.scm_type) {
         form.setFieldValue(label, scmSubFormState[label]);
       } else {
@@ -162,7 +163,7 @@ function ProjectFormFields({
         helperTextInvalid={organizationMeta.error}
         isValid={!organizationMeta.touched || !organizationMeta.error}
         onBlur={() => organizationHelpers.setTouched()}
-        onChange={value => {
+        onChange={(value) => {
           organizationHelpers.setValue(value);
         }}
         value={organizationField.value}
@@ -273,8 +274,8 @@ function ProjectFormFields({
                     key: 'default',
                   },
                   ...custom_virtualenvs
-                    .filter(datum => datum !== '/venv/ansible/')
-                    .map(datum => ({
+                    .filter((datum) => datum !== '/venv/ansible/')
+                    .map((datum) => ({
                       label: datum,
                       value: datum,
                       key: datum,
@@ -365,7 +366,7 @@ function ProjectForm({ i18n, project, submitError, ...props }) {
           }}
           onSubmit={handleSubmit}
         >
-          {formik => (
+          {(formik) => (
             <Form autoComplete="off" onSubmit={formik.handleSubmit}>
               <FormColumnLayout>
                 <ProjectFormFields

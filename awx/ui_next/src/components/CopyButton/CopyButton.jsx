@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import PropTypes from 'prop-types';
-
+import { withI18n } from '@lingui/react';
 import { Button, Tooltip } from '@patternfly/react-core';
 import { CopyIcon } from '@patternfly/react-icons';
+import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+
 import useRequest, { useDismissableError } from '../../util/useRequest';
 import AlertModal from '../AlertModal';
 import ErrorDetail from '../ErrorDetail';

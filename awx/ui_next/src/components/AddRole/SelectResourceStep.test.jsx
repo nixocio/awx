@@ -1,7 +1,7 @@
+import { shallow } from 'enzyme';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 
-import { shallow } from 'enzyme';
 import {
   mountWithContexts,
   waitForElement,
@@ -66,7 +66,7 @@ describe('<SelectResourceStep />', () => {
       page: 1,
       page_size: 5,
     });
-    waitForElement(wrapper, 'CheckBoxListItem', el => el.length === 2);
+    waitForElement(wrapper, 'CheckBoxListItem', (el) => el.length === 2);
   });
 
   test('clicking on row fires callback with correct params', async () => {

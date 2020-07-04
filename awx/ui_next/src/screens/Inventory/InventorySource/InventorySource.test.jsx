@@ -1,11 +1,12 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
-import { InventoriesAPI, OrganizationsAPI } from '../../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
+import { InventoriesAPI, OrganizationsAPI } from '../../../api';
 import mockInventorySource from '../shared/data.inventory_source.json';
 import InventorySource from './InventorySource';
 
@@ -81,8 +82,8 @@ describe('<InventorySource />', () => {
         />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
     expect(wrapper.find('ContentError Title').text()).toEqual(
       'Something went wrong...'
     );
@@ -108,7 +109,7 @@ describe('<InventorySource />', () => {
         { context: { router: { history } } }
       );
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
     expect(wrapper.find('ContentError Title').text()).toEqual('Not Found');
   });
 

@@ -1,15 +1,16 @@
-import React from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
+  Chip,
   DataListItem,
   DataListItemCells,
   DataListItemRow,
-  Chip,
 } from '@patternfly/react-core';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { DetailList, Detail } from '../../../components/DetailList';
+
 import DataListCell from '../../../components/DataListCell';
+import { Detail, DetailList } from '../../../components/DetailList';
 
 function TeamAccessListItem({ role, i18n, detailUrl, onSelect }) {
   const labelId = `teamRole-${role.id}`;

@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect } from 'react';
-import { withI18n } from '@lingui/react';
-import { useLocation, useParams } from 'react-router-dom';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import React, { useCallback, useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 
-import PaginatedDataList from '../../../components/PaginatedDataList';
-import useRequest from '../../../util/useRequest';
 import { UsersAPI } from '../../../api';
+import PaginatedDataList from '../../../components/PaginatedDataList';
 import { getQSConfig, parseQueryString } from '../../../util/qs';
+import useRequest from '../../../util/useRequest';
 import UserOrganizationListItem from './UserOrganizationListItem';
 
 const QS_CONFIG = getQSConfig('organizations', {
@@ -54,7 +54,7 @@ function UserOrganizationsList({ i18n }) {
       itemCount={count}
       pluralizedItemName={i18n._(t`Organizations`)}
       qsConfig={QS_CONFIG}
-      renderItem={organization => (
+      renderItem={(organization) => (
         <UserOrganizationListItem
           key={organization.id}
           value={organization.name}

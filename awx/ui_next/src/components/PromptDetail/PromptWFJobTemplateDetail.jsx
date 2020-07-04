@@ -1,15 +1,15 @@
-import React from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Chip, List, ListItem } from '@patternfly/react-core';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Chip, List, ListItem } from '@patternfly/react-core';
-import CredentialChip from '../CredentialChip';
-import ChipGroup from '../ChipGroup';
-import { Detail } from '../DetailList';
-import { VariablesDetail } from '../CodeMirrorInput';
-import Sparkline from '../Sparkline';
 import { toTitleCase } from '../../util/strings';
+import ChipGroup from '../ChipGroup';
+import { VariablesDetail } from '../CodeMirrorInput';
+import CredentialChip from '../CredentialChip';
+import { Detail } from '../DetailList';
+import Sparkline from '../Sparkline';
 
 function PromptWFJobTemplateDetail({ i18n, resource }) {
   const {
@@ -40,7 +40,7 @@ function PromptWFJobTemplateDetail({ i18n, resource }) {
       ? 'smart_inventory'
       : 'inventory';
 
-  const recentJobs = summary_fields.recent_jobs.map(job => ({
+  const recentJobs = summary_fields.recent_jobs.map((job) => ({
     ...job,
     type: 'job',
   }));
@@ -113,7 +113,7 @@ function PromptWFJobTemplateDetail({ i18n, resource }) {
               numChips={5}
               totalChips={summary_fields.labels.results.length}
             >
-              {summary_fields.labels.results.map(label => (
+              {summary_fields.labels.results.map((label) => (
                 <Chip key={label.id} isReadOnly>
                   {label.name}
                 </Chip>

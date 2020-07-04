@@ -1,9 +1,10 @@
-import React from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import styled from 'styled-components';
-import { func, string } from 'prop-types';
+import { withI18n } from '@lingui/react';
 import { Title } from '@patternfly/react-core';
+import { func, string } from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
+
 import SelectableCard from '../../../../../components/SelectableCard';
 
 const Grid = styled.div`

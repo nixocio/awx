@@ -1,8 +1,8 @@
-import React from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import styled from 'styled-components';
+import { withI18n } from '@lingui/react';
 import { shape } from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
 
 const GridDL = styled.dl`
   column-gap: 15px;

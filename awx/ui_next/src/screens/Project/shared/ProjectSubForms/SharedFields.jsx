@@ -1,15 +1,16 @@
-import React from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { useField } from 'formik';
+import { withI18n } from '@lingui/react';
 import { FormGroup, Title } from '@patternfly/react-core';
-import CredentialLookup from '../../../../components/Lookup/CredentialLookup';
+import { useField } from 'formik';
+import React from 'react';
+
 import FormField, { CheckboxField } from '../../../../components/FormField';
-import { required } from '../../../../util/validators';
 import {
   FormCheckboxLayout,
   FormFullWidthLayout,
 } from '../../../../components/FormLayout';
+import CredentialLookup from '../../../../components/Lookup/CredentialLookup';
+import { required } from '../../../../util/validators';
 
 export const UrlFormField = withI18n()(({ i18n, tooltip }) => (
   <FormField
@@ -46,7 +47,7 @@ export const ScmCredentialFormField = withI18n()(
         credentialTypeId={credential.typeId}
         label={i18n._(t`Source Control Credential`)}
         value={credential.value}
-        onChange={value => {
+        onChange={(value) => {
           onCredentialSelection('scm', value);
           credHelpers.setValue(value ? value.id : '');
         }}

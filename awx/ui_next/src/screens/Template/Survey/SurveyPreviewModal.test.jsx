@@ -1,10 +1,10 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import {
-  waitForElement,
-  mountWithContexts,
-} from '../../../../testUtils/enzymeHelpers';
 
+import {
+  mountWithContexts,
+  waitForElement,
+} from '../../../../testUtils/enzymeHelpers';
 import SurveyPreviewModal from './SurveyPreviewModal';
 
 const questions = [

@@ -1,7 +1,7 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 
+import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 import UserOrganizationListItem from './UserOrganizationListItem';
 
 describe('<UserOrganizationListItem />', () => {
@@ -25,18 +25,8 @@ describe('<UserOrganizationListItem />', () => {
         />
       );
     });
-    expect(
-      wrapper
-        .find('DataListCell')
-        .at(0)
-        .text()
-    ).toBe('foo');
-    expect(
-      wrapper
-        .find('DataListCell')
-        .at(1)
-        .text()
-    ).toBe('Bar');
+    expect(wrapper.find('DataListCell').at(0).text()).toBe('foo');
+    expect(wrapper.find('DataListCell').at(1).text()).toBe('Bar');
     expect(wrapper.find('Link').prop('to')).toBe('/organizations/1/details');
   });
 });

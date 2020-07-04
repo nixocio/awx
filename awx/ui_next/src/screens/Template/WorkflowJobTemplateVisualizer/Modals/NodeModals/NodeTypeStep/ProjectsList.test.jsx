@@ -1,5 +1,6 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import { mountWithContexts } from '../../../../../../../testUtils/enzymeHelpers';
 import { ProjectsAPI } from '../../../../../../api';
 import ProjectsList from './ProjectsList';

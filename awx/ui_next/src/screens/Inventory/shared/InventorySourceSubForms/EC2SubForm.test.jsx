@@ -1,9 +1,10 @@
+import { Formik } from 'formik';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { Formik } from 'formik';
+
 import { mountWithContexts } from '../../../../../testUtils/enzymeHelpers';
-import EC2SubForm from './EC2SubForm';
 import { CredentialsAPI } from '../../../../api';
+import EC2SubForm from './EC2SubForm';
 
 jest.mock('../../../../api/models/Credentials');
 

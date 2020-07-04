@@ -1,13 +1,11 @@
 import React from 'react';
 
-import { sleep } from '../../../testUtils/testUtils';
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
-
+import { sleep } from '../../../testUtils/testUtils';
 import { OrganizationsAPI, TeamsAPI, UsersAPI } from '../../api';
-
 import ResourceAccessList from './ResourceAccessList';
 
 jest.mock('../../api');
@@ -91,14 +89,14 @@ describe('<ResourceAccessList />', () => {
     expect(wrapper.find('PaginatedDataList')).toHaveLength(1);
   });
 
-  test('should fetch and display access records on mount', async done => {
+  test('should fetch and display access records on mount', async (done) => {
     const wrapper = mountWithContexts(
       <ResourceAccessList resource={organization} apiModel={OrganizationsAPI} />
     );
     await waitForElement(
       wrapper,
       'ResourceAccessListItem',
-      el => el.length === 2
+      (el) => el.length === 2
     );
     expect(wrapper.find('PaginatedDataList').prop('items')).toEqual(
       data.results
@@ -110,7 +108,7 @@ describe('<ResourceAccessList />', () => {
     done();
   });
 
-  test('should open confirmation dialog when deleting role', async done => {
+  test('should open confirmation dialog when deleting role', async (done) => {
     const wrapper = mountWithContexts(
       <ResourceAccessList resource={organization} apiModel={OrganizationsAPI} />
     );
@@ -130,7 +128,7 @@ describe('<ResourceAccessList />', () => {
     done();
   });
 
-  it('should close dialog when cancel button clicked', async done => {
+  it('should close dialog when cancel button clicked', async (done) => {
     const wrapper = mountWithContexts(
       <ResourceAccessList resource={organization} apiModel={OrganizationsAPI} />
     );
@@ -149,14 +147,14 @@ describe('<ResourceAccessList />', () => {
     done();
   });
 
-  it('should delete user role', async done => {
+  it('should delete user role', async (done) => {
     const wrapper = mountWithContexts(
       <ResourceAccessList resource={organization} apiModel={OrganizationsAPI} />
     );
     const button = await waitForElement(
       wrapper,
       'Chip Button',
-      el => el.length === 2
+      (el) => el.length === 2
     );
     button.at(0).prop('onClick')();
 
@@ -168,7 +166,7 @@ describe('<ResourceAccessList />', () => {
     await waitForElement(
       wrapper,
       'DeleteRoleConfirmationModal',
-      el => el.length === 0
+      (el) => el.length === 0
     );
 
     await sleep(0);
@@ -182,14 +180,14 @@ describe('<ResourceAccessList />', () => {
     done();
   });
 
-  it('should delete team role', async done => {
+  it('should delete team role', async (done) => {
     const wrapper = mountWithContexts(
       <ResourceAccessList resource={organization} apiModel={OrganizationsAPI} />
     );
     const button = await waitForElement(
       wrapper,
       'Chip Button',
-      el => el.length === 2
+      (el) => el.length === 2
     );
     button.at(1).prop('onClick')();
 
@@ -201,7 +199,7 @@ describe('<ResourceAccessList />', () => {
     await waitForElement(
       wrapper,
       'DeleteRoleConfirmationModal',
-      el => el.length === 0
+      (el) => el.length === 0
     );
 
     await sleep(0);

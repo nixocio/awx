@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
 import { withI18n } from '@lingui/react';
-import { useParams, useHistory } from 'react-router-dom';
-import { GroupsAPI } from '../../../api';
+import React, { useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 
+import { GroupsAPI } from '../../../api';
 import InventoryGroupForm from '../shared/InventoryGroupForm';
 
 function InventoryGroupEdit({ inventoryGroup }) {
@@ -10,7 +10,7 @@ function InventoryGroupEdit({ inventoryGroup }) {
   const { id, groupId } = useParams();
   const history = useHistory();
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     try {
       await GroupsAPI.update(groupId, values);
       history.push(`/inventories/inventory/${id}/groups/${groupId}`);

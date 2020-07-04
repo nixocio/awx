@@ -1,5 +1,5 @@
-import React from 'react';
 import { string } from 'prop-types';
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const Pulse = keyframes`

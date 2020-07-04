@@ -1,12 +1,13 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-import OrganizationAdd from './OrganizationAdd';
 import { OrganizationsAPI } from '../../../api';
+import OrganizationAdd from './OrganizationAdd';
 
 jest.mock('../../../api');
 
@@ -33,7 +34,7 @@ describe('<OrganizationAdd />', () => {
         context: { router: { history } },
       });
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     await act(async () => {
       wrapper.find('button[aria-label="Cancel"]').invoke('onClick')();
     });
@@ -110,15 +111,12 @@ describe('<OrganizationAdd />', () => {
         context: { config },
       });
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(wrapper.find('FormSelect')).toHaveLength(1);
     expect(wrapper.find('FormSelectOption')).toHaveLength(3);
-    expect(
-      wrapper
-        .find('FormSelectOption')
-        .first()
-        .prop('value')
-    ).toEqual('/venv/ansible/');
+    expect(wrapper.find('FormSelectOption').first().prop('value')).toEqual(
+      '/venv/ansible/'
+    );
   });
 
   test('AnsibleSelect component does not render if there are 0 virtual environments', async () => {
@@ -140,7 +138,7 @@ describe('<OrganizationAdd />', () => {
         context: { config },
       });
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(wrapper.find('AnsibleSelect FormSelect')).toHaveLength(0);
   });
 });

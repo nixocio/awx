@@ -1,15 +1,16 @@
 import 'styled-components/macro';
-import React from 'react';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Button as PFButton } from '@patternfly/react-core';
 import {
-  PlusIcon,
-  AngleDoubleUpIcon,
   AngleDoubleDownIcon,
-  AngleUpIcon,
+  AngleDoubleUpIcon,
   AngleDownIcon,
+  AngleUpIcon,
+  PlusIcon,
 } from '@patternfly/react-icons';
+import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`

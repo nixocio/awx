@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { shape } from 'prop-types';
-import { Badge as PFBadge, Button, Tooltip } from '@patternfly/react-core';
+import { withI18n } from '@lingui/react';
+import { Button, Badge as PFBadge, Tooltip } from '@patternfly/react-core';
 import { CompassIcon, WrenchIcon } from '@patternfly/react-icons';
+import { shape } from 'prop-types';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+
 import StatusIcon from '../../../components/StatusIcon';
 import {
   WorkflowDispatchContext,

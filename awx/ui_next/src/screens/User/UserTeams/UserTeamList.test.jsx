@@ -1,8 +1,8 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { UsersAPI } from '../../../api';
-import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
 
+import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
+import { UsersAPI } from '../../../api';
 import UserTeamList from './UserTeamList';
 
 jest.mock('../../../api');

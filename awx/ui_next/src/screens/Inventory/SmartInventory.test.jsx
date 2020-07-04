@@ -1,11 +1,12 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
-import { InventoriesAPI } from '../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
+import { InventoriesAPI } from '../../api';
 import mockSmartInventory from './shared/data.smart_inventory.json';
 import SmartInventory from './SmartInventory';
 
@@ -34,7 +35,7 @@ describe('<SmartInventory />', () => {
       wrapper = mountWithContexts(<SmartInventory setBreadcrumb={() => {}} />);
     });
     await waitForElement(wrapper, 'SmartInventory');
-    await waitForElement(wrapper, '.pf-c-tabs__item', el => el.length === 5);
+    await waitForElement(wrapper, '.pf-c-tabs__item', (el) => el.length === 5);
   });
 
   test('should show content error when api throws an error', async () => {
@@ -45,7 +46,7 @@ describe('<SmartInventory />', () => {
       wrapper = mountWithContexts(<SmartInventory setBreadcrumb={() => {}} />);
     });
     expect(InventoriesAPI.readDetail).toHaveBeenCalledTimes(1);
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
     expect(wrapper.find('ContentError Title').text()).toEqual('Not Found');
   });
 
@@ -70,6 +71,6 @@ describe('<SmartInventory />', () => {
         },
       });
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

@@ -1,12 +1,12 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { LoginForm, LoginPage as PFLoginPage } from '@patternfly/react-core';
 import React, { Component } from 'react';
 import { Redirect, withRouter } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
 import styled from 'styled-components';
-import { LoginForm, LoginPage as PFLoginPage } from '@patternfly/react-core';
+
 import { RootAPI } from '../../api';
 import { BrandName } from '../../variables';
-
 import brandLogo from './brand-logo.svg';
 
 const LoginPage = styled(PFLoginPage)`

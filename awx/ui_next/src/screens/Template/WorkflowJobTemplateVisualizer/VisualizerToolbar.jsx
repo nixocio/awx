@@ -1,11 +1,10 @@
 import 'styled-components/macro';
-import React, { useContext } from 'react';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
-import { bool, func, shape } from 'prop-types';
+import { withI18n } from '@lingui/react';
 import {
-  Badge as PFBadge,
   Button,
+  Badge as PFBadge,
   Title,
   Tooltip,
 } from '@patternfly/react-core';
@@ -17,7 +16,10 @@ import {
   TrashAltIcon,
   WrenchIcon,
 } from '@patternfly/react-icons';
+import { bool, func, shape } from 'prop-types';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+
 import LaunchButton from '../../../components/LaunchButton';
 import {
   WorkflowDispatchContext,

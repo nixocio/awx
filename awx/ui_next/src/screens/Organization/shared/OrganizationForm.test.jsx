@@ -1,11 +1,11 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
 import { OrganizationsAPI } from '../../../api';
-
 import OrganizationForm from './OrganizationForm';
 
 jest.mock('../../../api');
@@ -51,7 +51,7 @@ describe('<OrganizationForm />', () => {
         }
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(OrganizationsAPI.readInstanceGroups).toHaveBeenCalledTimes(1);
   });
 
@@ -79,7 +79,7 @@ describe('<OrganizationForm />', () => {
     await waitForElement(
       wrapper,
       'InstanceGroupsLookup',
-      el => el.length === 1
+      (el) => el.length === 1
     );
     expect(OrganizationsAPI.readInstanceGroups).toHaveBeenCalled();
     expect(wrapper.find('InstanceGroupsLookup Chip span')).toHaveLength(2);
@@ -103,7 +103,7 @@ describe('<OrganizationForm />', () => {
     const lookup = await waitForElement(
       wrapper,
       'InstanceGroupsLookup',
-      el => el.length === 1
+      (el) => el.length === 1
     );
     expect(lookup.length).toBe(1);
     expect(lookup.find('Chip span')).toHaveLength(0);
@@ -121,7 +121,7 @@ describe('<OrganizationForm />', () => {
     const group = await waitForElement(
       wrapper,
       'InstanceGroupsLookup Chip span',
-      el => el.length === 1
+      (el) => el.length === 1
     );
     expect(group.text()).toEqual('foo');
   });
@@ -144,7 +144,7 @@ describe('<OrganizationForm />', () => {
         />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     await act(async () => {
       wrapper.find('input#org-name').simulate('change', {
         target: { value: 'new foo', name: 'name' },
@@ -191,15 +191,12 @@ describe('<OrganizationForm />', () => {
         }
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(wrapper.find('FormSelect')).toHaveLength(1);
     expect(wrapper.find('FormSelectOption')).toHaveLength(3);
-    expect(
-      wrapper
-        .find('FormSelectOption')
-        .first()
-        .prop('value')
-    ).toEqual('/venv/ansible/');
+    expect(wrapper.find('FormSelectOption').first().prop('value')).toEqual(
+      '/venv/ansible/'
+    );
   });
 
   test('onSubmit associates and disassociates instance groups', async () => {
@@ -232,7 +229,7 @@ describe('<OrganizationForm />', () => {
         }
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     await act(async () => {
       wrapper.find('InstanceGroupsLookup').prop('onChange')(
         [
@@ -264,7 +261,7 @@ describe('<OrganizationForm />', () => {
         />
       );
     });
-    await waitForElement(wrapper1, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper1, 'ContentLoading', (el) => el.length === 0);
     await act(async () => {
       wrapper1.find('button[aria-label="Save"]').simulate('click');
     });
@@ -284,7 +281,7 @@ describe('<OrganizationForm />', () => {
         />
       );
     });
-    await waitForElement(wrapper2, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper2, 'ContentLoading', (el) => el.length === 0);
     await act(async () => {
       wrapper2.find('button[aria-label="Save"]').simulate('click');
     });
@@ -307,7 +304,7 @@ describe('<OrganizationForm />', () => {
         />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     await act(async () => {
       wrapper.find('button[aria-label="Save"]').simulate('click');
     });
@@ -336,7 +333,7 @@ describe('<OrganizationForm />', () => {
         />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(onCancel).not.toHaveBeenCalled();
     wrapper.find('button[aria-label="Cancel"]').prop('onClick')();
     expect(onCancel).toBeCalled();

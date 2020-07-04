@@ -1,15 +1,5 @@
-import React, { Fragment, useReducer, useEffect } from 'react';
-import {
-  string,
-  bool,
-  arrayOf,
-  func,
-  number,
-  oneOfType,
-  shape,
-} from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { SearchIcon } from '@patternfly/react-icons';
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   Button,
   ButtonVariant,
@@ -17,13 +7,23 @@ import {
   InputGroup,
   Modal,
 } from '@patternfly/react-core';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
+import { SearchIcon } from '@patternfly/react-icons';
+import {
+  arrayOf,
+  bool,
+  func,
+  number,
+  oneOfType,
+  shape,
+  string,
+} from 'prop-types';
+import React, { Fragment, useEffect, useReducer } from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import ChipGroup from '../ChipGroup';
 
-import reducer, { initReducer } from './shared/reducer';
 import { QSConfig } from '../../types';
+import ChipGroup from '../ChipGroup';
+import reducer, { initReducer } from './shared/reducer';
 
 const ChipHolder = styled.div`
   --pf-c-form-control--Height: auto;
@@ -62,7 +62,7 @@ function Lookup(props) {
   const clearQSParams = () => {
     const parts = history.location.search.replace(/^\?/, '').split('&');
     const ns = qsConfig.namespace;
-    const otherParts = parts.filter(param => !param.startsWith(`${ns}.`));
+    const otherParts = parts.filter((param) => !param.startsWith(`${ns}.`));
     history.push(`${history.location.pathname}?${otherParts.join('&')}`);
   };
 
@@ -74,9 +74,9 @@ function Lookup(props) {
     dispatch({ type: 'CLOSE_MODAL' });
   };
 
-  const removeItem = item => {
+  const removeItem = (item) => {
     if (multiple) {
-      onChange(value.filter(i => i.id !== item.id));
+      onChange(value.filter((i) => i.id !== item.id));
     } else {
       onChange(null);
     }
@@ -109,7 +109,7 @@ function Lookup(props) {
         </Button>
         <ChipHolder className="pf-c-form-control">
           <ChipGroup numChips={5} totalChips={items.length}>
-            {items.map(item =>
+            {items.map((item) =>
               renderItemChip({
                 item,
                 removeItem,

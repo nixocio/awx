@@ -1,9 +1,10 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
+
 import {
+  encodeNonDefaultQueryString,
   parseQueryString,
   replaceParams,
-  encodeNonDefaultQueryString,
 } from './qs';
 
 /*

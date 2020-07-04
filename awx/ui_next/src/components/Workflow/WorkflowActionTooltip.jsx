@@ -1,6 +1,6 @@
+import { node, number } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { node, number } from 'prop-types';
 
 const TooltipContents = styled.div`
   display: flex;

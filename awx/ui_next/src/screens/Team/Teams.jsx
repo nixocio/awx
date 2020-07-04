@@ -1,13 +1,13 @@
-import React, { useState, useCallback } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import React, { useCallback, useState } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
-import { Config } from '../../contexts/Config';
 import Breadcrumbs from '../../components/Breadcrumbs';
-import TeamList from './TeamList';
-import TeamAdd from './TeamAdd';
+import { Config } from '../../contexts/Config';
 import Team from './Team';
+import TeamAdd from './TeamAdd';
+import TeamList from './TeamList';
 
 function Teams({ i18n }) {
   const [breadcrumbConfig, setBreadcrumbConfig] = useState({
@@ -16,7 +16,7 @@ function Teams({ i18n }) {
   });
 
   const buildBreadcrumbConfig = useCallback(
-    team => {
+    (team) => {
       if (!team) {
         return;
       }

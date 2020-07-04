@@ -1,6 +1,6 @@
+import { Tab, TabTitleText, Tabs } from '@patternfly/react-core';
+import { arrayOf, node, number, oneOfType, shape, string } from 'prop-types';
 import React from 'react';
-import { shape, string, number, arrayOf, node, oneOfType } from 'prop-types';
-import { Tab, Tabs, TabTitleText } from '@patternfly/react-core';
 import { useHistory } from 'react-router-dom';
 
 function RoutedTabs(props) {
@@ -8,11 +8,13 @@ function RoutedTabs(props) {
   const history = useHistory();
 
   const getActiveTabId = () => {
-    const match = tabsArray.find(tab => tab.link === history.location.pathname);
+    const match = tabsArray.find(
+      (tab) => tab.link === history.location.pathname
+    );
     if (match) {
       return match.id;
     }
-    const subpathMatch = tabsArray.find(tab =>
+    const subpathMatch = tabsArray.find((tab) =>
       history.location.pathname.startsWith(tab.link)
     );
     if (subpathMatch) {
@@ -22,7 +24,7 @@ function RoutedTabs(props) {
   };
 
   function handleTabSelect(event, eventKey) {
-    const match = tabsArray.find(tab => tab.id === eventKey);
+    const match = tabsArray.find((tab) => tab.id === eventKey);
     if (match) {
       history.push(match.link);
     }
@@ -30,7 +32,7 @@ function RoutedTabs(props) {
 
   return (
     <Tabs activeKey={getActiveTabId()} onSelect={handleTabSelect}>
-      {tabsArray.map(tab => (
+      {tabsArray.map((tab) => (
         <Tab
           aria-label={`${tab.name}`}
           eventKey={tab.id}

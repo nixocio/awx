@@ -1,8 +1,7 @@
 import 'styled-components/macro';
-import React, { Fragment } from 'react';
-import { string, bool, func } from 'prop-types';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   Button,
   DataListAction,
@@ -12,11 +11,12 @@ import {
   DataListItemRow,
   Tooltip,
 } from '@patternfly/react-core';
-
-import { Link } from 'react-router-dom';
 import { PencilAltIcon } from '@patternfly/react-icons';
-import DataListCell from '../../../components/DataListCell';
+import { bool, func, string } from 'prop-types';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
+import DataListCell from '../../../components/DataListCell';
 import { User } from '../../../types';
 
 class UserListItem extends React.Component {

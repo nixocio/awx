@@ -1,12 +1,13 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { SchedulesAPI } from '../../../api';
+import { Route } from 'react-router-dom';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
+import { SchedulesAPI } from '../../../api';
 import ScheduleDetail from './ScheduleDetail';
 
 jest.mock('../../../api/models/Schedules');
@@ -98,27 +99,18 @@ describe('<ScheduleDetail />', () => {
         }
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
-    expect(
-      wrapper
-        .find('Detail[label="Name"]')
-        .find('dd')
-        .text()
-    ).toBe('Mock JT Schedule');
-    expect(
-      wrapper
-        .find('Detail[label="Description"]')
-        .find('dd')
-        .text()
-    ).toBe('A good schedule');
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
+    expect(wrapper.find('Detail[label="Name"]').find('dd').text()).toBe(
+      'Mock JT Schedule'
+    );
+    expect(wrapper.find('Detail[label="Description"]').find('dd').text()).toBe(
+      'A good schedule'
+    );
     expect(wrapper.find('Detail[label="First Run"]').length).toBe(1);
     expect(wrapper.find('Detail[label="Next Run"]').length).toBe(1);
     expect(wrapper.find('Detail[label="Last Run"]').length).toBe(1);
     expect(
-      wrapper
-        .find('Detail[label="Local Time Zone"]')
-        .find('dd')
-        .text()
+      wrapper.find('Detail[label="Local Time Zone"]').find('dd').text()
     ).toBe('America/New_York');
     expect(wrapper.find('Detail[label="Repeat Frequency"]').length).toBe(1);
     expect(wrapper.find('Detail[label="Created"]').length).toBe(1);
@@ -181,52 +173,34 @@ describe('<ScheduleDetail />', () => {
         }
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     // await waitForElement(wrapper, 'Title', el => el.length > 0);
-    expect(
-      wrapper
-        .find('Detail[label="Name"]')
-        .find('dd')
-        .text()
-    ).toBe('Mock JT Schedule');
-    expect(
-      wrapper
-        .find('Detail[label="Description"]')
-        .find('dd')
-        .text()
-    ).toBe('A good schedule');
+    expect(wrapper.find('Detail[label="Name"]').find('dd').text()).toBe(
+      'Mock JT Schedule'
+    );
+    expect(wrapper.find('Detail[label="Description"]').find('dd').text()).toBe(
+      'A good schedule'
+    );
     expect(wrapper.find('Detail[label="First Run"]').length).toBe(1);
     expect(wrapper.find('Detail[label="Next Run"]').length).toBe(1);
     expect(wrapper.find('Detail[label="Last Run"]').length).toBe(1);
     expect(
-      wrapper
-        .find('Detail[label="Local Time Zone"]')
-        .find('dd')
-        .text()
+      wrapper.find('Detail[label="Local Time Zone"]').find('dd').text()
     ).toBe('America/New_York');
     expect(wrapper.find('Detail[label="Repeat Frequency"]').length).toBe(1);
     expect(wrapper.find('Detail[label="Created"]').length).toBe(1);
     expect(wrapper.find('Detail[label="Last Modified"]').length).toBe(1);
     expect(wrapper.find('Title[children="Prompted Fields"]').length).toBe(1);
-    expect(
-      wrapper
-        .find('Detail[label="Job Type"]')
-        .find('dd')
-        .text()
-    ).toBe('run');
+    expect(wrapper.find('Detail[label="Job Type"]').find('dd').text()).toBe(
+      'run'
+    );
     expect(wrapper.find('Detail[label="Inventory"]').length).toBe(1);
     expect(
-      wrapper
-        .find('Detail[label="Source Control Branch"]')
-        .find('dd')
-        .text()
+      wrapper.find('Detail[label="Source Control Branch"]').find('dd').text()
     ).toBe('foo/branch');
-    expect(
-      wrapper
-        .find('Detail[label="Limit"]')
-        .find('dd')
-        .text()
-    ).toBe('localhost');
+    expect(wrapper.find('Detail[label="Limit"]').find('dd').text()).toBe(
+      'localhost'
+    );
     expect(wrapper.find('Detail[label="Show Changes"]').length).toBe(1);
     expect(wrapper.find('Detail[label="Credentials"]').length).toBe(1);
     expect(wrapper.find('Detail[label="Job Tags"]').length).toBe(1);
@@ -264,7 +238,7 @@ describe('<ScheduleDetail />', () => {
         }
       );
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 
   test('should show edit button for users with edit permission', async () => {
@@ -339,7 +313,7 @@ describe('<ScheduleDetail />', () => {
     await waitForElement(
       wrapper,
       'Modal[title="Error!"]',
-      el => el.length === 1
+      (el) => el.length === 1
     );
     await act(async () => {
       wrapper.find('Modal[title="Error!"]').invoke('onClose')();
@@ -347,7 +321,7 @@ describe('<ScheduleDetail />', () => {
     await waitForElement(
       wrapper,
       'Modal[title="Error!"]',
-      el => el.length === 0
+      (el) => el.length === 0
     );
     expect(SchedulesAPI.destroy).toHaveBeenCalledTimes(1);
   });

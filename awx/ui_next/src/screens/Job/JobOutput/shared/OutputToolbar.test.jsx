@@ -1,7 +1,8 @@
 import React from 'react';
+
 import { mountWithContexts } from '../../../../../testUtils/enzymeHelpers';
-import { OutputToolbar } from '.';
 import mockJobData from '../../shared/data.job.json';
+import { OutputToolbar } from '.';
 
 describe('<OutputToolbar />', () => {
   let wrapper;

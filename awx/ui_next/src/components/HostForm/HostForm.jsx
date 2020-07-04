@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { bool, func, shape } from 'prop-types';
-import { Formik, useField } from 'formik';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-
+import { withI18n } from '@lingui/react';
 import { Form, FormGroup } from '@patternfly/react-core';
-import FormField, { FormSubmitError, FieldTooltip } from '../FormField';
-import FormActionGroup from '../FormActionGroup/FormActionGroup';
-import { VariablesField } from '../CodeMirrorInput';
-import { InventoryLookup } from '../Lookup';
-import { FormColumnLayout, FormFullWidthLayout } from '../FormLayout';
+import { Formik, useField } from 'formik';
+import { bool, func, shape } from 'prop-types';
+import React, { useState } from 'react';
+
 import { required } from '../../util/validators';
+import { VariablesField } from '../CodeMirrorInput';
+import FormActionGroup from '../FormActionGroup/FormActionGroup';
+import FormField, { FieldTooltip, FormSubmitError } from '../FormField';
+import { FormColumnLayout, FormFullWidthLayout } from '../FormLayout';
+import { InventoryLookup } from '../Lookup';
 
 const InventoryLookupField = withI18n()(({ i18n, host }) => {
   const [inventory, setInventory] = useState(
@@ -41,7 +41,7 @@ const InventoryLookupField = withI18n()(({ i18n, host }) => {
         tooltip={i18n._(t`Select the inventory that this host will belong to.`)}
         isValid={!inventoryMeta.touched || !inventoryMeta.error}
         helperTextInvalid={inventoryMeta.error}
-        onChange={value => {
+        onChange={(value) => {
           inventoryHelpers.setValue(value.id);
           setInventory(value);
         }}
@@ -71,7 +71,7 @@ const HostForm = ({
       }}
       onSubmit={handleSubmit}
     >
-      {formik => (
+      {(formik) => (
         <Form autoComplete="off" onSubmit={formik.handleSubmit}>
           <FormColumnLayout>
             <FormField

@@ -1,27 +1,28 @@
-import React, { useEffect, useState } from 'react';
 import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
+import { Card, PageSection } from '@patternfly/react-core';
+import { CaretLeftIcon } from '@patternfly/react-icons';
+import React, { useEffect, useState } from 'react';
 import {
-  Switch,
-  Route,
-  Redirect,
   Link,
+  Redirect,
+  Route,
+  Switch,
   useLocation,
   useRouteMatch,
 } from 'react-router-dom';
-import { CaretLeftIcon } from '@patternfly/react-icons';
-import { Card, PageSection } from '@patternfly/react-core';
+
+import { InventoriesAPI } from '../../api';
 import ContentError from '../../components/ContentError';
 import ContentLoading from '../../components/ContentLoading';
 import JobList from '../../components/JobList';
-import RoutedTabs from '../../components/RoutedTabs';
 import { ResourceAccessList } from '../../components/ResourceAccessList';
+import RoutedTabs from '../../components/RoutedTabs';
 import InventoryDetail from './InventoryDetail';
 import InventoryEdit from './InventoryEdit';
 import InventoryGroups from './InventoryGroups';
 import InventoryHosts from './InventoryHosts/InventoryHosts';
 import InventorySources from './InventorySources';
-import { InventoriesAPI } from '../../api';
 
 function Inventory({ i18n, setBreadcrumb }) {
   const [contentError, setContentError] = useState(null);
@@ -103,7 +104,7 @@ function Inventory({ i18n, setBreadcrumb }) {
   let showCardHeader = true;
 
   if (
-    ['edit', 'add', 'groups/', 'hosts/', 'sources/'].some(name =>
+    ['edit', 'add', 'groups/', 'hosts/', 'sources/'].some((name) =>
       location.pathname.includes(name)
     )
   ) {

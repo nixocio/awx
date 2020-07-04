@@ -1,20 +1,20 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { number, shape } from 'prop-types';
 import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import { number, shape } from 'prop-types';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
 
-import AlertModal from '../AlertModal';
-import ErrorDetail from '../ErrorDetail';
 import {
   AdHocCommandsAPI,
   InventorySourcesAPI,
-  JobsAPI,
   JobTemplatesAPI,
+  JobsAPI,
   ProjectsAPI,
-  WorkflowJobsAPI,
   WorkflowJobTemplatesAPI,
+  WorkflowJobsAPI,
 } from '../../api';
+import AlertModal from '../AlertModal';
+import ErrorDetail from '../ErrorDetail';
 import LaunchPrompt from '../LaunchPrompt';
 
 function canLaunchWithoutPrompt(launchData) {

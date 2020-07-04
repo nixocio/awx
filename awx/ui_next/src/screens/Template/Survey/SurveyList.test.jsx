@@ -1,9 +1,10 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
-import SurveyList from './SurveyList';
 import { JobTemplatesAPI } from '../../../api';
 import mockJobTemplateData from '../shared/data.job_template.json';
+import SurveyList from './SurveyList';
 
 jest.mock('../../../api/models/JobTemplates');
 
@@ -140,12 +141,9 @@ describe('<SurveyList />', () => {
       );
     });
 
-    expect(
-      wrapper
-        .find('Toolbar')
-        .find('Checkbox')
-        .prop('isDisabled')
-    ).toBe(true);
+    expect(wrapper.find('Toolbar').find('Checkbox').prop('isDisabled')).toBe(
+      true
+    );
     expect(wrapper.find('Switch').prop('isDisabled')).toBe(true);
     expect(wrapper.find('ToolbarAddButton').prop('isDisabled')).toBe(true);
     expect(wrapper.find('Button[variant="danger"]').prop('isDisabled')).toBe(

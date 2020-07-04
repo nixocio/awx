@@ -1,11 +1,11 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { HostsAPI } from '../../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-
+import { HostsAPI } from '../../../api';
 import HostList from './HostList';
 
 jest.mock('../../../api');
@@ -75,7 +75,7 @@ function waitForLoaded(wrapper) {
   return waitForElement(
     wrapper,
     'HostList',
-    el => el.find('ContentLoading').length === 0
+    (el) => el.find('ContentLoading').length === 0
   );
 }
 
@@ -138,12 +138,9 @@ describe('<HostList />', () => {
         .invoke('onChange')();
     });
     wrapper.update();
-    expect(
-      wrapper
-        .find('HostListItem')
-        .first()
-        .prop('isSelected')
-    ).toEqual(true);
+    expect(wrapper.find('HostListItem').first().prop('isSelected')).toEqual(
+      true
+    );
     act(() => {
       wrapper
         .find('input#select-host-1')
@@ -151,12 +148,9 @@ describe('<HostList />', () => {
         .invoke('onChange')();
     });
     wrapper.update();
-    expect(
-      wrapper
-        .find('HostListItem')
-        .first()
-        .prop('isSelected')
-    ).toEqual(false);
+    expect(wrapper.find('HostListItem').first().prop('isSelected')).toEqual(
+      false
+    );
   });
 
   test('should select all items', async () => {
@@ -171,7 +165,7 @@ describe('<HostList />', () => {
     });
     wrapper.update();
 
-    wrapper.find('HostListItem').forEach(item => {
+    wrapper.find('HostListItem').forEach((item) => {
       expect(item.prop('isSelected')).toEqual(true);
     });
   });
@@ -184,10 +178,7 @@ describe('<HostList />', () => {
     await waitForLoaded(wrapper);
 
     act(() => {
-      wrapper
-        .find('HostListItem')
-        .at(2)
-        .invoke('onSelect')();
+      wrapper.find('HostListItem').at(2).invoke('onSelect')();
     });
     expect(wrapper.find('ToolbarDeleteButton button').prop('disabled')).toEqual(
       true
@@ -203,17 +194,11 @@ describe('<HostList />', () => {
     await waitForLoaded(wrapper);
 
     await act(async () => {
-      wrapper
-        .find('HostListItem')
-        .at(0)
-        .invoke('onSelect')();
+      wrapper.find('HostListItem').at(0).invoke('onSelect')();
     });
     wrapper.update();
     await act(async () => {
-      wrapper
-        .find('HostListItem')
-        .at(1)
-        .invoke('onSelect')();
+      wrapper.find('HostListItem').at(1).invoke('onSelect')();
     });
     wrapper.update();
     await act(async () => {
@@ -241,10 +226,7 @@ describe('<HostList />', () => {
     await waitForLoaded(wrapper);
 
     await act(async () => {
-      wrapper
-        .find('HostListItem')
-        .at(0)
-        .invoke('onSelect')();
+      wrapper.find('HostListItem').at(0).invoke('onSelect')();
     });
     wrapper.update();
     await act(async () => {

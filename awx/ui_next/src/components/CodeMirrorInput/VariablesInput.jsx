@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { string, func, bool, number } from 'prop-types';
 import { Split, SplitItem } from '@patternfly/react-core';
+import { bool, func, number, string } from 'prop-types';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { yamlToJson, jsonToYaml, isJson } from '../../util/yaml';
+
+import { isJson, jsonToYaml, yamlToJson } from '../../util/yaml';
 import MultiButtonToggle from '../MultiButtonToggle';
 import CodeMirrorInput from './CodeMirrorInput';
 import { JSON_MODE, YAML_MODE } from './constants';
@@ -26,7 +27,7 @@ function VariablesInput(props) {
   const isControlled = !!props.onChange;
   /* eslint-enable react/destructuring-assignment */
 
-  const onChange = newValue => {
+  const onChange = (newValue) => {
     if (isControlled) {
       props.onChange(newValue);
     }
@@ -48,7 +49,7 @@ function VariablesInput(props) {
               [JSON_MODE, 'JSON'],
             ]}
             value={mode}
-            onChange={newMode => {
+            onChange={(newMode) => {
               try {
                 if (mode === JSON_MODE) {
                   onChange(jsonToYaml(value));

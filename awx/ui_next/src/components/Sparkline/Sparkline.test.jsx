@@ -1,7 +1,7 @@
-import React from 'react';
 import { mount } from 'enzyme';
-import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
+import React from 'react';
 
+import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
 import Sparkline from './Sparkline';
 
 describe('Sparkline', () => {

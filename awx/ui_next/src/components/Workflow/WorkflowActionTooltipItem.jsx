@@ -1,6 +1,6 @@
+import { func, string } from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { func, string } from 'prop-types';
 
 const TooltipItem = styled.div`
   align-items: center;

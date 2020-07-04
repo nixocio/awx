@@ -1,25 +1,26 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { PencilAltIcon, PlusIcon, TrashAltIcon } from '@patternfly/react-icons';
+import { bool, func, shape } from 'prop-types';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { bool, func, shape } from 'prop-types';
-import { PencilAltIcon, PlusIcon, TrashAltIcon } from '@patternfly/react-icons';
+
 import {
-  WorkflowDispatchContext,
-  WorkflowStateContext,
-} from '../../../contexts/Workflow';
+  WorkflowActionTooltip,
+  WorkflowActionTooltipItem,
+} from '../../../components/Workflow';
 import {
   generateLine,
   getLinePoints,
   getLinkOverlayPoints,
 } from '../../../components/Workflow/WorkflowUtils';
 import {
-  WorkflowActionTooltip,
-  WorkflowActionTooltipItem,
-} from '../../../components/Workflow';
+  WorkflowDispatchContext,
+  WorkflowStateContext,
+} from '../../../contexts/Workflow';
 
 const LinkG = styled.g`
-  pointer-events: ${props => (props.ignorePointerEvents ? 'none' : 'auto')};
+  pointer-events: ${(props) => (props.ignorePointerEvents ? 'none' : 'auto')};
 `;
 
 function VisualizerLink({

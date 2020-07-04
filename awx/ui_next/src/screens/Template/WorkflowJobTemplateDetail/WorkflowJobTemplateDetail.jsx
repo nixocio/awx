@@ -1,26 +1,26 @@
-import React, { useCallback } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
-  Chip,
   Button,
+  Chip,
+  Label,
   TextList,
   TextListItem,
-  TextListVariants,
   TextListItemVariants,
-  Label,
+  TextListVariants,
 } from '@patternfly/react-core';
-import { WorkflowJobTemplatesAPI } from '../../../api';
+import React, { useCallback } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
+import { WorkflowJobTemplatesAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal';
-import { CardBody, CardActionsRow } from '../../../components/Card';
+import { CardActionsRow, CardBody } from '../../../components/Card';
 import ChipGroup from '../../../components/ChipGroup';
 import { VariablesDetail } from '../../../components/CodeMirrorInput';
 import DeleteButton from '../../../components/DeleteButton';
 import {
-  DetailList,
   Detail,
+  DetailList,
   UserDateDetail,
 } from '../../../components/DetailList';
 import ErrorDetail from '../../../components/ErrorDetail';
@@ -97,7 +97,7 @@ function WorkflowJobTemplateDetail({ template, i18n }) {
   };
 
   const canLaunch = summary_fields?.user_capabilities?.start;
-  const recentPlaybookJobs = summary_fields.recent_jobs.map(job => ({
+  const recentPlaybookJobs = summary_fields.recent_jobs.map((job) => ({
     ...job,
     type: 'job',
   }));
@@ -171,7 +171,7 @@ function WorkflowJobTemplateDetail({ template, i18n }) {
                 numChips={3}
                 totalChips={summary_fields.labels.results.length}
               >
-                {summary_fields.labels.results.map(l => (
+                {summary_fields.labels.results.map((l) => (
                   <Chip key={l.id} isReadOnly>
                     {l.name}
                   </Chip>

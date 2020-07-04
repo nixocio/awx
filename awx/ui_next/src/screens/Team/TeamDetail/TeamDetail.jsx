@@ -1,16 +1,16 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Button } from '@patternfly/react-core';
 import React, { useCallback } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { Button } from '@patternfly/react-core';
 
+import { TeamsAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal';
-import { CardBody, CardActionsRow } from '../../../components/Card';
+import { CardActionsRow, CardBody } from '../../../components/Card';
 import DeleteButton from '../../../components/DeleteButton';
-import { DetailList, Detail } from '../../../components/DetailList';
+import { Detail, DetailList } from '../../../components/DetailList';
 import ErrorDetail from '../../../components/ErrorDetail';
 import { formatDateString } from '../../../util/dates';
-import { TeamsAPI } from '../../../api';
 import useRequest, { useDismissableError } from '../../../util/useRequest';
 
 function TeamDetail({ team, i18n }) {

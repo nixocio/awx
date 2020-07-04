@@ -1,13 +1,15 @@
 import 'styled-components/macro';
-import React from 'react';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import React from 'react';
+
 import FormField from '../../../../components/FormField';
 import {
-  UrlFormField,
   BranchFormField,
   ScmCredentialFormField,
   ScmTypeOptions,
+  UrlFormField,
 } from './SharedFields';
 
 const GitSubForm = ({

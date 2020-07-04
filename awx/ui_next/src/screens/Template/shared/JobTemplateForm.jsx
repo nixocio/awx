@@ -1,45 +1,45 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { withFormik, useField } from 'formik';
+import { withI18n } from '@lingui/react';
 import {
+  Checkbox,
   Form,
   FormGroup,
   Switch,
-  Checkbox,
   TextInput,
   Title,
 } from '@patternfly/react-core';
+import { useField, withFormik } from 'formik';
+import PropTypes from 'prop-types';
+import React, { useCallback, useEffect, useState } from 'react';
+
+import { JobTemplatesAPI, ProjectsAPI } from '../../../api';
+import AnsibleSelect from '../../../components/AnsibleSelect';
+import { VariablesField } from '../../../components/CodeMirrorInput';
 import ContentError from '../../../components/ContentError';
 import ContentLoading from '../../../components/ContentLoading';
-import AnsibleSelect from '../../../components/AnsibleSelect';
-import { TagMultiSelect } from '../../../components/MultiSelect';
-import useRequest from '../../../util/useRequest';
-
+import FieldWithPrompt from '../../../components/FieldWithPrompt';
 import FormActionGroup from '../../../components/FormActionGroup';
 import FormField, {
   CheckboxField,
   FieldTooltip,
   FormSubmitError,
 } from '../../../components/FormField';
-import FieldWithPrompt from '../../../components/FieldWithPrompt';
 import {
+  FormCheckboxLayout,
   FormColumnLayout,
   FormFullWidthLayout,
-  FormCheckboxLayout,
   SubFormLayout,
 } from '../../../components/FormLayout';
-import { VariablesField } from '../../../components/CodeMirrorInput';
-import { required } from '../../../util/validators';
-import { JobTemplate } from '../../../types';
 import {
-  InventoryLookup,
   InstanceGroupsLookup,
-  ProjectLookup,
+  InventoryLookup,
   MultiCredentialsLookup,
+  ProjectLookup,
 } from '../../../components/Lookup';
-import { JobTemplatesAPI, ProjectsAPI } from '../../../api';
+import { TagMultiSelect } from '../../../components/MultiSelect';
+import { JobTemplate } from '../../../types';
+import useRequest from '../../../util/useRequest';
+import { required } from '../../../util/validators';
 import LabelSelect from './LabelSelect';
 import PlaybookSelect from './PlaybookSelect';
 import WebhookSubForm from './WebhookSubForm';
@@ -73,7 +73,7 @@ function JobTemplateForm({
   const [, inventoryMeta, inventoryHelpers] = useField('inventory');
   const [projectField, projectMeta, projectHelpers] = useField({
     name: 'project',
-    validate: project => handleProjectValidation(project),
+    validate: (project) => handleProjectValidation(project),
   });
   const [scmField, , scmHelpers] = useField('scm_branch');
   const [playbookField, playbookMeta, playbookHelpers] = useField({
@@ -126,7 +126,7 @@ function JobTemplateForm({
     loadRelatedInstanceGroups();
   }, [loadRelatedInstanceGroups]);
 
-  const handleProjectValidation = project => {
+  const handleProjectValidation = (project) => {
     if (!project && projectMeta.touched) {
       return i18n._(t`Select a value for this field`);
     }
@@ -137,7 +137,7 @@ function JobTemplateForm({
   };
 
   const handleProjectUpdate = useCallback(
-    value => {
+    (value) => {
       playbookHelpers.setValue(0);
       scmHelpers.setValue('');
       projectHelpers.setValue(value);
@@ -146,7 +146,7 @@ function JobTemplateForm({
   );
 
   const handleProjectAutocomplete = useCallback(
-    val => {
+    (val) => {
       projectHelpers.setValue(val);
     },
     [] // eslint-disable-line react-hooks/exhaustive-deps
@@ -242,7 +242,7 @@ function JobTemplateForm({
           <InventoryLookup
             value={inventory}
             onBlur={() => inventoryHelpers.setTouched()}
-            onChange={value => {
+            onChange={(value) => {
               inventoryHelpers.setValue(value ? value.id : null);
               setInventory(value);
             }}
@@ -284,7 +284,7 @@ function JobTemplateForm({
             <TextInput
               id="template-scm-branch"
               {...scmField}
-              onChange={value => {
+              onChange={(value) => {
                 scmHelpers.setValue(value);
               }}
             />
@@ -324,7 +324,7 @@ function JobTemplateForm({
           >
             <MultiCredentialsLookup
               value={credentialField.value}
-              onChange={newCredentials =>
+              onChange={(newCredentials) =>
                 credentialHelpers.setValue(newCredentials)
               }
               onError={setContentError}
@@ -338,7 +338,7 @@ function JobTemplateForm({
             />
             <LabelSelect
               value={labelsField.value}
-              onChange={labels => labelsHelpers.setValue(labels)}
+              onChange={(labels) => labelsHelpers.setValue(labels)}
               onError={setContentError}
               createText={i18n._(t`Create`)}
             />
@@ -388,7 +388,7 @@ function JobTemplateForm({
                 validated={
                   !limitMeta.touched || !limitMeta.error ? 'default' : 'error'
                 }
-                onChange={value => {
+                onChange={(value) => {
                   limitHelpers.setValue(value);
                 }}
               />
@@ -440,13 +440,13 @@ function JobTemplateForm({
                 id="template-show-changes"
                 label={diffModeField.value ? i18n._(t`On`) : i18n._(t`Off`)}
                 isChecked={diffModeField.value}
-                onChange={checked => diffModeHelpers.setValue(checked)}
+                onChange={(checked) => diffModeHelpers.setValue(checked)}
               />
             </FieldWithPrompt>
             <FormFullWidthLayout>
               <InstanceGroupsLookup
                 value={instanceGroupsField.value}
-                onChange={value => instanceGroupsHelpers.setValue(value)}
+                onChange={(value) => instanceGroupsHelpers.setValue(value)}
                 tooltip={i18n._(t`Select the Instance Groups for this Organization
                         to run on.`)}
               />
@@ -463,7 +463,7 @@ function JobTemplateForm({
               >
                 <TagMultiSelect
                   value={jobTagsField.value}
-                  onChange={value => jobTagsHelpers.setValue(value)}
+                  onChange={(value) => jobTagsHelpers.setValue(value)}
                 />
               </FieldWithPrompt>
               <FieldWithPrompt
@@ -479,7 +479,7 @@ function JobTemplateForm({
               >
                 <TagMultiSelect
                   value={skipTagsField.value}
-                  onChange={value => skipTagsHelpers.setValue(value)}
+                  onChange={(value) => skipTagsHelpers.setValue(value)}
                 />
               </FieldWithPrompt>
               <FormGroup
@@ -510,7 +510,7 @@ function JobTemplateForm({
                     }
                     id="option-callbacks"
                     isChecked={allowCallbacks}
-                    onChange={checked => {
+                    onChange={(checked) => {
                       setAllowCallbacks(checked);
                     }}
                   />
@@ -527,7 +527,7 @@ function JobTemplateForm({
                     }
                     id="wfjt-enabled-webhooks"
                     isChecked={enableWebhooks}
-                    onChange={checked => {
+                    onChange={(checked) => {
                       setEnableWebhooks(checked);
                     }}
                   />

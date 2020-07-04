@@ -1,23 +1,25 @@
-import React, { Fragment, useCallback, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter, useLocation } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import useRequest from '../../util/useRequest';
+import { withI18n } from '@lingui/react';
+import PropTypes from 'prop-types';
+import React, { Fragment, useCallback, useEffect } from 'react';
+import { useLocation, withRouter } from 'react-router-dom';
 
 import { SearchColumns, SortColumns } from '../../types';
-import PaginatedDataList from '../PaginatedDataList';
-import DataListToolbar from '../DataListToolbar';
-import CheckboxListItem from '../CheckboxListItem';
-import SelectedList from '../SelectedList';
 import { getQSConfig, parseQueryString } from '../../util/qs';
+import useRequest from '../../util/useRequest';
+import CheckboxListItem from '../CheckboxListItem';
+import DataListToolbar from '../DataListToolbar';
+import PaginatedDataList from '../PaginatedDataList';
+import SelectedList from '../SelectedList';
 
-const QS_Config = sortColumns => {
+const QS_Config = (sortColumns) => {
   return getQSConfig('resource', {
     page: 1,
     page_size: 5,
     order_by: `${
-      sortColumns.filter(col => col.key === 'name').length ? 'name' : 'username'
+      sortColumns.filter((col) => col.key === 'name').length
+        ? 'name'
+        : 'username'
     }`,
   });
 };
@@ -84,9 +86,9 @@ function SelectResourceStep({
         onRowClick={onRowClick}
         toolbarSearchColumns={searchColumns}
         toolbarSortColumns={sortColumns}
-        renderItem={item => (
+        renderItem={(item) => (
           <CheckboxListItem
-            isSelected={selectedResourceRows.some(i => i.id === item.id)}
+            isSelected={selectedResourceRows.some((i) => i.id === item.id)}
             itemId={item.id}
             key={item.id}
             name={item[displayKey]}
@@ -95,7 +97,7 @@ function SelectResourceStep({
             onDeselect={() => onRowClick(item)}
           />
         )}
-        renderToolbar={props => <DataListToolbar {...props} fillWidth />}
+        renderToolbar={(props) => <DataListToolbar {...props} fillWidth />}
         showPageSizeOptions={false}
       />
     </Fragment>

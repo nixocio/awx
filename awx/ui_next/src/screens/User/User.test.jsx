@@ -1,11 +1,12 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
-import { UsersAPI } from '../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
+import { UsersAPI } from '../../api';
 import mockDetails from './data.user.json';
 import User from './User';
 
@@ -75,7 +76,7 @@ describe('<User />', () => {
         }
       );
     });
-    await waitForElement(wrapper, '.pf-c-tabs__item', el => el.length === 6);
+    await waitForElement(wrapper, '.pf-c-tabs__item', (el) => el.length === 6);
 
     /* eslint-disable react/button-has-type */
     expect(wrapper.find('Tabs TabButton').length).toEqual(6);
@@ -133,6 +134,6 @@ describe('<User />', () => {
         },
       });
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

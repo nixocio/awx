@@ -1,16 +1,17 @@
-import React, { useCallback, useEffect } from 'react';
-import { bool, func, node, number, string, oneOfType } from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { FormGroup } from '@patternfly/react-core';
+import { bool, func, node, number, oneOfType, string } from 'prop-types';
+import React, { useCallback, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import { CredentialsAPI } from '../../api';
 import { Credential } from '../../types';
-import { getQSConfig, parseQueryString, mergeParams } from '../../util/qs';
-import { FieldTooltip } from '../FormField';
-import Lookup from './Lookup';
-import OptionsList from '../OptionsList';
+import { getQSConfig, mergeParams, parseQueryString } from '../../util/qs';
 import useRequest from '../../util/useRequest';
+import { FieldTooltip } from '../FormField';
+import OptionsList from '../OptionsList';
+import Lookup from './Lookup';
 import LookupErrorMessage from './shared/LookupErrorMessage';
 
 const QS_CONFIG = getQSConfig('credentials', {
@@ -127,8 +128,8 @@ function CredentialLookup({
             ]}
             readOnly={!canDelete}
             name="credential"
-            selectItem={item => dispatch({ type: 'SELECT_ITEM', item })}
-            deselectItem={item => dispatch({ type: 'DESELECT_ITEM', item })}
+            selectItem={(item) => dispatch({ type: 'SELECT_ITEM', item })}
+            deselectItem={(item) => dispatch({ type: 'DESELECT_ITEM', item })}
           />
         )}
       />

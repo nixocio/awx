@@ -1,10 +1,12 @@
 import 'styled-components/macro';
-import React, { useState, useEffect } from 'react';
-import { string, node, number } from 'prop-types';
+
 import { Split, SplitItem, TextListItemVariants } from '@patternfly/react-core';
+import { node, number, string } from 'prop-types';
+import React, { useEffect, useState } from 'react';
+
+import { isJson, jsonToYaml, yamlToJson } from '../../util/yaml';
 import { DetailName, DetailValue } from '../DetailList';
 import MultiButtonToggle from '../MultiButtonToggle';
-import { yamlToJson, jsonToYaml, isJson } from '../../util/yaml';
 import CodeMirrorInput from './CodeMirrorInput';
 import { JSON_MODE, YAML_MODE } from './constants';
 
@@ -57,7 +59,7 @@ function VariablesDetail({ value, label, rows, fullHeight }) {
                 [JSON_MODE, 'JSON'],
               ]}
               value={mode}
-              onChange={newMode => {
+              onChange={(newMode) => {
                 try {
                   setCurrentValue(getValueAsMode(currentValue, newMode));
                   setMode(newMode);

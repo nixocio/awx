@@ -1,18 +1,18 @@
-import React, { Fragment } from 'react';
+import { Toolbar, ToolbarContent } from '@patternfly/react-core';
 import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import { Toolbar, ToolbarContent } from '@patternfly/react-core';
-import DataListToolbar from '../DataListToolbar';
 
+import { QSConfig, SearchColumns, SortColumns } from '../../types';
 import {
   encodeNonDefaultQueryString,
-  parseQueryString,
   mergeParams,
-  replaceParams,
+  parseQueryString,
   removeParams,
+  replaceParams,
 } from '../../util/qs';
-import { QSConfig, SearchColumns, SortColumns } from '../../types';
+import DataListToolbar from '../DataListToolbar';
 
 const EmptyStateControlsWrapper = styled.div`
   display: flex;
@@ -143,7 +143,7 @@ ListHeader.propTypes = {
 };
 
 ListHeader.defaultProps = {
-  renderToolbar: props => <DataListToolbar {...props} />,
+  renderToolbar: (props) => <DataListToolbar {...props} />,
 };
 
 export default withRouter(ListHeader);

@@ -1,11 +1,12 @@
-import React from 'react';
-import { node, string } from 'prop-types';
 import { Trans } from '@lingui/macro';
+import { node, string } from 'prop-types';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { SummaryFieldUser } from '../../types';
 import { formatDateString } from '../../util/dates';
 import _Detail from './Detail';
-import { SummaryFieldUser } from '../../types';
 
 const Detail = styled(_Detail)`
   word-break: break-word;

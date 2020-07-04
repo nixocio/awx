@@ -1,8 +1,8 @@
+import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Card, PageSection } from '@patternfly/react-core';
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
-import { t } from '@lingui/macro';
-import { Card, PageSection } from '@patternfly/react-core';
 
 import { UsersAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal';
@@ -13,7 +13,6 @@ import PaginatedDataList, {
   ToolbarDeleteButton,
 } from '../../../components/PaginatedDataList';
 import { getQSConfig, parseQueryString } from '../../../util/qs';
-
 import UserListItem from './UserListItem';
 
 const QS_CONFIG = getQSConfig('user', {
@@ -64,8 +63,8 @@ class UsersList extends Component {
   handleSelect(row) {
     const { selected } = this.state;
 
-    if (selected.some(s => s.id === row.id)) {
-      this.setState({ selected: selected.filter(s => s.id !== row.id) });
+    if (selected.some((s) => s.id === row.id)) {
+      this.setState({ selected: selected.filter((s) => s.id !== row.id) });
     } else {
       this.setState({ selected: selected.concat(row) });
     }
@@ -80,7 +79,7 @@ class UsersList extends Component {
 
     this.setState({ hasContentLoading: true });
     try {
-      await Promise.all(selected.map(org => UsersAPI.destroy(org.id)));
+      await Promise.all(selected.map((org) => UsersAPI.destroy(org.id)));
     } catch (err) {
       this.setState({ deletionError: err });
     } finally {
@@ -183,7 +182,7 @@ class UsersList extends Component {
                   key: 'last_name',
                 },
               ]}
-              renderToolbar={props => (
+              renderToolbar={(props) => (
                 <DataListToolbar
                   {...props}
                   showSelectAll
@@ -208,12 +207,12 @@ class UsersList extends Component {
                   ]}
                 />
               )}
-              renderItem={o => (
+              renderItem={(o) => (
                 <UserListItem
                   key={o.id}
                   user={o}
                   detailUrl={`${match.url}/${o.id}/details`}
-                  isSelected={selected.some(row => row.id === o.id)}
+                  isSelected={selected.some((row) => row.id === o.id)}
                   onSelect={() => this.handleSelect(o)}
                 />
               )}

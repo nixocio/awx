@@ -1,6 +1,7 @@
+import WS from 'jest-websocket-mock';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import WS from 'jest-websocket-mock';
+
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
 import useWsJobs from './useWsJobs';
 
@@ -10,7 +11,7 @@ import useWsJobs from './useWsJobs';
 */
 jest.mock('./useThrottle', () => ({
   __esModule: true,
-  default: jest.fn(val => val),
+  default: jest.fn((val) => val),
 }));
 
 function TestInner() {

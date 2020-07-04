@@ -1,27 +1,28 @@
-import React, { useEffect, useCallback } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import {
-  Switch,
-  Route,
-  Redirect,
-  Link,
-  useRouteMatch,
-  useLocation,
-} from 'react-router-dom';
-import { CaretLeftIcon } from '@patternfly/react-icons';
+import { withI18n } from '@lingui/react';
 import { Card, PageSection } from '@patternfly/react-core';
-import useRequest from '../../util/useRequest';
+import { CaretLeftIcon } from '@patternfly/react-icons';
+import React, { useCallback, useEffect } from 'react';
+import {
+  Link,
+  Redirect,
+  Route,
+  Switch,
+  useLocation,
+  useRouteMatch,
+} from 'react-router-dom';
+
 import { UsersAPI } from '../../api';
 import ContentError from '../../components/ContentError';
 import ContentLoading from '../../components/ContentLoading';
 import RoutedTabs from '../../components/RoutedTabs';
+import useRequest from '../../util/useRequest';
+import UserAccessList from './UserAccess/UserAccessList';
 import UserDetail from './UserDetail';
 import UserEdit from './UserEdit';
 import UserOrganizations from './UserOrganizations';
 import UserTeams from './UserTeams';
 import UserTokenList from './UserTokenList';
-import UserAccessList from './UserAccess/UserAccessList';
 
 function User({ i18n, setBreadcrumb, me }) {
   const location = useLocation();
@@ -80,7 +81,7 @@ function User({ i18n, setBreadcrumb, me }) {
   }
 
   let showCardHeader = true;
-  if (['edit'].some(name => location.pathname.includes(name))) {
+  if (['edit'].some((name) => location.pathname.includes(name))) {
     showCardHeader = false;
   }
 

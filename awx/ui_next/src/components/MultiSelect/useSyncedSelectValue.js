@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 /*
   Hook for using PatternFly's <Select> component when a pre-existing value
@@ -12,8 +12,8 @@ export default function useSyncedSelectValue(value, onChange) {
 
   useEffect(() => {
     if (value !== selections && options.length) {
-      const syncedValue = value.map(item =>
-        options.find(i => i.id === item.id)
+      const syncedValue = value.map((item) =>
+        options.find((i) => i.id === item.id)
       );
       setSelections(syncedValue);
     }
@@ -22,7 +22,7 @@ export default function useSyncedSelectValue(value, onChange) {
 
   const onSelect = (event, item) => {
     if (selections.includes(item)) {
-      onChange(selections.filter(i => i !== item));
+      onChange(selections.filter((i) => i !== item));
     } else {
       onChange(selections.concat(item));
     }
@@ -32,7 +32,7 @@ export default function useSyncedSelectValue(value, onChange) {
     selections: options.length ? addToStringToObjects(selections) : [],
     onSelect,
     options,
-    setOptions: newOpts => setOptions(addToStringToObjects(newOpts)),
+    setOptions: (newOpts) => setOptions(addToStringToObjects(newOpts)),
   };
 }
 
@@ -41,7 +41,7 @@ export default function useSyncedSelectValue(value, onChange) {
   all objects in the array have a toString method.
  */
 function addToStringToObjects(items = []) {
-  items.forEach(item => {
+  items.forEach((item) => {
     item.toString = toString;
   });
   return items;

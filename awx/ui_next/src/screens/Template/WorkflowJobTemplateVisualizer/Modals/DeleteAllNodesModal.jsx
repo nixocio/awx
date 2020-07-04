@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
-import { Button } from '@patternfly/react-core';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import { WorkflowDispatchContext } from '../../../../contexts/Workflow';
+import { withI18n } from '@lingui/react';
+import { Button } from '@patternfly/react-core';
+import React, { useContext } from 'react';
+
 import AlertModal from '../../../../components/AlertModal';
+import { WorkflowDispatchContext } from '../../../../contexts/Workflow';
 
 function DeleteAllNodesModal({ i18n }) {
   const dispatch = useContext(WorkflowDispatchContext);

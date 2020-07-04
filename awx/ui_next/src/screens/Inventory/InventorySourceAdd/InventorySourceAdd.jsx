@@ -1,9 +1,10 @@
+import { Card } from '@patternfly/react-core';
 import React, { useCallback, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Card } from '@patternfly/react-core';
+
 import { InventorySourcesAPI } from '../../../api';
-import useRequest from '../../../util/useRequest';
 import { CardBody } from '../../../components/Card';
+import useRequest from '../../../util/useRequest';
 import InventorySourceForm from '../shared/InventorySourceForm';
 
 function InventorySourceAdd() {
@@ -11,7 +12,7 @@ function InventorySourceAdd() {
   const { id } = useParams();
 
   const { error, request, result } = useRequest(
-    useCallback(async values => {
+    useCallback(async (values) => {
       const { data } = await InventorySourcesAPI.create(values);
       return data;
     }, [])
@@ -25,7 +26,7 @@ function InventorySourceAdd() {
     }
   }, [result, history]);
 
-  const handleSubmit = async form => {
+  const handleSubmit = async (form) => {
     const {
       credential,
       source_path,

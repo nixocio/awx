@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { CardBody } from '../../../components/Card';
 
 import { TeamsAPI } from '../../../api';
+import { CardBody } from '../../../components/Card';
 import { Config } from '../../../contexts/Config';
-
 import TeamForm from '../shared/TeamForm';
 
 function TeamEdit({ team }) {
   const history = useHistory();
   const [error, setError] = useState(null);
 
-  const handleSubmit = async values => {
+  const handleSubmit = async (values) => {
     try {
       await TeamsAPI.update(team.id, values);
       history.push(`/teams/${team.id}/details`);

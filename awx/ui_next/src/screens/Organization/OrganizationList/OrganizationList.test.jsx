@@ -1,12 +1,11 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 
-import { OrganizationsAPI } from '../../../api';
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-
+import { OrganizationsAPI } from '../../../api';
 import OrganizationsList from './OrganizationList';
 
 jest.mock('../../../api');
@@ -97,7 +96,7 @@ describe('<OrganizationsList />', () => {
     await waitForElement(
       wrapper,
       'OrganizationsList',
-      el => el.find('ContentLoading').length === 0
+      (el) => el.find('ContentLoading').length === 0
     );
     expect(wrapper.find('OrganizationListItem').length).toBe(3);
   });
@@ -110,7 +109,7 @@ describe('<OrganizationsList />', () => {
     await waitForElement(
       wrapper,
       'OrganizationsList',
-      el => el.find('ContentLoading').length === 0
+      (el) => el.find('ContentLoading').length === 0
     );
     await act(async () => {
       wrapper
@@ -122,7 +121,7 @@ describe('<OrganizationsList />', () => {
     await waitForElement(
       wrapper,
       'OrganizationsList',
-      el => el.find(itemCheckboxInput).props().checked === true
+      (el) => el.find(itemCheckboxInput).props().checked === true
     );
   });
 
@@ -138,15 +137,15 @@ describe('<OrganizationsList />', () => {
     await waitForElement(
       wrapper,
       'OrganizationsList',
-      el => el.find('ContentLoading').length === 0
+      (el) => el.find('ContentLoading').length === 0
     );
     // Check for initially unselected items
     await waitForElement(
       wrapper,
       'input#select-all',
-      el => el.props().checked === false
+      (el) => el.props().checked === false
     );
-    itemCheckboxInputs.forEach(inputSelector => {
+    itemCheckboxInputs.forEach((inputSelector) => {
       const checkboxInput = wrapper
         .find('OrganizationsList')
         .find(inputSelector);
@@ -154,17 +153,14 @@ describe('<OrganizationsList />', () => {
     });
     // Check select-all behavior
     await act(async () => {
-      wrapper
-        .find('Checkbox#select-all')
-        .props()
-        .onChange(true);
+      wrapper.find('Checkbox#select-all').props().onChange(true);
     });
     await waitForElement(
       wrapper,
       'input#select-all',
-      el => el.props().checked === true
+      (el) => el.props().checked === true
     );
-    itemCheckboxInputs.forEach(inputSelector => {
+    itemCheckboxInputs.forEach((inputSelector) => {
       const checkboxInput = wrapper
         .find('OrganizationsList')
         .find(inputSelector);
@@ -172,17 +168,14 @@ describe('<OrganizationsList />', () => {
     });
     // Check unselect-all behavior
     await act(async () => {
-      wrapper
-        .find('Checkbox#select-all')
-        .props()
-        .onChange(false);
+      wrapper.find('Checkbox#select-all').props().onChange(false);
     });
     await waitForElement(
       wrapper,
       'input#select-all',
-      el => el.props().checked === false
+      (el) => el.props().checked === false
     );
-    itemCheckboxInputs.forEach(inputSelector => {
+    itemCheckboxInputs.forEach((inputSelector) => {
       const checkboxInput = wrapper
         .find('OrganizationsList')
         .find(inputSelector);
@@ -197,19 +190,16 @@ describe('<OrganizationsList />', () => {
     await waitForElement(
       wrapper,
       'OrganizationsList',
-      el => el.find('ContentLoading').length === 0
+      (el) => el.find('ContentLoading').length === 0
     );
     expect(OrganizationsAPI.read).toHaveBeenCalledTimes(1);
     await act(async () => {
-      wrapper
-        .find('Checkbox#select-all')
-        .props()
-        .onChange(true);
+      wrapper.find('Checkbox#select-all').props().onChange(true);
     });
     await waitForElement(
       wrapper,
       'input#select-all',
-      el => el.props().checked === true
+      (el) => el.props().checked === true
     );
     await act(async () => {
       wrapper.find('button[aria-label="Delete"]').simulate('click');
@@ -245,7 +235,7 @@ describe('<OrganizationsList />', () => {
     await waitForElement(
       wrapper,
       'OrganizationsList',
-      el => el.find('ContentLoading').length === 0
+      (el) => el.find('ContentLoading').length === 0
     );
     await act(async () => {
       wrapper
@@ -257,7 +247,7 @@ describe('<OrganizationsList />', () => {
     await waitForElement(
       wrapper,
       'OrganizationsList',
-      el => el.find(itemCheckboxInput).props().checked === true
+      (el) => el.find(itemCheckboxInput).props().checked === true
     );
     await act(async () => {
       wrapper.find('button[aria-label="Delete"]').simulate('click');
@@ -273,7 +263,7 @@ describe('<OrganizationsList />', () => {
     await waitForElement(
       wrapper,
       'Modal',
-      el => el.props().isOpen === true && el.props().title === 'Error!'
+      (el) => el.props().isOpen === true && el.props().title === 'Error!'
     );
   });
 
@@ -284,7 +274,7 @@ describe('<OrganizationsList />', () => {
     await waitForElement(
       wrapper,
       'OrganizationsList',
-      el => el.find('ContentLoading').length === 0
+      (el) => el.find('ContentLoading').length === 0
     );
     expect(wrapper.find('ToolbarAddButton').length).toBe(1);
   });
@@ -303,7 +293,7 @@ describe('<OrganizationsList />', () => {
     await waitForElement(
       wrapper,
       'OrganizationsList',
-      el => el.find('ContentLoading').length === 0
+      (el) => el.find('ContentLoading').length === 0
     );
     expect(wrapper.find('ToolbarAddButton').length).toBe(0);
   });

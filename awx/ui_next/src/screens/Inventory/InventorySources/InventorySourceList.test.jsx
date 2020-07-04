@@ -1,13 +1,13 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { InventoriesAPI, InventorySourcesAPI } from '../../../api';
+import { Route } from 'react-router-dom';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-
+import { InventoriesAPI, InventorySourcesAPI } from '../../../api';
 import InventorySourceList from './InventorySourceList';
 
 jest.mock('../../../api/models/InventorySources');
@@ -101,11 +101,11 @@ describe('<InventorySourceList />', () => {
   });
 
   test('should mount properly', async () => {
-    await waitForElement(wrapper, 'InventorySourceList', el => el.length > 0);
+    await waitForElement(wrapper, 'InventorySourceList', (el) => el.length > 0);
   });
 
   test('api calls should be made on mount', async () => {
-    await waitForElement(wrapper, 'InventorySourceList', el => el.length > 0);
+    await waitForElement(wrapper, 'InventorySourceList', (el) => el.length > 0);
     expect(InventoriesAPI.readSources).toHaveBeenCalledWith('1', {
       not__source: '',
       order_by: 'name',
@@ -116,7 +116,7 @@ describe('<InventorySourceList />', () => {
   });
 
   test('source data should render properly', async () => {
-    await waitForElement(wrapper, 'InventorySourceList', el => el.length > 0);
+    await waitForElement(wrapper, 'InventorySourceList', (el) => el.length > 0);
     expect(
       wrapper
         .find("DataListItem[aria-labelledby='check-action-1']")
@@ -132,7 +132,7 @@ describe('<InventorySourceList />', () => {
   });
 
   test('add button is not disabled and delete button is disabled', async () => {
-    await waitForElement(wrapper, 'InventorySourceList', el => el.length > 0);
+    await waitForElement(wrapper, 'InventorySourceList', (el) => el.length > 0);
     const addButton = wrapper.find('ToolbarAddButton').find('Link');
     const deleteButton = wrapper.find('ToolbarDeleteButton').find('Button');
     expect(addButton.prop('aria-disabled')).toBe(false);
@@ -142,7 +142,7 @@ describe('<InventorySourceList />', () => {
   test('delete button becomes enabled and properly calls api to delete', async () => {
     const deleteButton = wrapper.find('ToolbarDeleteButton').find('Button');
 
-    await waitForElement(wrapper, 'InventorySourceList', el => el.length > 0);
+    await waitForElement(wrapper, 'InventorySourceList', (el) => el.length > 0);
     expect(deleteButton.prop('isDisabled')).toBe(true);
 
     await act(async () =>
@@ -177,7 +177,7 @@ describe('<InventorySourceList />', () => {
       })
     );
 
-    await waitForElement(wrapper, 'InventorySourceList', el => el.length > 0);
+    await waitForElement(wrapper, 'InventorySourceList', (el) => el.length > 0);
 
     await act(async () =>
       wrapper.find('DataListCheck#select-source-1').prop('onChange')({ id: 1 })
@@ -228,7 +228,7 @@ describe('<InventorySourceList />', () => {
       wrapper = mountWithContexts(<InventorySourceList />);
     });
 
-    await waitForElement(wrapper, 'ContentError', el => el.length > 0);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length > 0);
 
     expect(wrapper.find('ContentError').length).toBe(1);
   });
@@ -251,7 +251,7 @@ describe('<InventorySourceList />', () => {
       wrapper = mountWithContexts(<InventorySourceList />);
     });
 
-    await waitForElement(wrapper, 'InventorySourceList', el => el.length > 0);
+    await waitForElement(wrapper, 'InventorySourceList', (el) => el.length > 0);
 
     expect(wrapper.find('ContentError').length).toBe(1);
   });
@@ -269,7 +269,7 @@ describe('<InventorySourceList />', () => {
         },
       })
     );
-    await waitForElement(wrapper, 'InventorySourceList', el => el.length > 0);
+    await waitForElement(wrapper, 'InventorySourceList', (el) => el.length > 0);
     await act(async () =>
       wrapper.find('Button[aria-label="Sync all"]').prop('onClick')()
     );
@@ -282,7 +282,7 @@ describe('<InventorySourceList />', () => {
     await waitForElement(
       wrapper,
       'InventorySourceListItem',
-      el => el.length > 0
+      (el) => el.length > 0
     );
     const syncAllButton = wrapper.find('Button[aria-label="Sync all"]');
     expect(syncAllButton.length).toBe(1);
@@ -340,7 +340,7 @@ describe('<InventorySourceList /> RBAC testing', () => {
     await waitForElement(
       newWrapper,
       'InventorySourceList',
-      el => el.length > 0
+      (el) => el.length > 0
     );
     expect(newWrapper.find('ToolbarAddButton').length).toBe(0);
     newWrapper.unmount();
@@ -380,7 +380,7 @@ describe('<InventorySourceList /> RBAC testing', () => {
     await waitForElement(
       newWrapper,
       'InventorySourceList',
-      el => el.length > 0
+      (el) => el.length > 0
     );
     expect(newWrapper.find('Button[aria-label="Sync All"]').length).toBe(0);
     newWrapper.unmount();

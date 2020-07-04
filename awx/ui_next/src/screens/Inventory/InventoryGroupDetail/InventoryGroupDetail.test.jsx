@@ -1,12 +1,13 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { GroupsAPI } from '../../../api';
+import { Route } from 'react-router-dom';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
+import { GroupsAPI } from '../../../api';
 import InventoryGroupDetail from './InventoryGroupDetail';
 
 jest.mock('../../../api');
@@ -54,7 +55,7 @@ describe('<InventoryGroupDetail />', () => {
           },
         }
       );
-      await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+      await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     });
   });
   afterEach(() => {
@@ -67,7 +68,7 @@ describe('<InventoryGroupDetail />', () => {
     await act(async () => {
       wrapper.find('button[aria-label="Delete"]').simulate('click');
     });
-    await waitForElement(wrapper, 'Modal', el => el.length === 1);
+    await waitForElement(wrapper, 'Modal', (el) => el.length === 1);
     expect(wrapper.find('Modal').length).toBe(1);
     await act(async () => {
       wrapper.find('Radio[id="radio-delete"]').invoke('onChange')();

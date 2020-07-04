@@ -1,6 +1,7 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { RRule } from 'rrule';
+
 import {
   mountWithContexts,
   waitForElement,
@@ -35,7 +36,7 @@ describe('<ScheduleAdd />', () => {
         <ScheduleAdd createSchedule={createSchedule} />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
   });
   afterEach(() => {
     jest.clearAllMocks();

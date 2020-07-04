@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
-import styled from 'styled-components';
+import { withI18n } from '@lingui/react';
 import {
   ExclamationTriangleIcon,
   PauseIcon,
   TimesIcon,
 } from '@patternfly/react-icons';
+import React, { useContext } from 'react';
+import styled from 'styled-components';
+
 import { WorkflowDispatchContext } from '../../contexts/Workflow';
 
 const Wrapper = styled.div`

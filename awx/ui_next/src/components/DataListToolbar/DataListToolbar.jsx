@@ -1,7 +1,5 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import {
   Checkbox,
   Toolbar,
@@ -11,11 +9,13 @@ import {
   ToolbarToggleGroup,
 } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons';
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
+
+import { QSConfig, SearchColumns, SortColumns } from '../../types';
 import ExpandCollapse from '../ExpandCollapse';
 import Search from '../Search';
 import Sort from '../Sort';
-
-import { SearchColumns, SortColumns, QSConfig } from '../../types';
 
 class DataListToolbar extends React.Component {
   render() {
@@ -86,7 +86,7 @@ class DataListToolbar extends React.Component {
             </ToolbarGroup>
           )}
           <ToolbarGroup>
-            {additionalControls.map(control => (
+            {additionalControls.map((control) => (
               <ToolbarItem key={control.key}>{control}</ToolbarItem>
             ))}
           </ToolbarGroup>

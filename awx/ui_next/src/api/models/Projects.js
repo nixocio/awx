@@ -1,6 +1,6 @@
 import Base from '../Base';
-import NotificationsMixin from '../mixins/Notifications.mixin';
 import LaunchUpdateMixin from '../mixins/LaunchUpdate.mixin';
+import NotificationsMixin from '../mixins/Notifications.mixin';
 import SchedulesMixin from '../mixins/Schedules.mixin';
 
 class Projects extends SchedulesMixin(

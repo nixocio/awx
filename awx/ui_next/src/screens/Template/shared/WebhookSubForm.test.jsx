@@ -1,15 +1,14 @@
+import { Formik } from 'formik';
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { Route } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 
-import { Formik } from 'formik';
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
 import { CredentialsAPI } from '../../../api';
-
 import WebhookSubForm from './WebhookSubForm';
 
 jest.mock('../../../api');
@@ -59,7 +58,7 @@ describe('<WebhookSubForm />', () => {
     expect(wrapper.length).toBe(1);
   });
   test('should render initial values properly', () => {
-    waitForElement(wrapper, 'Lookup__ChipHolder', el => el.lenth > 0);
+    waitForElement(wrapper, 'Lookup__ChipHolder', (el) => el.lenth > 0);
     expect(wrapper.find('AnsibleSelect').prop('value')).toBe('github');
     expect(
       wrapper.find('TextInputBase[aria-label="Webhook URL"]').prop('value')
@@ -67,12 +66,7 @@ describe('<WebhookSubForm />', () => {
     expect(
       wrapper.find('TextInputBase[aria-label="wfjt-webhook-key"]').prop('value')
     ).toBe('webhook key');
-    expect(
-      wrapper
-        .find('Chip')
-        .find('span')
-        .text()
-    ).toBe('Github credential');
+    expect(wrapper.find('Chip').find('span').text()).toBe('Github credential');
   });
   test('should make other credential type available', async () => {
     CredentialsAPI.read.mockResolvedValue({

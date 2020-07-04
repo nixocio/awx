@@ -2,7 +2,7 @@ import { t } from '@lingui/macro';
 
 export function required(message, i18n) {
   const errorMessage = message || i18n._(t`This field must not be blank`);
-  return value => {
+  return (value) => {
     if (typeof value === 'string' && !value.trim()) {
       return errorMessage;
     }
@@ -17,7 +17,7 @@ export function required(message, i18n) {
 }
 
 export function maxLength(max, i18n) {
-  return value => {
+  return (value) => {
     if (value.trim().length > max) {
       return i18n._(t`This field must not exceed ${max} characters`);
     }
@@ -26,7 +26,7 @@ export function maxLength(max, i18n) {
 }
 
 export function minLength(min, i18n) {
-  return value => {
+  return (value) => {
     if (value.trim().length < min) {
       return i18n._(t`This field must be at least ${min} characters`);
     }
@@ -35,7 +35,7 @@ export function minLength(min, i18n) {
 }
 
 export function minMaxValue(min, max, i18n) {
-  return value => {
+  return (value) => {
     if (value < min || value > max) {
       return i18n._(
         t`This field must be a number and have a value between ${min} and ${max}`
@@ -46,7 +46,7 @@ export function minMaxValue(min, max, i18n) {
 }
 
 export function requiredEmail(i18n) {
-  return value => {
+  return (value) => {
     if (!value) {
       return i18n._(t`This field must not be blank`);
     }
@@ -58,7 +58,7 @@ export function requiredEmail(i18n) {
 }
 
 export function noWhiteSpace(i18n) {
-  return value => {
+  return (value) => {
     if (/\s/.test(value)) {
       return i18n._(t`This field must not contain spaces`);
     }
@@ -67,7 +67,7 @@ export function noWhiteSpace(i18n) {
 }
 
 export function integer(i18n) {
-  return value => {
+  return (value) => {
     const str = String(value);
     if (/[^0-9]/.test(str)) {
       return i18n._(t`This field must be an integer`);
@@ -77,7 +77,7 @@ export function integer(i18n) {
 }
 
 export function combine(validators) {
-  return value => {
+  return (value) => {
     for (let i = 0; i < validators.length; i++) {
       const validate = validators[i];
       const error = validate ? validate(value) : null;

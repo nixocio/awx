@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
-import { number } from 'prop-types';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { number } from 'prop-types';
+import React, { Fragment } from 'react';
 
+import { ProjectsAPI } from '../../../api';
 import AlertModal from '../../../components/AlertModal';
 import ErrorDetail from '../../../components/ErrorDetail';
-import { ProjectsAPI } from '../../../api';
 
 class ProjectSyncButton extends React.Component {
   static propTypes = {

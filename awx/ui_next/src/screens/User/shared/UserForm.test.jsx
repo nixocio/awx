@@ -1,12 +1,13 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
-import UserForm from './UserForm';
 import { UsersAPI } from '../../../api';
 import mockData from '../data.user.json';
+import UserForm from './UserForm';
 
 jest.mock('../../../api');
 
@@ -47,7 +48,7 @@ describe('<UserForm />', () => {
         <UserForm handleSubmit={jest.fn()} handleCancel={jest.fn()} />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(wrapper.find('FormGroup[label="Username"]').length).toBe(1);
     expect(wrapper.find('FormGroup[label="Email"]').length).toBe(1);
     expect(wrapper.find('FormGroup[label="First Name"]').length).toBe(1);
@@ -68,7 +69,7 @@ describe('<UserForm />', () => {
         />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(wrapper.find('FormGroup[label="Organization"]').length).toBe(0);
   });
 
@@ -78,7 +79,7 @@ describe('<UserForm />', () => {
         <UserForm handleSubmit={jest.fn()} handleCancel={jest.fn()} />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     await act(async () => {
       wrapper.find('OrganizationLookup').invoke('onBlur')();
       wrapper.find('OrganizationLookup').invoke('onChange')({
@@ -136,7 +137,7 @@ describe('<UserForm />', () => {
         />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(handleSubmit).not.toHaveBeenCalled();
     await act(async () => {
       wrapper.find('button[aria-label="Save"]').simulate('click');
@@ -155,7 +156,7 @@ describe('<UserForm />', () => {
         />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(handleCancel).not.toHaveBeenCalled();
     wrapper.find('button[aria-label="Cancel"]').invoke('onClick')();
     expect(handleCancel).toBeCalled();

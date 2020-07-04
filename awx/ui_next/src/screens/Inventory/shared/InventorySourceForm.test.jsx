@@ -1,11 +1,12 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../../testUtils/enzymeHelpers';
+import { CredentialsAPI, InventorySourcesAPI, ProjectsAPI } from '../../../api';
 import InventorySourceForm from './InventorySourceForm';
-import { InventorySourcesAPI, ProjectsAPI, CredentialsAPI } from '../../../api';
 
 jest.mock('../../../api/models/Credentials');
 jest.mock('../../../api/models/InventorySources');
@@ -59,7 +60,7 @@ describe('<InventorySourceForm />', () => {
           }
         );
       });
-      await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+      await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     });
 
     afterAll(() => {
@@ -128,7 +129,7 @@ describe('<InventorySourceForm />', () => {
         <InventorySourceForm onCancel={() => {}} onSubmit={() => {}} />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(wrapper.find('ContentError').length).toBe(1);
   });
 
@@ -139,7 +140,7 @@ describe('<InventorySourceForm />', () => {
         <InventorySourceForm onCancel={onCancel} onSubmit={() => {}} />
       );
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
     expect(onCancel).not.toHaveBeenCalled();
     wrapper.find('button[aria-label="Cancel"]').prop('onClick')();
     expect(onCancel).toBeCalled();

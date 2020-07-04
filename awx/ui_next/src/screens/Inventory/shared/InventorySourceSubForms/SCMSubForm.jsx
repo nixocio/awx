@@ -1,17 +1,17 @@
-import React, { useCallback, useEffect } from 'react';
-import { useField } from 'formik';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { FormGroup } from '@patternfly/react-core';
-import { ProjectsAPI } from '../../../../api';
-import useRequest from '../../../../util/useRequest';
-import { required } from '../../../../util/validators';
+import { useField } from 'formik';
+import React, { useCallback, useEffect } from 'react';
 
+import { ProjectsAPI } from '../../../../api';
 import AnsibleSelect from '../../../../components/AnsibleSelect';
 import { FieldTooltip } from '../../../../components/FormField';
 import CredentialLookup from '../../../../components/Lookup/CredentialLookup';
 import ProjectLookup from '../../../../components/Lookup/ProjectLookup';
-import { VerbosityField, OptionsField, SourceVarsField } from './SharedFields';
+import useRequest from '../../../../util/useRequest';
+import { required } from '../../../../util/validators';
+import { OptionsField, SourceVarsField, VerbosityField } from './SharedFields';
 
 const SCMSubForm = ({ i18n }) => {
   const [credentialField, , credentialHelpers] = useField('credential');
@@ -29,7 +29,7 @@ const SCMSubForm = ({ i18n }) => {
     request: fetchSourcePath,
     result: sourcePath,
   } = useRequest(
-    useCallback(async projectId => {
+    useCallback(async (projectId) => {
       const { data } = await ProjectsAPI.readInventories(projectId);
       return [...data, '/ (project root)'];
     }, []),
@@ -43,7 +43,7 @@ const SCMSubForm = ({ i18n }) => {
   }, [fetchSourcePath, projectMeta.initialValue]);
 
   const handleProjectUpdate = useCallback(
-    value => {
+    (value) => {
       sourcePathHelpers.setValue('');
       projectHelpers.setValue(value);
       fetchSourcePath(value.id);
@@ -52,7 +52,7 @@ const SCMSubForm = ({ i18n }) => {
   );
 
   const handleProjectAutocomplete = useCallback(
-    val => {
+    (val) => {
       projectHelpers.setValue(val);
       if (!projectMeta.initialValue) {
         fetchSourcePath(val.id);
@@ -67,7 +67,7 @@ const SCMSubForm = ({ i18n }) => {
         credentialTypeKind="cloud"
         label={i18n._(t`Credential`)}
         value={credentialField.value}
-        onChange={value => {
+        onChange={(value) => {
           credentialHelpers.setValue(value);
         }}
       />
@@ -111,7 +111,7 @@ const SCMSubForm = ({ i18n }) => {
               label: i18n._(t`Choose an inventory file`),
               isDisabled: true,
             },
-            ...sourcePath.map(value => ({ value, label: value, key: value })),
+            ...sourcePath.map((value) => ({ value, label: value, key: value })),
           ]}
           onChange={(event, value) => {
             sourcePathHelpers.setValue(value);

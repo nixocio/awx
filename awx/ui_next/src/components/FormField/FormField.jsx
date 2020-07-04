@@ -1,7 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { FormGroup, TextArea, TextInput } from '@patternfly/react-core';
 import { useField } from 'formik';
-import { FormGroup, TextInput, TextArea } from '@patternfly/react-core';
+import PropTypes from 'prop-types';
+import React from 'react';
+
 import FieldTooltip from './FieldTooltip';
 
 function FormField(props) {

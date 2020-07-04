@@ -1,5 +1,5 @@
-import React from 'react';
 import { Card, PageSection } from '@patternfly/react-core';
+import React from 'react';
 
 function CredentialTypeEdit() {
   return (

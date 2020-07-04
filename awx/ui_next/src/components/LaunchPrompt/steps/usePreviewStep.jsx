@@ -1,5 +1,6 @@
-import React from 'react';
 import { t } from '@lingui/macro';
+import React from 'react';
+
 import PreviewStep from './PreviewStep';
 
 const STEP_ID = 'preview';

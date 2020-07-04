@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
-import { func, string } from 'prop-types';
-import { Button } from '@patternfly/react-core';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
+import { Button } from '@patternfly/react-core';
+import { func, string } from 'prop-types';
+import React, { Fragment } from 'react';
 
-import AlertModal from '../AlertModal';
 import { Role } from '../../types';
+import AlertModal from '../AlertModal';
 
 class DeleteRoleConfirmationModal extends React.Component {
   static propTypes = {

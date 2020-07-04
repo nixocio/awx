@@ -1,11 +1,12 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
-import machineCredential from './data.machineCredential.json';
-import gceCredential from './data.gceCredential.json';
-import scmCredential from './data.scmCredential.json';
-import credentialTypesArr from './data.credentialTypes.json';
 import CredentialForm from './CredentialForm';
+import credentialTypesArr from './data.credentialTypes.json';
+import gceCredential from './data.gceCredential.json';
+import machineCredential from './data.machineCredential.json';
+import scmCredential from './data.scmCredential.json';
 
 jest.mock('../../../api');
 

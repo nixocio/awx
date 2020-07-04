@@ -1,8 +1,9 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+
 import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
-import OrganizationLookup, { _OrganizationLookup } from './OrganizationLookup';
 import { OrganizationsAPI } from '../../api';
+import OrganizationLookup, { _OrganizationLookup } from './OrganizationLookup';
 
 jest.mock('../../api');
 

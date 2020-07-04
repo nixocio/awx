@@ -1,13 +1,14 @@
+import { createMemoryHistory } from 'history';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { createMemoryHistory } from 'history';
-import { InventoriesAPI } from '../../api';
+
 import {
   mountWithContexts,
   waitForElement,
 } from '../../../testUtils/enzymeHelpers';
-import mockInventory from './shared/data.inventory.json';
+import { InventoriesAPI } from '../../api';
 import Inventory from './Inventory';
+import mockInventory from './shared/data.inventory.json';
 
 jest.mock('../../api');
 jest.mock('react-router-dom', () => ({
@@ -29,8 +30,8 @@ describe('<Inventory />', () => {
     await act(async () => {
       wrapper = mountWithContexts(<Inventory setBreadcrumb={() => {}} />);
     });
-    await waitForElement(wrapper, 'ContentLoading', el => el.length === 0);
-    await waitForElement(wrapper, '.pf-c-tabs__item', el => el.length === 7);
+    await waitForElement(wrapper, 'ContentLoading', (el) => el.length === 0);
+    await waitForElement(wrapper, '.pf-c-tabs__item', (el) => el.length === 7);
   });
 
   test('should show content error when user attempts to navigate to erroneous route', async () => {
@@ -54,6 +55,6 @@ describe('<Inventory />', () => {
         },
       });
     });
-    await waitForElement(wrapper, 'ContentError', el => el.length === 1);
+    await waitForElement(wrapper, 'ContentError', (el) => el.length === 1);
   });
 });

@@ -1,10 +1,12 @@
 import 'styled-components/macro';
-import React, { useState } from 'react';
-import { shape } from 'prop-types';
-import styled from 'styled-components';
-import { withI18n } from '@lingui/react';
+
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { Split, SplitItem, TextListItemVariants } from '@patternfly/react-core';
+import { shape } from 'prop-types';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+
 import { formatDateString, formatDateStringUTC } from '../../../util/dates';
 import { DetailName, DetailValue } from '../../DetailList';
 import MultiButtonToggle from '../../MultiButtonToggle';
@@ -50,7 +52,7 @@ function ScheduleOccurrences({ preview = { local: [], utc: [] }, i18n }) {
                 ['utc', 'UTC'],
               ]}
               value={mode}
-              onChange={newMode => setMode(newMode)}
+              onChange={(newMode) => setMode(newMode)}
             />
           </SplitItem>
         </Split>
@@ -60,7 +62,7 @@ function ScheduleOccurrences({ preview = { local: [], utc: [] }, i18n }) {
         fullWidth
         css="grid-column: 1 / -1; margin-top: -10px"
       >
-        {preview[mode].map(dateStr => (
+        {preview[mode].map((dateStr) => (
           <div key={dateStr}>
             {mode === 'local'
               ? formatDateString(dateStr)

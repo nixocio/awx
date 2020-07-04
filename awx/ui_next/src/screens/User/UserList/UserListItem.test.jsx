@@ -1,9 +1,8 @@
+import { I18nProvider } from '@lingui/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { I18nProvider } from '@lingui/react';
 
 import { mountWithContexts } from '../../../../testUtils/enzymeHelpers';
-
 import mockDetails from '../data.user.json';
 import UserListItem from './UserListItem';
 

@@ -1,14 +1,15 @@
-import React, { useCallback, useEffect } from 'react';
-import { arrayOf, string, func, object, bool } from 'prop-types';
-import { withRouter } from 'react-router-dom';
-import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
+import { withI18n } from '@lingui/react';
 import { FormGroup } from '@patternfly/react-core';
+import { arrayOf, bool, func, object, string } from 'prop-types';
+import React, { useCallback, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import { InstanceGroupsAPI } from '../../api';
 import { getQSConfig, parseQueryString } from '../../util/qs';
+import useRequest from '../../util/useRequest';
 import { FieldTooltip } from '../FormField';
 import OptionsList from '../OptionsList';
-import useRequest from '../../util/useRequest';
 import Lookup from './Lookup';
 import LookupErrorMessage from './shared/LookupErrorMessage';
 
@@ -93,8 +94,8 @@ function InstanceGroupsLookup(props) {
             name="instanceGroups"
             qsConfig={QS_CONFIG}
             readOnly={!canDelete}
-            selectItem={item => dispatch({ type: 'SELECT_ITEM', item })}
-            deselectItem={item => dispatch({ type: 'DESELECT_ITEM', item })}
+            selectItem={(item) => dispatch({ type: 'SELECT_ITEM', item })}
+            deselectItem={(item) => dispatch({ type: 'DESELECT_ITEM', item })}
           />
         )}
       />
