@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import 'styled-components/macro';
 import {
   Badge as PFBadge,
-  Progress,
+  Progress as PFProgress,
   ProgressMeasureLocation,
   ProgressSize,
   Button,
@@ -20,12 +20,8 @@ import {
 import { PencilAltIcon } from '@patternfly/react-icons';
 import styled from 'styled-components';
 
-import _DataListCell from '../../../components/DataListCell';
+import DataListCell from '../../../components/DataListCell';
 import { InstanceGroup } from '../../../types';
-
-const DataListCell = styled(_DataListCell)`
-  white-space: nowrap;
-`;
 
 const Badge = styled(PFBadge)`
   margin-left: 8px;
@@ -37,6 +33,10 @@ const ListGroup = styled.span`
   &:first-of-type {
     margin-left: 0;
   }
+`;
+
+const Progress = styled(PFProgress)`
+  margin-left: 4px;
 `;
 
 const DataListAction = styled(_DataListAction)`
