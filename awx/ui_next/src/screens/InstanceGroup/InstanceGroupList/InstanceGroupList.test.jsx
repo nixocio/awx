@@ -186,5 +186,3 @@ describe('<InstanceGroupList', () => {
     expect(wrapper.find('ToolbarAddButton').length).toBe(0);
   });
 });
-
-describe('modifyInstanceGroups', () => {});

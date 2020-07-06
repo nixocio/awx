@@ -65,24 +65,6 @@ function InstanceGroupListItem({
   const isContainerGroup = item => {
     return item.is_containerized;
   };
-
-  function usedCapacity(item) {
-    if (!isContainerGroup(item)) {
-      if (isAvailable(item)) {
-        return (
-          <Progress
-            value={100 - item.percent_capacity_remaining}
-            measureLocation={ProgressMeasureLocation.top}
-            size={ProgressSize.sm}
-            title={i18n._(t`Used capacity`)}
-          />
-        );
-      }
-      return <span css="color: red">{i18n._(t`Unavailable`)}</span>;
-    }
-    return null;
-  }
-
   return (
     <DataListItem
       key={instanceGroup.id}
@@ -147,7 +129,18 @@ function InstanceGroupListItem({
               key="capacity"
               aria-label={i18n._(t`instance group used capacity`)}
             >
-              {usedCapacity(instanceGroup)}
+              {!isContainerGroup(instanceGroup) ? (
+                isAvailable(instanceGroup) ? (
+                  <Progress
+                    value={100 - instanceGroup.percent_capacity_remaining}
+                    measureLocation={ProgressMeasureLocation.top}
+                    size={ProgressSize.sm}
+                    title={i18n._(t`Capacity`)}
+                  />
+                ) : (
+                  <span css="color: red">{i18n._(t`Unavailable`)}</span>
+                )
+              ) : null}
             </DataListCell>,
           ]}
         />

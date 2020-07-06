@@ -22,23 +22,14 @@ const QS_CONFIG = getQSConfig('instance_group', {
   page_size: 20,
 });
 
-function modifyInstanceGroups(items = []) {
-  return items.map(item => {
-    const clonedItem = {
-      ...item,
-      summary_fields: {
-        ...item.summary_fields,
-        user_capabilities: {
-          ...item.summary_fields.user_capabilities,
-        },
-      },
-    };
-    if (clonedItem.name === 'tower') {
-      clonedItem.summary_fields.user_capabilities.delete = false;
+const modifyInstanceGroups = (items = []) => {
+  return items.map(function updateDelete(item) {
+    if (item.name === 'tower') {
+      item.summary_fields.user_capabilities.delete = false;
     }
-    return clonedItem;
+    return item;
   });
-}
+};
 
 function InstanceGroupList({ i18n }) {
   const location = useLocation();
@@ -84,7 +75,7 @@ function InstanceGroupList({ i18n }) {
   const {
     isLoading: deleteLoading,
     deletionError,
-    deleteItems: deleteInstanceGroups,
+    deleteItems: handleDeleteInstanceGroups,
     clearDeletionError,
   } = useDeleteItems(
     useCallback(async () => {
@@ -100,7 +91,7 @@ function InstanceGroupList({ i18n }) {
   );
 
   const handleDelete = async () => {
-    await deleteInstanceGroups();
+    await handleDeleteInstanceGroups();
     setSelected([]);
   };
 
@@ -110,25 +101,26 @@ function InstanceGroupList({ i18n }) {
     return !item.summary_fields.user_capabilities.delete;
   }
 
+  let itemsUnableToDelete = false;
+  itemsUnableToDelete = modifiedSelected
+    .filter(cannotDelete)
+    .filter(item => item.name !== 'tower')
+    .map(item => item.name)
+    .join(', ');
+
   const pluralizedItemName = i18n._(t`Instance Groups`);
 
   let errorMessageDelete = '';
 
-  if (modifiedSelected.some(item => item.name === 'tower')) {
-    const itemsUnableToDelete = modifiedSelected
-      .filter(cannotDelete)
-      .filter(item => item.name !== 'tower')
-      .map(item => item.name)
-      .join(', ');
-
-    if (itemsUnableToDelete) {
-      if (modifiedSelected.some(cannotDelete)) {
-        errorMessageDelete = i18n._(
-          t`You do not have permission to delete ${pluralizedItemName}: ${itemsUnableToDelete}. `
-        );
-      }
+  if (itemsUnableToDelete) {
+    if (modifiedSelected.some(cannotDelete)) {
+      errorMessageDelete = i18n._(
+        t`You do not have permission to delete ${pluralizedItemName}: ${itemsUnableToDelete}. `
+      );
     }
+  }
 
+  if (modifiedSelected.some(item => item.name === 'tower')) {
     if (errorMessageDelete.length > 0) {
       errorMessageDelete = errorMessageDelete.concat('\n');
     }
@@ -173,7 +165,11 @@ function InstanceGroupList({ i18n }) {
                     onDelete={handleDelete}
                     itemsToDelete={modifiedSelected}
                     pluralizedItemName={i18n._(t`Instance Groups`)}
-                    errorMessage={errorMessageDelete}
+                    errorMessage={
+                      modifiedSelected.some(item => item.name === 'tower')
+                        ? errorMessageDelete
+                        : ''
+                    }
                   />,
                 ]}
               />
