@@ -10,11 +10,12 @@ import useRequest, { useDeleteItems } from '../../../util/useRequest';
 import useSelected from '../../../util/useSelected';
 import PaginatedDataList, {
   ToolbarDeleteButton,
-  ToolbarAddButton,
 } from '../../../components/PaginatedDataList';
 import ErrorDetail from '../../../components/ErrorDetail';
 import AlertModal from '../../../components/AlertModal';
 import DatalistToolbar from '../../../components/DataListToolbar';
+import AddDropDownButton from '../../../components/AddDropDownButton';
+
 import InstanceGroupListItem from './InstanceGroupListItem';
 
 const QS_CONFIG = getQSConfig('instance_group', {
@@ -22,14 +23,23 @@ const QS_CONFIG = getQSConfig('instance_group', {
   page_size: 20,
 });
 
-const modifyInstanceGroups = (items = []) => {
-  return items.map(function updateDelete(item) {
-    if (item.name === 'tower') {
-      item.summary_fields.user_capabilities.delete = false;
+function modifyInstanceGroups(items = []) {
+  return items.map(item => {
+    const clonedItem = {
+      ...item,
+      summary_fields: {
+        ...item.summary_fields,
+        user_capabilities: {
+          ...item.summary_fields.user_capabilities,
+        },
+      },
+    };
+    if (clonedItem.name === 'tower') {
+      clonedItem.summary_fields.user_capabilities.delete = false;
     }
-    return item;
+    return clonedItem;
   });
-};
+}
 
 function InstanceGroupList({ i18n }) {
   const location = useLocation();
@@ -75,7 +85,7 @@ function InstanceGroupList({ i18n }) {
   const {
     isLoading: deleteLoading,
     deletionError,
-    deleteItems: handleDeleteInstanceGroups,
+    deleteItems: deleteInstanceGroups,
     clearDeletionError,
   } = useDeleteItems(
     useCallback(async () => {
@@ -91,7 +101,7 @@ function InstanceGroupList({ i18n }) {
   );
 
   const handleDelete = async () => {
-    await handleDeleteInstanceGroups();
+    await deleteInstanceGroups();
     setSelected([]);
   };
 
@@ -101,26 +111,25 @@ function InstanceGroupList({ i18n }) {
     return !item.summary_fields.user_capabilities.delete;
   }
 
-  let itemsUnableToDelete = false;
-  itemsUnableToDelete = modifiedSelected
-    .filter(cannotDelete)
-    .filter(item => item.name !== 'tower')
-    .map(item => item.name)
-    .join(', ');
-
   const pluralizedItemName = i18n._(t`Instance Groups`);
 
   let errorMessageDelete = '';
 
-  if (itemsUnableToDelete) {
-    if (modifiedSelected.some(cannotDelete)) {
-      errorMessageDelete = i18n._(
-        t`You do not have permission to delete ${pluralizedItemName}: ${itemsUnableToDelete}. `
-      );
-    }
-  }
-
   if (modifiedSelected.some(item => item.name === 'tower')) {
+    const itemsUnableToDelete = modifiedSelected
+      .filter(cannotDelete)
+      .filter(item => item.name !== 'tower')
+      .map(item => item.name)
+      .join(', ');
+
+    if (itemsUnableToDelete) {
+      if (modifiedSelected.some(cannotDelete)) {
+        errorMessageDelete = i18n._(
+          t`You do not have permission to delete ${pluralizedItemName}: ${itemsUnableToDelete}. `
+        );
+      }
+    }
+
     if (errorMessageDelete.length > 0) {
       errorMessageDelete = errorMessageDelete.concat('\n');
     }
@@ -128,6 +137,27 @@ function InstanceGroupList({ i18n }) {
       i18n._(t`The tower instance group cannot be deleted.`)
     );
   }
+
+  const addButtonOptions = [
+    {
+      label: i18n._(t`Instance group`),
+      url: '/instance_groups/add',
+    },
+    {
+      label: i18n._(t`Container group`),
+      url: '/instance_groups/container_group/add',
+    },
+  ];
+
+  const addButton = (
+    <AddDropDownButton key="add" dropdownItems={addButtonOptions} />
+  );
+
+  const verifyDetailUrl = item => {
+    return item.is_containerized
+      ? `${match.url}/container_group/${item.id}/details`
+      : `${match.url}/${item.id}/details`;
+  };
 
   return (
     <>
@@ -152,24 +182,13 @@ function InstanceGroupList({ i18n }) {
                 }
                 qsConfig={QS_CONFIG}
                 additionalControls={[
-                  ...(canAdd
-                    ? [
-                        <ToolbarAddButton
-                          key="add"
-                          linkTo={`${match.url}/add`}
-                        />,
-                      ]
-                    : []),
+                  ...(canAdd ? [addButton] : []),
                   <ToolbarDeleteButton
                     key="delete"
                     onDelete={handleDelete}
                     itemsToDelete={modifiedSelected}
                     pluralizedItemName={i18n._(t`Instance Groups`)}
-                    errorMessage={
-                      modifiedSelected.some(item => item.name === 'tower')
-                        ? errorMessageDelete
-                        : ''
-                    }
+                    errorMessage={errorMessageDelete}
                   />,
                 ]}
               />
@@ -179,16 +198,12 @@ function InstanceGroupList({ i18n }) {
                 key={instanceGroup.id}
                 value={instanceGroup.name}
                 instanceGroup={instanceGroup}
-                detailUrl={`${match.url}/${instanceGroup.id}/details`}
+                detailUrl={verifyDetailUrl(instanceGroup)}
                 onSelect={() => handleSelect(instanceGroup)}
                 isSelected={selected.some(row => row.id === instanceGroup.id)}
               />
             )}
-            emptyStateControls={
-              canAdd && (
-                <ToolbarAddButton key="add" linkTo={`${match.url}/add`} />
-              )
-            }
+            emptyStateControls={canAdd && addButton}
           />
         </Card>
       </PageSection>

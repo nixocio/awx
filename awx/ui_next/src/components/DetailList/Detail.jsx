@@ -69,6 +69,7 @@ const Detail = ({
     </>
   );
 };
+
 Detail.propTypes = {
   label: node.isRequired,
   value: node,

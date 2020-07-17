@@ -65,6 +65,7 @@ function InstanceGroupListItem({
   const isContainerGroup = item => {
     return item.is_containerized;
   };
+
   return (
     <DataListItem
       key={instanceGroup.id}
@@ -155,7 +156,11 @@ function InstanceGroupListItem({
                 aria-label={i18n._(t`Edit instance group`)}
                 variant="plain"
                 component={Link}
-                to={`/instance_groups/${instanceGroup.id}/edit`}
+                to={
+                  isContainerGroup(instanceGroup)
+                    ? `/instance_groups/container_group/${instanceGroup.id}/edit`
+                    : `/instance_groups/${instanceGroup.id}/edit`
+                }
               >
                 <PencilAltIcon />
               </Button>

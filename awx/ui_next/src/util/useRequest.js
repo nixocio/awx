@@ -64,7 +64,7 @@ export default function useRequest(makeRequest, initialValue) {
  *
  * Params: an error object
  * Returns: { error, dismissError }
- *   The returned error object is the same object passed in via the paremeter,
+ *   The returned error object is the same object passed in via the parameter,
  *   until the dismissError function is called, at which point the returned
  *   error will be set to null on the subsequent render.
  */
