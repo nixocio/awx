@@ -1,6 +1,6 @@
 import React from 'react';
 import { func, shape } from 'prop-types';
-import { Formik } from 'formik';
+import { Formik, useField } from 'formik';
 import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
 import { Form } from '@patternfly/react-core';
@@ -11,21 +11,17 @@ import { required, minMaxValue } from '../../../util/validators';
 import { FormColumnLayout } from '../../../components/FormLayout';
 
 function InstanceGroupFormFields({ i18n }) {
+  const [instanceGroupNameField, ,] = useField('name');
   return (
     <>
       <FormField
+        name="name"
         id="instance-group-name"
         label={i18n._(t`Name`)}
-        name="name"
         type="text"
         validate={required(null, i18n)}
         isRequired
-      />
-      <FormField
-        id="instance-group-description"
-        label={i18n._(t`Description`)}
-        name="description"
-        type="text"
+        isDisabled={instanceGroupNameField.value === 'tower'}
       />
       <FormField
         id="instance-group-policy-instance-minimum"
@@ -62,7 +58,6 @@ function InstanceGroupForm({
 }) {
   const initialValues = {
     name: instanceGroup.name || '',
-    description: instanceGroup.description || '',
     policy_instance_minimum: instanceGroup.policy_instance_minimum || 0,
     policy_instance_percentage: instanceGroup.policy_instance_percentage || 0,
   };

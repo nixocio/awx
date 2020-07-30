@@ -71,7 +71,6 @@ describe('<InstanceGroupForm/>', () => {
 
   test('should display form fields properly', () => {
     expect(wrapper.find('FormGroup[label="Name"]').length).toBe(1);
-    expect(wrapper.find('FormGroup[label="Description"]').length).toBe(1);
     expect(
       wrapper.find('FormGroup[label="Policy instance minimum"]').length
     ).toBe(1);
@@ -93,9 +92,6 @@ describe('<InstanceGroupForm/>', () => {
       wrapper.find('input#instance-group-name').simulate('change', {
         target: { value: 'Foo', name: 'name' },
       });
-      wrapper.find('input#instance-group-description').simulate('change', {
-        target: { value: 'New description', name: 'description' },
-      });
       wrapper
         .find('input#instance-group-policy-instance-minimum')
         .simulate('change', {
@@ -106,9 +102,6 @@ describe('<InstanceGroupForm/>', () => {
     expect(wrapper.find('input#instance-group-name').prop('value')).toEqual(
       'Foo'
     );
-    expect(
-      wrapper.find('input#instance-group-description').prop('value')
-    ).toEqual('New description');
     expect(
       wrapper.find('input#instance-group-policy-instance-minimum').prop('value')
     ).toEqual(10);
