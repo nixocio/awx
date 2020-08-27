@@ -1,5 +1,5 @@
 import 'styled-components/macro';
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
@@ -16,8 +16,11 @@ import DeleteButton from '../../../components/DeleteButton';
 import ErrorDetail from '../../../components/ErrorDetail';
 import LaunchButton from '../../../components/LaunchButton';
 import StatusIcon from '../../../components/StatusIcon';
+import ContentError from '../../../components/ContentError';
+import ContentLoading from '../../../components/ContentLoading';
 import { toTitleCase } from '../../../util/strings';
 import { formatDateString } from '../../../util/dates';
+import useRequest from '../../../util/useRequest';
 import { Job } from '../../../types';
 import {
   JobsAPI,
@@ -26,6 +29,7 @@ import {
   WorkflowJobsAPI,
   InventoriesAPI,
   AdHocCommandsAPI,
+  InstanceGroupsAPI,
 } from '../../../api';
 
 const VariablesInput = styled(_VariablesInput)`
@@ -121,21 +125,35 @@ function JobDetail({ job, i18n }) {
     }
   };
 
-  const isIsolatedInstanceGroup = item => {
-    if (item.is_isolated) {
-      return (
-        <>
-          <Link to={`/instance_groups/${item.id}`}>{item.name}</Link>
-          <span css="margin-left: 12px">
-            <Label aria-label={i18n._(t`isolated instance`)}>
-              {i18n._(t`Isolated`)}
-            </Label>
-          </span>
-        </>
-      );
+  const {
+    result: completeInstanceGroup,
+    isLoading,
+    error,
+    request: fetchInstanceGroup,
+  } = useRequest(
+    useCallback(async () => {
+      const { data } = await InstanceGroupsAPI.readDetail(instanceGroup.id);
+      return { completeInstanceGroup: data };
+    }, [instanceGroup]),
+    {
+      completeInstanceGroup: [],
     }
-    return <Link to={`/instance_groups/${item.id}`}>{item.name}</Link>;
-  };
+  );
+
+  useEffect(() => {
+    fetchInstanceGroup();
+  }, []);
+
+  console.log(completeInstanceGroup, 'completeInstanceGroup');
+  console.log(typeof completeInstanceGroup, 'completeInstanceGroup');
+
+  if (isLoading) {
+    return <ContentLoading />;
+  }
+
+  if (error) {
+    return <ContentError error={error} />;
+  }
 
   return (
     <CardBody>
@@ -224,10 +242,27 @@ function JobDetail({ job, i18n }) {
         <Detail label={i18n._(t`Verbosity`)} value={VERBOSITY[job.verbosity]} />
         <Detail label={i18n._(t`Environment`)} value={job.custom_virtualenv} />
         <Detail label={i18n._(t`Execution Node`)} value={job.execution_node} />
-        {instanceGroup && (
+        {completeInstanceGroup && (
           <Detail
             label={i18n._(t`Instance Group`)}
-            value={isIsolatedInstanceGroup(instanceGroup)}
+            value={
+              completeInstanceGroup.is_isolated ? (
+                <>
+                  <Link to={`/instance_groups/${completeInstanceGroup.id}`}>
+                    {completeInstanceGroup.name}
+                  </Link>
+                  <span css="margin-left: 12px">
+                    <Label aria-label={i18n._(t`isolated instance`)}>
+                      {i18n._(t`Isolated`)}
+                    </Label>
+                  </span>
+                </>
+              ) : (
+                <Link to={`/instance_groups/${completeInstanceGroup.id}`}>
+                  {completeInstanceGroup.name}
+                </Link>
+              )
+            }
           />
         )}
         {typeof job.job_slice_number === 'number' &&
