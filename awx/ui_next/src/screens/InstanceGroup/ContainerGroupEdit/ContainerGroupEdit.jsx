@@ -39,17 +39,14 @@ function ContainerGroupEdit({ instanceGroup }) {
     if (isJsonString(value)) {
       value = jsonToYaml(value);
     }
-    console.log(value, 'getPodSpecOverrideValue');
     if (value !== jsonToYaml(JSON.stringify(initialPodSpec))) {
       return JSON.stringify(value);
     }
     return null;
   };
 
-  console.log(instanceGroup, 'Edit');
-
   const handleSubmit = async values => {
-    console.log(values, 'values');
+    console.log(values, 'Edit');
     try {
       await InstanceGroupsAPI.update(instanceGroup.id, {
         name: values.name,

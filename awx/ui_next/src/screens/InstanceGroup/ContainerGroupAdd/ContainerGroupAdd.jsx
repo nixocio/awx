@@ -26,6 +26,7 @@ function ContainerGroupAdd() {
   };
 
   const handleSubmit = async values => {
+    console.log(values);
     try {
       const { data: response } = await InstanceGroupsAPI.create({
         name: values.name,
@@ -42,6 +43,9 @@ function ContainerGroupAdd() {
     history.push(`/instance_groups`);
   };
 
+  const consoleValues = values => {
+    console.log(values, 'valuesSubmit');
+  };
   const {
     error: fetchError,
     isLoading,
@@ -93,7 +97,6 @@ function ContainerGroupAdd() {
             onSubmit={handleSubmit}
             submitError={submitError}
             onCancel={handleCancel}
-            initialPodSpec={initialPodSpec}
           />
         </CardBody>
       </Card>

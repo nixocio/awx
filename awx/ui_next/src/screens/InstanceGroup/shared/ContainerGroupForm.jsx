@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { func, shape } from 'prop-types';
-import { Formik, useField } from 'formik';
+import { Formik, useField, useFormikContext } from 'formik';
 import { withI18n } from '@lingui/react';
 import { t } from '@lingui/macro';
 import { Form, FormGroup, Checkbox } from '@patternfly/react-core';
-
-import { jsonToYaml } from '../../../util/yaml';
+import { Card, PageSection } from '@patternfly/react-core';
+import { jsonToYaml, isJsonString } from '../../../util/yaml';
+import { CardBody } from '../../../components/Card';
 
 import FormField, {
   FieldTooltip,
   FormSubmitError,
+  CheckboxField,
 } from '../../../components/FormField';
 import FormActionGroup from '../../../components/FormActionGroup';
 import { required, minMaxValue } from '../../../util/validators';
@@ -21,13 +23,33 @@ import {
 } from '../../../components/FormLayout';
 import CredentialLookup from '../../../components/Lookup/CredentialLookup';
 import { VariablesField } from '../../../components/CodeMirrorInput';
+import { InstanceGroupsAPI, CredentialTypesAPI } from '../../../api';
+import useRequest from '../../../util/useRequest';
+import ContentError from '../../../components/ContentError';
+import ContentLoading from '../../../components/ContentLoading';
 
-function ContainerGroupFormFields({ i18n, isChecked }) {
+function ContainerGroupFormFields({ i18n, isChecked, pod_spec_override }) {
   const [credentialField, credentialMeta, credentialHelpers] = useField(
     'credential'
   );
 
+  const [specField, specMeta, specHelpers] = useField('pod_spec_override');
+
   const [allowCallbacks, setAllowCallbacks] = useState(isChecked);
+
+  const { setFieldValue } = useFormikContext();
+
+  useEffect(() => {
+    if (!allowCallbacks) {
+      setFieldValue('pod_spec_override', null);
+    } else {
+      setFieldValue('pod_spec_override', pod_spec_override);
+    }
+  }, [allowCallbacks]);
+
+  console.log(allowCallbacks, 'allowCallbacks');
+
+  console.log(specField.value, 'specField');
 
   return (
     <>
@@ -49,7 +71,7 @@ function ContainerGroupFormFields({ i18n, isChecked }) {
           credentialHelpers.setValue(value);
         }}
         value={credentialField.value}
-        required
+        isRequired
       />
 
       <FormGroup
@@ -58,7 +80,7 @@ function ContainerGroupFormFields({ i18n, isChecked }) {
       >
         <FormCheckboxLayout>
           <Checkbox
-            name="customizePodSpec"
+            name="override"
             aria-label={i18n._(t`Customize pod specification`)}
             label={
               <span>
@@ -67,7 +89,7 @@ function ContainerGroupFormFields({ i18n, isChecked }) {
                 <FieldTooltip content={i18n._(t`Customize pod spec...`)} />
               </span>
             }
-            id="option-custom-pod-spec"
+            id="override"
             isChecked={allowCallbacks}
             onChange={checked => {
               setAllowCallbacks(checked);
@@ -99,24 +121,78 @@ function ContainerGroupForm({
   onSubmit,
   onCancel,
   submitError,
-  initialPodSpec,
   ...rest
 }) {
+  const {
+    error: fetchError,
+    isLoading,
+    request: fetchInitialPodSpec,
+    result: initialSpec,
+  } = useRequest(
+    useCallback(async () => {
+      const { data } = await InstanceGroupsAPI.readOptions();
+      return data.actions.POST.pod_spec_override.default;
+    }, []),
+    {
+      initialSpec: {},
+    }
+  );
+
+  useEffect(() => {
+    fetchInitialPodSpec();
+  }, []);
+
+  let isChecked = Boolean(instanceGroup.pod_spec_override) || false;
+
   const initialValues = {
     name: instanceGroup.name || '',
-    pod_spec_override:
-      initialPodSpec !== undefined
-        ? jsonToYaml(JSON.stringify(initialPodSpec))
-        : {},
     credential: instanceGroup?.summary_fields?.credential,
+    pod_spec_override: isChecked
+      ? jsonToYaml(JSON.stringify(instanceGroup.pod_spec_override))
+      : jsonToYaml(JSON.stringify(initialSpec)),
+    override: isChecked,
   };
-  let isChecked = Boolean(instanceGroup.pod_spec_override) || false;
+
+  const pod_spec_override = initialValues['pod_spec_override'];
+
+  if (fetchError) {
+    return (
+      <PageSection>
+        <Card>
+          <CardBody>
+            <ContentError />
+          </CardBody>
+        </Card>
+      </PageSection>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <PageSection>
+        <Card>
+          <CardBody>
+            <ContentLoading />
+          </CardBody>
+        </Card>
+      </PageSection>
+    );
+  }
   return (
-    <Formik initialValues={initialValues} onSubmit={values => onSubmit(values)}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={values => {
+        onSubmit(values);
+      }}
+    >
       {formik => (
         <Form autoComplete="off" onSubmit={formik.handleSubmit}>
           <FormColumnLayout>
-            <ContainerGroupFormFields isChecked={isChecked} {...rest} />
+            <ContainerGroupFormFields
+              pod_spec_override={pod_spec_override}
+              isChecked={isChecked}
+              {...rest}
+            />
             {submitError && <FormSubmitError error={submitError} />}
             <FormActionGroup
               onCancel={onCancel}
