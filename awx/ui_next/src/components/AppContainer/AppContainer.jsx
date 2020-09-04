@@ -35,12 +35,14 @@ const PageHeader = styled(PFPageHeader)`
 `;
 
 function AppContainer({ i18n, navRouteConfig = [], children }) {
+  console.log(navRouteConfig, 'navRouteConfig');
   const history = useHistory();
   const { pathname } = useLocation();
   const [config, setConfig] = useState({});
   const [configError, setConfigError] = useState(null);
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const [isNormalUser, setIsNormalUser] = useState(true);
 
   const handleAboutModalOpen = () => setIsAboutModalOpen(true);
   const handleAboutModalClose = () => setIsAboutModalOpen(false);
@@ -92,6 +94,23 @@ function AppContainer({ i18n, navRouteConfig = [], children }) {
     />
   );
 
+  // const isNormalUser = () => {
+  //   if (config?.me?.is_superuser || config?.me?.is_system_auditor) {
+  //     return false;
+  //   }
+  //   return true;
+  // };
+
+  console.log(config.me, 'config');
+
+  useEffect(() => {
+    if (config !== 'undefined') {
+      if (config?.me?.is_superuser || config?.me?.is_system_auditor) {
+        setIsNormalUser(false);
+      }
+    }
+  }, []);
+
   const sidebar = (
     <PageSidebar
       theme="dark"
@@ -104,6 +123,7 @@ function AppContainer({ i18n, navRouteConfig = [], children }) {
                 groupId={groupId}
                 groupTitle={groupTitle}
                 routes={routes}
+                isNormalUser={isNormalUser}
               />
             ))}
           </NavList>
@@ -111,6 +131,8 @@ function AppContainer({ i18n, navRouteConfig = [], children }) {
       }
     />
   );
+
+  console.log(children, 'children');
 
   return (
     <>

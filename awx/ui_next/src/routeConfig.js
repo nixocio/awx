@@ -31,16 +31,19 @@ function getRouteConfig(i18n) {
         {
           title: i18n._(t`Dashboard`),
           path: '/home',
+          isVisibleNormalUser: true,
           screen: Dashboard,
         },
         {
           title: i18n._(t`Jobs`),
           path: '/jobs',
+          isVisibleNormalUser: true,
           screen: Jobs,
         },
         {
           title: i18n._(t`Schedules`),
           path: '/schedules',
+          isVisibleNormalUser: true,
           screen: Schedules,
         },
       ],
@@ -52,26 +55,31 @@ function getRouteConfig(i18n) {
         {
           title: i18n._(t`Templates`),
           path: '/templates',
+          isVisibleNormalUser: true,
           screen: Templates,
         },
         {
           title: i18n._(t`Credentials`),
           path: '/credentials',
+          isVisibleNormalUser: true,
           screen: Credentials,
         },
         {
           title: i18n._(t`Projects`),
           path: '/projects',
+          isVisibleNormalUser: true,
           screen: Projects,
         },
         {
           title: i18n._(t`Inventories`),
           path: '/inventories',
+          isVisibleNormalUser: true,
           screen: Inventory,
         },
         {
           title: i18n._(t`Hosts`),
           path: '/hosts',
+          isVisibleNormalUser: false,
           screen: Hosts,
         },
       ],
@@ -83,16 +91,19 @@ function getRouteConfig(i18n) {
         {
           title: i18n._(t`Organizations`),
           path: '/organizations',
+          isVisibleNormalUser: true,
           screen: Organizations,
         },
         {
           title: i18n._(t`Users`),
           path: '/users',
+          isVisibleNormalUser: true,
           screen: Users,
         },
         {
           title: i18n._(t`Teams`),
           path: '/teams',
+          isVisibleNormalUser: true,
           screen: Teams,
         },
       ],
@@ -104,26 +115,31 @@ function getRouteConfig(i18n) {
         {
           title: i18n._(t`Credential Types`),
           path: '/credential_types',
+          isVisibleNormalUser: false,
           screen: CredentialTypes,
         },
         {
           title: i18n._(t`Notifications`),
           path: '/notification_templates',
+          isVisibleNormalUser: false,
           screen: NotificationTemplates,
         },
         {
           title: i18n._(t`Management Jobs`),
           path: '/management_jobs',
+          isVisibleNormalUser: false,
           screen: ManagementJobs,
         },
         {
           title: i18n._(t`Instance Groups`),
           path: '/instance_groups',
+          isVisibleNormalUser: false,
           screen: InstanceGroups,
         },
         {
           title: i18n._(t`Applications`),
           path: '/applications',
+          isVisibleNormalUser: false,
           screen: Applications,
         },
       ],
@@ -135,6 +151,7 @@ function getRouteConfig(i18n) {
         {
           title: i18n._(t`Settings`),
           path: '/settings',
+          isVisibleNormalUser: false,
           screen: Settings,
         },
       ],

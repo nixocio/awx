@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {useState } from 'react';
 import PropTypes from 'prop-types';
 import { matchPath, Link, withRouter } from 'react-router-dom';
 import { NavExpandable, NavItem } from '@patternfly/react-core';
@@ -11,10 +11,7 @@ class NavExpandableGroup extends Component {
 
     // Extract a list of paths from the route params and store them for later. This creates
     // an array of url paths associated with any NavItem component rendered by this component.
-    this.navItemPaths = routes.map(({ path }) => path);
-    this.handleExpand = this.handleExpand.bind(this);
-    this.isActiveGroup = this.isActiveGroup.bind(this);
-    this.isActivePath = this.isActivePath.bind(this);
+    const navItemPaths = routes.map(({ path }) => path);
   }
 
   isActiveGroup() {
@@ -31,17 +28,39 @@ class NavExpandableGroup extends Component {
   }
 
   render() {
-    const { groupId, groupTitle, routes } = this.props;
+    const { groupId, groupTitle, routes, isNormalUser } = this.props;
     const { isExpanded } = this.state;
 
     if (routes.length === 1) {
-      const [{ path }] = routes;
-      return (
-        <NavItem itemId={groupId} isActive={this.isActivePath(path)} key={path}>
-          <Link to={path}>{groupTitle}</Link>
-        </NavItem>
-      );
+      const [{ path, isVisibleNormalUser }] = routes;
+      if (isVisibleNormalUser && isNormalUser) {
+        return (
+          <NavItem
+            itemId={groupId}
+            isActive={this.isActivePath(path)}
+            key={path}
+          >
+            <Link to={path}>{groupTitle}</Link>
+          </NavItem>
+        );
+      } else return null;
     }
+ 
+
+  const verifyUser = (path, title, isNormalUser, isVisibleNormalUser)  => {
+     if(isNormalUser && isNormalUser) {
+       return (
+        <NavItem
+        groupId={groupId}
+        isActive={this.isActivePath(path)}
+        key={path}
+      >
+        <Link to={path}>{title}</Link>
+      </NavItem>
+       )
+     }
+
+  }
 
     return (
       <NavExpandable
@@ -51,14 +70,8 @@ class NavExpandableGroup extends Component {
         title={groupTitle}
         onExpand={this.handleExpand}
       >
-        {routes.map(({ path, title }) => (
-          <NavItem
-            groupId={groupId}
-            isActive={this.isActivePath(path)}
-            key={path}
-          >
-            <Link to={path}>{title}</Link>
-          </NavItem>
+        {routes.map(({ path, title, isVisibleNormalUser }) => (
+  
         ))}
       </NavExpandable>
     );
