@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import ExecutionEnvironmentForm from '../shared/ExecutionEnvironmentForm';
 import { CardBody } from '../../../components/Card';
 import { ExecutionEnvironmentsAPI } from '../../../api';
+import { Config } from '../../../contexts/Config';
 
 function ExecutionEnvironmentAdd() {
   const history = useHistory();
@@ -15,6 +16,7 @@ function ExecutionEnvironmentAdd() {
       const { data: response } = await ExecutionEnvironmentsAPI.create({
         ...values,
         credential: values?.credential?.id,
+        organization: values?.organization.id,
       });
       history.push(`/execution_environments/${response.id}/details`);
     } catch (error) {
@@ -25,6 +27,7 @@ function ExecutionEnvironmentAdd() {
   const handleCancel = () => {
     history.push(`/execution_environments`);
   };
+
   return (
     <PageSection>
       <Card>

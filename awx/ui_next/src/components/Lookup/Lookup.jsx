@@ -30,24 +30,23 @@ const ChipHolder = styled.div`
   background-color: ${props =>
     props.isDisabled ? 'var(--pf-global--disabled-color--300)' : null};
 `;
-function Lookup(props) {
-  const {
-    id,
-    header,
-    onChange,
-    onBlur,
-    isLoading,
-    value,
-    multiple,
-    required,
-    qsConfig,
-    renderItemChip,
-    renderOptionsList,
-    history,
-    i18n,
-    isDisabled,
-  } = props;
-
+function Lookup({
+  id,
+  header,
+  onChange,
+  onBlur,
+  isLoading,
+  value,
+  multiple,
+  required,
+  qsConfig,
+  renderItemChip,
+  renderOptionsList,
+  history,
+  i18n,
+  isDisabled,
+  checkBox,
+}) {
   const [state, dispatch] = useReducer(
     reducer,
     { value, multiple, required },

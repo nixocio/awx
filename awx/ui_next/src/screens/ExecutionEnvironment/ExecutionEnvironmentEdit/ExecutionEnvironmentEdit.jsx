@@ -15,6 +15,7 @@ function ExecutionEnvironmentEdit({ executionEnvironment }) {
       await ExecutionEnvironmentsAPI.update(executionEnvironment.id, {
         ...values,
         credential: values.credential ? values.credential.id : null,
+        organization: values.organization?.id || null,
       });
       history.push(detailsUrl);
     } catch (error) {
