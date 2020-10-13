@@ -24,9 +24,17 @@ const FileUpload = styled(PFFileUpload)`
 
 function CredentialInput({ fieldOptions, credentialKind, ...rest }) {
   const [fileName, setFileName] = useState('');
+  const [isRejected, setIsRejected] = useState(false);
   const [fileIsUploading, setFileIsUploading] = useState(false);
   const [subFormField, meta, helpers] = useField(`inputs.${fieldOptions.id}`);
   const isValid = !(meta.touched && meta.error);
+
+  const handleIsRejected = (rejectedFiles, event) => {
+    setIsRejected(true);
+     console.log(isRejected)
+     console.log(rejectedFiles, 'rejectedFiles')
+  };
+
   if (fieldOptions.multiline) {
     const handleFileChange = (value, filename) => {
       helpers.setValue(value);
@@ -44,7 +52,11 @@ function CredentialInput({ fieldOptions, credentialKind, ...rest }) {
         onReadFinished={() => setFileIsUploading(false)}
         isLoading={fileIsUploading}
         allowEditingUploadedText
-        validated={isValid ? 'default' : 'error'}
+        validated={ isValid ? 'default' : 'error'}
+        dropzoneProps={{
+          maxSize: 512,
+          onDropRejected: handleIsRejected,
+        }}
       />
     );
   }
@@ -106,6 +118,7 @@ function CredentialField({ credentialType, fieldOptions, i18n }) {
     validate: validateField(),
   });
   const isValid = !(meta.touched && meta.error);
+  console.log(meta, 'isValid')
 
   if (fieldOptions.choices) {
     const selectOptions = fieldOptions.choices.map(choice => {
@@ -115,6 +128,7 @@ function CredentialField({ credentialType, fieldOptions, i18n }) {
         label: choice,
       };
     });
+    console.log(meta.error)
     return (
       <FormGroup
         fieldId={`credential-${fieldOptions.id}`}
