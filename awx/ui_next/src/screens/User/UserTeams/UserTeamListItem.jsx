@@ -15,6 +15,8 @@ import DataListCell from '../../../components/DataListCell';
 import { Team } from '../../../types';
 
 function UserTeamListItem({ team, isSelected, onSelect, i18n }) {
+  console.log(team, 'UserTeamListItem')
+  debugger;
   return (
     <DataListItem
       key={team.id}

@@ -37,6 +37,7 @@ function UserTeamList({ i18n }) {
       teams,
       count,
       userOptions,
+      roles,
       relatedSearchableKeys,
       searchableKeys,
     },
@@ -51,16 +52,23 @@ function UserTeamList({ i18n }) {
           data: { results, count: teamCount },
         },
         actionsResponse,
+        userRolesResponse,
         usersResponse,
       ] = await Promise.all([
         UsersAPI.readTeams(userId, params),
         UsersAPI.readTeamsOptions(userId),
+        UsersAPI.readRoles(userId),
         UsersAPI.readOptions(),
       ]);
       return {
         teams: results,
         count: teamCount,
         userOptions: usersResponse.data.actions,
+        roles: userRolesResponse.data.results.filter(
+          role =>
+            role.summary_fields.resource_type === 'team' &&
+            role.summary_fields.resource_name === 'Member'
+        ),
         actions: actionsResponse.data.actions,
         relatedSearchableKeys: (
           actionsResponse?.data?.related_search_fields || []
@@ -80,13 +88,22 @@ function UserTeamList({ i18n }) {
     }
   );
 
-  const { selected, isAllSelected, handleSelect, setSelected } = useSelected(
-    teams
+  console.log(teams, 'teams');
+
+  const memberRoleTeams = teams.map(
+    team => team.summary_fields.object_roles.member_role === roles.id
   );
 
   useEffect(() => {
     fetchTeams();
   }, [fetchTeams]);
+
+  const { selected, isAllSelected, handleSelect, setSelected } = useSelected(
+    memberRoleTeams
+  );
+
+  console.log(memberRoleTeams, 'teams');
+  console.log(roles, 'roles');
 
   const {
     isLoading: isDisassociateLoading,
@@ -155,7 +172,7 @@ function UserTeamList({ i18n }) {
   return (
     <>
       <PaginatedDataList
-        items={teams}
+        items={memberRoleTeams}
         contentError={contentError}
         hasContentLoading={isLoading || isDisassociateLoading}
         itemCount={count}
@@ -178,7 +195,7 @@ function UserTeamList({ i18n }) {
             showSelectAll
             isAllSelected={isAllSelected}
             onSelectAll={isSelected =>
-              setSelected(isSelected ? [...teams] : [])
+              setSelected(isSelected ? [...memberRoleTeams] : [])
             }
             qsConfig={QS_CONFIG}
             additionalControls={[
