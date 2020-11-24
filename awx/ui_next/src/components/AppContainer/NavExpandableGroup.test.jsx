@@ -1,32 +1,68 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { mount } from 'enzyme';
+import { createMemoryHistory } from 'history';
 
-import { Nav } from '@patternfly/react-core';
+import { mountWithContexts } from '../../../testUtils/enzymeHelpers';
 import NavExpandableGroup from './NavExpandableGroup';
 
 describe('NavExpandableGroup', () => {
   test('initialization and render', () => {
-    const component = mount(
-      <MemoryRouter initialEntries={['/foo']}>
-        <Nav aria-label="Test Navigation">
-          <NavExpandableGroup
-            groupId="test"
-            groupTitle="Test"
-            routes={[
-              { path: '/foo', title: 'Foo' },
-              { path: '/bar', title: 'Bar' },
-              { path: '/fiz', title: 'Fiz' },
-            ]}
-          />
-        </Nav>
-      </MemoryRouter>
-    )
-      .find('NavExpandableGroup')
-      .instance();
+    const history = createMemoryHistory({ initialEntries: ['/foo'] });
+    const component = mountWithContexts(
+      <NavExpandableGroup
+        groupId="test"
+        groupTitle="Test"
+        routes={[
+          { path: '/foo', title: 'Foo' },
+          { path: '/bar', title: 'Bar' },
+          { path: '/fiz', title: 'Fiz' },
+        ]}
+      />,
+      { context: { router: { history } } }
+    );
+    expect(component.find('NavExpandableGroup').length).toBe(1);
+    expect(component.find('NavItem').length).toBe(3);
 
-    expect(component.navItemPaths).toEqual(['/foo', '/bar', '/fiz']);
-    expect(component.isActiveGroup()).toEqual(true);
+    expect(
+      component
+        .find('NavItem')
+        .at(0)
+        .prop('isActive')
+    ).toBe(true);
+    expect(
+      component
+        .find('NavItem')
+        .at(0)
+        .find('Link')
+        .prop('to')
+    ).toBe('/foo');
+
+    expect(
+      component
+        .find('NavItem')
+        .at(1)
+        .prop('isActive')
+    ).toBe(false);
+    expect(
+      component
+        .find('NavItem')
+        .at(1)
+        .find('Link')
+        .prop('to')
+    ).toBe('/bar');
+
+    expect(
+      component
+        .find('NavItem')
+        .at(2)
+        .prop('isActive')
+    ).toBe(false);
+    expect(
+      component
+        .find('NavItem')
+        .at(2)
+        .find('Link')
+        .prop('to')
+    ).toBe('/fiz');
   });
 
   describe('isActivePath', () => {
@@ -42,25 +78,36 @@ describe('NavExpandableGroup', () => {
 
     params.forEach(([location, path, expected]) => {
       test(`when location is ${location}, isActivePath('${path}') returns ${expected} `, () => {
-        const component = mount(
-          <MemoryRouter initialEntries={[location]}>
-            <Nav aria-label="Test Navigation">
-              <NavExpandableGroup
-                groupId="test"
-                groupTitle="Test"
-                routes={[
-                  { path: '/foo', title: 'Foo' },
-                  { path: '/bar', title: 'Bar' },
-                  { path: '/fiz', title: 'Fiz' },
-                ]}
-              />
-            </Nav>
-          </MemoryRouter>
-        )
-          .find('NavExpandableGroup')
-          .instance();
+        const history = createMemoryHistory({
+          initialEntries: [`${location}`],
+        });
+        console.log(history, 'history');
+        const component = mountWithContexts(
+          <NavExpandableGroup
+            groupId="test"
+            groupTitle="Test"
+            routes={[
+              { path: '/foo', title: 'Foo' },
+              { path: '/bar', title: 'Bar' },
+              { path: '/fiz', title: 'Fiz' },
+            ]}
+          />,
+          { context: { router: { history } } }
+        );
 
-        expect(component.isActivePath(path)).toEqual(expected);
+        expect(
+          component
+            .find('NavItem')
+            .at(0)
+            .prop('isActive')
+        ).toBe(expected);
+        expect(
+          component
+            .find('NavItem')
+            .at(0)
+            .find('Link')
+            .prop('to')
+        ).toBe(`${path}`);
       });
     });
   });

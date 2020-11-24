@@ -11,7 +11,7 @@ import { t } from '@lingui/macro';
 import { withI18n } from '@lingui/react';
 import styled from 'styled-components';
 
-import { ConfigAPI, MeAPI, RootAPI } from '../../api';
+import { ConfigAPI, MeAPI, RootAPI, UsersAPI } from '../../api';
 import { ConfigProvider } from '../../contexts/Config';
 import About from '../About';
 import AlertModal from '../AlertModal';
@@ -72,6 +72,9 @@ function AppContainer({ i18n, navRouteConfig = [], children }) {
     loadConfig();
   }, [config, pathname, handleLogout]);
 
+
+  
+
   const header = (
     <PageHeader
       showNavToggle
@@ -88,21 +91,29 @@ function AppContainer({ i18n, navRouteConfig = [], children }) {
     />
   );
 
+  let isNormalUser = false
+  isNormalUser = !(config?.me?.is_superuser || config?.me?.is_system_auditor);
+
+  console.log(isNormalUser, 'isNormalUser')
+
   const sidebar = (
     <PageSidebar
       theme="dark"
       nav={
         <Nav aria-label={i18n._(t`Navigation`)} theme="dark">
-          <NavList>
-            {navRouteConfig.map(({ groupId, groupTitle, routes }) => (
-              <NavExpandableGroup
-                key={groupId}
-                groupId={groupId}
-                groupTitle={groupTitle}
-                routes={routes}
-              />
-            ))}
-          </NavList>
+          <>
+            <NavList>
+              {navRouteConfig.map(({ groupId, groupTitle, routes }) => (
+                <NavExpandableGroup
+                  key={groupId}
+                  groupId={groupId}
+                  groupTitle={groupTitle}
+                  routes={routes}
+                  isNormalUser={isNormalUser}
+                />
+              ))}
+            </NavList>
+          </>
         </Nav>
       }
     />

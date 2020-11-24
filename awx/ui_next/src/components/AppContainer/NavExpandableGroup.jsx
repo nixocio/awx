@@ -1,60 +1,60 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { matchPath, Link, withRouter } from 'react-router-dom';
+import { matchPath, Link, withRouter, useHistory } from 'react-router-dom';
 import { NavExpandable, NavItem } from '@patternfly/react-core';
 
-class NavExpandableGroup extends Component {
-  constructor(props) {
-    super(props);
-    const { routes } = this.props;
+import {useConfig} from '../../contexts/Config'
 
-    // Extract a list of paths from the route params and store them for later. This creates
-    // an array of url paths associated with any NavItem component rendered by this component.
-    this.navItemPaths = routes.map(({ path }) => path);
-    this.isActiveGroup = this.isActiveGroup.bind(this);
-    this.isActivePath = this.isActivePath.bind(this);
-  }
+function NavExpandableGroup({ groupId, groupTitle, routes, isNormalUser }) {
 
-  isActiveGroup() {
-    return this.navItemPaths.some(this.isActivePath);
-  }
+  const {me = {}} = useConfig();
+  console.log(me, 'me')
+  const history = useHistory();
 
-  isActivePath(path) {
-    const { history } = this.props;
+  // Extract a list of paths from the route params and store them for later. This creates
+  // an array of url paths associated with any NavItem component rendered by this component.
+
+  const filteredRoutes = routes.filter(
+    item => item.isVisibleNormalUser !== isNormalUser
+  );
+  const navItemPaths = filteredRoutes.map(({ path }) => path);
+
+  const isActiveGroup = () => {
+    return navItemPaths.some(isActivePath);
+  };
+
+  const isActivePath = path => {
     return Boolean(matchPath(history.location.pathname, { path }));
-  }
+  };
 
-  render() {
-    const { groupId, groupTitle, routes } = this.props;
+  // Settings is the only one with length 1
 
-    if (routes.length === 1) {
-      const [{ path }] = routes;
+    if (filteredRoutes.length === 1) {
+      const [{ path }] = filteredRoutes;
       return (
-        <NavItem itemId={groupId} isActive={this.isActivePath(path)} key={path}>
+        <NavItem itemId={groupId} isActive={isActivePath(path)} key={path}>
           <Link to={path}>{groupTitle}</Link>
         </NavItem>
       );
     }
 
-    return (
-      <NavExpandable
-        isActive={this.isActiveGroup()}
-        isExpanded
-        groupId={groupId}
-        title={groupTitle}
-      >
-        {routes.map(({ path, title }) => (
-          <NavItem
-            groupId={groupId}
-            isActive={this.isActivePath(path)}
-            key={path}
-          >
-            <Link to={path}>{title}</Link>
-          </NavItem>
-        ))}
-      </NavExpandable>
-    );
-  }
+
+
+  return (
+
+    <NavExpandable
+      isActive={isActiveGroup()}
+      isExpanded
+      groupId={groupId}
+      title={groupTitle}
+    >
+      {filteredRoutes.map(({ path, title }) => (
+        <NavItem groupId={groupId} isActive={isActivePath(path)} key={path}>
+          <Link to={path}>{title}</Link>
+        </NavItem>
+      ))}
+    </NavExpandable>
+  );
 }
 
 NavExpandableGroup.propTypes = {
