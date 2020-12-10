@@ -29,6 +29,7 @@ function CredentialFormFields({
   });
 
   const isGalaxyCredential =
+  
     !!credTypeField.value &&
     credentialTypes[credTypeField.value].kind === 'galaxy';
 
