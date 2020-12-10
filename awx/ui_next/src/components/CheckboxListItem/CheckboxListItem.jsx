@@ -19,6 +19,7 @@ const CheckboxListItem = ({
   onDeselect,
   onSelect,
 }) => {
+  console.log('name', name)
   const CheckboxRadio = isRadio ? Radio : DataListCheck;
 
   return (
