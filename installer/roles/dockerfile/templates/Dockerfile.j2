@@ -140,7 +140,7 @@ RUN python3 -m ensurepip && pip3 install "virtualenv < 20" supervisor {% if buil
     pip3 install --no-cache-dir https://github.com/ansible/ansible/archive/${ANSIBLE_BRANCH}.tar.gz
 
 # TODO: Remove this once launch script removes need for postres modules
-RUN ansible-galaxy collection install --collections-path /usr/share/ansible/collections community.general
+RUN ansible-galaxy collection install --collections-path /usr/share/ansible/collections community.postgresql
 
 RUN rm -rf /root/.cache && rm -rf /tmp/*
 
@@ -186,7 +186,7 @@ COPY --from=builder /var/lib/awx /var/lib/awx
 {%if build_dev|bool %}
 COPY --from=quay.io/shanemcd/receptor /usr/bin/receptor /usr/bin/receptor
 RUN openssl req -nodes -newkey rsa:2048 -keyout /etc/nginx/nginx.key -out /etc/nginx/nginx.csr \
-        -subj "/C=US/ST=North Carolina/L=Durham/O=Ansible/OU=AWX Development/CN=awx.localhost" && \
+    -subj "/C=US/ST=North Carolina/L=Durham/O=Ansible/OU=AWX Development/CN=awx.localhost" && \
     openssl x509 -req -days 365 -in /etc/nginx/nginx.csr -signkey /etc/nginx/nginx.key -out /etc/nginx/nginx.crt && \
     chmod 640 /etc/nginx/nginx.{csr,key,crt}
 {% endif %}
@@ -218,23 +218,23 @@ ADD tools/scripts/awx-python /usr/bin/awx-python
 
 # Pre-create things we need to access
 RUN for dir in \
-      /var/lib/awx \
-      /var/lib/awx/rsyslog \
-      /var/lib/awx/rsyslog/conf.d \
-      /var/lib/awx/.local/share/containers/storage \
-      /var/run/awx-rsyslog \
-      /var/log/tower \
-      /var/log/nginx \
-      /var/lib/postgresql \
-      /var/run/supervisor \
-      /var/run/receptor \
-      /var/lib/nginx ; \
+    /var/lib/awx \
+    /var/lib/awx/rsyslog \
+    /var/lib/awx/rsyslog/conf.d \
+    /var/lib/awx/.local/share/containers/storage \
+    /var/run/awx-rsyslog \
+    /var/log/tower \
+    /var/log/nginx \
+    /var/lib/postgresql \
+    /var/run/supervisor \
+    /var/run/receptor \
+    /var/lib/nginx ; \
     do mkdir -m 0775 -p $dir ; chmod g+rw $dir ; chgrp root $dir ; done && \
     for file in \
-      /etc/subuid \
-      /etc/subgid \
-      /etc/group \
-      /etc/passwd ; \
+    /etc/subuid \
+    /etc/subgid \
+    /etc/group \
+    /etc/passwd ; \
     do touch $file ; chmod g+rw $file ; chgrp root $file ; done
 
 # Adjust any remaining permissions
@@ -244,17 +244,17 @@ RUN chmod u+s /usr/bin/bwrap ; \
 
 {% if (build_dev|bool) or (kube_dev|bool) %}
 RUN for dir in \
-      /var/lib/awx/venv \
-      /var/lib/awx/venv/awx/lib/python3.6 \
-      /var/lib/awx/projects \
-      /var/lib/awx/rsyslog \
-      /var/run/awx-rsyslog \
-      /.ansible \
-      /var/lib/awx/vendor ; \
+    /var/lib/awx/venv \
+    /var/lib/awx/venv/awx/lib/python3.6 \
+    /var/lib/awx/projects \
+    /var/lib/awx/rsyslog \
+    /var/run/awx-rsyslog \
+    /.ansible \
+    /var/lib/awx/vendor ; \
     do mkdir -m 0775 -p $dir ; chmod g+rw $dir ; chgrp root $dir ; done && \
     for file in \
-      /var/run/nginx.pid \
-      /var/lib/awx/venv/awx/lib/python3.6/site-packages/awx.egg-link ; \
+    /var/run/nginx.pid \
+    /var/lib/awx/venv/awx/lib/python3.6/site-packages/awx.egg-link ; \
     do touch $file ; chmod g+rw $file ; done
 {% endif %}
 
