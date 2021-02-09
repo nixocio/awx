@@ -16,6 +16,12 @@ class Organizations extends InstanceGroupsMixin(NotificationsMixin(Base)) {
     return this.http.options(`${this.baseUrl}${id}/access_list/`);
   }
 
+  readExecutionEnvironments(id, params) {
+    return this.http.get(`${this.baseUrl}${id}/execution_environments/`, {
+      params,
+    });
+  }
+
   readTeams(id, params) {
     return this.http.get(`${this.baseUrl}${id}/teams/`, { params });
   }
