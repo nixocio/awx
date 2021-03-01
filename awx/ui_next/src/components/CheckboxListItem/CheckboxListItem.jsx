@@ -1,13 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import {
   DataListItem,
-  DataListItemRow,
+  DataListItemRow as PFDataListItemRow,
   DataListItemCells,
   DataListCheck,
   Radio,
 } from '@patternfly/react-core';
 import DataListCell from '../DataListCell';
+
+const DataListItemRow = styled(PFDataListItemRow)`
+  && {
+    align-items: center;
+  }
+`;
 
 const CheckboxListItem = ({
   isDisabled = false,
