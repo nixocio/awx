@@ -21,7 +21,7 @@ const QS_CONFIG = getQSConfig('execution_environments', {
   order_by: 'name',
 });
 
-function ExecutionEnvironmentLookup({
+function _ExecutionEnvironmentLookup({
   globallyAvailable,
   i18n,
   isDefaultEnvironment,
@@ -175,7 +175,7 @@ function ExecutionEnvironmentLookup({
   );
 }
 
-ExecutionEnvironmentLookup.propTypes = {
+_ExecutionEnvironmentLookup.propTypes = {
   value: ExecutionEnvironment,
   popoverContent: string,
   onChange: func.isRequired,
@@ -184,12 +184,12 @@ ExecutionEnvironmentLookup.propTypes = {
   organizationId: oneOfType([number, string]),
 };
 
-ExecutionEnvironmentLookup.defaultProps = {
+_ExecutionEnvironmentLookup.defaultProps = {
   popoverContent: '',
   isDefaultEnvironment: false,
   value: null,
   projectId: null,
   organizationId: null,
 };
-
-export default withI18n()(ExecutionEnvironmentLookup);
+const ExecutionEnvironmentLookup = React.memo(_ExecutionEnvironmentLookup)
+export default withI18n()((ExecutionEnvironmentLookup));

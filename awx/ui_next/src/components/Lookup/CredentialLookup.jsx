@@ -28,7 +28,8 @@ const QS_CONFIG = getQSConfig('credentials', {
   order_by: 'name',
 });
 
-function CredentialLookup({
+
+function _CredentialLookup({
   helperTextInvalid,
   label,
   isValid,
@@ -46,6 +47,7 @@ function CredentialLookup({
   multiple,
 }) {
   const history = useHistory();
+  const renders = React.useRef(0);
   const autoPopulateLookup = useAutoPopulateLookup(onChange);
   const {
     result: { count, credentials, relatedSearchableKeys, searchableKeys },
@@ -175,6 +177,10 @@ function CredentialLookup({
         )}
       />
       <LookupErrorMessage error={error} />
+      {
+        <h1>{renders.current++}</h1>
+      }
+     
     </FormGroup>
   );
 }
@@ -199,7 +205,7 @@ function idOrKind(props, propName, componentName) {
   return error;
 }
 
-CredentialLookup.propTypes = {
+_CredentialLookup.propTypes = {
   credentialTypeId: oneOfType([number, string]),
   credentialTypeKind: idOrKind,
   helperTextInvalid: node,
@@ -214,7 +220,7 @@ CredentialLookup.propTypes = {
   autoPopulate: bool,
 };
 
-CredentialLookup.defaultProps = {
+_CredentialLookup.defaultProps = {
   credentialTypeId: '',
   credentialTypeKind: '',
   helperTextInvalid: '',
@@ -227,5 +233,5 @@ CredentialLookup.defaultProps = {
   autoPopulate: false,
 };
 
-export { CredentialLookup as _CredentialLookup };
+const CredentialLookup = React.memo(_CredentialLookup)
 export default withI18n()(CredentialLookup);

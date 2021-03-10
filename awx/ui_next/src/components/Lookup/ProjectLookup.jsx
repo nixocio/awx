@@ -21,7 +21,7 @@ const QS_CONFIG = getQSConfig('project', {
   role_level: 'use_role',
 });
 
-function ProjectLookup({
+function _ProjectLookup({
   helperTextInvalid,
   autoPopulate,
   i18n,
@@ -155,7 +155,7 @@ function ProjectLookup({
   );
 }
 
-ProjectLookup.propTypes = {
+_ProjectLookup.propTypes = {
   autoPopulate: bool,
   helperTextInvalid: node,
   isValid: bool,
@@ -167,16 +167,16 @@ ProjectLookup.propTypes = {
   isOverrideDisabled: bool,
 };
 
-ProjectLookup.defaultProps = {
+_ProjectLookup.defaultProps = {
   autoPopulate: false,
   helperTextInvalid: '',
   isValid: true,
-  onBlur: () => {},
+  onBlur: () => {}, 
   required: false,
   tooltip: '',
   value: null,
   isOverrideDisabled: false,
 };
 
-export { ProjectLookup as _ProjectLookup };
+const ProjectLookup = React.memo(_ProjectLookup);
 export default withI18n()(withRouter(ProjectLookup));
