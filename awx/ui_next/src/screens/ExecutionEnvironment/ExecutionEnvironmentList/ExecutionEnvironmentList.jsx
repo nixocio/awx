@@ -194,6 +194,7 @@ function ExecutionEnvironmentList({ i18n }) {
                 isSelected={selected.some(
                   row => row.id === executionEnvironment.id
                 )}
+                fetchExecutionEnvironments={fetchExecutionEnvironments}
               />
             )}
             emptyStateControls={
